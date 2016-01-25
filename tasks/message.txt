@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=flying-illusion
+Comment=
+GenericName=flying-illusion
+Exec=flying-illusion
+Terminal=false
+Type=Application
+StartupNotify=true

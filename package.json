@@ -1,0 +1,69 @@
+{
+  "name": "flying-illusion",
+  "version": "0.0.1",
+  "description": "Dance game for the Flying Illusion show",
+  "scripts": {
+    "clean": "rimraf electron tmp dist",
+    "lint": "eslint src tasks --ext js,jsx",
+    "start": "electron www",
+    "app:osx": "electron-packager www flying-illusion --platform=darwin --arch=x64 --out=electron/osx --version=0.36.5 --overwrite",
+    "app:linux": "electron-packager www flying-illusion --platform=linux --arch=x64 --out=electron/linux --version=0.36.5 --overwrite",
+    "pack:linux": "node tasks/buildPackage.es5.js",
+    "dev": "node tasks/server-dev.es5.js",
+    "build": "webpack --colors --progress --config tasks/webpack.config.prod.babel.js",
+    "deploy": "git subtree push --prefix www origin gh-pages",
+    "test": "mocha 'src/**/__test__/*.test.js*' -R spec --compilers jsx:babel-core/register,css:./src/misc/null-compiler --recursive",
+    "ci:checks": "npm run clean && npm run lint && npm run test",
+    "ci": "npm run ci:checks && npm run build && npm run app:linux && npm run pack:linux"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xseignard/flying-illusion.git"
+  },
+  "author": "Xavier Seignard <xavier.seignard@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xseignard/flying-illusion/issues"
+  },
+  "homepage": "https://github.com/xseignard/flying-illusion#readme",
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "chai": "^3.4.1",
+    "classnames": "^2.2.3",
+    "codeclimate-test-reporter": "^0.3.0",
+    "css-loader": "^0.23.1",
+    "cz-conventional-changelog": "^1.1.5",
+    "electron-packager": "^5.2.1",
+    "electron-prebuilt": "^0.36.5",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^4.0.0",
+    "eslint-loader": "^1.2.0",
+    "eslint-plugin-react": "^3.16.1",
+    "express": "^4.13.4",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "istanbul": "^0.4.2",
+    "lodash": "^4.0.1",
+    "mkdirp": "^0.5.1",
+    "mocha": "^2.3.4",
+    "react": "^0.14.6",
+    "react-addons-test-utils": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.0.6",
+    "redux": "^3.0.6",
+    "rimraf": "^2.5.1",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.12",
+    "webpack-dev-middleware": "^1.5.1",
+    "webpack-hot-middleware": "^2.6.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

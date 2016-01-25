@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '4.0'
+before_install:
+- sudo gem install fpm -y
+script: npm run ci
+deploy:
+  provider: releases
+  api_key:
+    secure: upqHRxvFQi5Myuv603FtTL8qiaAPY1HC4vhIwW1+Y0pMJmq9Ng4KzziqYdB0jG6IT7cHlOIl4HAV4Eff0SjCW8yUFn714XuBNPyye8Eud7s7CLiXyY6okYuxdzgP7Yqi8ItWnvQFLCPSpqP9tTcJ67k6dTmUSsTpKbOJrwFYFmRNfcYhzpDaVlwwE6xI+zZ2KmemeKS6UjD4Iy6LHyJsU6km6SGUSEfdatddXnDD1xCIDkPqxsyJDegxhKAoCfac1zRoERKiRv4zCXGuzyt4Lv4CpUtgFCFOg2O5uZU94MGYGhXo8uasC+BidmqwTLVqbpXkqwUm0vdeMnmLk6aCVZ1CbkWPL7g0VsWx5pOSnn2vaCp3I21eiQLAcKjwcjQA/iRVmaVrmdCNcachlca2ZmDWHU39DXgq2TjnAmJT7tX99tNpkbTRPqqvvcxADp6b5l0ktL0uyEofWiTLcajkS8ery1hhzZYQYYKUozcMBtDy4UQftD0/wbdPmp5iCqDY30c22598bzXbtpX7bYD0genVZuo4r1aZ08hMi8av33aI4vPXmB7zfXwgXB0S2i2RVa3yRoh5NS7vW2vzXldON78YVunv2h/Y0lQbhH8kmnt6FiaFh55EmrxpH3yWYwQ2Hb2JQ7GBs5/eMXypN+xbj/aIaRy4gTl/R7Cn6W68cLI=
+  file: dist/flying-illusion-$TRAVIS_TAG.deb
+  on:
+    tags: true
