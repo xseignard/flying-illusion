@@ -2,7 +2,8 @@ language: node_js
 node_js:
 - '4.0'
 before_install:
-- sudo gem install fpm -y
+- sudo apt-get install ruby-dev gcc make -y
+- sudo gem install fpm
 script: npm run ci
 deploy:
   provider: releases
