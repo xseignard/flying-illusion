@@ -2,7 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 
 module.exports = {
-	devtool: 'eval-source-map',
+	devtool: 'cheap-module-eval-source-map',
 	eslint: {
 		configFile: '.eslintrc'
 	},

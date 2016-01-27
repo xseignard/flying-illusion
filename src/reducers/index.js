@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { TEST } from './actions';
+import { TEST } from '../actions';
 
 // reducer dedicated to lang selection
 function test(state = true, action) {

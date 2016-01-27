@@ -3,8 +3,10 @@
 		"mocha": true,
 		"node": true
 	},
+	"parser": "babel-eslint",
 	"extends": "airbnb",
 	"rules": {
+		"strict": 0,
 		"no-console": 0,
 		"indent": [2, "tab", {"SwitchCase": 1}],
 		"comma-dangle": 0,

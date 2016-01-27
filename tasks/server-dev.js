@@ -9,7 +9,10 @@ const app = express();
 const compiler = webpack(config);
 
 app.use(webpackDevMiddleware(compiler, {
-	noInfo: true,
+	stats: {
+		chunks: false,
+		colors: true
+	},
 	publicPath: config.output.publicPath
 }));
 

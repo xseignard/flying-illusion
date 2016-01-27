@@ -2,9 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import './css/global';
-import App from './components/App/App';
-import reducers from './store/reducers';
+import './global';
+import App from './components/App';
+import reducers from './reducers';
 
 // create redux store from the reducer
 const store = createStore(reducers);

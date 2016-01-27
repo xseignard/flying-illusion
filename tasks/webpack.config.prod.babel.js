@@ -7,7 +7,7 @@ module.exports = {
 		configFile: '.eslintrc'
 	},
 	entry: [
-		path.join(__dirname, '..', 'src', 'main.jsx')
+		path.join(__dirname, '..', 'src', 'main')
 	],
 	output: {
 		path: path.join(__dirname, '..', 'www'),

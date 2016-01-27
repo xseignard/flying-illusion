@@ -1,7 +1,7 @@
 import { should } from 'chai';
 import { createStore } from 'redux';
-import reducers from '../reducers';
-import { handleTest } from '../actions';
+import reducers from '../index';
+import { handleTest } from '../../actions';
 
 should();
 

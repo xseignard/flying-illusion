@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import AppCss from './App.css';
+import css from './css';
 
 // exported so we can write tests
 // see: https://github.com/rackt/redux/blob/master/docs/recipes/WritingTests.md#connected-components
@@ -10,7 +10,7 @@ export class App extends React.Component {
 	}
 	render() {
 		return (
-			<div className={AppCss.app}>
+			<div className={css.app}>
 				<h1>Hello World</h1>
 			</div>
 		);
