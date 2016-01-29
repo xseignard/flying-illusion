@@ -11,8 +11,8 @@ function test(state = true, action) {
 	}
 }
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
 	test
 });
 
-export default reducers;
+export default rootReducer;

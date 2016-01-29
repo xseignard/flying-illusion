@@ -8,7 +8,9 @@
 	"rules": {
 		"strict": 0,
 		"no-console": 0,
+		"arrow-body-style": 0,
 		"indent": [2, "tab", {"SwitchCase": 1}],
+		"no-unused-vars": [2, {"vars": "all", "args": "none"}],
 		"comma-dangle": 0,
 		"react/prop-types": 0,
 		"react/jsx-indent-props": [2, "tab"]
