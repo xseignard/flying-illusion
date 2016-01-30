@@ -15,7 +15,12 @@ module.exports = {
 		filename: '[name].js'
 	},
 	resolve: {
-		extensions: ['', '.js', '.jsx', '.css']
+		extensions: ['', '.js', '.jsx', '.css', '.srt']
+	},
+	resolveLoader: {
+		alias: {
+			'choreography-loader': path.join(__dirname, '../src/misc/choreography-loader.js')
+		}
 	},
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),
@@ -39,6 +44,10 @@ module.exports = {
 			{
 				test: /\.css$/,
 				loader: 'style-loader!css-loader?modules'
+			},
+			{
+				test: /\.srt$/,
+				loader: 'raw-loader!choreography-loader'
 			}
 		]
 	}
