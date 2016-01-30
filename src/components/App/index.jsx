@@ -6,26 +6,26 @@ export function DumbApp(props) {
 	let content = <h1>Game status unknown</h1>;
 	if (props && props.game) {
 		switch (props.game.status) {
+			case 'idle':
+				content = (
+					<h1>Touche un pad pour lancer l'intro</h1>
+				);
+				break;
 			case 'intro':
+				content = (
+					<h1>Regarde l'intro (5 secondes)</h1>
+				);
+				break;
+			case 'waiting':
 				content = (
 					<h1>Place tes pieds<br />sur les pads gauche et droit</h1>
 				);
 				break;
-			case 'selecting':
+			case 'loading':
 				content = (
 					<div>
-						<h1>Selection nouveau joueur...</h1>
+						<h1>Lancement du jeu...</h1>
 					</div>
-				);
-				break;
-			case 'selected':
-				content = (
-					<h1>Bienvenue!<br />Place tes pieds en dehors des pads<br />pour commencer le jeu</h1>
-				);
-				break;
-			case 'starting':
-				content = (
-					<h1>Lancement du jeu...</h1>
 				);
 				break;
 			case 'started':
@@ -41,8 +41,7 @@ export function DumbApp(props) {
 	}
 	const loaderClass = classnames({
 		[css.loader]: true,
-		[css.delay2sec]: props && props.game && props.game.status === 'selecting',
-		[css.delay4sec]: props && props.game && props.game.status === 'starting'
+		[css.loading]: props && props.game && props.game.status === 'loading'
 	});
 	return (
 		<div className={css.app}>

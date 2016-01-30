@@ -1,7 +1,7 @@
 import C from '../constants';
 
 export function game(state = {
-	status: 'intro',
+	status: 'idle',
 	timeout: null
 }, action) {
 	switch (action.type) {

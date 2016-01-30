@@ -11,7 +11,8 @@ import App from './containers/App';
 
 const logger = createLogger({
 	collapsed: (getState, action) => {
-		return action.type === 'PAD';
+		return true;
+		// return action.type === 'PAD';
 	}
 });
 const createStoreWithMiddleware = applyMiddleware(thunk, promise, logger)(createStore);
