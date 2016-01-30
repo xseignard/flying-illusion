@@ -1,5 +1,6 @@
 export default {
 	PAD: 'PAD',
-	GAME: 'GAME',
-	STEP: 'STEP'
+	GAME_STATUS: 'GAME_STATUS',
+	STEPS_ADD: 'STEPS_ADD',
+	STEPS_RESET: 'STEPS_RESET'
 };

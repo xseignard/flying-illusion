@@ -1,17 +1,30 @@
 import React from 'react';
+import classnames from 'classnames';
 import css from './css';
 
 export function DumbApp(props) {
 	let content;
-	switch (props.game) {
+	switch (props.game.status) {
 		case 'intro':
 			content = (
-				<h1>Marchez sur les pads gauche et droit pour rejoindre le battle</h1>
+				<h1>Place tes pieds<br />sur les pads gauche et droit</h1>
 			);
 			break;
-		case 'pending':
+		case 'loading':
 			content = (
-				<h1>Enlevez les pieds des pads gauche et droit pour commencer le battle</h1>
+				<div>
+					<h1>Selection nouveau joueur...</h1>
+				</div>
+			);
+			break;
+		case 'waiting':
+			content = (
+				<h1>Bienvenue!<br />Place tes pieds en dehors des pads<br />pour commencer le jeu</h1>
+			);
+			break;
+		case 'starting':
+			content = (
+				<h1>Lancement du jeu...</h1>
 			);
 			break;
 		case 'started':
@@ -27,9 +40,16 @@ export function DumbApp(props) {
 				<h1>Game status unknown</h1>
 			);
 	}
+	const loaderClass = classnames({
+		[css.loader]: true,
+		[css.delay2sec]: props.game.status === 'loading',
+		[css.delay4sec]: props.game.status === 'starting'
+	});
 	return (
 		<div className={css.app}>
+			<img src="img/logo.png" />
 			{content}
+			<div className={loaderClass}></div>
 		</div>
 	);
 }

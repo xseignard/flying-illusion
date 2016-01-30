@@ -1,42 +1,57 @@
 import C from '../constants';
 
-let pendingTimeout = null;
-
-export const checkGamePending = () => {
+export const checkGameStatus = (direction) => {
 	return (dispatch, getState) => {
+		if (!direction.match(/left|right/)) {
+			return;
+		}
 		const state = getState();
 		if (
-			state.game === 'intro' &&
+			!state.game.timeout &&
+			state.game.status === 'intro' &&
 			state.pads.left === 'down' &&
 			state.pads.right === 'down'
 		) {
-			pendingTimeout = setTimeout(() => {
+			const timeout = setTimeout(() => {
 				dispatch({
-					type: C.GAME,
-					status: 'pending'
+					type: C.GAME_STATUS,
+					status: 'waiting',
+					timeout: null
 				});
 			}, 2000);
+			dispatch({
+				type: C.GAME_STATUS,
+				status: 'loading',
+				timeout
+			});
 		}
-	};
-};
-
-export const clearPendingTimeout = () => {
-	if (pendingTimeout) {
-		clearTimeout(pendingTimeout);
-	}
-};
-
-export const checkGameStarted = () => {
-	return (dispatch, getState) => {
-		const state = getState();
-		if (
-			state.game === 'pending' &&
+		else if (
+			state.game.status === 'loading' && (
+			state.pads.left === 'up' ||
+			state.pads.right === 'up'
+		)) {
+			console.log('clearTimeout(state.game.timeout)', state.game.timeout);
+			clearTimeout(state.game.timeout);
+			dispatch({
+				type: C.GAME_STATUS,
+				status: 'intro',
+				timeout: null
+			});
+		}
+		else if (
+			state.game.status === 'waiting' &&
 			state.pads.left === 'up' &&
 			state.pads.right === 'up'
 		) {
+			setTimeout(() => {
+				dispatch({
+					type: C.GAME_STATUS,
+					status: 'started'
+				});
+			}, 3000);
 			dispatch({
-				type: C.GAME,
-				status: 'started'
+				type: C.GAME_STATUS,
+				status: 'starting'
 			});
 		}
 	};
@@ -45,8 +60,11 @@ export const checkGameStarted = () => {
 export const resetGame = () => {
 	return (dispatch, getState) => {
 		dispatch({
-			type: C.GAME,
+			type: C.GAME_STATUS,
 			status: 'intro'
+		});
+		dispatch({
+			type: C.STEPS_RESET
 		});
 	};
 };

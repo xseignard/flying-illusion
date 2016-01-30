@@ -1,5 +1,5 @@
 import C from '../constants';
-import { checkGamePending, clearPendingTimeout, checkGameStarted } from './game';
+import { checkGameStatus } from './game';
 import { listenToDirectionKeys } from '../misc/utils';
 
 const onPadDown = (direction) => {
@@ -10,14 +10,12 @@ const onPadDown = (direction) => {
 			upOrDown: 'down'
 		});
 		const state = getState();
-		if (state.game === 'intro') {
-			if (direction.match(/left|right/)) {
-				dispatch(checkGamePending());
-			}
+		if (state.game.status === 'intro') {
+			dispatch(checkGameStatus(direction));
 		}
-		else if (state.game === 'started') {
+		else if (state.game.status === 'started') {
 			dispatch({
-				type: C.STEP,
+				type: C.STEPS_ADD,
 				direction,
 				upOrDown: 'down',
 				time: Date.now()
@@ -34,19 +32,12 @@ const onPadUp = (direction) => {
 			upOrDown: 'up'
 		});
 		const state = getState();
-		if (state.game === 'intro') {
-			if (direction.match(/left|right/)) {
-				clearPendingTimeout();
-			}
+		if (state.game.status !== 'started') {
+			dispatch(checkGameStatus(direction));
 		}
-		else if (state.game === 'pending') {
-			if (direction.match(/left|right/)) {
-				dispatch(checkGameStarted());
-			}
-		}
-		else if (state.game === 'started') {
+		else if (state.game.status === 'started') {
 			dispatch({
-				type: C.STEP,
+				type: C.STEPS_ADD,
 				direction,
 				upOrDown: 'up',
 				time: Date.now()
