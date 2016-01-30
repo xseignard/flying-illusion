@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { resetGame } from '../../actions/game';
 import { listenToPads } from '../../actions/pads';
 import { DumbApp } from '../../components/App';
+import { startChoreography } from '../../actions/choreography.js';
 
 export class App extends React.Component {
 	constructor(props) {
@@ -10,6 +11,7 @@ export class App extends React.Component {
 	}
 	componentDidMount() {
 		this.props.listenToPads();
+		startChoreography();
 	}
 	render() {
 		return (
