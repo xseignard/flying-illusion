@@ -27,7 +27,12 @@ module.exports = {
 		})
 	],
 	resolve: {
-		extensions: ['', '.js', '.jsx', '.css']
+		extensions: ['', '.js', '.jsx', '.css', '.srt']
+	},
+	resolveLoader: {
+		alias: {
+			'choreography-loader': path.join(__dirname, '../src/misc/choreography-loader.js')
+		}
 	},
 	module: {
 		preLoaders: [
@@ -46,6 +51,10 @@ module.exports = {
 			{
 				test: /\.css$/,
 				loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules')
+			},
+			{
+				test: /\.srt$/,
+				loader: 'raw-loader!choreography-loader'
 			}
 		]
 	}

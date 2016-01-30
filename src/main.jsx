@@ -8,6 +8,10 @@ import createLogger from 'redux-logger';
 import rootReducer from './reducers';
 import './global';
 import App from './containers/App';
+import steps from './choregraphies/choreography_1.srt';
+import { startChoreography } from './misc/choreography.js';
+
+startChoreography(steps);
 
 const logger = createLogger({
 	collapsed: (getState, action) => {
