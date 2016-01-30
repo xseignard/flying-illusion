@@ -11,14 +11,14 @@ export function DumbApp(props) {
 					<h1>Place tes pieds<br />sur les pads gauche et droit</h1>
 				);
 				break;
-			case 'loading':
+			case 'selecting':
 				content = (
 					<div>
 						<h1>Selection nouveau joueur...</h1>
 					</div>
 				);
 				break;
-			case 'waiting':
+			case 'selected':
 				content = (
 					<h1>Bienvenue!<br />Place tes pieds en dehors des pads<br />pour commencer le jeu</h1>
 				);
@@ -41,7 +41,7 @@ export function DumbApp(props) {
 	}
 	const loaderClass = classnames({
 		[css.loader]: true,
-		[css.delay2sec]: props && props.game && props.game.status === 'loading',
+		[css.delay2sec]: props && props.game && props.game.status === 'selecting',
 		[css.delay4sec]: props && props.game && props.game.status === 'starting'
 	});
 	return (

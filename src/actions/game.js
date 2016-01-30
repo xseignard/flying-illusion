@@ -15,18 +15,19 @@ export const checkGameStatus = (direction) => {
 			const timeout = setTimeout(() => {
 				dispatch({
 					type: C.GAME_STATUS,
-					status: 'waiting',
+					status: 'selected',
 					timeout: null
 				});
 			}, 2000);
 			dispatch({
 				type: C.GAME_STATUS,
-				status: 'loading',
+				status: 'selecting',
 				timeout
 			});
 		}
 		else if (
-			state.game.status === 'loading' && (
+			state.game.timeout &&
+			state.game.status === 'selecting' && (
 			state.pads.left === 'up' ||
 			state.pads.right === 'up'
 		)) {
@@ -38,7 +39,7 @@ export const checkGameStatus = (direction) => {
 			});
 		}
 		else if (
-			state.game.status === 'waiting' &&
+			state.game.status === 'selected' &&
 			state.pads.left === 'up' &&
 			state.pads.right === 'up'
 		) {
