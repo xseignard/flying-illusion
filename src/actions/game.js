@@ -30,7 +30,6 @@ export const checkGameStatus = (direction) => {
 			state.pads.left === 'up' ||
 			state.pads.right === 'up'
 		)) {
-			console.log('clearTimeout(state.game.timeout)', state.game.timeout);
 			clearTimeout(state.game.timeout);
 			dispatch({
 				type: C.GAME_STATUS,

@@ -5,11 +5,15 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import createLogger from 'redux-logger';
+import rootReducer from './reducers';
 import './global';
 import App from './containers/App';
-import rootReducer from './reducers';
 
-const logger = createLogger();
+const logger = createLogger({
+	collapsed: (getState, action) => {
+		return action.type === 'PAD';
+	}
+});
 const createStoreWithMiddleware = applyMiddleware(thunk, promise, logger)(createStore);
 const store = createStoreWithMiddleware(rootReducer);
 
