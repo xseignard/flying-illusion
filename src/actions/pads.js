@@ -1,6 +1,6 @@
 import C from '../constants';
 import { checkGameStatus } from './game';
-import { listenToDirectionKeys } from '../misc/utils';
+import { listenToDirectionKeys } from '../misc/direction-keys';
 
 const onPadChange = (eventType, direction) => {
 	return (dispatch, getState) => {
