@@ -1,20 +1,35 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import css from './css';
 
-// exported so we can write tests
-// see: https://github.com/rackt/redux/blob/master/docs/recipes/WritingTests.md#connected-components
-export class App extends React.Component {
-	constructor(props) {
-		super(props);
+export function DumbApp(props) {
+	let content;
+	switch (props.game) {
+		case 'intro':
+			content = (
+				<h1>Marchez sur les pads gauche et droit pour rejoindre le battle</h1>
+			);
+			break;
+		case 'pending':
+			content = (
+				<h1>Enlevez les pieds des pads gauche et droit pour commencer le battle</h1>
+			);
+			break;
+		case 'started':
+			content = (
+				<div>
+					<h1>Game is on!</h1>
+					<button onClick={props.onResetGame}>Reset Game</button>
+				</div>
+			);
+			break;
+		default:
+			content = (
+				<h1>Game status unknown</h1>
+			);
 	}
-	render() {
-		return (
-			<div className={css.app}>
-				<h1>Hello World</h1>
-			</div>
-		);
-	}
+	return (
+		<div className={css.app}>
+			{content}
+		</div>
+	);
 }
-
-export default connect(state => state)(App);

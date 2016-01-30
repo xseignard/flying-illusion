@@ -1,4 +1,11 @@
 .app {
 	position: relative;
-	color: red;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	max-width: 600px;
+	margin: 0 auto;
+}
+h1 {
+	font-weight: normal;
 }

@@ -9,6 +9,7 @@
 		"strict": 0,
 		"no-console": 0,
 		"arrow-body-style": 0,
+		"brace-style": [2, "stroustrup"],
 		"indent": [2, "tab", {"SwitchCase": 1}],
 		"no-unused-vars": [2, {"vars": "all", "args": "none"}],
 		"comma-dangle": 0,

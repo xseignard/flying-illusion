@@ -1,29 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import css from './css';
-import { listenToKeyDown } from '../../actions/input';
+import { resetGame } from '../../actions/game';
+import { listenToPads } from '../../actions/pads';
+import { DumbApp } from '../../components/App';
 
-// exported so we can write tests
-// see: https://github.com/rackt/redux/blob/master/docs/recipes/WritingTests.md#connected-components
 export class App extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 	componentDidMount() {
-		this.props.listenToKeyDown();
+		this.props.listenToPads();
 	}
 	render() {
 		return (
-			<div className={css.app}>
-				<h1>Marchez sur le tapis pour rejoindre le battle</h1>
-			</div>
+			<DumbApp
+				game={this.props.game}
+				onResetGame={this.props.resetGame}
+			/>
 		);
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		listenToKeyDown() { dispatch(listenToKeyDown()); }
+		resetGame() {
+			dispatch(resetGame());
+		},
+		listenToPads() {
+			dispatch(listenToPads());
+		}
 	};
 };
 

@@ -1,4 +1,7 @@
 import { combineReducers } from 'redux';
+import { pads } from './pads';
+import { game } from './game';
+import { steps } from './steps';
 import { TEST } from '../actions';
 
 // reducer dedicated to lang selection
@@ -12,7 +15,10 @@ function test(state = true, action) {
 }
 
 const rootReducer = combineReducers({
-	test
+	test,
+	game,
+	pads,
+	steps
 });
 
 export default rootReducer;
