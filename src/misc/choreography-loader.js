@@ -2,12 +2,12 @@ import subParser from 'subtitles-parser';
 import moment from 'moment';
 
 export default function (source) {
-	const steps = subParser.fromSrt(source);
-	return steps.map((current) => {
+	const subs = subParser.fromSrt(source);
+	return subs.map((sub) => {
 		return {
-			steps: current.text.split('#'),
-			startTime: moment.duration(current.startTime).asMilliseconds(),
-			endTime: moment.duration(current.endTime).asMilliseconds()
+			directions: sub.text.split('#'),
+			startTime: moment.duration(sub.startTime).asMilliseconds(),
+			endTime: moment.duration(sub.endTime).asMilliseconds()
 		};
 	});
 }
