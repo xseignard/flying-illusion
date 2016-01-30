@@ -69,15 +69,18 @@ const buildPackage = (buildArch, buildTarget) => {
 	let archName;
 	if (buildArch === 32) {
 		archName = 'i386';
-	} else if (buildTarget === 'deb') {
+	}
+	else if (buildTarget === 'deb') {
 		archName = 'amd64';
-	} else {
+	}
+	else {
 		archName = 'x86_64';
 	}
 	let packageName;
 	if (process.env.TRAVIS_TAG) {
 		packageName = `${path.join(distdDir, manifest.name)}-${process.env.TRAVIS_TAG}.${target}`;
-	} else {
+	}
+	else {
 		packageName = `${path.join(distdDir, manifest.name)}-DEBUG.${target}`;
 	}
 
