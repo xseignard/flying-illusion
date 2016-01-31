@@ -29,11 +29,6 @@ module.exports = {
 	resolve: {
 		extensions: ['', '.js', '.jsx', '.css', '.srt']
 	},
-	resolveLoader: {
-		alias: {
-			'choreography-loader': path.join(__dirname, './misc/choreography-loader.es5.js')
-		}
-	},
 	module: {
 		preLoaders: [
 			{
@@ -54,7 +49,7 @@ module.exports = {
 			},
 			{
 				test: /\.srt$/,
-				loader: 'raw-loader!choreography-loader'
+				loader: 'raw-loader!srt-loader'
 			}
 		]
 	}

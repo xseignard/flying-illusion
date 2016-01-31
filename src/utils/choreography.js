@@ -1,16 +1,17 @@
+import moment from 'moment';
 import choregraphySubs from '../choregraphies/choreography_1.srt';
 import { flattenArray } from './utils';
 
 export const mapSubsToSteps = (subs) => {
-	return flattenArray(subs.map((sub) => {
-		return sub.directions.map((direction) => {
-			return {
-				direction,
-				start: sub.startTime,
-				end: sub.endTime
-			};
+	const mappedSubs = subs.map((sub) => {
+		const start = moment.duration(sub.startTime).asMilliseconds();
+		const end = moment.duration(sub.endTime).asMilliseconds();
+		const formattedSteps = sub.text.split('#').map((direction) => {
+			return { direction, start, end };
 		});
-	}));
+		return formattedSteps;
+	});
+	return flattenArray(mappedSubs);
 };
 
 export const filterStepsByDirection = (steps, direction) => {

@@ -17,11 +17,6 @@ module.exports = {
 	resolve: {
 		extensions: ['', '.js', '.jsx', '.css', '.srt']
 	},
-	resolveLoader: {
-		alias: {
-			'choreography-loader': path.join(__dirname, './misc/choreography-loader.es5.js')
-		}
-	},
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
@@ -47,7 +42,7 @@ module.exports = {
 			},
 			{
 				test: /\.srt$/,
-				loader: 'raw-loader!choreography-loader'
+				loader: 'raw-loader!srt-loader'
 			}
 		]
 	}

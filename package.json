@@ -63,6 +63,7 @@
     "redux-promise": "^0.5.1",
     "redux-thunk": "^1.0.3",
     "rimraf": "^2.5.1",
+    "srt-loader": "0.0.1",
     "style-loader": "^0.13.0",
     "subtitles-parser": "0.0.2",
     "webpack": "^1.12.12",
