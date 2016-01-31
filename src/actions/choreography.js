@@ -1,3 +1,4 @@
+import moment from 'moment';
 import choregraphy from '../choregraphies/choreography_1.srt';
 import { flattenArray } from '../misc/utils';
 
@@ -5,15 +6,16 @@ const timeouts = [];
 
 export const mapSubsToSteps = (subs) => {
 	console.log(subs);
-	return flattenArray(subs.map((sub) => {
-		return sub.directions.map((direction) => {
-			return {
-				direction,
-				start: sub.startTime,
-				duration: sub.endTime - sub.startTime
-			};
+	const mappedSubs = subs.map((sub) => {
+		const start = moment.duration(sub.startTime).asMilliseconds();
+		const duration = moment.duration(sub.endTime).asMilliseconds() - start;
+		const result = [];
+		sub.text.split('#').forEach((direction) => {
+			result.push({ direction, start, duration });
 		});
-	}));
+		return result;
+	});
+	return flattenArray(mappedSubs);
 };
 
 export const startChoreography = () => {
@@ -46,8 +48,6 @@ export const startChoreography = () => {
 };
 
 export const stopChoreography = (choreography) => {
-	timeouts.forEach((timeout) => {
-		clearTimeout(timeout);
-	});
+	timeouts.forEach(clearTimeout);
 	// TODO: dispatch stopped action?
 };
