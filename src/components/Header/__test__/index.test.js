@@ -1,14 +1,14 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import { should } from 'chai';
-import { DumbApp } from '../index';
+import { Header } from '../index';
 
 should();
 
-describe('DumbApp', () => {
+describe('Header', () => {
 	it('should render ok', () => {
 		const renderer = TestUtils.createRenderer();
-		renderer.render(<DumbApp />);
+		renderer.render(<Header />);
 		const result = renderer.getRenderOutput();
 		// root object of component should be a div
 		result.type.should.equal('div');
