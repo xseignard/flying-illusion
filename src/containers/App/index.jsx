@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { resetGame } from '../../actions/game';
 import { listenToPads } from '../../actions/pads';
-import { DumbApp } from '../../components/App';
+import { Header } from '../../components/Header';
+import { Game } from '../../components/Game';
 import { startChoreography } from '../../actions/choreography.js';
+import css from './css';
 
 export class App extends React.Component {
 	constructor(props) {
@@ -11,14 +13,23 @@ export class App extends React.Component {
 	}
 	componentDidMount() {
 		this.props.listenToPads();
-		startChoreography();
+	}
+	componentWillUpdate(prevProps) {
 	}
 	render() {
 		return (
-			<DumbApp
-				game={this.props.game}
-				onResetGame={this.props.resetGame}
-			/>
+			<div className={css.app}>
+				<Header
+					game={this.props.game}
+				/>
+				<Game
+					game={this.props.game}
+					playerSteps={this.props.playerSteps}
+					targetSteps={this.props.targetSteps}
+					startChoreography={this.props.startChoreography}
+					onResetGame={this.props.resetGame}
+				/>
+			</div>
 		);
 	}
 }
@@ -30,6 +41,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		listenToPads() {
 			dispatch(listenToPads());
+		},
+		startChoreography() {
+			dispatch(startChoreography());
 		}
 	};
 };

@@ -1,26 +1,29 @@
 import C from '../constants';
 import { checkGameStatus } from './game';
-import { listenToDirectionKeys } from '../misc/direction-keys';
+import { listenToDirectionKeys } from '../utils/direction-keys';
+import { updateScore } from './score';
 
 const onPadChange = (eventType, direction) => {
 	return (dispatch, getState) => {
-		const status = getState().game.status;
+		const state = getState();
+		const status = state.game.status;
 		const upOrDown = eventType === 'keyup' ? 'up' : 'down';
 		dispatch({
 			type: C.PAD,
 			direction,
 			upOrDown
 		});
-		if (status === 'started') {
-			dispatch({
-				type: C.STEPS_ADD,
-				direction,
-				upOrDown,
-				time: Date.now()
-			});
-		}
-		else {
+		if (status !== 'started') {
 			dispatch(checkGameStatus(direction));
+		}
+		else if (upOrDown === 'down') {
+			const time = Date.now() - state.game.startTime;
+			dispatch({
+				type: C.PLAYER_STEP,
+				direction,
+				time
+			});
+			dispatch(updateScore());
 		}
 	};
 };

@@ -8,6 +8,7 @@ export function game(state = {
 		case C.GAME_STATUS:
 			return {
 				status: action.status,
+				time: action.time,
 				timeout: action.timeout
 			};
 		default:

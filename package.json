@@ -12,7 +12,7 @@
     "dev": "node tasks/server-dev.es5.js",
     "build": "webpack --colors --progress --config tasks/webpack.config.prod.babel.js",
     "deploy": "git subtree push --prefix www origin gh-pages",
-    "test": "mocha 'src/**/__test__/*.test.js*' -R spec --compilers jsx:babel-core/register,css:./src/misc/null-compiler --recursive",
+    "test": "mocha 'src/**/__test__/*.test.js*' -R spec --compilers jsx:babel-core/register,css:./tasks/misc/null-compiler --recursive",
     "ci:checks": "npm run clean && npm run lint && npm run test",
     "ci": "npm run ci:checks && npm run build && npm run app:linux && npm run pack:linux"
   },

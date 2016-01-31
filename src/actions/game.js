@@ -17,8 +17,7 @@ export const checkGameStatus = (direction) => {
 						timeout: setTimeout(() => {
 							dispatch({
 								type: C.GAME_STATUS,
-								status: 'idle',
-								timeout: null
+								status: 'idle'
 							});
 						}, 5000)
 					});
@@ -42,8 +41,7 @@ export const checkGameStatus = (direction) => {
 				timeout: setTimeout(() => {
 					dispatch({
 						type: C.GAME_STATUS,
-						status: 'started',
-						timeout: null
+						status: 'started'
 					});
 				}, 3000)
 			});
@@ -62,7 +60,7 @@ export const checkGameStatus = (direction) => {
 					dispatch({
 						type: C.GAME_STATUS,
 						status: 'idle',
-						timeout: null
+						time: Date.now()
 					});
 				}, 5000)
 			});
@@ -77,7 +75,10 @@ export const resetGame = () => {
 			status: 'idle'
 		});
 		dispatch({
-			type: C.STEPS_RESET
+			type: C.RESET_PLAYER_STEPS
+		});
+		dispatch({
+			type: C.RESET_TARGET_STEPS
 		});
 	};
 };

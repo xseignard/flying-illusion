@@ -1,53 +1,38 @@
-import choregraphy from '../choregraphies/choreography_1.srt';
-import { flattenArray } from '../misc/utils';
+import C from '../constants';
+import { updateScore } from './score';
+import { getChoreography } from '../utils/choreography';
 
-const timeouts = [];
-
-export const mapSubsToSteps = (subs) => {
-	console.log(subs);
-	return flattenArray(subs.map((sub) => {
-		return sub.directions.map((direction) => {
-			return {
-				direction,
-				start: sub.startTime,
-				duration: sub.endTime - sub.startTime
-			};
-		});
-	}));
-};
+const ADDITIONAL_TIME = 500;
+let timeouts;
 
 export const startChoreography = () => {
-	console.log(mapSubsToSteps(choregraphy));
-	// const createTimeouts = (step) => {
-	// 	const startTimeout = setTimeout(() => {
-	// 		console.log('START');
-	// 	}, step.startTime);
-	// 	timeouts.push(startTimeout);
-	//
-	// 	const endTimeout = setTimeout(() => {
-	// 		console.log('END');
-	// 	}, step.endTime);
-	// 	timeouts.push(endTimeout);
-	// };
-	//
-	// const choregraphySteps = steps.map((step) => {
-	// 	return [
-	// 		{
-	// 			direction: step.direction
-	// 			upOrDown: 'down',
-	// 			time: step.startTime,
-	// 		}
-	// 	]
-	//
-	// })
-	//
-	// steps.forEach(createTimeouts);
-	console.log('done');
+	return (dispatch, getState) => {
+		const steps = getChoreography();
+		timeouts = steps.map((step) => {
+			const visualTimeout = setTimeout(() => {
+				dispatch({
+					type: C.TARGET_STEP,
+					direction: step.direction,
+					time: step.end
+				});
+			}, step.start);
+			const scoreTimeout = setTimeout(() => {
+				dispatch(updateScore());
+			}, step.end + ADDITIONAL_TIME);
+			return {
+				visualTimeout,
+				scoreTimeout
+			};
+		});
+	};
 };
 
 export const stopChoreography = (choreography) => {
-	timeouts.forEach((timeout) => {
-		clearTimeout(timeout);
-	});
-	// TODO: dispatch stopped action?
+	return (dispatch, getState) => {
+		timeouts.forEach((timeout) => {
+			clearTimeout(timeout.visualTimeout);
+			clearTimeout(timeout.scoreTimeout);
+		});
+		timeouts = [];
+	};
 };

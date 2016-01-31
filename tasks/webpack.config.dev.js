@@ -19,7 +19,7 @@ module.exports = {
 	},
 	resolveLoader: {
 		alias: {
-			'choreography-loader': path.join(__dirname, '../src/misc/choreography-loader.es5.js')
+			'choreography-loader': path.join(__dirname, './misc/choreography-loader.es5.js')
 		}
 	},
 	plugins: [

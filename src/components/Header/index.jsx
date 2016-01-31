@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import css from './css';
 
-export function DumbApp(props) {
+export function Header(props) {
 	let content = <h1>Game status unknown</h1>;
 	if (props && props.game) {
 		switch (props.game.status) {
@@ -32,7 +32,6 @@ export function DumbApp(props) {
 				content = (
 					<div>
 						<h1>Game is on!</h1>
-						<button onClick={props.onResetGame}>Reset Game</button>
 					</div>
 				);
 				break;
@@ -44,7 +43,7 @@ export function DumbApp(props) {
 		[css.loading]: props && props.game && props.game.status === 'loading'
 	});
 	return (
-		<div className={css.app}>
+		<div>
 			<img src="img/logo.png" />
 			{content}
 			<div className={loaderClass}></div>
