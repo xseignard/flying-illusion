@@ -1,4 +1,5 @@
 import C from '../constants';
+import { stopChoreography } from './choreography';
 
 export const checkGameStatus = (direction) => {
 	return (dispatch, getState) => {
@@ -80,5 +81,6 @@ export const resetGame = () => {
 		dispatch({
 			type: C.RESET_TARGET_STEPS
 		});
+		dispatch(stopChoreography());
 	};
 };
