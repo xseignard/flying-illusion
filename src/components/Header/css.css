@@ -4,13 +4,15 @@
 h1 {
 	font-weight: normal;
 }
-.loader {
+.loading,
+.waiting {
 	position: relative;
 	max-width: 600px;
 	margin: 0 auto;
 }
 
-.loader:after {
+.loading:after,
+.waiting:after {
 	content: '3';
 	position: absolute;
 	left: 0;
@@ -18,10 +20,55 @@ h1 {
 	top: 0;
 	height: 100%;
 	font-size: 40px;
-	animation: countdown 3s linear;
 }
 
-@keyframes countdown {
+.waiting:after {
+	content: '10';
+	animation: countdown10s 10s linear;
+}
+
+.loading:after {
+	content: '3';
+	animation: countdown3s 3s linear;
+}
+
+@keyframes countdown10s {
+  0% {
+		content: '10';
+  }
+	10% {
+		content: '9';
+  }
+	20% {
+		content: '8';
+  }
+	30% {
+		content: '7';
+  }
+	40% {
+		content: '6';
+  }
+	50% {
+		content: '5';
+  }
+	60% {
+		content: '4';
+  }
+	70% {
+		content: '3';
+  }
+	80% {
+		content: '2';
+  }
+	90% {
+		content: '1';
+  }
+  100% {
+		content: '0';
+  }
+}
+
+@keyframes countdown3s {
   0% {
 		content: '3';
   }
@@ -36,7 +83,7 @@ h1 {
   }
 }
 
-.loaderBar {
+.loadingBar {
 	position: absolute;;
 	top: 60px;
 	width: 100%;
@@ -46,7 +93,7 @@ h1 {
 	border: 1px solid rgba(255,255,255,0.4);
 	overflow: hidden;
 }
-.loaderBar:before {
+.loadingBar:before {
 	content: '';
 	position: absolute;
 	left: 0;

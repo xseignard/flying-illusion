@@ -19,15 +19,20 @@ const headline = (props) => {
 				break;
 			case 'waiting':
 				content = (
-					<h1>Place tes pieds<br />sur les pads gauche et droit</h1>
+					<div>
+						<h1>Pieds sur les pads gauche et droit</h1>
+						<div className={css.waiting}>
+							<div className={css.waitingBar}></div>
+						</div>
+					</div>
 				);
 				break;
 			case 'loading':
 				content = (
 					<div>
 						<h1>Lancement du jeu...</h1>
-						<div className={css.loader}>
-							<div className={css.loaderBar}></div>
+						<div className={css.loading}>
+							<div className={css.loadingBar}></div>
 						</div>
 					</div>
 				);

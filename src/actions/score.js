@@ -5,7 +5,7 @@ import { filterStepsByDirection } from '../utils/choreography';
 const directions = ['left', 'top', 'right', 'bottom'];
 
 const sortStepsChronologically = (steps) => {
-	steps.sort((step1, step2) => {
+	return steps.sort((step1, step2) => {
 		const step1Time = step1.time ? step1.time : step1.end;
 		const step2Time = step2.time ? step2.time : step2.end;
 		return step1Time - step2Time;
@@ -13,12 +13,11 @@ const sortStepsChronologically = (steps) => {
 };
 
 const getDirectionSteps = (steps) => {
-	return {
-		left: filterStepsByDirection(steps, 'left'),
-		top: filterStepsByDirection(steps, 'top'),
-		right: filterStepsByDirection(steps, 'right'),
-		bottom: filterStepsByDirection(steps, 'bottom')
-	};
+	const directionSteps = {};
+	directions.forEach((direction) => {
+		directionSteps[direction] = filterStepsByDirection(steps, direction);
+	});
+	return directionSteps;
 };
 
 const getDirectionScore = (steps) => {
@@ -58,13 +57,17 @@ const getDirectionScore = (steps) => {
 	return score;
 };
 
-const getScore = (targetSteps, playerSteps) => {
-	const allSteps = targetSteps.concat(playerSteps);
-	sortStepsChronologically(allSteps);
-	const directionSteps = getDirectionSteps(allSteps);
-	const directionScores = directions.map((direction) => {
+const getDirectionScores = (directionSteps) => {
+	return directions.map((direction) => {
 		return getDirectionScore(directionSteps[direction]);
 	});
+};
+
+const getScore = (targetSteps, playerSteps) => {
+	const allSteps = targetSteps.concat(playerSteps);
+	const orderedSteps = sortStepsChronologically(allSteps);
+	const directionSteps = getDirectionSteps(orderedSteps);
+	const directionScores = getDirectionScores(directionSteps);
 	return sum(directionScores);
 };
 

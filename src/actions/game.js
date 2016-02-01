@@ -56,7 +56,7 @@ export const checkGameStatus = (direction) => {
 								type: C.GAME,
 								status: 'idle'
 							});
-						}, 5000)
+						}, 10000)
 					});
 					dispatch(checkGameStatus());
 				}, 5000)
@@ -95,7 +95,7 @@ export const checkGameStatus = (direction) => {
 						type: C.GAME,
 						status: 'idle'
 					});
-				}, 5000)
+				}, 10000)
 			});
 		}
 	};
