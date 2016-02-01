@@ -1,11 +1,13 @@
 import C from '../constants';
 
-export function game(state = {
+const defaultState = {
 	status: 'idle',
 	timeout: null
-}, action) {
+};
+
+export function game(state = defaultState, action) {
 	switch (action.type) {
-		case C.GAME_STATUS:
+		case C.GAME:
 			return {
 				status: action.status,
 				time: action.time,

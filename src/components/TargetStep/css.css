@@ -1,0 +1,33 @@
+.targetStep {
+	position: absolute;
+	height: 40px;
+	width: 40px;
+	border-radius: 100%;
+	margin-left: -20px;
+	background: blue;
+	will-change: transform;
+	transform: translateY(100vh);
+	animation-name: falling;
+	animation-timing-function: linear;
+}
+.left {
+	left: 13%;
+}
+.top {
+	left: 38%;
+}
+.bottom {
+	left: 62%;
+}
+.right {
+	left: 87%;
+}
+
+@keyframes falling {
+  0% {
+		transform: translateY(0vh);
+  }
+	100% {
+		transform: translateY(100vh);
+  }
+}

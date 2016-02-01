@@ -5,7 +5,8 @@ export function targetSteps(state = [], action) {
 		case C.TARGET_STEP:
 			return state.concat([{
 				direction: action.direction,
-				time: action.time
+				start: action.start,
+				end: action.end
 			}]);
 		case C.RESET_TARGET_STEPS:
 			return [];

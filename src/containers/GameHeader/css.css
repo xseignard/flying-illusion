@@ -1,0 +1,23 @@
+.gameHeader {
+	position: relative;
+	display: flex;
+	justify-content: space-around;
+	width: 600px;
+	margin: 0 auto;
+}
+.targetSteps {
+	position: absolute;
+	top: 20px;
+	left: 0;
+	right: 0;
+}
+.arrow {
+	position: relative;
+	top: 20px;
+	height: 60px;
+	width: 60px;
+	border-radius: 100%;
+	background: white;
+	color: black;
+	line-height: 60px;
+}

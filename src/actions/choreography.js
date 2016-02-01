@@ -1,19 +1,21 @@
 import C from '../constants';
 import { updateScore } from './score';
-import { getChoreography } from '../utils/choreography';
+import { getChoreographySteps } from '../utils/choreography';
 
 const ADDITIONAL_TIME = 500;
 let timeouts;
+let choregraphyEndTimeout;
 
 export const startChoreography = () => {
 	return (dispatch, getState) => {
-		const steps = getChoreography();
+		const steps = getChoreographySteps();
 		timeouts = steps.map((step) => {
 			const visualTimeout = setTimeout(() => {
 				dispatch({
 					type: C.TARGET_STEP,
 					direction: step.direction,
-					time: step.end
+					start: step.start,
+					end: step.end
 				});
 			}, step.start);
 			const scoreTimeout = setTimeout(() => {
@@ -24,6 +26,13 @@ export const startChoreography = () => {
 				scoreTimeout
 			};
 		});
+		const gameEndTime = parseInt(steps[steps.length - 1].end, 10) + 1000;
+		choregraphyEndTimeout = setTimeout(() => {
+			dispatch({
+				type: C.GAME,
+				status: 'end'
+			});
+		}, gameEndTime);
 	};
 };
 
@@ -32,6 +41,7 @@ export const stopChoreography = (choreography) => {
 		timeouts.forEach((timeout) => {
 			clearTimeout(timeout.visualTimeout);
 			clearTimeout(timeout.scoreTimeout);
+			clearTimeout(choregraphyEndTimeout);
 		});
 		timeouts = [];
 	};

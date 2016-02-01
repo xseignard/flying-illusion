@@ -1,0 +1,22 @@
+.gameFooter {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+}
+.score,
+.bonus {
+	padding: 10px 20px;
+}
+.score {
+	text-align: left;
+}
+.bonus {
+	text-align: right;
+}
+.label {
+	font-size: 16px;
+	color: rgba(255,255,255,0.4);
+}
+.amount {
+	font-size: 40px;
+}

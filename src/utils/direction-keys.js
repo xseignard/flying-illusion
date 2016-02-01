@@ -47,6 +47,8 @@ export function listenToDirectionKeys(cb) {
 
 	if (document) {
 		const body = document.querySelector('body');
+		body.removeEventListener('keyup', onKeyUp);
+		body.removeEventListener('keydown', onKeyDown);
 		body.addEventListener('keyup', onKeyUp);
 		body.addEventListener('keydown', onKeyDown);
 	}

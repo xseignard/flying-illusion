@@ -17,7 +17,7 @@ const onPadChange = (eventType, direction) => {
 			dispatch(checkGameStatus(direction));
 		}
 		else if (upOrDown === 'down') {
-			const time = Date.now() - state.game.startTime;
+			const time = Date.now() - state.game.time;
 			dispatch({
 				type: C.PLAYER_STEP,
 				direction,

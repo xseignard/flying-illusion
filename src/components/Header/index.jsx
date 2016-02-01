@@ -1,9 +1,10 @@
 import React from 'react';
-import classnames from 'classnames';
 import css from './css';
 
-export function Header(props) {
-	let content = <h1>Game status unknown</h1>;
+const headline = (props) => {
+	let content = (
+		<h1>Game status unknown</h1>
+	);
 	if (props && props.game) {
 		switch (props.game.status) {
 			case 'idle':
@@ -25,28 +26,44 @@ export function Header(props) {
 				content = (
 					<div>
 						<h1>Lancement du jeu...</h1>
+						<div className={css.loader}>
+							<div className={css.loaderBar}></div>
+						</div>
 					</div>
 				);
 				break;
 			case 'started':
+			// waiting for react 0.15 to be allowed to return null
+				content = (
+					<noscript />
+				);
+				break;
+			case 'end':
+			// waiting for react 0.15 to be allowed to return null
 				content = (
 					<div>
-						<h1>Game is on!</h1>
+						<h1>Nice game! Save your score</h1>
+						<button onClick={props.startGame}>Start new game</button>
 					</div>
 				);
 				break;
 			default:
 		}
 	}
-	const loaderClass = classnames({
-		[css.loader]: true,
-		[css.loading]: props && props.game && props.game.status === 'loading'
-	});
+	return content;
+};
+
+export function Header(props) {
+	if (props && props.game && props.game.status === 'started') {
+		// waiting for react 0.15 to be allowed to return null
+		return (
+			<noscript />
+		);
+	}
 	return (
-		<div>
+		<div className={css.header}>
 			<img src="img/logo.png" />
-			{content}
-			<div className={loaderClass}></div>
+			{headline(props)}
 		</div>
 	);
 }

@@ -20,27 +20,7 @@ export const filterStepsByDirection = (steps, direction) => {
 	});
 };
 
-export const getStepsTimes = (steps) => {
-	return steps.map((step) => {
-		return step.end;
-	});
-};
-
-export const getChoreography = () => {
+export const getChoreographySteps = () => {
 	const steps = mapSubsToSteps(choregraphySubs);
-
-	// const padSteps = {
-	// 	left: filterStepsByDirection(steps, 'left'),
-	// 	top: filterStepsByDirection(steps, 'top'),
-	// 	right: filterStepsByDirection(steps, 'right'),
-	// 	bottom: filterStepsByDirection(steps, 'bottom')
-	// };
-	// const padStepsTimes = {
-	// 	left: getStepsTimes(padSteps.left),
-	// 	top: getStepsTimes(padSteps.top),
-	// 	right: getStepsTimes(padSteps.right),
-	// 	bottom: getStepsTimes(padSteps.bottom)
-	// };
-
 	return steps;
 };

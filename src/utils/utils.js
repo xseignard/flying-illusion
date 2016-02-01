@@ -3,3 +3,9 @@ export const flattenArray = (arr) => {
 		return a.concat(b);
 	});
 };
+
+export const sum = (array) => {
+	return array.reduce((first, second) => {
+		return first + second;
+	}, 0);
+};
