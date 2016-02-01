@@ -41,6 +41,10 @@ module.exports = {
 				loader: 'style-loader!css-loader?modules'
 			},
 			{
+				test: /\.png|\.jpg|\.svg$/,
+				loader: 'file-loader?name=img/[name].[ext]'
+			},
+			{
 				test: /\.srt$/,
 				loader: 'raw-loader!srt-loader'
 			}

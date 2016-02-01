@@ -1,7 +1,7 @@
 import C from '../constants';
 
 const defaultState = {
-	status: 'idle',
+	status: 'started',
 	timeout: null
 };
 

@@ -2,32 +2,52 @@
 	position: absolute;
 	height: 40px;
 	width: 40px;
-	border-radius: 100%;
 	margin-left: -20px;
-	background: blue;
 	will-change: transform;
 	transform: translateY(100vh);
 	animation-name: falling;
 	animation-timing-function: linear;
 }
+.targetStep:before {
+	position: absolute;
+	content: '';
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-size: contain;
+	background-image: url('../../../www/img/arrow.svg');
+}
 .left {
 	left: 13%;
+}
+.left:before {
+	transform: rotate(90deg);
 }
 .top {
 	left: 38%;
 }
+.top:before {
+	transform: rotate(180deg);
+}
 .bottom {
 	left: 62%;
+}
+.bottom:before {
+	transform: rotate(0deg);
 }
 .right {
 	left: 87%;
 }
+.right:before {
+	transform: rotate(-90deg);
+}
 
 @keyframes falling {
   0% {
-		transform: translateY(0vh);
+		transform: translateY(100vh);
   }
 	100% {
-		transform: translateY(100vh);
+		transform: translateY(0vh);
   }
 }

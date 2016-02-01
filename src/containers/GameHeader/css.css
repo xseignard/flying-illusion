@@ -14,10 +14,20 @@
 .arrow {
 	position: relative;
 	top: 20px;
-	height: 60px;
-	width: 60px;
-	border-radius: 100%;
-	background: white;
-	color: black;
-	line-height: 60px;
+	height: 40px;
+	width: 40px;
+	background-size: contain;
+	background-image: url('../../../www/img/arrow_white.svg');
+}
+.arrow:nth-child(1) {
+	transform: rotate(90deg);
+}
+.arrow:nth-child(2) {
+	transform: rotate(180deg);
+}
+.arrow:nth-child(3) {
+	transform: rotate(0deg);
+}
+.arrow:nth-child(4) {
+	transform: rotate(-90deg);
 }
