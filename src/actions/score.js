@@ -49,7 +49,7 @@ const getDirectionScore = (steps) => {
 			timeDifferences.push(nextStep.time - step.end);
 		}
 		const minTimeDifference = Math.min(...timeDifferences);
-		if (minTimeDifference < 300) {
+		if (minTimeDifference < C.ADDITIONAL_TIME) {
 			score = score + 1;
 		}
 		return true;

@@ -2,7 +2,6 @@ import C from '../constants';
 import { updateScore } from './score';
 import { getChoreographySteps } from '../utils/choreography';
 
-const ADDITIONAL_TIME = 500;
 let timeouts;
 let choregraphyEndTimeout;
 
@@ -20,7 +19,7 @@ export const startChoreography = () => {
 			}, step.start);
 			const scoreTimeout = setTimeout(() => {
 				dispatch(updateScore());
-			}, step.end + ADDITIONAL_TIME);
+			}, step.end + C.ADDITIONAL_TIME);
 			return {
 				visualTimeout,
 				scoreTimeout
