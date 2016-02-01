@@ -2,13 +2,13 @@ import C from '../constants';
 import { updateScore } from './score';
 import { getChoreographySteps } from '../utils/choreography';
 
-let timeouts;
+let targetStepsTimeouts;
 let choregraphyEndTimeout;
 
 export const startChoreography = () => {
 	return (dispatch, getState) => {
 		const steps = getChoreographySteps();
-		timeouts = steps.map((step) => {
+		targetStepsTimeouts = steps.map((step) => {
 			const visualTimeout = setTimeout(() => {
 				dispatch({
 					type: C.TARGET_STEP,
@@ -37,11 +37,11 @@ export const startChoreography = () => {
 
 export const stopChoreography = (choreography) => {
 	return (dispatch, getState) => {
-		timeouts.forEach((timeout) => {
+		targetStepsTimeouts.forEach((timeout) => {
 			clearTimeout(timeout.visualTimeout);
 			clearTimeout(timeout.scoreTimeout);
 			clearTimeout(choregraphyEndTimeout);
 		});
-		timeouts = [];
+		targetStepsTimeouts = [];
 	};
 };
