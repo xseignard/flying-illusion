@@ -2,8 +2,7 @@ import C from '../constants';
 
 const defaultState = {
 	game: null,
-	choregraphySteps: null,
-	choregraphyEnd: null
+	arrows: null
 };
 
 export function timeouts(state = defaultState, action) {
@@ -12,13 +11,9 @@ export function timeouts(state = defaultState, action) {
 			return Object.assign({}, state, {
 				game: action.timeout
 			});
-		case C.CHOREGRAPHY_STEPS_TIMEOUTS:
+		case C.ARROWS_TIMEOUTS:
 			return Object.assign({}, state, {
-				choregraphySteps: action.timeouts
-			});
-		case C.CHOREGRAPHY_END_TIMEOUT:
-			return Object.assign({}, state, {
-				choregraphyEnd: action.timeout
+				arrows: action.timeouts
 			});
 		default:
 			return state;

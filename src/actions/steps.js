@@ -1,5 +1,4 @@
 import C from '../constants';
-import { updateScore } from './score';
 
 export function dispatchStep(direction) {
 	return (dispatch, getState) => {
@@ -10,6 +9,5 @@ export function dispatchStep(direction) {
 			direction,
 			time
 		});
-		dispatch(updateScore());
 	};
 }

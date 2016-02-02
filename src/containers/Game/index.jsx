@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getScore } from '../../selectors/score';
 import * as gameActions from '../../actions/game';
 import { GameHeader } from '../GameHeader';
 import { GameFooter } from '../GameFooter';
-import { getActiveMoves } from '../../actions/moves/helpers';
 import css from './css';
 
 export class Game extends Component {
@@ -26,7 +26,7 @@ export class Game extends Component {
 				ref="game"
 				className={css.game}
 			>
-				<GameHeader moves={this.props.moves} />
+				<GameHeader arrows={this.props.arrows} />
 				<GameFooter score={this.props.score} />
 			</div>
 		);
@@ -36,8 +36,8 @@ export class Game extends Component {
 function mapStateToProps(state) {
 	return {
 		game: state.game,
-		score: state.score,
-		moves: getActiveMoves(state.moves),
+		score: getScore(state),
+		arrows: state.arrows,
 		steps: state.steps
 	};
 }

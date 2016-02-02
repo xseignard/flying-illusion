@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import { Move } from '../../components/Move';
+import { Arrow } from '../../components/Arrow';
 import css from './css';
 
 export class GameHeader extends Component {
-	movesList() {
-		return this.props.moves.map((move) => {
-			return <Move key={move.id} move={move} />;
+	arrowsList() {
+		return this.props.arrows.map((arrow) => {
+			return <Arrow key={arrow.id} arrow={arrow} />;
 		});
 	}
 	render() {
-		this.moves = this.movesList();
+		this.arrows = this.arrowsList();
 		return (
 			<div className={css.gameHeader}>
 				<div className={css.arrow}></div>
 				<div className={css.arrow}></div>
 				<div className={css.arrow}></div>
 				<div className={css.arrow}></div>
-				<div className={css.moves}>
-					{this.moves}
+				<div className={css.arrows}>
+					{this.arrows}
 				</div>
 			</div>
 		);

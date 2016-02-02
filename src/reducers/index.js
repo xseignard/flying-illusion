@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { game } from './game';
-import { moves } from './moves';
+import { choregraphy } from './choregraphy';
+import { arrows } from './arrows';
 import { pads } from './pads';
 import { steps } from './steps';
-import { score } from './score';
 import { timeouts } from './timeouts';
 import { TEST } from '../actions';
 
@@ -19,10 +19,10 @@ function test(state = true, action) {
 
 const rootReducer = combineReducers({
 	game,
-	moves,
+	choregraphy,
+	arrows,
 	pads,
 	steps,
-	score,
 	timeouts,
 	test,
 });
