@@ -1,7 +1,7 @@
 import C from '../constants';
 import { checkGameStatus } from './game';
 import { listenToDirectionKeys } from '../utils/direction-keys';
-import { updateScore } from './score';
+import { dispatchStep } from './steps';
 
 const onPadChange = (eventType, direction) => {
 	return (dispatch, getState) => {
@@ -17,13 +17,7 @@ const onPadChange = (eventType, direction) => {
 			dispatch(checkGameStatus(direction));
 		}
 		else if (upOrDown === 'down') {
-			const time = Date.now() - state.game.time;
-			dispatch({
-				type: C.PLAYER_STEP,
-				direction,
-				time
-			});
-			dispatch(updateScore());
+			dispatch(dispatchStep(direction));
 		}
 	};
 };

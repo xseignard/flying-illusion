@@ -1,14 +1,14 @@
 import C from '../constants';
-import { startChoregraphy, stopChoregraphy } from './choregraphy';
+import { startChoregraphy, stopChoregraphy } from './moves';
 import { updateScore } from './score';
 
 export const startGame = () => {
 	return (dispatch, getState) => {
 		dispatch({
-			type: C.RESET_PLAYER_STEPS
+			type: C.STEPS_RESET
 		});
 		dispatch({
-			type: C.RESET_CHOREGRAPHY_STEPS
+			type: C.MOVES_RESET
 		});
 		dispatch(updateScore());
 		dispatch({
@@ -28,86 +28,100 @@ export const stopGame = () => {
 			status: 'idle'
 		});
 		dispatch({
-			type: C.RESET_PLAYER_STEPS
+			type: C.STEPS_RESET
 		});
 		dispatch({
-			type: C.RESET_CHOREGRAPHY_STEPS
+			type: C.MOVES_RESET
 		});
 		dispatch(updateScore());
 	};
 };
 
-export const checkGameStatus = (direction) => {
+let setGameWaiting;
+let checkGameStatus;
+
+const setGameIntro = () => {
+	return (dispatch, getState) => {
+		dispatch({
+			type: C.GAME,
+			status: 'intro'
+		});
+		dispatch({
+			type: C.GAME_TIMEOUT,
+			timeout: setTimeout(() => {
+				dispatch(setGameWaiting());
+				dispatch(checkGameStatus());
+			}, 5000)
+		});
+	};
+};
+
+setGameWaiting = () => {
+	return (dispatch, getState) => {
+		dispatch({
+			type: C.GAME,
+			status: 'waiting'
+		});
+		dispatch({
+			type: C.GAME_TIMEOUT,
+			timeout: setTimeout(() => {
+				dispatch({
+					type: C.GAME,
+					status: 'idle'
+				});
+			}, 10000)
+		});
+	};
+};
+
+const setGameLoading = () => {
+	return (dispatch, getState) => {
+		const state = getState();
+		clearTimeout(state.timeouts.game);
+		dispatch({
+			type: C.GAME,
+			status: 'loading'
+		});
+		dispatch({
+			type: C.GAME_TIMEOUT,
+			timeout: setTimeout(() => {
+				dispatch(startGame());
+			}, 3000)
+		});
+	};
+};
+
+checkGameStatus = (direction) => {
 	return (dispatch, getState) => {
 		const state = getState();
 		if (
-			!state.timeouts.game &&
-			state.game.status === 'idle'
+			state.game.status === 'idle' && (
+				state.pads.left === 'down' ||
+				state.pads.top === 'down' ||
+				state.pads.bottom === 'down' ||
+				state.pads.right === 'down'
+			)
 		) {
-			dispatch({
-				type: C.GAME,
-				status: 'intro'
-			});
-			dispatch({
-				type: C.GAME_TIMEOUT,
-				timeout: setTimeout(() => {
-					dispatch({
-						type: C.GAME,
-						status: 'waiting'
-					});
-					dispatch({
-						type: C.GAME_TIMEOUT,
-						timeout: setTimeout(() => {
-							dispatch({
-								type: C.GAME,
-								status: 'idle'
-							});
-						}, 10000)
-					});
-				}, 5000)
-			});
+			dispatch(setGameIntro());
 		}
 		else if (direction && direction.match(/top|bottom/)) {
 			return;
 		}
 		else if (
-			state.timeouts.game &&
 			state.game.status === 'waiting' &&
 			state.pads.left === 'down' &&
 			state.pads.right === 'down'
 		) {
-			clearTimeout(state.timeouts.game);
-			dispatch({
-				type: C.GAME,
-				status: 'loading'
-			});
-			dispatch({
-				type: C.GAME_TIMEOUT,
-				timeout: setTimeout(() => {
-					dispatch(startGame());
-				}, 3000)
-			});
+			dispatch(setGameLoading());
 		}
 		else if (
-			state.timeouts.game &&
 			state.game.status === 'loading' && (
 			state.pads.left === 'up' ||
 			state.pads.right === 'up'
 		)) {
-			clearTimeout(state.timeouts.game);
-			dispatch({
-				type: C.GAME,
-				status: 'waiting'
-			});
-			dispatch({
-				type: C.GAME_TIMEOUT,
-				timeout: setTimeout(() => {
-					dispatch({
-						type: C.GAME,
-						status: 'idle'
-					});
-				}, 10000)
-			});
+			dispatch(setGameWaiting());
 		}
 	};
 };
+
+export { checkGameStatus };

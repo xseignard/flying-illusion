@@ -1,60 +1,58 @@
 import C from '../../constants';
-import { sum } from '../../utils/utils';
+import { sum } from '../../utils';
 
 const directions = ['left', 'top', 'right', 'bottom'];
 
-export const filterStepsByDirection = (steps, direction) => {
-	return steps.filter((step) => {
-		return (step.direction === direction);
+export const filterBeatsByDirection = (beats, direction) => {
+	return beats.filter((beat) => {
+		return (beat.direction === direction);
 	});
 };
 
-const sortStepsChronologically = (steps) => {
-	return steps.sort((step1, step2) => {
-		const step1Time = step1.time ? step1.time : step1.end;
-		const step2Time = step2.time ? step2.time : step2.end;
-		return step1Time - step2Time;
+const sortBeatsChronologically = (beats) => {
+	return beats.sort((beat1, beat2) => {
+		return beat1.time - beat2.time;
 	});
 };
 
-const getDirectionSteps = (steps) => {
-	const directionSteps = {};
+const getDirectionBeats = (beats) => {
+	const directionBeats = {};
 	directions.forEach((direction) => {
-		directionSteps[direction] = filterStepsByDirection(steps, direction);
+		directionBeats[direction] = filterBeatsByDirection(beats, direction);
 	});
-	return directionSteps;
+	return directionBeats;
 };
 
-const getDirectionScore = (steps) => {
+const getDirectionScore = (beats) => {
 	let score = 0;
-	steps.every((step, index) => {
-		const isStepTarget = typeof step.end === 'number';
-		// basic version of algorithm just takes choregraphySteps into account
-		if (!isStepTarget) {
+	beats.every((beat, index) => {
+		const isStepChoregraphy = typeof beat.showTime === 'number';
+		// basic version of algorithm just takes moves into account
+		if (!isStepChoregraphy) {
 			return true;
 		}
-		const previousStep = steps[index - 1];
-		const nextStep = steps[index + 1];
-		let isPreviousStepPlayer = false;
-		let isNextStepPlayer = false;
-		if (previousStep) {
-			isPreviousStepPlayer = typeof previousStep.time === 'number';
+		const previousBeat = beats[index - 1];
+		const nextBeat = beats[index + 1];
+		let isPreviousBeatStep = false;
+		let isNextBeatStep = false;
+		if (previousBeat) {
+			isPreviousBeatStep = typeof previousBeat.showTime !== 'number';
 		}
-		if (nextStep) {
-			isNextStepPlayer = typeof nextStep.time === 'number';
+		if (nextBeat) {
+			isNextBeatStep = typeof nextBeat.showTime !== 'number';
 		}
-		if (!isPreviousStepPlayer && !isNextStepPlayer) {
+		if (!isPreviousBeatStep && !isNextBeatStep) {
 			return true;
 		}
 		const timeDifferences = [];
-		if (previousStep && isPreviousStepPlayer) {
-			timeDifferences.push(step.end - previousStep.time);
+		if (previousBeat && isPreviousBeatStep) {
+			timeDifferences.push(beat.time - previousBeat.time);
 		}
-		if (nextStep && isNextStepPlayer) {
-			timeDifferences.push(nextStep.time - step.end);
+		if (nextBeat && isNextBeatStep) {
+			timeDifferences.push(nextBeat.time - beat.time);
 		}
 		const minTimeDifference = Math.min(...timeDifferences);
-		if (minTimeDifference < C.ADDITIONAL_TIME) {
+		if (minTimeDifference < C.MOVE_RANGE_OK / 2) {
 			score = score + 1;
 		}
 		return true;
@@ -62,16 +60,16 @@ const getDirectionScore = (steps) => {
 	return score;
 };
 
-const getDirectionScores = (directionSteps) => {
+const getDirectionScores = (directionBeats) => {
 	return directions.map((direction) => {
-		return getDirectionScore(directionSteps[direction]);
+		return getDirectionScore(directionBeats[direction]);
 	});
 };
 
-export const getScore = (choregraphySteps, playerSteps) => {
-	const allSteps = choregraphySteps.concat(playerSteps);
-	const orderedSteps = sortStepsChronologically(allSteps);
-	const directionSteps = getDirectionSteps(orderedSteps);
-	const directionScores = getDirectionScores(directionSteps);
+export const getScore = (moves, steps) => {
+	const allBeats = moves.concat(steps);
+	const orderedBeats = sortBeatsChronologically(allBeats);
+	const directionBeats = getDirectionBeats(orderedBeats);
+	const directionScores = getDirectionScores(directionBeats);
 	return sum(directionScores);
 };

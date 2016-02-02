@@ -6,7 +6,7 @@ export const updateScore = () => {
 		const state = getState();
 		dispatch({
 			type: C.SCORE,
-			value: getScore(state.choregraphySteps, state.playerSteps)
+			value: getScore(state.moves, state.steps)
 		});
 	};
 };
