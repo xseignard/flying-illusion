@@ -25,7 +25,7 @@ export class Game extends Component {
 				ref="game"
 				className={css.game}
 			>
-				<GameHeader targetSteps={this.props.targetSteps} />
+				<GameHeader choregraphySteps={this.props.choregraphySteps} />
 				<GameFooter score={this.props.score} />
 			</div>
 		);
@@ -36,7 +36,7 @@ function mapStateToProps(state) {
 	return {
 		game: state.game,
 		score: state.score,
-		targetSteps: state.targetSteps,
+		choregraphySteps: state.choregraphySteps,
 		playerSteps: state.playerSteps
 	};
 }

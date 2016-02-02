@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import { pads } from './pads';
 import { game } from './game';
 import { score } from './score';
-import { targetSteps, playerSteps } from './steps';
+import { timeouts } from './timeouts';
+import { choregraphySteps, playerSteps } from './steps';
 import { TEST } from '../actions';
 
 // reducer dedicated to lang selection
@@ -20,8 +21,9 @@ const rootReducer = combineReducers({
 	game,
 	score,
 	pads,
+	timeouts,
 	playerSteps,
-	targetSteps
+	choregraphySteps
 });
 
 export default rootReducer;

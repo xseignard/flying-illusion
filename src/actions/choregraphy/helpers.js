@@ -1,6 +1,6 @@
 import moment from 'moment';
-import choregraphySubs from '../choregraphies/choreography_1.srt';
-import { flattenArray } from './utils';
+import choregraphySubs from '../../choregraphies/choregraphy_1.srt';
+import { flattenArray } from '../../utils/utils';
 
 export const mapSubsToSteps = (subs) => {
 	const mappedSubs = subs.map((sub) => {
@@ -14,13 +14,7 @@ export const mapSubsToSteps = (subs) => {
 	return flattenArray(mappedSubs);
 };
 
-export const filterStepsByDirection = (steps, direction) => {
-	return steps.filter((step) => {
-		return (step.direction === direction);
-	});
-};
-
-export const getChoreographySteps = () => {
+export const getChoregraphySteps = () => {
 	const steps = mapSubsToSteps(choregraphySubs);
 	return steps;
 };

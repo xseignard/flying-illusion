@@ -2,7 +2,7 @@ import C from '../constants';
 
 const defaultState = {
 	status: 'idle',
-	timeout: null
+	time: null
 };
 
 export function game(state = defaultState, action) {
@@ -10,8 +10,7 @@ export function game(state = defaultState, action) {
 		case C.GAME:
 			return {
 				status: action.status,
-				time: action.time,
-				timeout: action.timeout
+				time: action.time
 			};
 		default:
 			return state;

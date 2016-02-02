@@ -1,4 +1,4 @@
-.targetStep {
+.choregraphyStep {
 	position: absolute;
 	height: 40px;
 	width: 40px;
@@ -8,13 +8,14 @@
 	animation-name: falling;
 	animation-timing-function: linear;
 }
-.targetStep:before {
+.choregraphyStep:before {
 	position: absolute;
 	content: '';
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
+	background-repeat: no-repeat;;
 	background-size: contain;
 	background-image: url('../../../www/img/arrow.svg');
 }

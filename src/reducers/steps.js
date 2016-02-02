@@ -1,14 +1,14 @@
 import C from '../constants';
 
-export function targetSteps(state = [], action) {
+export function choregraphySteps(state = [], action) {
 	switch (action.type) {
-		case C.TARGET_STEP:
+		case C.CHOREGRAPHY_STEP:
 			return state.concat([{
 				direction: action.direction,
 				start: action.start,
 				end: action.end
 			}]);
-		case C.RESET_TARGET_STEPS:
+		case C.RESET_CHOREGRAPHY_STEPS:
 			return [];
 		default:
 			return state;

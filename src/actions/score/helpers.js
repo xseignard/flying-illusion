@@ -1,8 +1,13 @@
-import C from '../constants';
-import { sum } from '../utils/utils';
-import { filterStepsByDirection } from '../utils/choreography';
+import C from '../../constants';
+import { sum } from '../../utils/utils';
 
 const directions = ['left', 'top', 'right', 'bottom'];
+
+export const filterStepsByDirection = (steps, direction) => {
+	return steps.filter((step) => {
+		return (step.direction === direction);
+	});
+};
 
 const sortStepsChronologically = (steps) => {
 	return steps.sort((step1, step2) => {
@@ -24,7 +29,7 @@ const getDirectionScore = (steps) => {
 	let score = 0;
 	steps.every((step, index) => {
 		const isStepTarget = typeof step.end === 'number';
-		// basic version of algorithm just takes targetSteps into account
+		// basic version of algorithm just takes choregraphySteps into account
 		if (!isStepTarget) {
 			return true;
 		}
@@ -63,20 +68,10 @@ const getDirectionScores = (directionSteps) => {
 	});
 };
 
-const getScore = (targetSteps, playerSteps) => {
-	const allSteps = targetSteps.concat(playerSteps);
+export const getScore = (choregraphySteps, playerSteps) => {
+	const allSteps = choregraphySteps.concat(playerSteps);
 	const orderedSteps = sortStepsChronologically(allSteps);
 	const directionSteps = getDirectionSteps(orderedSteps);
 	const directionScores = getDirectionScores(directionSteps);
 	return sum(directionScores);
-};
-
-export const updateScore = () => {
-	return (dispatch, getState) => {
-		const state = getState();
-		dispatch({
-			type: C.SCORE,
-			value: getScore(state.targetSteps, state.playerSteps)
-		});
-	};
 };

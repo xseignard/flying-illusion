@@ -4,7 +4,7 @@ import css from './css';
 
 export function TargetStep(props) {
 	const stepClass = classnames({
-		[css.targetStep]: true,
+		[css.choregraphyStep]: true,
 		[css[props.step.direction]]: true
 	});
 	const animationDuration = `${parseInt(props.step.end, 10) - parseInt(props.step.start, 10)}ms`;
