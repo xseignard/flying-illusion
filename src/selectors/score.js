@@ -4,15 +4,15 @@ import { sum } from '../utils';
 
 const directions = ['left', 'top', 'right', 'bottom'];
 
-export const filterGameEventsByDirection = (gameEvent, direction) => {
-	return gameEvent.filter((beat) => {
-		return (beat.direction === direction);
-	});
-};
-
 const sortGameEventsChronologically = (gameEvent) => {
 	return gameEvent.sort((beat1, beat2) => {
 		return beat1.time - beat2.time;
+	});
+};
+
+const filterGameEventsByDirection = (gameEvent, direction) => {
+	return gameEvent.filter((beat) => {
+		return (beat.direction === direction);
 	});
 };
 
@@ -72,8 +72,8 @@ const getSteps = (state) => state.steps;
 
 export const getScore = createSelector(
 	[getChoregraphy, getSteps],
-	(choregraphy, steps) => {
-		const allGameEvents = choregraphy.concat(steps);
+	(moves, steps) => {
+		const allGameEvents = moves.concat(steps);
 		const orderedGameEvents = sortGameEventsChronologically(allGameEvents);
 		const directionGameEvents = getDirectionGameEvents(orderedGameEvents);
 		const directionScores = getDirectionScores(directionGameEvents);

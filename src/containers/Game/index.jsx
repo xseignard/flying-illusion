@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getScore } from '../../selectors/score';
+import { getArrows } from '../../selectors/arrows';
 import * as gameActions from '../../actions/game';
 import { GameHeader } from '../GameHeader';
 import { GameFooter } from '../GameFooter';
@@ -36,9 +37,9 @@ export class Game extends Component {
 function mapStateToProps(state) {
 	return {
 		game: state.game,
+		steps: state.steps,
+		arrows: getArrows(state),
 		score: getScore(state),
-		arrows: state.arrows,
-		steps: state.steps
 	};
 }
 // https://github.com/rackt/react-redux/blob/master/docs/api.md

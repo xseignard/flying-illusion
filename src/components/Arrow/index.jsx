@@ -7,7 +7,8 @@ export function Arrow(props) {
 		[css.arrow]: true,
 		[css[props.arrow.direction]]: true
 	});
-	const animationDurationValue = `${props.arrow.duration}ms`;
+	const duration = props.arrow.time - props.arrow.showTime;
+	const animationDurationValue = `${duration}ms`;
 	const inlineStyle = { animationDuration: animationDurationValue };
 	return (
 		<div

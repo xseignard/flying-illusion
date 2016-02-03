@@ -2,7 +2,7 @@ import C from '../constants';
 
 const defaultState = {
 	game: null,
-	arrows: null
+	moves: null
 };
 
 export function timeouts(state = defaultState, action) {
@@ -11,9 +11,9 @@ export function timeouts(state = defaultState, action) {
 			return Object.assign({}, state, {
 				game: action.timeout
 			});
-		case C.ARROWS_TIMEOUTS:
+		case C.MOVES_TIMEOUTS:
 			return Object.assign({}, state, {
-				arrows: action.timeouts
+				moves: action.timeouts
 			});
 		default:
 			return state;

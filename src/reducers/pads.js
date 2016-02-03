@@ -1,11 +1,13 @@
 import C from '../constants';
 
-export function pads(state = {
+const defaultState = {
 	left: null,
 	top: null,
 	right: null,
 	bottom: null
-}, action) {
+};
+
+export function pads(state = defaultState, action) {
 	switch (action.type) {
 		case C.PAD:
 			return Object.assign({}, state, {

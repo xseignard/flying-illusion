@@ -1,34 +1,29 @@
 import C from '../constants';
-import { startArrows, stopArrows } from './arrows';
-import { setChoregraphy } from './choregraphy';
+import { startChoregraphy, stopChoregraphy } from './choregraphy';
 
 export const startGame = () => {
 	return (dispatch, getState) => {
 		dispatch({
 			type: C.STEPS_RESET
 		});
-		dispatch(setChoregraphy());
 		dispatch({
 			type: C.GAME,
 			status: 'started',
 			time: Date.now()
 		});
-		dispatch(startArrows());
+		dispatch(startChoregraphy());
 	};
 };
 
 export const stopGame = () => {
 	return (dispatch, getState) => {
-		dispatch(stopArrows());
+		dispatch(stopChoregraphy());
 		dispatch({
 			type: C.GAME,
 			status: 'idle'
 		});
 		dispatch({
 			type: C.STEPS_RESET
-		});
-		dispatch({
-			type: C.CHOREGRAPHY_RESET
 		});
 	};
 };
