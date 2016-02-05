@@ -6,14 +6,14 @@ import { dispatchStep } from './steps';
 const onPadChange = (eventType, direction) => {
 	return (dispatch, getState) => {
 		const state = getState();
-		const status = state.game.status;
+		const status = state.game.get('status');
 		const upOrDown = eventType === 'keyup' ? 'up' : 'down';
 		dispatch({
 			type: C.PAD,
 			direction,
 			upOrDown
 		});
-		if (status !== 'started') {
+		if (status !== 'play') {
 			dispatch(checkGameStatus(direction));
 		}
 		else if (upOrDown === 'down') {

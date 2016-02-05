@@ -1,16 +1,11 @@
-export default {
-	PAD: 'PAD',
-	SCORE: 'SCORE',
-	GAME: 'GAME',
-	GAME_TIMEOUT: 'GAME_TIMEOUT',
-	STEP: 'STEP',
-	STEPS_RESET: 'STEPS_RESET',
-	CHOREGRAPHY: 'CHOREGRAPHY',
-	MOVE_TIMEOUTS: 'MOVE_TIMEOUTS',
-	MOVE_SHOW: 'MOVE_SHOW',
-	MOVE_PLAY: 'MOVE_PLAY',
-	MOVE_HIDE: 'MOVE_HIDE',
-	MOVE_RANGE_OK: 400,
-	MOVE_RANGE_BIEN: 200,
-	MOVE_RANGE_EXCELLENT: 100
-};
+import game from './game';
+import choregraphy from './choregraphy';
+import steps from './steps';
+import pads from './pads';
+
+export default Object.assign({},
+	game,
+	choregraphy,
+	steps,
+	pads,
+);

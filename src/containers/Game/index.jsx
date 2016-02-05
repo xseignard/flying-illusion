@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getScore } from '../../selectors/score';
-import { getArrows } from '../../selectors/arrows';
+import { getPerformance } from '../../selectors/performance';
 import * as gameActions from '../../actions/game';
 import { GameHeader } from '../GameHeader';
 import { GameFooter } from '../GameFooter';
@@ -11,7 +10,7 @@ export class Game extends Component {
 	constructor(props) {
 		super(props);
 		// FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
-		if (this.props.game.status === 'started') {
+		if (this.props.game.get('status') === 'play') {
 			this.props.startGame();
 		}
 	}
@@ -19,7 +18,7 @@ export class Game extends Component {
 		this.props.stopGame();
 	}
 	render() {
-		if (this.props.game.status !== 'started') {
+		if (this.props.game.get('status') !== 'play') {
 			return null;
 		}
 		return (
@@ -27,8 +26,8 @@ export class Game extends Component {
 				ref="game"
 				className={css.game}
 			>
-				<GameHeader arrows={this.props.arrows} />
-				<GameFooter score={this.props.score} />
+				<GameHeader choregraphy={this.props.choregraphy} />
+				<GameFooter performance={this.props.performance} />
 			</div>
 		);
 	}
@@ -38,8 +37,8 @@ function mapStateToProps(state) {
 	return {
 		game: state.game,
 		steps: state.steps,
-		arrows: getArrows(state),
-		score: getScore(state),
+		choregraphy: state.choregraphy,
+		performance: getPerformance(state),
 	};
 }
 // https://github.com/rackt/react-redux/blob/master/docs/api.md

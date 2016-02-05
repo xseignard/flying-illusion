@@ -5,13 +5,13 @@
 	width: 600px;
 	margin: 0 auto;
 }
-.arrows {
+.moves {
 	position: absolute;
 	top: 20px;
 	left: 0;
 	right: 0;
 }
-.arrow {
+.direction {
 	position: relative;
 	top: 20px;
 	height: 40px;
@@ -20,15 +20,15 @@
 	background-size: contain;
 	background-image: url('../../../www/img/arrow_white.svg');
 }
-.arrow:nth-child(1) {
+.direction:nth-child(1) {
 	transform: rotate(90deg);
 }
-.arrow:nth-child(2) {
+.direction:nth-child(2) {
 	transform: rotate(180deg);
 }
-.arrow:nth-child(3) {
+.direction:nth-child(3) {
 	transform: rotate(0deg);
 }
-.arrow:nth-child(4) {
+.direction:nth-child(4) {
 	transform: rotate(-90deg);
 }

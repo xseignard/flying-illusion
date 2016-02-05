@@ -1,14 +1,19 @@
+import { List } from 'immutable';
 import C from '../constants';
 
-export function steps(state = [], action) {
+const getDefaultState = () => {
+	return List([]);
+};
+
+export function steps(state = getDefaultState(), action) {
 	switch (action.type) {
 		case C.STEP:
-			return state.concat([{
+			return state.push({
 				direction: action.direction,
 				time: action.time
-			}]);
+			});
 		case C.STEPS_RESET:
-			return [];
+			return getDefaultState();
 		default:
 			return state;
 	}

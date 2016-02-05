@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
-import { pads } from './pads';
 import { game } from './game';
+import { pads } from './pads';
 import { choregraphy } from './choregraphy';
 import { steps } from './steps';
-import { timeouts } from './timeouts';
 import { TEST } from '../actions';
 
 // reducer dedicated to lang selection
@@ -17,11 +16,10 @@ function test(state = true, action) {
 }
 
 const rootReducer = combineReducers({
-	pads,
 	game,
+	pads,
 	choregraphy,
 	steps,
-	timeouts,
 	test,
 });
 

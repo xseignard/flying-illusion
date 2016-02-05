@@ -6,7 +6,7 @@ const headline = (props) => {
 		<h1>Game status unknown</h1>
 	);
 	if (props && props.game) {
-		switch (props.game.status) {
+		switch (props.game.get('status')) {
 			case 'idle':
 				content = (
 					<h1>Touche un pad pour lancer l'intro</h1>
@@ -17,7 +17,7 @@ const headline = (props) => {
 					<h1>Regarde l'intro (5 secondes)</h1>
 				);
 				break;
-			case 'waiting':
+			case 'wait':
 				content = (
 					<div>
 						<h1>Pieds sur les pads gauche et droit</h1>
@@ -27,7 +27,7 @@ const headline = (props) => {
 					</div>
 				);
 				break;
-			case 'loading':
+			case 'load':
 				content = (
 					<div>
 						<h1>Lancement du jeu...</h1>
@@ -37,7 +37,7 @@ const headline = (props) => {
 					</div>
 				);
 				break;
-			case 'started':
+			case 'play':
 			// waiting for react 0.15 to be allowed to return null
 				content = (
 					<noscript />
@@ -59,7 +59,7 @@ const headline = (props) => {
 };
 
 export function Header(props) {
-	if (props && props.game && props.game.status === 'started') {
+	if (props && props.game && props.game.get('status') === 'play') {
 		// waiting for react 0.15 to be allowed to return null
 		return (
 			<noscript />

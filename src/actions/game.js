@@ -1,5 +1,5 @@
 import C from '../constants';
-import { startChoregraphy, stopChoregraphy } from './choregraphy';
+import { startChoregraphy, stopChoregraphy, getChoregraphyEndTime } from './choregraphy';
 
 export const startGame = () => {
 	return (dispatch, getState) => {
@@ -7,20 +7,29 @@ export const startGame = () => {
 			type: C.STEPS_RESET
 		});
 		dispatch({
-			type: C.GAME,
-			status: 'started',
+			type: C.GAME_PLAY,
 			time: Date.now()
 		});
 		dispatch(startChoregraphy());
+		const gameEndTime = getChoregraphyEndTime(getState().choregraphy) + C.GAME_END_DELAY;
+		dispatch({
+			type: C.GAME_TIMEOUT,
+			timeout: setTimeout(() => {
+				dispatch({
+					type: C.GAME_END
+				});
+			}, gameEndTime)
+		});
 	};
 };
 
 export const stopGame = () => {
 	return (dispatch, getState) => {
 		dispatch(stopChoregraphy());
+		const state = getState();
+		clearTimeout(state.game.get('timeout'));
 		dispatch({
-			type: C.GAME,
-			status: 'idle'
+			type: C.GAME_IDLE
 		});
 		dispatch({
 			type: C.STEPS_RESET
@@ -28,50 +37,48 @@ export const stopGame = () => {
 	};
 };
 
-let setGameWaiting;
+let launchGameWait;
 let checkGameStatus;
 
-const setGameIntro = () => {
+const launchGameIntro = () => {
 	return (dispatch, getState) => {
 		dispatch({
-			type: C.GAME,
-			status: 'intro'
+			type: C.GAME_INTRO
 		});
 		dispatch({
 			type: C.GAME_TIMEOUT,
 			timeout: setTimeout(() => {
-				dispatch(setGameWaiting());
+				dispatch(launchGameWait());
 				dispatch(checkGameStatus());
 			}, 5000)
 		});
 	};
 };
 
-setGameWaiting = () => {
+launchGameWait = () => {
 	return (dispatch, getState) => {
+		const state = getState();
+		clearTimeout(state.game.get('timeout'));
 		dispatch({
-			type: C.GAME,
-			status: 'waiting'
+			type: C.GAME_WAIT
 		});
 		dispatch({
 			type: C.GAME_TIMEOUT,
 			timeout: setTimeout(() => {
 				dispatch({
-					type: C.GAME,
-					status: 'idle'
+					type: C.GAME_IDLE
 				});
 			}, 10000)
 		});
 	};
 };
 
-const setGameLoading = () => {
+const launchGameLoad = () => {
 	return (dispatch, getState) => {
 		const state = getState();
-		clearTimeout(state.timeouts.game);
+		clearTimeout(state.game.get('timeout'));
 		dispatch({
-			type: C.GAME,
-			status: 'loading'
+			type: C.GAME_LOAD
 		});
 		dispatch({
 			type: C.GAME_TIMEOUT,
@@ -82,35 +89,43 @@ const setGameLoading = () => {
 	};
 };
 
+const isTopOrBottom = /top|bottom/;
+const areLeftAndRightPadDown = (pads) => {
+	return ['left', 'right'].every((dir) => {
+		return pads.get(dir) === 'down';
+	});
+};
+const isLeftOrRightPadUp = (pads) => {
+	return ['left', 'right'].some((dir) => {
+		return pads.get(dir) === 'up';
+	});
+};
+
 checkGameStatus = (direction) => {
 	return (dispatch, getState) => {
 		const state = getState();
+		const status = state.game.get('status');
+		const pads = state.pads;
 		if (
-			state.game.status === 'idle' && (
-				state.pads.left === 'down' ||
-				state.pads.top === 'down' ||
-				state.pads.bottom === 'down' ||
-				state.pads.right === 'down'
-			)
+			status === 'idle' &&
+			pads.includes('down')
 		) {
-			dispatch(setGameIntro());
+			dispatch(launchGameIntro());
 		}
-		else if (direction && direction.match(/top|bottom/)) {
+		else if (direction && direction.match(isTopOrBottom)) {
 			return;
 		}
 		else if (
-			state.game.status === 'waiting' &&
-			state.pads.left === 'down' &&
-			state.pads.right === 'down'
+			status === 'wait' &&
+			areLeftAndRightPadDown(pads)
 		) {
-			dispatch(setGameLoading());
+			dispatch(launchGameLoad());
 		}
 		else if (
-			state.game.status === 'loading' && (
-			state.pads.left === 'up' ||
-			state.pads.right === 'up'
-		)) {
-			dispatch(setGameWaiting());
+			status === 'load' &&
+			isLeftOrRightPadUp(pads)
+		) {
+			dispatch(launchGameWait());
 		}
 	};
 };
