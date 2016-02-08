@@ -1,3 +1,4 @@
+/*eslint-disable */
 var parser = require('subtitles-parser'),
 	fs = require('fs');
 	path = require('path');
