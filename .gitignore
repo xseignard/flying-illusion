@@ -2,3 +2,4 @@ node_modules
 electron
 npm-debug.log
 tmp
+dist
