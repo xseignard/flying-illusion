@@ -1,6 +1,6 @@
 import moment from 'moment';
 import C from '../constants';
-import choregraphySubs from '../choregraphies/choregraphy_1.srt';
+import choregraphies from '../choregraphies';
 import { flattenArray } from '../utils';
 
 export const mapSubsToMoves = (subs) => {
@@ -26,8 +26,9 @@ export const getChoregraphyEndTime = (moves) => {
 };
 
 export const startChoregraphy = () => {
+	const randomChoregraphy = choregraphies[Math.floor(Math.random() * choregraphies.length)];
 	return (dispatch, getState) => {
-		const moves = mapSubsToMoves(choregraphySubs);
+		const moves = mapSubsToMoves(randomChoregraphy.steps);
 		dispatch({
 			type: C.CHOREGRAPHY,
 			moves
