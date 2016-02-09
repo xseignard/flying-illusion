@@ -1,29 +1,38 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import GSAP from 'gsap';
 import css from './css';
 
 export class Move extends Component {
 	constructor(props) {
 		super(props);
-		this.duration = (this.props.move.time - this.props.move.showTime) / 1000;
+		this.duration = this.props.move.time - this.props.move.showTime;
+		this.mounted = false;
 	}
 	componentDidMount() {
+		this.mounted = true;
 		this.el = this.refs.move;
 	}
-	componentDidUpdate(prevProps) {
+	componentWillReceiveProps(nextProps) {
 		if (
-			prevProps.move.status === 'idle' &&
-			this.props.move.status === 'show'
+			this.props.move.status === 'idle' &&
+			nextProps.move.status === 'show'
 		) {
-			GSAP.to(this.el, this.duration, { top: 0 });
+			this.el.animate([
+				{ transform: 'translate3d(0, 90vh, 0)' },
+				{ transform: 'translate3d(0, 0, 0)' },
+			], {
+				duration: this.duration,
+				easing: 'linear'
+			});
 		}
+	}
+	shouldComponentUpdate() {
+		return !this.mounted;
 	}
 	render() {
 		const moveClass = classnames({
 			[css.move]: true,
-			[css[this.props.move.direction]]: true,
-			[css[this.props.move.status]]: true,
+			[css[this.props.move.direction]]: true
 		});
 		return (
 			<div

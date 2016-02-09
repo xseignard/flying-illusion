@@ -19,6 +19,8 @@ const mapKeyCodeToDirection = (keyCode) => {
 	return value;
 };
 
+const directionsRegExp = /left|top|right|bottom/;
+
 export function listenToDirectionKeys(cb) {
 	const isKeyDown = {
 		left: false,
@@ -29,7 +31,9 @@ export function listenToDirectionKeys(cb) {
 
 	const onKeyDown = (e) => {
 		const direction = mapKeyCodeToDirection(e.keyCode.toString());
-		if (direction.match(/left|top|right|bottom/)) {
+		if (direction.match(directionsRegExp)) {
+			e.stopPropagation();
+			e.preventDefault();
 			if (!isKeyDown[direction]) {
 				isKeyDown[direction] = true;
 				cb('keydown', direction);
@@ -39,7 +43,9 @@ export function listenToDirectionKeys(cb) {
 
 	const onKeyUp = (e) => {
 		const direction = mapKeyCodeToDirection(e.keyCode.toString());
-		if (direction.match(/left|top|right|bottom/)) {
+		if (direction.match(directionsRegExp)) {
+			e.stopPropagation();
+			e.preventDefault();
 			isKeyDown[direction] = false;
 			cb('keyup', direction);
 		}

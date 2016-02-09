@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPerformance } from '../../selectors/performance';
 import * as gameActions from '../../actions/game';
-import { GameHeader } from '../GameHeader';
-import { GameFooter } from '../GameFooter';
+import GameHeader from '../GameHeader';
+import GameFooter from '../GameFooter';
+import Moves from '../Moves';
 import css from './css';
 
 export class Game extends Component {
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
+		this.didMount = false;
+	}
+	componentDidMount() {
+		this.didMount = true;
 		// FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
 		if (this.props.game.get('status') === 'play') {
+			this.props.startGame();
+		}
+	}
+	componentWillReceiveProps(nextProps) {
+		if (
+			this.props.game.get('status') === 'load' &&
+			nextProps.game.get('status') === 'play'
+		) {
+			console.log('starting game');
 			this.props.startGame();
 		}
 	}
@@ -22,12 +35,10 @@ export class Game extends Component {
 			return null;
 		}
 		return (
-			<div
-				ref="game"
-				className={css.game}
-			>
-				<GameHeader choregraphy={this.props.choregraphy} />
-				<GameFooter performance={this.props.performance} />
+			<div className={css.game}>
+				<GameHeader />
+				<GameFooter />
+				<Moves />
 			</div>
 		);
 	}
@@ -35,10 +46,7 @@ export class Game extends Component {
 
 function mapStateToProps(state) {
 	return {
-		game: state.game,
-		steps: state.steps,
-		choregraphy: state.choregraphy,
-		performance: getPerformance(state),
+		game: state.game
 	};
 }
 // https://github.com/rackt/react-redux/blob/master/docs/api.md

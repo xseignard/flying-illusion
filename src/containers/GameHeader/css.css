@@ -1,18 +1,9 @@
 .gameHeader {
-	position: relative;
-	display: flex;
-	justify-content: space-around;
 	width: 600px;
 	margin: 0 auto;
 }
-.moves {
-	position: absolute;
-	top: 20px;
-	left: 0;
-	right: 0;
-}
 .direction {
-	position: relative;
+	position: absolute;;
 	top: 20px;
 	height: 40px;
 	width: 40px;
@@ -21,14 +12,18 @@
 	background-image: url('../../../www/img/arrow_white.svg');
 }
 .direction:nth-child(1) {
+	left: 13%;
 	transform: rotate(90deg);
 }
 .direction:nth-child(2) {
+	left: 38%;
 	transform: rotate(180deg);
 }
 .direction:nth-child(3) {
+	left: 62%;
 	transform: rotate(0deg);
 }
 .direction:nth-child(4) {
+	left: 87%;
 	transform: rotate(-90deg);
 }

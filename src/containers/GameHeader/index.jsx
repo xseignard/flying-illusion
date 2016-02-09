@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
-import { Move } from '../Move';
 import css from './css';
 
-export class GameHeader extends Component {
-	movesList() {
-		return this.props.choregraphy.map((move, index) => {
-			return <Move key={index} move={move} />;
-		});
+export default class GameHeader extends Component {
+	shouldComponentUpdate() {
+		return false;
 	}
 	render() {
-		this.moves = this.movesList();
 		return (
 			<div className={css.gameHeader}>
 				<div className={css.direction}></div>
 				<div className={css.direction}></div>
 				<div className={css.direction}></div>
 				<div className={css.direction}></div>
-				<div className={css.moves}>
-					{this.moves}
-				</div>
 			</div>
 		);
 	}

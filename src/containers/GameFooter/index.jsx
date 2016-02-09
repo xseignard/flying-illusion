@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getPerformance } from '../../selectors/performance';
 import css from './css';
 
 export class GameFooter extends Component {
+	shouldComponentUpdate(nextProps) {
+		const tp = this.props.performance;
+		const np = nextProps.performance;
+		return (
+			tp.score !== np.score ||
+			tp.comment !== np.comment ||
+			tp.combo !== np.combo
+		);
+	}
 	render() {
 		return (
 			<div className={css.gameFooter}>
@@ -18,3 +29,11 @@ export class GameFooter extends Component {
 		);
 	}
 }
+
+function mapStateToProps(state) {
+	return {
+		performance: getPerformance(state),
+	};
+}
+
+export default connect(mapStateToProps)(GameFooter);
