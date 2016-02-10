@@ -7,11 +7,13 @@ export const getChoregraphyEndTime = (moves) => {
 };
 
 const setRandomChoregraphy = () => {
-	const randomChoregraphy = getRandomChoregraphy();
-	dispatch({
-		type: C.CHOREGRAPHY,
-		moves: randomChoregraphy.moves
-	});
+	return (dispatch, getState) => {
+		const randomChoregraphy = getRandomChoregraphy();
+		dispatch({
+			type: C.CHOREGRAPHY,
+			moves: randomChoregraphy.moves
+		});
+	};
 };
 
 const setMovesTimeouts = () => {
@@ -44,7 +46,7 @@ const setMovesTimeouts = () => {
 
 export const startChoregraphy = () => {
 	return (dispatch, getState) => {
-		setRandomChoregraphy();
+		dispatch(setRandomChoregraphy());
 		dispatch(setMovesTimeouts());
 	};
 };
