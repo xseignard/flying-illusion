@@ -1,38 +1,22 @@
-import moment from 'moment';
 import C from '../constants';
-import choregraphies from '../choregraphies';
-import { flattenArray } from '../utils';
-
-export const mapSubsToMoves = (subs) => {
-	const nestedMoves = subs.map((sub) => {
-		const directions = sub.text.split('#');
-		const showTime = moment.duration(sub.startTime).asMilliseconds();
-		const time = moment.duration(sub.endTime).asMilliseconds();
-		const moves = directions.map((direction) => {
-			return {
-				direction,
-				showTime,
-				time,
-			};
-		});
-		return moves;
-	});
-	return flattenArray(nestedMoves);
-};
+import { getRandomChoregraphy } from '../choregraphies';
 
 export const getChoregraphyEndTime = (moves) => {
 	const lastMove = moves.get(moves.size - 1);
 	return lastMove.time;
 };
 
-export const startChoregraphy = () => {
-	const randomChoregraphy = choregraphies[Math.floor(Math.random() * choregraphies.length)];
+const setRandomChoregraphy = () => {
+	const randomChoregraphy = getRandomChoregraphy();
+	dispatch({
+		type: C.CHOREGRAPHY,
+		moves: randomChoregraphy.moves
+	});
+};
+
+const setMovesTimeouts = () => {
 	return (dispatch, getState) => {
-		const moves = mapSubsToMoves(randomChoregraphy.steps);
-		dispatch({
-			type: C.CHOREGRAPHY,
-			moves
-		});
+		const moves = getState().choregraphy;
 		const movesTimeouts = moves.map((move, index) => {
 			const showTimeout = setTimeout(() => {
 				dispatch({
@@ -58,6 +42,13 @@ export const startChoregraphy = () => {
 	};
 };
 
+export const startChoregraphy = () => {
+	return (dispatch, getState) => {
+		setRandomChoregraphy();
+		dispatch(setMovesTimeouts());
+	};
+};
+
 export const stopChoregraphy = () => {
 	return (dispatch, getState) => {
 		const state = getState();
@@ -66,6 +57,9 @@ export const stopChoregraphy = () => {
 				.forEach((timeoutName) => {
 					clearTimeout(move.get(timeoutName));
 				});
+		});
+		dispatch({
+			type: C.STEPS_RESET
 		});
 	};
 };
