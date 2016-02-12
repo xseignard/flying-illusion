@@ -1,22 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import promise from 'redux-promise';
-import createLogger from 'redux-logger';
-import rootReducer from './reducers';
+import C from './constants';
 import './global';
-import App from './containers/App';
+import { configureStore } from './store';
+import App from './components/App';
 
-const logger = createLogger({
-	collapsed: (getState, action) => {
-		return true;
-		// return action.type === 'PAD';
-	}
-});
-const createStoreWithMiddleware = applyMiddleware(thunk, promise, logger)(createStore);
-const store = createStoreWithMiddleware(rootReducer);
+const store = configureStore();
 
 const rootElement = document.querySelector('.root');
 const renderApp = () => {
@@ -33,3 +23,15 @@ renderApp();
 if (module.hot) {
 	module.hot.accept();
 }
+
+const scaleBody = () => {
+	const ratio = Math.min(
+		window.innerWidth / C.APP_WIDTH,
+		window.innerHeight / C.APP_HEIGHT
+	);
+	document.body.style.transform = `scale(${ratio})`;
+};
+if (document) {
+	window.addEventListener('resize', scaleBody);
+}
+scaleBody();

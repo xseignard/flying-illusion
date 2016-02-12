@@ -3,22 +3,17 @@ import { startChoregraphy, stopChoregraphy, getChoregraphyEndTime } from './chor
 
 export const startGame = () => {
 	return (dispatch, getState) => {
-		dispatch({
-			type: C.STEPS_RESET
-		});
-		dispatch({
-			type: C.GAME_PLAY,
-			time: Date.now()
-		});
 		dispatch(startChoregraphy());
 		const gameEndTime = getChoregraphyEndTime(getState().choregraphy) + C.GAME_END_DELAY;
+		const gameEndTimeout = setTimeout(() => {
+			dispatch({
+				type: C.GAME_END
+			});
+		}, gameEndTime);
 		dispatch({
-			type: C.GAME_TIMEOUT,
-			timeout: setTimeout(() => {
-				dispatch({
-					type: C.GAME_END
-				});
-			}, gameEndTime)
+			type: C.GAME_PLAY,
+			time: Date.now(),
+			timeout: gameEndTimeout
 		});
 	};
 };
@@ -31,44 +26,36 @@ export const stopGame = () => {
 		dispatch({
 			type: C.GAME_IDLE
 		});
+	};
+};
+
+const launchGameWait = () => {
+	return (dispatch, getState) => {
+		const state = getState();
+		clearTimeout(state.game.get('timeout'));
+		const gameWaitTimeout = setTimeout(() => {
+			dispatch({
+				type: C.GAME_IDLE
+			});
+		}, C.GAME_WAIT_DURATION);
 		dispatch({
-			type: C.STEPS_RESET
+			type: C.GAME_WAIT,
+			timeout: gameWaitTimeout
 		});
 	};
 };
 
-let launchGameWait;
 let checkGameStatus;
 
 const launchGameIntro = () => {
 	return (dispatch, getState) => {
+		const gameIntroTimeout = setTimeout(() => {
+			dispatch(launchGameWait());
+			dispatch(checkGameStatus());
+		}, C.GAME_INTRO_DURATION);
 		dispatch({
-			type: C.GAME_INTRO
-		});
-		dispatch({
-			type: C.GAME_TIMEOUT,
-			timeout: setTimeout(() => {
-				dispatch(launchGameWait());
-				dispatch(checkGameStatus());
-			}, 5000)
-		});
-	};
-};
-
-launchGameWait = () => {
-	return (dispatch, getState) => {
-		const state = getState();
-		clearTimeout(state.game.get('timeout'));
-		dispatch({
-			type: C.GAME_WAIT
-		});
-		dispatch({
-			type: C.GAME_TIMEOUT,
-			timeout: setTimeout(() => {
-				dispatch({
-					type: C.GAME_IDLE
-				});
-			}, 10000)
+			type: C.GAME_INTRO,
+			timeout: gameIntroTimeout
 		});
 	};
 };
@@ -77,29 +64,30 @@ const launchGameLoad = () => {
 	return (dispatch, getState) => {
 		const state = getState();
 		clearTimeout(state.game.get('timeout'));
+		const gameLoadTimeout = setTimeout(() => {
+			dispatch(startGame());
+		}, C.GAME_LOAD_DURATION);
 		dispatch({
-			type: C.GAME_LOAD
-		});
-		dispatch({
-			type: C.GAME_TIMEOUT,
-			timeout: setTimeout(() => {
-				dispatch(startGame());
-			}, 3000)
+			type: C.GAME_LOAD,
+			timeout: gameLoadTimeout
 		});
 	};
 };
 
-const isTopOrBottom = /top|bottom/;
-const areLeftAndRightPadDown = (pads) => {
-	return ['left', 'right'].every((dir) => {
+const leftAndRight = ['left', 'right'];
+
+const areLeftAndRightDown = (pads) => {
+	return leftAndRight.every((dir) => {
 		return pads.get(dir) === 'down';
 	});
 };
-const isLeftOrRightPadUp = (pads) => {
-	return ['left', 'right'].some((dir) => {
+const isLeftOrRightUp = (pads) => {
+	return leftAndRight.some((dir) => {
 		return pads.get(dir) === 'up';
 	});
 };
+
+const isTopOrBottom = /top|bottom/;
 
 checkGameStatus = (direction) => {
 	return (dispatch, getState) => {
@@ -117,13 +105,13 @@ checkGameStatus = (direction) => {
 		}
 		else if (
 			status === 'wait' &&
-			areLeftAndRightPadDown(pads)
+			areLeftAndRightDown(pads)
 		) {
 			dispatch(launchGameLoad());
 		}
 		else if (
 			status === 'load' &&
-			isLeftOrRightPadUp(pads)
+			isLeftOrRightUp(pads)
 		) {
 			dispatch(launchGameWait());
 		}
