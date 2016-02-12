@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { listenToPads } from '../../actions/pads';
-import { startGame } from '../../actions/game';
-import { Header } from '../../components/Header';
-import Game from '../Game';
+import Video from '../Video';
+import Three from '../Three';
+import Html from '../Html';
 import css from './css';
 
 export class App extends Component {
@@ -16,25 +16,18 @@ export class App extends Component {
 	render() {
 		return (
 			<div className={css.app}>
-				<Header
-					game={this.props.game}
-					startGame={this.props.startGame}
-				/>
-				<Game />
+				<div className={css.video}>
+					<Video />
+				</div>
+				<div className={css.three}>
+					<Three />
+				</div>
+				<div className={css.html}>
+					<Html />
+				</div>
 			</div>
 		);
 	}
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		listenToPads() {
-			dispatch(listenToPads());
-		},
-		startGame() {
-			dispatch(startGame());
-		}
-	};
-};
-
-export default connect(state => state, mapDispatchToProps)(App);
+export default connect(state => state, { listenToPads })(App);

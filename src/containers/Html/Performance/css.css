@@ -1,6 +1,5 @@
-.gameFooter {
+.performance {
 	position: absolute;
-	transform: translate3d(0,0,0);
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -8,13 +7,13 @@
 	justify-content: space-between;
 }
 .score,
-.bonus {
+.combo {
 	padding: 10px 20px;
 }
 .score {
 	text-align: left;
 }
-.bonus {
+.combo {
 	text-align: right;
 }
 .label {
