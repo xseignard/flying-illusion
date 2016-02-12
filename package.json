@@ -68,6 +68,7 @@
     "reselect": "^2.0.3",
     "rimraf": "^2.5.1",
     "srt-loader": "0.0.2",
+    "stats.js": "^1.0.0",
     "style-loader": "^0.13.0",
     "subtitles-parser": "0.0.2",
     "three": "^0.73.2",
