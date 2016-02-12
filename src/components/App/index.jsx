@@ -13,6 +13,9 @@ export class App extends Component {
 	componentDidMount() {
 		this.props.listenToPads();
 	}
+	shouldComponentUpdate() {
+		return false;
+	}
 	render() {
 		return (
 			<div className={css.app}>

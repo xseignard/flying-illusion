@@ -31,7 +31,7 @@ const setMovesTimeouts = () => {
 					type: C.MOVE_HIDE,
 					index
 				});
-			}, move.time + C.MOVE_TOLERANCE_OK);
+			}, move.time);
 			return {
 				showTimeout,
 				hideTimeout

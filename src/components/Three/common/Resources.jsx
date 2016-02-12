@@ -5,10 +5,10 @@ export default class Resources extends Component {
 	constructor(props) {
 		super(props);
 		const arrowShape = new THREE.Shape();
-		arrowShape.moveTo(-10, -10);
-		arrowShape.moveTo(0, 10);
-		arrowShape.moveTo(10, -10);
-		arrowShape.moveTo(0, -6);
+		arrowShape.moveTo(-20, -20);
+		arrowShape.moveTo(0, 20);
+		arrowShape.moveTo(20, -20);
+		arrowShape.moveTo(0, -12);
 		this.arrowShapes = [
 			arrowShape
 		];

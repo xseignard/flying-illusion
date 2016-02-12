@@ -9,7 +9,6 @@ body {
 	background: #1D2025;
 	font-family: arial;
 	color: white;
-	transform: scale(0.4);
 	transform-origin: 0 0;
 	overflow: hidden;
 }

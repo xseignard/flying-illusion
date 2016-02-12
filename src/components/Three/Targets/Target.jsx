@@ -6,7 +6,6 @@ export class Target extends Component {
 		super(props);
 		this.position = getPosition(this.props.target);
 		this.geometry = getGeometry(this.props.target);
-		console.log(this.position.position);
 	}
 	shouldComponentUpdate(nextProps) {
 		return false;

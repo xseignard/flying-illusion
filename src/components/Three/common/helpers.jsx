@@ -3,7 +3,7 @@ import THREE from 'three';
 
 const framesPerMillisecond = 60 / 1000;
 const framesPerAnimation = C.MOVE_DURATION * framesPerMillisecond;
-export const distancePerFrame = (C.APP_HEIGHT - 120) / framesPerAnimation;
+export const distancePerFrame = (C.APP_HEIGHT - 60) / framesPerAnimation;
 
 export const getPosition = (move, isMove) => {
 	const arcadeWidth = C.APP_WIDTH * 3 / 4;
