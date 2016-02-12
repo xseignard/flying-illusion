@@ -1,7 +1,7 @@
 import C from '../constants';
 import { checkGameStatus } from './game';
-import { listenToDirectionKeys } from '../utils/direction-keys';
 import { dispatchStep } from './steps';
+import dev from '../dev';
 
 const onPadChange = (eventType, direction) => {
 	return (dispatch, getState) => {
@@ -24,7 +24,7 @@ const onPadChange = (eventType, direction) => {
 export function listenToPads() {
 	return dispatch => {
 		// TO BE REPLACED WITH MESSAGES COMING FROM THE ACTUAL PADS
-		listenToDirectionKeys((eventType, direction) => {
+		dev.listenToDirectionKeys((eventType, direction) => {
 			dispatch(onPadChange(eventType, direction));
 		});
 	};
