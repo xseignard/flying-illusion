@@ -8,7 +8,7 @@ var subDir = path.join(__dirname, '..', '..', 'src', 'choregraphies');
 var choregraphies = ['In_Training', 'Last_Resistance', 'The_Battle', 'The_Flying_Heroes'];
 
 // duration that we can adjust to re-export subs
-var duration = 3000;
+var duration = 8000;
 
 choregraphies.forEach(function(choregraphy) {
 	var subFilePath = path.join(subDir, choregraphy);
