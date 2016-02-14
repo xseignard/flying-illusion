@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import C from '../constants';
-import { sum } from '../utils';
 
 const filterOutIdleMoves = (moves) => {
 	return moves.filter(move => {
@@ -18,86 +17,142 @@ const isMove = (event) => {
 	return event && typeof event.showTime !== 'undefined';
 };
 
-const getNextEventInSameDirection = (events, event, index) => {
+const getNextEventInSameDirection = (events, index) => {
 	return events.find((value, key) => {
 		return (
 			key > index &&
-			value.direction === event.direction
+			value.direction === events.get(index).direction
 		);
 	});
 };
 
+/*
+	### Performance algorithm ###
+
+	### Main principles ###
+	- Moves and steps are merged and sorted chronologically
+	to form a List of "events"
+	- Each event in the List is assigned a score
+	and the sum of these scores is returned.
+	- The score of an event depends on its relationship
+	to the next event in the same direction.
+
+*/
+
+
 const getPerformances = (events) => {
+	let score = 0;
+	let combo = 1;
+	let comment;
+	const targetState = {
+		left: 'unknown',
+		top: 'unknown',
+		bottom: 'unknown',
+		right: 'unknown',
+	};
+
 	const ignoreNextEvent = {
 		left: false,
 		top: false,
 		bottom: false,
 		right: false,
 	};
-	let combo = 1;
-	let comment;
-	const score = sum(events.map((event, index) => {
+	events.every((event, index) => {
+		/*
+			Event has already been counted from relationship
+			with previous event
+		*/
 		if (ignoreNextEvent[event.direction]) {
 			ignoreNextEvent[event.direction] = false;
-			return 0;
+			return true;
 		}
-		const nextEvent = getNextEventInSameDirection(events, event, index);
+
+		const nextEvent = getNextEventInSameDirection(events, index);
+		/*
+			Last event in this direction
+		*/
 		if (!nextEvent) {
 			if (isMove(event)) {
 				if (event.status === 'hide') {
+					score -= 10;
 					combo = 1;
 					comment = 'missed';
-					return -10;
+					targetState[event.direction] = 'missed';
 				}
-				return 0;
+				return true;
 			}
+			score -= 1;
 			combo = 1;
 			comment = 'fail';
-			return -1;
+			targetState[event.direction] = 'fail';
+			return true;
 		}
+
+		/*
+			Move has not been hit
+		*/
 		if (
 			isMove(event) &&
 			isMove(nextEvent)
 		) {
-			combo = 1;
-			comment = 'missed';
-			return -10;
+			if (event.status === 'hide') {
+				score -= 10;
+				combo = 1;
+				comment = 'missed';
+				targetState[event.direction] = 'missed';
+			}
+			return true;
 		}
+
 		const timeDifference = nextEvent.time - event.time;
+		/*
+			Step has not hit a move
+		*/
 		if (
 			(
 				!isMove(event) &&
 				!isMove(nextEvent)
 			) ||
-			timeDifference >= C.MOVE_TOLERANCE_OK
+			timeDifference > C.MOVE_TOLERANCE_OK
 		) {
+			score -= 1;
 			combo = 1;
 			comment = 'fail';
-			return -1;
+			targetState[event.direction] = 'fail';
+			return true;
 		}
+
+		/*
+			Move is hit by step or step hits move
+		*/
 		let thisScore;
 		ignoreNextEvent[event.direction] = true;
 		if (timeDifference < C.MOVE_TOLERANCE_EXCELLENT) {
 			thisScore = 4;
-			combo = combo * 8;
+			combo = combo + 8;
 			comment = 'excellent';
+			targetState[event.direction] = 'excellent';
 		}
 		else if (timeDifference < C.MOVE_TOLERANCE_GOOD) {
 			thisScore = 2;
-			combo = combo * 4;
+			combo = combo + 4;
 			comment = 'good';
+			targetState[event.direction] = 'good';
 		}
-		else if (timeDifference < C.MOVE_TOLERANCE_OK) {
+		else if (timeDifference <= C.MOVE_TOLERANCE_OK) {
 			thisScore = 1;
-			combo = combo * 2;
+			combo = combo + 2;
 			comment = 'ok';
+			targetState[event.direction] = 'ok';
 		}
-		return thisScore * combo;
-	}));
+		score += thisScore * combo;
+		return true;
+	});
 	return {
 		score,
 		combo,
-		comment
+		comment,
+		targetState
 	};
 };
 
