@@ -11,6 +11,9 @@ export default class Targets extends Component {
 			{ direction: 'right' }
 		];
 	}
+	shouldComponentUpdate() {
+		return false;
+	}
 	render() {
 		return (
 			<group>

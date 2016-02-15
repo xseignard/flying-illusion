@@ -16,7 +16,7 @@ export class Video extends Component {
 			'end'
 		];
 		this.state = {
-			muted: false
+			muted: true
 		};
 		this.toggleSound = this.toggleSound.bind(this);
 	}

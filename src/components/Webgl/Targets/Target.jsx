@@ -7,7 +7,7 @@ export class Target extends Component {
 		this.position = getPosition('target', this.props.target.direction);
 		this.geometry = getGeometry(this.props.target);
 	}
-	shouldComponentUpdate(nextProps) {
+	shouldComponentUpdate() {
 		return false;
 	}
 	render() {

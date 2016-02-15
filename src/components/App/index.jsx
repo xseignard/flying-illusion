@@ -18,18 +18,18 @@ export class App extends Component {
 			this.props.startGame();
 		}
 	}
-	shouldComponentUpdate() {
-		return false;
-	}
 	render() {
+		const WebglContent = this.props.game.get('status') !== 'play' ? null : (
+			<div className={css.webgl}>
+				<Webgl />
+			</div>
+		);
 		return (
 			<div className={css.app}>
 				<div className={css.video}>
 					<Video />
 				</div>
-				<div className={css.webgl}>
-					<Webgl />
-				</div>
+				{WebglContent}
 				<div className={css.html}>
 					<Html />
 				</div>

@@ -19,6 +19,9 @@ export default class Resources extends Component {
 		this.refs.bottomArrowGeometry.rotateZ(Math.PI);
 		this.refs.rightArrowGeometry.rotateZ(Math.PI / -2);
 	}
+	shouldComponentUpdate() {
+		return false;
+	}
 	render() {
 		return (
 			<resources>
