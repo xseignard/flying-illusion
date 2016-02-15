@@ -35,14 +35,13 @@ export default class Headline extends Component {
 					content = (
 						<div ref="headline">
 							<h1>Prenez vos marques sur le tapis</h1>
-							<h1>Pour entrez dans la danse</h1>
+							<h1>Pour entrer dans la danse</h1>
 						</div>
 					);
 					break;
 				case 'intro':
 					content = (
 						<div ref="headline">
-							<h1>Regarde l'intro (5 secondes)</h1>
 						</div>
 					);
 					break;
@@ -59,7 +58,6 @@ export default class Headline extends Component {
 				case 'load':
 					content = (
 						<div ref="headline">
-							<h1>Lancement du jeu...</h1>
 							<div className={css.loading}>
 								<div className={css.loadingBar}></div>
 							</div>

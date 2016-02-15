@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Isvg from 'react-inlinesvg';
-import * as gameActions from '../../../actions/game';
 import css from './css';
 import Headline from './Headline';
 
-export class Header extends Component {
+export default class Header extends Component {
 	constructor() {
 		super();
 	}
@@ -32,11 +30,3 @@ export class Header extends Component {
 		);
 	}
 }
-
-function mapStateToProps(state) {
-	return {
-		game: state.game,
-	};
-}
-
-export default connect(mapStateToProps, gameActions)(Header);

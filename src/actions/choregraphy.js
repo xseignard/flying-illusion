@@ -1,7 +1,8 @@
 import C from '../constants';
 import { getRandomChoregraphy } from '../choregraphies';
 
-export const getChoregraphyEndTime = (moves) => {
+export const getChoregraphyEndTime = (choregraphy) => {
+	const moves = choregraphy.get('moves');
 	const lastMove = moves.get(moves.size - 1);
 	return lastMove.time;
 };
@@ -19,7 +20,7 @@ const setRandomChoregraphy = () => {
 
 const setMovesTimeouts = () => {
 	return (dispatch, getState) => {
-		const moves = getState().choregraphy;
+		const moves = getState().choregraphy.get('moves');
 		const movesTimeouts = moves.map((move, index) => {
 			const showTimeout = setTimeout(() => {
 				dispatch({

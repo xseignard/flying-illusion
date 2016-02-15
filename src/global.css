@@ -8,7 +8,7 @@ body {
 	height: 1080px;
 	background: #1D2025;
 	font-family: arial;
-	color: white;
+	color: rgba(255,255,255,0.7);
 	transform-origin: 0 0;
 	overflow: hidden;
 }

@@ -5,23 +5,26 @@
 .logo {
 	width: 300px;
 	margin: 0 auto;
+	opacity: 0;
 }
 .header h1 {
-	font-size: 48px;
+	font-size: 60px;
+	margin: 0;
+	line-height: 90px;
 	font-weight: normal;
 	text-transform: uppercase;
 	font-style: italic;
 }
 .header h1:first-child {
-	transform: translateX(-50%);
+	transform: translateX(-200%);
 }
 .header h1:last-child {
-	transform: translateX(50%);
+	transform: translateX(200%);
 }
 .loaded h1:first-child,
 .loaded h1:last-child {
 	transform: translateX(0);
-	transition: transform 400ms linear;
+	transition: transform 1000ms ease-out;
 }
 .loading,
 .waiting {

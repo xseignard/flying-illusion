@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
-const getChoregraphy = (state) => state.choregraphy;
+const getMoves = (state) => state.choregraphy.get('moves');
 
 export const getShowMoves = createSelector(
-	[getChoregraphy],
+	[getMoves],
 	(moves) => {
 		return moves.filter(move => {
 			return (

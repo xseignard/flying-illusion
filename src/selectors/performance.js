@@ -156,11 +156,11 @@ const getPerformances = (events) => {
 	};
 };
 
-const getChoregraphy = (state) => state.choregraphy;
+const getMoves = (state) => state.choregraphy.get('moves');
 const getSteps = (state) => state.steps;
 
 export const getPerformance = createSelector(
-	[getChoregraphy, getSteps],
+	[getMoves, getSteps],
 	(moves, steps) => {
 		const activeMoves = filterOutIdleMoves(moves);
 		const allEvents = activeMoves.concat(steps);

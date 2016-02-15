@@ -1,20 +1,28 @@
-import { List } from 'immutable';
+import { Map, List } from 'immutable';
 import C from '../constants';
 
-const defaultState = List([]);
+const defaultState = Map([
+	['name', null],
+	['moves', List([])],
+]);
 
-const setStatus = (moves, index, status) => {
-	return moves.update(index, move => {
+const setStatus = (state, index, status) => {
+	const movesList = state.get('moves').update(index, move => {
 		return Object.assign({}, move, { status });
 	});
+	return state.set('moves', movesList);
 };
 
 export function choregraphy(state = defaultState, action) {
 	switch (action.type) {
 		case C.CHOREGRAPHY:
-			return List(action.moves.map(move => {
+			const movesList = List(action.moves.map(move => {
 				return Object.assign({}, move, { status: 'idle' });
 			}));
+			return Map([
+				['name', action.name],
+				['moves', movesList],
+			]);
 		case C.MOVE_SHOW:
 			return setStatus(state, action.index, 'show');
 		case C.MOVE_HITTABLE:
@@ -24,9 +32,9 @@ export function choregraphy(state = defaultState, action) {
 		case C.MOVE_UNHITTABLE:
 			return setStatus(state, action.index, 'unhittable');
 		case C.MOVES_TIMEOUTS:
-			return state.map((move, index) => {
+			return state.set('moves', state.get('moves').map((move, index) => {
 				return Object.assign({}, move, action.timeouts[index]);
-			});
+			}));
 		default:
 			return state;
 	}
