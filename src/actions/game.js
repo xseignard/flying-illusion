@@ -1,9 +1,11 @@
 import C from '../constants';
 import { startChoregraphy, stopChoregraphy, getChoregraphyEndTime } from './choregraphy';
+import { resetSteps } from './steps';
 
 export const startGame = () => {
 	return (dispatch, getState) => {
 		dispatch(startChoregraphy());
+		dispatch(resetSteps());
 		const gameEndTime = getChoregraphyEndTime(getState().choregraphy) + C.GAME_END_DELAY;
 		const gameEndTimeout = setTimeout(() => {
 			dispatch({

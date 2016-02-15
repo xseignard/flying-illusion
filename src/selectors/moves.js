@@ -6,7 +6,10 @@ export const getShowMoves = createSelector(
 	[getChoregraphy],
 	(moves) => {
 		return moves.filter(move => {
-			return move.status === 'show';
+			return (
+				move.status === 'show' ||
+				move.status === 'hittable'
+			);
 		});
 	}
 );

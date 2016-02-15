@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Isvg from 'react-inlinesvg';
 import * as gameActions from '../../../actions/game';
 import css from './css';
 import Headline from './Headline';
@@ -20,7 +21,9 @@ export class Header extends Component {
 		}
 		return (
 			<div className={css.header}>
-				<img src="img/logo.png" />
+				<div className={css.logo}>
+					<Isvg src="img/logo.svg" />
+				</div>
 				<Headline
 					game={this.props.game}
 					startGame={this.props.startGame}

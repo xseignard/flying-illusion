@@ -1,8 +1,27 @@
 .header {
 	padding: 20px;
+	text-align: center;
 }
-h1 {
+.logo {
+	width: 300px;
+	margin: 0 auto;
+}
+.header h1 {
+	font-size: 48px;
 	font-weight: normal;
+	text-transform: uppercase;
+	font-style: italic;
+}
+.header h1:first-child {
+	transform: translateX(-50%);
+}
+.header h1:last-child {
+	transform: translateX(50%);
+}
+.loaded h1:first-child,
+.loaded h1:last-child {
+	transform: translateX(0);
+	transition: transform 400ms linear;
 }
 .loading,
 .waiting {
@@ -29,7 +48,7 @@ h1 {
 
 .loading:after {
 	content: '3';
-	animation: countdown3s 3s linear;
+	animation: countdown3s 3300ms linear;
 }
 
 @keyframes countdown10s {

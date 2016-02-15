@@ -11,6 +11,7 @@ const setRandomChoregraphy = () => {
 		const randomChoregraphy = getRandomChoregraphy();
 		dispatch({
 			type: C.CHOREGRAPHY,
+			name: randomChoregraphy.name,
 			moves: randomChoregraphy.moves
 		});
 	};
@@ -26,15 +27,29 @@ const setMovesTimeouts = () => {
 					index
 				});
 			}, move.showTime);
+			const hittableTimeout = setTimeout(() => {
+				dispatch({
+					type: C.MOVE_HITTABLE,
+					index
+				});
+			}, move.time - C.MOVE_TOLERANCE_OK);
 			const hideTimeout = setTimeout(() => {
 				dispatch({
 					type: C.MOVE_HIDE,
 					index
 				});
 			}, move.time);
+			const unhittableTimeout = setTimeout(() => {
+				dispatch({
+					type: C.MOVE_UNHITTABLE,
+					index
+				});
+			}, move.time + C.MOVE_TOLERANCE_OK);
 			return {
 				showTimeout,
-				hideTimeout
+				hittableTimeout,
+				hideTimeout,
+				unhittableTimeout
 			};
 		});
 		dispatch({
@@ -51,14 +66,20 @@ export const startChoregraphy = () => {
 	};
 };
 
+const timeoutNames = [
+	'showTimeout',
+	'hittableTimeout',
+	'hideTimeout',
+	'unhittableTimeout'
+];
+
 export const stopChoregraphy = () => {
 	return (dispatch, getState) => {
 		const state = getState();
 		state.choregraphy.forEach((move) => {
-			['showTimeout', 'hideTimeout']
-				.forEach((timeoutName) => {
-					clearTimeout(move.get(timeoutName));
-				});
+			timeoutNames.forEach((timeoutName) => {
+				clearTimeout(move.get(timeoutName));
+			});
 		});
 		dispatch({
 			type: C.STEPS_RESET

@@ -1,3 +1,10 @@
 .video {
 	color: blue
 }
+video {
+	position: absolute;
+	display: none;
+}
+video.above {
+	display: block;
+}

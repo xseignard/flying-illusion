@@ -73,7 +73,7 @@ const getPerformances = (events) => {
 		*/
 		if (!nextEvent) {
 			if (isMove(event)) {
-				if (event.status === 'hide') {
+				if (event.status === 'unhittable') {
 					score -= 10;
 					combo = 1;
 					comment = 'missed';
@@ -95,7 +95,7 @@ const getPerformances = (events) => {
 			isMove(event) &&
 			isMove(nextEvent)
 		) {
-			if (event.status === 'hide') {
+			if (event.status === 'unhittable') {
 				score -= 10;
 				combo = 1;
 				comment = 'missed';

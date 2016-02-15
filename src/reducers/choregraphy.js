@@ -17,8 +17,12 @@ export function choregraphy(state = defaultState, action) {
 			}));
 		case C.MOVE_SHOW:
 			return setStatus(state, action.index, 'show');
+		case C.MOVE_HITTABLE:
+			return setStatus(state, action.index, 'hittable');
 		case C.MOVE_HIDE:
 			return setStatus(state, action.index, 'hide');
+		case C.MOVE_UNHITTABLE:
+			return setStatus(state, action.index, 'unhittable');
 		case C.MOVES_TIMEOUTS:
 			return state.map((move, index) => {
 				return Object.assign({}, move, action.timeouts[index]);

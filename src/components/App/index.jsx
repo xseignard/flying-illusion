@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { listenToPads } from '../../actions/pads';
+import { startGame } from '../../actions/game';
 import Video from '../Video';
-import Three from '../Three';
+import Webgl from '../Webgl';
 import Html from '../Html';
 import css from './css';
 
@@ -12,6 +13,10 @@ export class App extends Component {
 	}
 	componentDidMount() {
 		this.props.listenToPads();
+		// FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
+		if (this.props.game.get('status') === 'dev') {
+			this.props.startGame();
+		}
 	}
 	shouldComponentUpdate() {
 		return false;
@@ -22,8 +27,8 @@ export class App extends Component {
 				<div className={css.video}>
 					<Video />
 				</div>
-				<div className={css.three}>
-					<Three />
+				<div className={css.webgl}>
+					<Webgl />
 				</div>
 				<div className={css.html}>
 					<Html />
@@ -33,4 +38,4 @@ export class App extends Component {
 	}
 }
 
-export default connect(state => state, { listenToPads })(App);
+export default connect(state => state, { listenToPads, startGame })(App);

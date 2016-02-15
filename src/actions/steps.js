@@ -11,3 +11,11 @@ export function dispatchStep(direction) {
 		});
 	};
 }
+
+export function resetSteps() {
+	return (dispatch, getState) => {
+		dispatch({
+			type: C.STEPS_RESET
+		});
+	};
+}

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import Isvg from 'react-inlinesvg';
 
 export default class SvgAssets extends Component {
@@ -12,7 +11,7 @@ export default class SvgAssets extends Component {
 				resolve = () => {
 					pResolve({
 						name: asset.name,
-						elem: findDOMNode(this.refs[asset.name])
+						elem: this.refs[asset.name]
 					});
 				};
 				reject = pReject;

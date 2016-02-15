@@ -4,9 +4,26 @@ import css from './css';
 export default class Headline extends Component {
 	constructor(props) {
 		super(props);
+		this.addLoadedClass = this.addLoadedClass.bind(this);
+	}
+	componentDidMount(prevProps) {
+		this.addLoadedClass();
 	}
 	shouldComponentUpdate(nextProps) {
 		return nextProps.game.get('status') !== this.props.game.get('status');
+	}
+	componentDidUpdate(prevProps) {
+		this.addLoadedClass();
+	}
+	addLoadedClass() {
+		if (this.refs.headline) {
+			setTimeout(() => {
+				this.refs.headline.classList.remove(css.loaded);
+				setTimeout(() => {
+					this.refs.headline.classList.add(css.loaded);
+				}, 100);
+			}, 0);
+		}
 	}
 	render() {
 		let content = (
@@ -16,17 +33,22 @@ export default class Headline extends Component {
 			switch (this.props.game.get('status')) {
 				case 'idle':
 					content = (
-						<h1>Touche un pad pour lancer l'intro</h1>
+						<div ref="headline">
+							<h1>Prenez vos marques sur le tapis</h1>
+							<h1>Pour entrez dans la danse</h1>
+						</div>
 					);
 					break;
 				case 'intro':
 					content = (
-						<h1>Regarde l'intro (5 secondes)</h1>
+						<div ref="headline">
+							<h1>Regarde l'intro (5 secondes)</h1>
+						</div>
 					);
 					break;
 				case 'wait':
 					content = (
-						<div>
+						<div ref="headline">
 							<h1>Pieds sur les pads gauche et droit</h1>
 							<div className={css.waiting}>
 								<div className={css.waitingBar}></div>
@@ -36,7 +58,7 @@ export default class Headline extends Component {
 					break;
 				case 'load':
 					content = (
-						<div>
+						<div ref="headline">
 							<h1>Lancement du jeu...</h1>
 							<div className={css.loading}>
 								<div className={css.loadingBar}></div>
@@ -53,7 +75,7 @@ export default class Headline extends Component {
 				case 'end':
 				// waiting for react 0.15 to be allowed to return null
 					content = (
-						<div>
+						<div ref="headline">
 							<h1>Nice game! Save your score</h1>
 							<button onClick={this.props.startGame}>Start new game</button>
 						</div>
