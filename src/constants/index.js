@@ -3,6 +3,7 @@ import game from './game';
 import choregraphy from './choregraphy';
 import steps from './steps';
 import pads from './pads';
+import ranks from './ranks';
 import tuto from './tuto';
 
 export default Object.assign({},
@@ -11,5 +12,6 @@ export default Object.assign({},
 	choregraphy,
 	steps,
 	pads,
+	ranks,
 	tuto,
 );

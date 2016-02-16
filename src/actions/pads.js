@@ -1,5 +1,5 @@
 import C from '../constants';
-import { checkGameStatus } from './game';
+import { checkStatus } from './game';
 import { dispatchStep } from './steps';
 import dev from '../dev';
 
@@ -13,10 +13,17 @@ const onPadChange = (eventType, direction) => {
 			direction,
 			upOrDown
 		});
-		if (status !== 'play') {
-			dispatch(checkGameStatus(direction));
+		if (
+			status !== 'intro' &&
+			status !== 'tuto' &&
+			status !== 'play'
+		) {
+			dispatch(checkStatus(direction));
 		}
-		else if (upOrDown === 'down') {
+		else if (
+			status === 'play' &&
+			upOrDown === 'down'
+		) {
 			dispatch(dispatchStep(direction));
 		}
 	};

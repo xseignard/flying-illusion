@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { isGame } from '../../utils';
 import { listenToPads } from '../../actions/pads';
-import { startGame } from '../../actions/game';
+import { loadRanks } from '../../actions/ranks';
+import { launchPlay } from '../../actions/game';
 import Audio from '../Audio';
 import Video from '../Video';
 import Webgl from '../Webgl';
@@ -15,9 +16,10 @@ export class App extends Component {
 	}
 	componentDidMount() {
 		this.props.listenToPads();
+		this.props.loadRanks();
 		// FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
 		if (this.props.game.get('status') === 'dev') {
-			this.props.startGame();
+			this.props.launchPlay();
 		}
 	}
 	render() {
@@ -41,4 +43,4 @@ export class App extends Component {
 	}
 }
 
-export default connect(state => state, { listenToPads, startGame })(App);
+export default connect(state => state, { listenToPads, loadRanks, launchPlay })(App);

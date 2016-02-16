@@ -6,13 +6,13 @@ export default class Headline extends Component {
 		super(props);
 		this.addLoadedClass = this.addLoadedClass.bind(this);
 	}
-	componentDidMount(prevProps) {
+	componentDidMount() {
 		this.addLoadedClass();
 	}
 	shouldComponentUpdate(nextProps) {
 		return nextProps.game.get('status') !== this.props.game.get('status');
 	}
-	componentDidUpdate(prevProps) {
+	componentDidUpdate() {
 		this.addLoadedClass();
 	}
 	addLoadedClass() {
@@ -39,12 +39,6 @@ export default class Headline extends Component {
 						</div>
 					);
 					break;
-				case 'intro':
-					content = (
-						<div ref="headline">
-						</div>
-					);
-					break;
 				case 'wait':
 					content = (
 						<div ref="headline">
@@ -64,22 +58,26 @@ export default class Headline extends Component {
 						</div>
 					);
 					break;
-				case 'play':
+				case 'save':
 				// waiting for react 0.15 to be allowed to return null
 					content = (
-						<noscript />
+						<div ref="headline">
+							<h1>Nice game! Save your score</h1>
+						</div>
 					);
 					break;
 				case 'end':
 				// waiting for react 0.15 to be allowed to return null
 					content = (
 						<div ref="headline">
-							<h1>Nice game! Save your score</h1>
-							<button onClick={this.props.startGame}>Start new game</button>
+							<h1>Game end animation</h1>
 						</div>
 					);
 					break;
 				default:
+					content = (
+						<noscript />
+					);
 			}
 		}
 		return content;

@@ -74,7 +74,7 @@ const setMovesTimeouts = (forward = 0) => {
 export const startTutoChoregraphy = () => {
 	return (dispatch, getState) => {
 		dispatch(setTutoChoregraphy());
-		dispatch(setMovesTimeouts(C.TUTO_START_TIME));
+		dispatch(setMovesTimeouts(C.TUTO_FORWARD_TIME));
 	};
 };
 

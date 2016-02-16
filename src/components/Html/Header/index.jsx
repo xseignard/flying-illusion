@@ -24,7 +24,7 @@ export default class Header extends Component {
 				</div>
 				<Headline
 					game={this.props.game}
-					startGame={this.props.startGame}
+					launchPlay={this.props.launchPlay}
 				/>
 			</div>
 		);

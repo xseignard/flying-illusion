@@ -41,6 +41,9 @@ const getNextEventInSameDirection = (events, index) => {
 
 const getPerformances = (events) => {
 	let score = 0;
+	let ok = 2;
+	let good = 3;
+	let excellent = 4;
 	let combo = 1;
 	let comment;
 	const targetState = {
@@ -128,18 +131,21 @@ const getPerformances = (events) => {
 		ignoreNextEvent[event.direction] = true;
 		if (timeDifference < C.MOVE_TOLERANCE_EXCELLENT) {
 			thisScore = 4;
+			excellent = excellent + 1;
 			combo = combo + 8;
 			comment = 'excellent';
 			targetState[event.direction] = 'excellent';
 		}
 		else if (timeDifference < C.MOVE_TOLERANCE_GOOD) {
 			thisScore = 2;
+			good = good + 1;
 			combo = combo + 4;
 			comment = 'good';
 			targetState[event.direction] = 'good';
 		}
 		else if (timeDifference <= C.MOVE_TOLERANCE_OK) {
 			thisScore = 1;
+			ok = ok + 1;
 			combo = combo + 2;
 			comment = 'ok';
 			targetState[event.direction] = 'ok';
@@ -149,6 +155,9 @@ const getPerformances = (events) => {
 	});
 	return {
 		score,
+		ok,
+		good,
+		excellent,
 		combo,
 		comment,
 		targetState
