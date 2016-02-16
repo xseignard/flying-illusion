@@ -13,6 +13,7 @@ export class Audio extends Component {
 		this.refs.audio.addEventListener('play', () => {
 			const delay = Date.now() - this.props.game.get('time');
 			this.refs.audio.currentTime = delay / 1000;
+			this.refs.audio.muted = this.state.muted;
 		});
 	}
 	toggleSound() {
