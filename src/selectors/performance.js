@@ -39,7 +39,6 @@ const getNextEventInSameDirection = (events, index) => {
 
 */
 
-
 const getPerformances = (events) => {
 	let score = 0;
 	let combo = 1;

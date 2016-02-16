@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
 import C from '../../constants';
 import css from './css';
 
@@ -18,7 +17,6 @@ export class Video extends Component {
 		this.state = {
 			muted: true
 		};
-		this.toggleSound = this.toggleSound.bind(this);
 	}
 	componentDidMount() {
 		const video = this.refs[this.props.game.get('status')];
@@ -39,11 +37,6 @@ export class Video extends Component {
 			currentVideo.pause();
 		}
 	}
-	toggleSound() {
-		this.setState({
-			muted: !this.state.muted
-		});
-	}
 	render() {
 		const videosContent = this.gameStates.map((state) => {
 			const videoSrc = `videos/${state}.mp4`;
@@ -58,30 +51,9 @@ export class Video extends Component {
 				></video>
 			);
 		});
-		const audioContent = !this.props.choregraphyName ? null : (
-			<audio
-				ref="audio"
-				autoPlay
-				muted={this.state.muted}
-				src={`choregraphies/${this.props.choregraphyName}.mp3`}
-			>
-			</audio>
-		);
-		const soundClass = classnames({
-			[css.sound]: true,
-			[css.muted]: this.state.muted
-		});
-		const soundText = this.state.muted ? 'Sound off' : 'Sound on';
 		return (
 			<div className={css.video}>
 				{videosContent}
-				{audioContent}
-				<div
-					className={soundClass}
-					onClick={this.toggleSound}
-				>
-					{soundText}
-				</div>
 			</div>
 		);
 	}

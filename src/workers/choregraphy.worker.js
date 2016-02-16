@@ -8,7 +8,6 @@ const dispatch = (action) => {
 };
 
 const startChoregraphy = (moves) => {
-	console.log('from the handler');
 	dispatch({
 		type: C.CHOREGRAPHY,
 		moves

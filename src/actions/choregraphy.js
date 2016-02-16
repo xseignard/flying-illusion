@@ -77,9 +77,9 @@ const timeoutNames = [
 export const stopChoregraphy = () => {
 	return (dispatch, getState) => {
 		const state = getState();
-		state.choregraphy.forEach((move) => {
+		state.choregraphy.get('moves').forEach((move) => {
 			timeoutNames.forEach((timeoutName) => {
-				clearTimeout(move.get(timeoutName));
+				clearTimeout(move[timeoutName]);
 			});
 		});
 		dispatch({

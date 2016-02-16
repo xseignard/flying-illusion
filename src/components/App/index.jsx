@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { listenToPads } from '../../actions/pads';
 import { startGame } from '../../actions/game';
+import Audio from '../Audio';
 import Video from '../Video';
 import Webgl from '../Webgl';
 import Html from '../Html';
@@ -19,7 +20,7 @@ export class App extends Component {
 		}
 	}
 	render() {
-		const WebglContent = this.props.game.get('status') !== 'play' ? null : (
+		const playContent = this.props.game.get('status') !== 'play' ? null : (
 			<div className={css.webgl}>
 				<Webgl />
 			</div>
@@ -28,8 +29,9 @@ export class App extends Component {
 			<div className={css.app}>
 				<div className={css.video}>
 					<Video />
+					<Audio />
 				</div>
-				{WebglContent}
+				{playContent}
 				<div className={css.html}>
 					<Html />
 				</div>

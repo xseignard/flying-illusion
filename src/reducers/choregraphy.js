@@ -33,7 +33,7 @@ export function choregraphy(state = defaultState, action) {
 			return setStatus(state, action.index, 'unhittable');
 		case C.MOVES_TIMEOUTS:
 			return state.set('moves', state.get('moves').map((move, index) => {
-				return Object.assign({}, move, action.timeouts[index]);
+				return Object.assign({}, move, action.timeouts.get(index));
 			}));
 		default:
 			return state;
