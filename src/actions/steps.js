@@ -19,3 +19,14 @@ export function resetSteps() {
 		});
 	};
 }
+
+export function setTutoStepsTimeouts() {
+	return (dispatch, getState) => {
+		setTimeout(() => {
+			dispatch(dispatchStep(C.TUTO_STEP_ONE_DIRECTION));
+		}, C.TUTO_STEP_ONE_TIME - C.TUTO_START_TIME);
+		setTimeout(() => {
+			dispatch(dispatchStep(C.TUTO_STEP_TWO_DIRECTION));
+		}, C.TUTO_STEP_TWO_TIME - C.TUTO_START_TIME);
+	};
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { isGame } from '../../utils';
 import * as gameActions from '../../actions/game';
 import Header from './Header';
 import Performance from './Performance';
@@ -10,7 +11,7 @@ export class Html extends Component {
 		super(props);
 	}
 	render() {
-		const performanceContent = this.props.game.get('status') !== 'play' ? null : (
+		const performanceContent = !isGame(this.props.game) ? null : (
 			<Performance />
 		);
 		return (

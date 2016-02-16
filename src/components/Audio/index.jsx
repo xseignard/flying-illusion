@@ -7,6 +7,7 @@ export class Audio extends Component {
 	constructor(props) {
 		super(props);
 		this.toggleSound = this.toggleSound.bind(this);
+		this.getAudioSrc = this.getAudioSrc.bind(this);
 		this.state = { muted: true };
 	}
 	componentDidMount() {
@@ -16,12 +17,20 @@ export class Audio extends Component {
 			this.refs.audio.muted = this.state.muted;
 		});
 	}
+	getAudioSrc() {
+		if (
+			this.props.game.get('status') !== 'play' ||
+			!this.props.choregraphyName
+		) {
+			return null;
+		}
+		return `choregraphies/${this.props.choregraphyName}.mp3`;
+	}
 	toggleSound() {
 		this.setState({ muted: !this.state.muted });
 	}
 	render() {
-		const audioSrc = !this.props.choregraphyName ? null :
-			`choregraphies/${this.props.choregraphyName}.mp3`;
+		const audioSrc = this.getAudioSrc();
 		const soundClass = classnames({
 			[css.sound]: true,
 			[css.muted]: this.state.muted

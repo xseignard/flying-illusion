@@ -15,6 +15,11 @@ export function game(state = defaultState, action) {
 			return state
 				.set('status', 'intro')
 				.set('timeout', action.timeout);
+		case C.GAME_TUTO:
+			return state
+				.set('status', 'tuto')
+				.set('time', action.time)
+				.set('timeout', action.timeout);
 		case C.GAME_WAIT:
 			return state
 				.set('status', 'wait')

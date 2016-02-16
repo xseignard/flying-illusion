@@ -10,16 +10,10 @@ export class Webgl extends Component {
 	constructor(props) {
 		super(props);
 		this._onAnimate = this._onAnimate.bind(this);
-		this.state = {
-			startTime: this.props.game.get('time'),
-			gameTime: 0
-		};
-	}
-	componentWillUnmount() {
-		this.props.stopGame();
+		this.state = { gameTime: 0 };
 	}
 	_onAnimate() {
-		this.setState({ gameTime: Date.now() - this.state.startTime });
+		this.setState({ gameTime: Date.now() - this.props.game.get('time') });
 	}
 	render() {
 		return (
@@ -33,6 +27,7 @@ export class Webgl extends Component {
 				antialias
 			>
 				<Scene
+					game={this.props.game}
 					moves={this.props.moves}
 					gameTime={this.state.gameTime}
 				/>

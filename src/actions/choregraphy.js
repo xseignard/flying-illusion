@@ -1,10 +1,21 @@
 import C from '../constants';
-import { getRandomChoregraphy } from '../choregraphies';
+import { getTutoChoregraphy, getRandomChoregraphy } from '../choregraphies';
 
 export const getChoregraphyEndTime = (choregraphy) => {
 	const moves = choregraphy.get('moves');
 	const lastMove = moves.get(moves.size - 1);
 	return lastMove.time;
+};
+
+const setTutoChoregraphy = () => {
+	return (dispatch, getState) => {
+		const tutoChoregraphy = getTutoChoregraphy();
+		dispatch({
+			type: C.CHOREGRAPHY,
+			name: tutoChoregraphy.name,
+			moves: tutoChoregraphy.moves
+		});
+	};
 };
 
 const setRandomChoregraphy = () => {
@@ -18,7 +29,7 @@ const setRandomChoregraphy = () => {
 	};
 };
 
-const setMovesTimeouts = () => {
+const setMovesTimeouts = (forward = 0) => {
 	return (dispatch, getState) => {
 		const moves = getState().choregraphy.get('moves');
 		const movesTimeouts = moves.map((move, index) => {
@@ -27,25 +38,25 @@ const setMovesTimeouts = () => {
 					type: C.MOVE_SHOW,
 					index
 				});
-			}, move.showTime);
+			}, move.showTime - forward);
 			const hittableTimeout = setTimeout(() => {
 				dispatch({
 					type: C.MOVE_HITTABLE,
 					index
 				});
-			}, move.time - C.MOVE_TOLERANCE_OK);
+			}, move.time - C.MOVE_TOLERANCE_OK - forward);
 			const hideTimeout = setTimeout(() => {
 				dispatch({
 					type: C.MOVE_HIDE,
 					index
 				});
-			}, move.time);
+			}, move.time - forward);
 			const unhittableTimeout = setTimeout(() => {
 				dispatch({
 					type: C.MOVE_UNHITTABLE,
 					index
 				});
-			}, move.time + C.MOVE_TOLERANCE_OK);
+			}, move.time + C.MOVE_TOLERANCE_OK - forward);
 			return {
 				showTimeout,
 				hittableTimeout,
@@ -57,6 +68,13 @@ const setMovesTimeouts = () => {
 			type: C.MOVES_TIMEOUTS,
 			timeouts: movesTimeouts
 		});
+	};
+};
+
+export const startTutoChoregraphy = () => {
+	return (dispatch, getState) => {
+		dispatch(setTutoChoregraphy());
+		dispatch(setMovesTimeouts(C.TUTO_START_TIME));
 	};
 };
 

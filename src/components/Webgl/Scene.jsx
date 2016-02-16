@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import THREE from 'three';
 import C from '../../constants';
+import { isGame } from '../../utils';
 import Resources from './common/Resources';
 import Targets from './Targets';
 import Moves from './Moves';
@@ -11,6 +12,15 @@ export default class Scene extends Component {
 		this.cameraPosition = new THREE.Vector3(0, 0, 1);
 	}
 	render() {
+		const playContent = !isGame(this.props.game) ? null : (
+			<group>
+				<Targets />
+				<Moves
+					moves={this.props.moves}
+					gameTime={this.props.gameTime}
+				/>
+			</group>
+		);
 		return (
 			<scene>
 				<orthographicCamera
@@ -24,11 +34,7 @@ export default class Scene extends Component {
 					position={this.cameraPosition}
 				/>
 				<Resources />
-				<Targets />
-				<Moves
-					moves={this.props.moves}
-					gameTime={this.props.gameTime}
-				/>
+				{playContent}
 			</scene>
 		);
 	}

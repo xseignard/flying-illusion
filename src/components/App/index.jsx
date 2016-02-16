@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { isGame } from '../../utils';
 import { listenToPads } from '../../actions/pads';
 import { startGame } from '../../actions/game';
 import Audio from '../Audio';
@@ -20,7 +21,7 @@ export class App extends Component {
 		}
 	}
 	render() {
-		const playContent = this.props.game.get('status') !== 'play' ? null : (
+		const webGlContent = !isGame(this.props.game) ? null : (
 			<div className={css.webgl}>
 				<Webgl />
 			</div>
@@ -31,7 +32,7 @@ export class App extends Component {
 					<Video />
 					<Audio />
 				</div>
-				{playContent}
+				{webGlContent}
 				<div className={css.html}>
 					<Html />
 				</div>

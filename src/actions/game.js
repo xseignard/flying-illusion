@@ -1,6 +1,15 @@
 import C from '../constants';
-import { startChoregraphy, stopChoregraphy, getChoregraphyEndTime } from './choregraphy';
-import { resetSteps } from './steps';
+import {
+	startTutoChoregraphy,
+	startChoregraphy,
+	stopChoregraphy,
+	getChoregraphyEndTime
+} from './choregraphy';
+import { setTutoStepsTimeouts, resetSteps } from './steps';
+
+let launchGameTuto;
+let launchGameWait;
+let checkGameStatus;
 
 export const startGame = () => {
 	return (dispatch, getState) => {
@@ -20,18 +29,49 @@ export const startGame = () => {
 	};
 };
 
-export const stopGame = () => {
+const stopGame = () => {
 	return (dispatch, getState) => {
 		dispatch(stopChoregraphy());
 		const state = getState();
 		clearTimeout(state.game.get('timeout'));
+	};
+};
+
+const launchGameIntro = () => {
+	return (dispatch, getState) => {
+		const gameIntroTimeout = setTimeout(() => {
+			dispatch(launchGameTuto());
+		}, C.GAME_INTRO_DURATION);
 		dispatch({
-			type: C.GAME_IDLE
+			type: C.GAME_INTRO,
+			timeout: gameIntroTimeout
 		});
 	};
 };
 
-const launchGameWait = () => {
+launchGameTuto = () => {
+	return (dispatch, getState) => {
+		dispatch(startTutoChoregraphy());
+		dispatch(resetSteps());
+		dispatch(setTutoStepsTimeouts());
+		const gameFinishTime = getChoregraphyEndTime(getState().choregraphy)
+			- C.TUTO_START_TIME
+			- C.MOVE_DURATION
+			+ C.GAME_END_DELAY;
+		const gameTutoTimeout = setTimeout(() => {
+			dispatch(stopGame());
+			dispatch(launchGameWait());
+			dispatch(checkGameStatus());
+		}, gameFinishTime);
+		dispatch({
+			type: C.GAME_TUTO,
+			time: Date.now() - C.TUTO_START_TIME,
+			timeout: gameTutoTimeout
+		});
+	};
+};
+
+launchGameWait = () => {
 	return (dispatch, getState) => {
 		const state = getState();
 		clearTimeout(state.game.get('timeout'));
@@ -47,20 +87,6 @@ const launchGameWait = () => {
 	};
 };
 
-let checkGameStatus;
-
-const launchGameIntro = () => {
-	return (dispatch, getState) => {
-		const gameIntroTimeout = setTimeout(() => {
-			dispatch(launchGameWait());
-			dispatch(checkGameStatus());
-		}, C.GAME_INTRO_DURATION);
-		dispatch({
-			type: C.GAME_INTRO,
-			timeout: gameIntroTimeout
-		});
-	};
-};
 
 const launchGameLoad = () => {
 	return (dispatch, getState) => {

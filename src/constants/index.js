@@ -3,6 +3,7 @@ import game from './game';
 import choregraphy from './choregraphy';
 import steps from './steps';
 import pads from './pads';
+import tuto from './tuto';
 
 export default Object.assign({},
 	app,
@@ -10,4 +11,5 @@ export default Object.assign({},
 	choregraphy,
 	steps,
 	pads,
+	tuto,
 );

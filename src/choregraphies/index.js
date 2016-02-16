@@ -1,4 +1,5 @@
 import moment from 'moment';
+import C from '../constants';
 import { flattenArray } from '../utils';
 import inTraining from './In_Training.new.srt';
 import lastResistance from './Last_Resistance.new.srt';
@@ -20,6 +21,19 @@ const mapSubsToMoves = (subs) => {
 		return moves;
 	});
 	return flattenArray(nestedMoves);
+};
+
+const getTutoMoves = (moves) => {
+	return moves.filter((move) => {
+		return move.time < C.TUTO_END_TIME + C.MOVE_DURATION;
+	});
+};
+
+export const getTutoChoregraphy = () => {
+	return {
+		name: 'The_Flying_Heroes',
+		moves: getTutoMoves(mapSubsToMoves(theFlyingHeroes))
+	};
 };
 
 export const choregraphies = [

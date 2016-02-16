@@ -26,15 +26,22 @@ export class Video extends Component {
 		}
 	}
 	componentWillReceiveProps(nextProps) {
-		const nextVideo = this.refs[nextProps.game.get('status')];
-		const currentVideo = this.refs[this.props.game.get('status')];
-		if (nextVideo) {
-			nextVideo.play();
-			nextVideo.classList.add(css.above);
+		const currentGame = this.props.game.get('status');
+		const nextGame = nextProps.game.get('status');
+		const currentVideo = currentGame === 'tuto' ? 'intro' : currentGame;
+		const nextVideo = nextGame === 'tuto' ? 'intro' : nextGame;
+		if (currentVideo === nextVideo) {
+			return false;
 		}
-		if (currentVideo) {
-			currentVideo.classList.remove(css.above);
-			currentVideo.pause();
+		const currentVideoEl = this.refs[currentVideo];
+		const nextVideoEl = this.refs[nextVideo];
+		if (nextVideoEl) {
+			nextVideoEl.play();
+			nextVideoEl.classList.add(css.above);
+		}
+		if (currentVideoEl) {
+			currentVideoEl.classList.remove(css.above);
+			currentVideoEl.pause();
 		}
 	}
 	render() {
@@ -61,8 +68,7 @@ export class Video extends Component {
 
 function mapStateToProps(state) {
 	return {
-		game: state.game,
-		choregraphyName: state.choregraphy.get('name')
+		game: state.game
 	};
 }
 

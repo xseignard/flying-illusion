@@ -9,3 +9,9 @@ export const sum = (array) => {
 		return first + second;
 	}, 0);
 };
+
+const gameStatusRegexp = /tuto|play/;
+
+export const isGame = (game) => {
+	return game.get('status').match(gameStatusRegexp);
+};
