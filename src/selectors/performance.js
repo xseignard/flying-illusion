@@ -1,178 +1,100 @@
 import { createSelector } from 'reselect';
-import C from '../constants';
 
-const filterOutIdleMoves = (moves) => {
-	return moves.filter(move => {
-		return move.status !== 'idle';
+const directions = ['left', 'top', 'bottom', 'right'];
+
+const performanceTable = {
+	ok: {
+		score: 1,
+		comboAddition: 1
+	},
+	good: {
+		score: 2,
+		comboAddition: 2
+	},
+	excellent: {
+		score: 4,
+		comboAddition: 4
+	},
+	fail: {
+		score: -1,
+		comboAddition: null
+	},
+	missed: {
+		score: -10,
+		comboAddition: null
+	},
+};
+
+const getCommentedEvents = (events) => {
+	return events.filter(event => {
+		return typeof event.comment === 'string';
 	});
 };
 
 const sortEventsChronologically = (events) => {
 	return events.sort((event1, event2) => {
-		return event1.time - event2.time;
+		return event1.commentTime - event2.commentTime;
 	});
 };
 
-const isMove = (event) => {
-	return event && typeof event.showTime !== 'undefined';
-};
-
-const getNextEventInSameDirection = (events, index) => {
-	return events.find((value, key) => {
-		return (
-			key > index &&
-			value.direction === events.get(index).direction
-		);
+const splitEventsByDirection = (events) => {
+	const splitEvents = {};
+	directions.forEach(direction => {
+		splitEvents[direction] = [];
 	});
+	events.forEach(event => {
+		splitEvents[event.direction].push(event);
+	});
+	return splitEvents;
 };
 
-/*
-	### Performance algorithm ###
-
-	### Main principles ###
-	- Moves and steps are merged and sorted chronologically
-	to form a List of "events"
-	- Each event in the List is assigned a score
-	and the sum of these scores is returned.
-	- The score of an event depends on its relationship
-	to the next event in the same direction.
-
-*/
+const getLastCommentsByDirection = (events) => {
+	const splitEvents = splitEventsByDirection(events);
+	const targets = {};
+	directions.forEach(direction => {
+		const directionEvents = splitEvents[direction];
+		const lastDirectionEvent = directionEvents[directionEvents.length - 1];
+		targets[direction] = lastDirectionEvent ? lastDirectionEvent.comment : '';
+	});
+	return targets;
+};
 
 const getPerformances = (events) => {
-	let score = 0;
-	let ok = 2;
-	let good = 3;
-	let excellent = 4;
 	let combo = 1;
-	let comment;
-	const targetState = {
-		left: 'unknown',
-		top: 'unknown',
-		bottom: 'unknown',
-		right: 'unknown',
-	};
-
-	const ignoreNextEvent = {
-		left: false,
-		top: false,
-		bottom: false,
-		right: false,
-	};
-	events.every((event, index) => {
-		/*
-			Event has already been counted from relationship
-			with previous event
-		*/
-		if (ignoreNextEvent[event.direction]) {
-			ignoreNextEvent[event.direction] = false;
-			return true;
-		}
-
-		const nextEvent = getNextEventInSameDirection(events, index);
-		/*
-			Last event in this direction
-		*/
-		if (!nextEvent) {
-			if (isMove(event)) {
-				if (event.status === 'unhittable') {
-					score -= 10;
-					combo = 1;
-					comment = 'missed';
-					targetState[event.direction] = 'missed';
-				}
-				return true;
-			}
-			score -= 1;
-			combo = 1;
-			comment = 'fail';
-			targetState[event.direction] = 'fail';
-			return true;
-		}
-
-		/*
-			Move has not been hit
-		*/
-		if (
-			isMove(event) &&
-			isMove(nextEvent)
-		) {
-			if (event.status === 'unhittable') {
-				score -= 10;
-				combo = 1;
-				comment = 'missed';
-				targetState[event.direction] = 'missed';
-			}
-			return true;
-		}
-
-		const timeDifference = nextEvent.time - event.time;
-		/*
-			Step has not hit a move
-		*/
-		if (
-			(
-				!isMove(event) &&
-				!isMove(nextEvent)
-			) ||
-			timeDifference > C.MOVE_TOLERANCE_OK
-		) {
-			score -= 1;
-			combo = 1;
-			comment = 'fail';
-			targetState[event.direction] = 'fail';
-			return true;
-		}
-
-		/*
-			Move is hit by step or step hits move
-		*/
-		let thisScore;
-		ignoreNextEvent[event.direction] = true;
-		if (timeDifference < C.MOVE_TOLERANCE_EXCELLENT) {
-			thisScore = 4;
-			excellent = excellent + 1;
-			combo = combo + 8;
-			comment = 'excellent';
-			targetState[event.direction] = 'excellent';
-		}
-		else if (timeDifference < C.MOVE_TOLERANCE_GOOD) {
-			thisScore = 2;
-			good = good + 1;
-			combo = combo + 4;
-			comment = 'good';
-			targetState[event.direction] = 'good';
-		}
-		else if (timeDifference <= C.MOVE_TOLERANCE_OK) {
-			thisScore = 1;
-			ok = ok + 1;
-			combo = combo + 2;
-			comment = 'ok';
-			targetState[event.direction] = 'ok';
-		}
-		score += thisScore * combo;
-		return true;
+	let score = 0;
+	let ok = 0;
+	let good = 0;
+	let excellent = 0;
+	events.forEach((event, index) => {
+		const comboAddition = performanceTable[event.comment].comboAddition;
+		combo = comboAddition ? combo + comboAddition : 1;
+		score += performanceTable[event.comment].score * combo;
+		ok = event.comment === 'ok' ? ok + 1 : ok;
+		good = event.comment === 'good' ? good + 1 : good;
+		excellent = event.comment === 'excellent' ? excellent + 1 : excellent;
 	});
+	const comment = events.size > 0 ? events.last().comment : '';
+	const targets = getLastCommentsByDirection(events);
 	return {
+		combo,
 		score,
 		ok,
 		good,
 		excellent,
-		combo,
 		comment,
-		targetState
+		targets
 	};
 };
 
-const getMoves = (state) => state.moves;
-const getSteps = (state) => state.steps;
+const getDance = (state) => state.dance;
 
 export const getPerformance = createSelector(
-	[getMoves, getSteps],
-	(moves, steps) => {
-		const activeMoves = filterOutIdleMoves(moves);
-		const allEvents = activeMoves.concat(steps);
-		const orderedEvents = sortEventsChronologically(allEvents);
+	[getDance],
+	(dance) => {
+		const scoringMoves = getCommentedEvents(dance.get('moves'));
+		const scoringSteps = getCommentedEvents(dance.get('steps'));
+		const scoringEvents = scoringMoves.concat(scoringSteps);
+		const orderedEvents = sortEventsChronologically(scoringEvents);
 		return getPerformances(orderedEvents);
 	}
 );

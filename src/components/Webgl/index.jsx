@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import React3 from 'react-three-renderer';
 import C from '../../constants';
 import * as gameActions from '../../actions/game';
-import { getShowMoves } from '../../selectors/moves';
+import { getVisibleMoves } from '../../selectors/moves';
 import Scene from './Scene';
 
 export class Webgl extends Component {
@@ -40,7 +40,7 @@ function mapStateToProps(state) {
 	return {
 		game: state.game,
 		choregraphy: state.choregraphy,
-		moves: getShowMoves(state)
+		moves: getVisibleMoves(state)
 	};
 }
 

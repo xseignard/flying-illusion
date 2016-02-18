@@ -1,15 +1,12 @@
 import { createSelector } from 'reselect';
 
-const getMoves = (state) => state.moves;
+const getMoves = (state) => state.dance.get('moves');
 
-export const getShowMoves = createSelector(
+export const getVisibleMoves = createSelector(
 	[getMoves],
 	(moves) => {
 		return moves.filter(move => {
-			return (
-				move.status === 'show' ||
-				move.status === 'hittable'
-			);
+			return move.visible;
 		});
 	}
 );

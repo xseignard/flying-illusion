@@ -7,36 +7,36 @@ export const getMovesEndTime = (moves) => {
 
 export const setMovesTimeouts = (forward = 0) => {
 	return (dispatch, getState) => {
-		const movesTimeouts = getState().moves.map((move, index) => {
-			const showTimeout = setTimeout(() => {
+		const movesTimeouts = getState().dance.get('moves').map((move, index) => {
+			const timeoutShow = setTimeout(() => {
 				dispatch({
 					type: C.MOVE_SHOW,
 					index
 				});
 			}, move.showTime - forward);
-			const hittableTimeout = setTimeout(() => {
+			const timeoutCommentable = setTimeout(() => {
 				dispatch({
-					type: C.MOVE_HITTABLE,
+					type: C.MOVE_COMMENTABLE,
 					index
 				});
 			}, move.time - C.MOVE_TOLERANCE_OK - forward);
-			const hideTimeout = setTimeout(() => {
+			const timeoutHide = setTimeout(() => {
 				dispatch({
 					type: C.MOVE_HIDE,
 					index
 				});
 			}, move.time - forward);
-			const unhittableTimeout = setTimeout(() => {
+			const timeoutUncommentable = setTimeout(() => {
 				dispatch({
-					type: C.MOVE_UNHITTABLE,
+					type: C.MOVE_UNCOMMENTABLE,
 					index
 				});
 			}, move.time + C.MOVE_TOLERANCE_OK - forward);
 			return {
-				showTimeout,
-				hittableTimeout,
-				hideTimeout,
-				unhittableTimeout
+				timeoutShow,
+				timeoutCommentable,
+				timeoutHide,
+				timeoutUncommentable
 			};
 		});
 		dispatch({
@@ -47,16 +47,16 @@ export const setMovesTimeouts = (forward = 0) => {
 };
 
 const movesTimeouts = [
-	'showTimeout',
-	'hittableTimeout',
-	'hideTimeout',
-	'unhittableTimeout'
+	'timeoutShow',
+	'timeoutCommentable',
+	'timeoutHide',
+	'timeoutUncommentable'
 ];
 
 export const stopMoves = () => {
 	return (dispatch, getState) => {
 		const state = getState();
-		state.moves.forEach((move) => {
+		state.dance.get('moves').forEach((move) => {
 			movesTimeouts.forEach((timeout) => {
 				clearTimeout(move[timeout]);
 			});
