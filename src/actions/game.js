@@ -1,14 +1,7 @@
 import C from '../constants';
-import {
-	startTutoChoregraphy,
-	startChoregraphy,
-	stopChoregraphy,
-	getChoregraphyEndTime
-} from './choregraphy';
-import {
-	setTutoStepsTimeouts,
-	resetSteps
-} from './steps';
+import { startTutoChoregraphy, startChoregraphy } from './choregraphy';
+import { getMovesEndTime, stopMoves } from './moves';
+import { setTutoStepsTimeouts, resetSteps } from './steps';
 
 let launchIntro;
 let launchTuto;
@@ -35,12 +28,13 @@ launchTuto = () => {
 		dispatch(resetSteps());
 		dispatch(startTutoChoregraphy());
 		dispatch(setTutoStepsTimeouts());
-		const tutoFinishTime = getChoregraphyEndTime(getState().choregraphy)
+		const tutoFinishTime = getMovesEndTime(getState().moves)
 			- C.TUTO_FORWARD_TIME
 			- C.MOVE_DURATION
 			+ C.GAME_END_DELAY;
 		const tutoTimeout = setTimeout(() => {
-			dispatch(stopChoregraphy());
+			dispatch(resetSteps());
+			dispatch(stopMoves());
 			dispatch(launchWait());
 			dispatch(checkStatus());
 		}, tutoFinishTime);
@@ -85,7 +79,7 @@ launchPlay = () => {
 	return (dispatch, getState) => {
 		dispatch(resetSteps());
 		dispatch(startChoregraphy());
-		const playEndTime = getChoregraphyEndTime(getState().choregraphy) + C.GAME_END_DELAY;
+		const playEndTime = getMovesEndTime(getState().moves) + C.GAME_END_DELAY;
 		const playTimeout = setTimeout(() => {
 			dispatch({
 				type: C.GAME_SAVE

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const getMoves = (state) => state.choregraphy.get('moves');
+const getMoves = (state) => state.moves;
 
 export const getShowMoves = createSelector(
 	[getMoves],

@@ -12,7 +12,7 @@ export class Audio extends Component {
 	}
 	componentDidMount() {
 		this.refs.audio.addEventListener('play', () => {
-			const delay = Date.now() - this.props.game.get('time');
+			const delay = Date.now() - this.props.choregraphy.get('time');
 			this.refs.audio.currentTime = delay / 1000;
 			this.refs.audio.muted = this.state.muted;
 		});
@@ -56,6 +56,7 @@ export class Audio extends Component {
 function mapStateToProps(state) {
 	return {
 		game: state.game,
+		choregraphy: state.choregraphy,
 		choregraphyName: state.choregraphy.get('name')
 	};
 }

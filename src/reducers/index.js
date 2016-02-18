@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { game } from './game';
 import { pads } from './pads';
 import { choregraphy } from './choregraphy';
+import { moves } from './moves';
 import { ranks } from './ranks';
 import { steps } from './steps';
 import { TEST } from '../actions';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
 	game,
 	pads,
 	choregraphy,
+	moves,
 	ranks,
 	steps,
 	test,

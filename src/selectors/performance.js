@@ -164,7 +164,7 @@ const getPerformances = (events) => {
 	};
 };
 
-const getMoves = (state) => state.choregraphy.get('moves');
+const getMoves = (state) => state.moves;
 const getSteps = (state) => state.steps;
 
 export const getPerformance = createSelector(

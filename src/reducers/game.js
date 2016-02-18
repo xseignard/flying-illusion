@@ -4,7 +4,6 @@ import C from '../constants';
 const defaultState = Map([
 	['status', 'idle'],
 	['timeout', null],
-	['time', null],
 ]);
 
 export function game(state = defaultState, action) {
@@ -18,7 +17,6 @@ export function game(state = defaultState, action) {
 		case C.GAME_TUTO:
 			return state
 				.set('status', 'tuto')
-				.set('time', action.time)
 				.set('timeout', action.timeout);
 		case C.GAME_WAIT:
 			return state
@@ -31,7 +29,6 @@ export function game(state = defaultState, action) {
 		case C.GAME_PLAY:
 			return state
 				.set('status', 'play')
-				.set('time', action.time)
 				.set('timeout', action.timeout);
 		case C.GAME_SAVE:
 			return state

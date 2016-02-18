@@ -13,7 +13,7 @@ export class Webgl extends Component {
 		this.state = { gameTime: 0 };
 	}
 	_onAnimate() {
-		this.setState({ gameTime: Date.now() - this.props.game.get('time') });
+		this.setState({ gameTime: Date.now() - this.props.choregraphy.get('time') });
 	}
 	render() {
 		return (
@@ -39,6 +39,7 @@ export class Webgl extends Component {
 function mapStateToProps(state) {
 	return {
 		game: state.game,
+		choregraphy: state.choregraphy,
 		moves: getShowMoves(state)
 	};
 }
