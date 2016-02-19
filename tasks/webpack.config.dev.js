@@ -46,6 +46,10 @@ module.exports = {
 				exclude: /node_modules/
 			},
 			{
+				test: /\.woff$|\.ttf$/,
+				loader: 'file-loader?name=[name].[ext]'
+			},
+			{
 				test: /\.css$/,
 				loader: 'style-loader!css-loader?modules'
 			},
