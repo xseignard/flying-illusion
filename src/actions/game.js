@@ -30,8 +30,7 @@ launchTuto = () => {
 		dispatch(setTutoStepsTimeouts());
 		const tutoFinishTime = getMovesEndTime(getState().dance.get('moves'))
 			- C.TUTO_FORWARD_TIME
-			- C.MOVE_DURATION
-			+ C.GAME_END_DELAY;
+			- C.MOVE_DURATION;
 		const tutoTimeout = setTimeout(() => {
 			dispatch(resetSteps());
 			dispatch(stopMoves());
@@ -79,7 +78,7 @@ launchPlay = () => {
 	return (dispatch, getState) => {
 		dispatch(resetSteps());
 		dispatch(startChoregraphy());
-		const playEndTime = getMovesEndTime(getState().dance.get('moves')) + C.GAME_END_DELAY;
+		const playEndTime = getMovesEndTime(getState().dance.get('moves'));
 		const playTimeout = setTimeout(() => {
 			dispatch({
 				type: C.GAME_SAVE

@@ -1,8 +1,8 @@
 import C from '../../../constants';
 import THREE from 'three';
 
-const TARGET_DISTANCE_FROM_TOP = 60;
-const MOVE_DISTANCE_FROM_BOTTOM = 60;
+const TARGET_DISTANCE_FROM_TOP = 100;
+const MOVE_DISTANCE_FROM_BOTTOM = 0;
 const DISTANCE_FROM_MOVE_TO_TARGET = C.APP_HEIGHT
 	- TARGET_DISTANCE_FROM_TOP
 	- MOVE_DISTANCE_FROM_BOTTOM;
@@ -16,8 +16,8 @@ const originalXPosition = {
 };
 
 const originalYPosition = {
-	target: C.APP_HEIGHT / 2 - MOVE_DISTANCE_FROM_BOTTOM,
-	move: C.APP_HEIGHT / -2 + TARGET_DISTANCE_FROM_TOP,
+	target: C.APP_HEIGHT / 2 - TARGET_DISTANCE_FROM_TOP,
+	move: C.APP_HEIGHT / -2 + MOVE_DISTANCE_FROM_BOTTOM,
 };
 
 const getYPosition = (type, moveShowTime, gameTime) => {
@@ -36,8 +36,4 @@ export const getPosition = (type, direction, moveShowTime, gameTime) => {
 		getYPosition(type, moveShowTime, gameTime),
 		0
 	);
-};
-
-export const getGeometry = (move) => {
-	return `${move.direction}ArrowGeometry`;
 };

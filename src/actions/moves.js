@@ -1,8 +1,7 @@
 import C from '../constants';
 
 export const getMovesEndTime = (moves) => {
-	const lastMove = moves.get(moves.size - 1);
-	return lastMove.time;
+	return moves.last().time + C.MOVES_END_DELAY;
 };
 
 export const setMovesTimeouts = (forward = 0) => {

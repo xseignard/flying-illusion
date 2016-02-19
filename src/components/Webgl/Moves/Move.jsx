@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { getPosition, getGeometry } from '../common/helpers';
+import { getPosition } from '../common/helpers';
 
 export class Move extends Component {
 	constructor(props) {
 		super(props);
-		this.geometry = getGeometry(this.props.move);
+		this.geometry = `geometry_move_${this.props.move.direction}`;
+		this.material = `material_move_${this.props.move.direction}`;
 		this.state = {
 			position: getPosition(
 				'move',
@@ -37,7 +38,7 @@ export class Move extends Component {
 		return (
 			<mesh position={this.state.position}>
 				<geometryResource resourceId={this.geometry} />
-				<materialResource resourceId="moveMaterial" />
+				<materialResource resourceId={this.material} />
 			</mesh>
 		);
 	}

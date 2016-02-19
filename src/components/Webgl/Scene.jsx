@@ -14,11 +14,11 @@ export default class Scene extends Component {
 	render() {
 		const playContent = !isGame(this.props.game) ? null : (
 			<group>
-				<Targets />
 				<Moves
 					moves={this.props.moves}
 					gameTime={this.props.gameTime}
 				/>
+				<Targets />
 			</group>
 		);
 		return (

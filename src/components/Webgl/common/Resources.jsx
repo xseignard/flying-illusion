@@ -4,20 +4,16 @@ import THREE from 'three';
 export default class Resources extends Component {
 	constructor(props) {
 		super(props);
-		const arrowShape = new THREE.Shape();
-		arrowShape.moveTo(-20, -20);
-		arrowShape.moveTo(0, 20);
-		arrowShape.moveTo(20, -20);
-		arrowShape.moveTo(0, -12);
-		this.arrowShapes = [
-			arrowShape
-		];
 	}
 	componentDidMount() {
-		this.refs.leftArrowGeometry.rotateZ(Math.PI / 2);
-		this.refs.topArrowGeometry.rotateZ(0);
-		this.refs.bottomArrowGeometry.rotateZ(Math.PI);
-		this.refs.rightArrowGeometry.rotateZ(Math.PI / -2);
+		this.refs.geometry_move_left.rotateZ(Math.PI / -2);
+		this.refs.geometry_move_top.rotateZ(Math.PI);
+		this.refs.geometry_move_bottom.rotateZ();
+		this.refs.geometry_move_right.rotateZ(Math.PI / 2);
+		// this.refs.geometry_target_left.rotateZ(Math.PI / 2);
+		// this.refs.geometry_target_top.rotateZ(0);
+		// this.refs.geometry_target_bottom.rotateZ(Math.PI);
+		// this.refs.geometry_target_right.rotateZ(Math.PI / -2);
 	}
 	shouldComponentUpdate() {
 		return false;
@@ -25,57 +21,101 @@ export default class Resources extends Component {
 	render() {
 		return (
 			<resources>
-				<extrudeGeometry
-					ref="leftArrowGeometry"
-					resourceId="leftArrowGeometry"
-					shapes={this.arrowShapes}
-					amount={0}
-					bevelEnabled={false}
-					bevelSegments={0}
-					steps={0}
-					bevelSize={0}
-					bevelThickness={0}
+				<texture
+					resourceId="texture_target_left_bottom"
+					url="../../../img/target_left_bottom.png"
+					wrapS={THREE.RepeatWrapping}
+					wrapT={THREE.RepeatWrapping}
 				/>
-				<extrudeGeometry
-					ref="topArrowGeometry"
-					resourceId="topArrowGeometry"
-					shapes={this.arrowShapes}
-					amount={0}
-					bevelEnabled={false}
-					bevelSegments={0}
-					steps={0}
-					bevelSize={0}
-					bevelThickness={0}
+				<texture
+					resourceId="texture_target_top_right"
+					url="../../../img/target_left_bottom.png"
+					wrapS={THREE.RepeatWrapping}
+					wrapT={THREE.RepeatWrapping}
 				/>
-				<extrudeGeometry
-					ref="bottomArrowGeometry"
-					resourceId="bottomArrowGeometry"
-					shapes={this.arrowShapes}
-					amount={0}
-					bevelEnabled={false}
-					bevelSegments={0}
-					steps={0}
-					bevelSize={0}
-					bevelThickness={0}
+			<meshBasicMaterial alphaTest={0.5} resourceId="material_target_left">
+					<textureResource resourceId="texture_target_left_bottom" />
+				</meshBasicMaterial>
+				<meshBasicMaterial alphaTest={0.5} resourceId="material_target_top">
+					<textureResource resourceId="texture_target_top_right" />
+				</meshBasicMaterial>
+				<meshBasicMaterial alphaTest={0.5} resourceId="material_target_bottom">
+					<textureResource resourceId="texture_target_left_bottom" />
+				</meshBasicMaterial>
+				<meshBasicMaterial alphaTest={0.5} resourceId="material_target_right">
+					<textureResource resourceId="texture_target_top_right" />
+				</meshBasicMaterial>
+				<planeGeometry
+					ref="geometry_target_left"
+					resourceId="geometry_target_left"
+					width={107}
+					height={106}
 				/>
-				<extrudeGeometry
-					ref="rightArrowGeometry"
-					resourceId="rightArrowGeometry"
-					shapes={this.arrowShapes}
-					amount={0}
-					bevelEnabled={false}
-					bevelSegments={0}
-					steps={0}
-					bevelSize={0}
-					bevelThickness={0}
+				<planeGeometry
+					ref="geometry_target_top"
+					resourceId="geometry_target_top"
+					width={107}
+					height={106}
 				/>
-				<meshBasicMaterial
-					resourceId="moveMaterial"
-					color={0x0089fe}
+				<planeGeometry
+					ref="geometry_target_bottom"
+					resourceId="geometry_target_bottom"
+					width={107}
+					height={106}
 				/>
-				<meshBasicMaterial
-					resourceId="targetMaterial"
-					color={0xffffff}
+				<planeGeometry
+					ref="geometry_target_right"
+					resourceId="geometry_target_right"
+					width={107}
+					height={106}
+				/>
+				<texture
+					resourceId="texture_move_left_bottom"
+					url="../../../img/move_left_bottom.png"
+					wrapS={THREE.RepeatWrapping}
+					wrapT={THREE.RepeatWrapping}
+				/>
+				<texture
+					resourceId="texture_move_top_right"
+					url="../../../img/move_top_right.png"
+					wrapS={THREE.RepeatWrapping}
+					wrapT={THREE.RepeatWrapping}
+				/>
+			<meshBasicMaterial alphaTest={0.5} resourceId="material_move_left">
+					<textureResource resourceId="texture_move_left_bottom" />
+				</meshBasicMaterial>
+				<meshBasicMaterial alphaTest={0.5} resourceId="material_move_top">
+					<textureResource resourceId="texture_move_top_right" />
+				</meshBasicMaterial>
+				<meshBasicMaterial alphaTest={0.5} resourceId="material_move_bottom">
+					<textureResource resourceId="texture_move_left_bottom" />
+				</meshBasicMaterial>
+				<meshBasicMaterial alphaTest={0.5} resourceId="material_move_right">
+					<textureResource resourceId="texture_move_top_right" />
+				</meshBasicMaterial>
+				<planeGeometry
+					ref="geometry_move_left"
+					resourceId="geometry_move_left"
+					width={140}
+					height={140}
+				/>
+				<planeGeometry
+					ref="geometry_move_top"
+					resourceId="geometry_move_top"
+					width={140}
+					height={140}
+				/>
+				<planeGeometry
+					ref="geometry_move_bottom"
+					resourceId="geometry_move_bottom"
+					width={140}
+					height={140}
+				/>
+				<planeGeometry
+					ref="geometry_move_right"
+					resourceId="geometry_move_right"
+					width={140}
+					height={140}
 				/>
 			</resources>
 		);
