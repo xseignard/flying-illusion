@@ -23,13 +23,13 @@ export default class Resources extends Component {
 			<resources>
 				<texture
 					resourceId="texture_target_left_bottom"
-					url="../../../img/target_left_bottom.png"
+					url="img/target_left_bottom.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
 				<texture
 					resourceId="texture_target_top_right"
-					url="../../../img/target_left_bottom.png"
+					url="img/target_left_bottom.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
@@ -71,13 +71,13 @@ export default class Resources extends Component {
 				/>
 				<texture
 					resourceId="texture_move_left_bottom"
-					url="../../../img/move_left_bottom.png"
+					url="img/move_left_bottom.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
 				<texture
 					resourceId="texture_move_top_right"
-					url="../../../img/move_top_right.png"
+					url="img/move_top_right.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
