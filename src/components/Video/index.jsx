@@ -55,7 +55,7 @@ export class Video extends Component {
 					width={C.APP_WIDTH}
 					height={C.APP_HEIGHT}
 					loop
-					preload
+					preload="auto"
 				></video>
 			);
 		});
