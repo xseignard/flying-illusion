@@ -20,5 +20,4 @@ const renderApp = () => {
 renderApp();
 
 dev.moduleHotAccept();
-dev.addStatsCounter();
 dev.scaleBody();
