@@ -20,20 +20,15 @@ const originalYPosition = {
 	move: C.APP_HEIGHT / -2 + MOVE_DISTANCE_FROM_BOTTOM,
 };
 
-const getYPosition = (type, moveShowTime, gameTime) => {
-	if (type === 'target') {
-		return originalYPosition.target;
-	}
-	const moveTime = gameTime - moveShowTime;
-	const moveProgression = moveTime / C.MOVE_DURATION;
-	const distance = moveProgression * DISTANCE_FROM_MOVE_TO_TARGET;
-	return originalYPosition.move + distance;
-};
-
 export const getPosition = (type, direction, moveShowTime, gameTime) => {
 	return new THREE.Vector3(
 		originalXPosition[direction],
-		getYPosition(type, moveShowTime, gameTime),
+		originalYPosition[type],
 		0
 	);
+};
+
+export const getTranslation = (y, moveShowTime, gameTime) => {
+	return originalYPosition.move - y
+		+ (gameTime - moveShowTime) / C.MOVE_DURATION * DISTANCE_FROM_MOVE_TO_TARGET;
 };

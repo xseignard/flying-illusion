@@ -4,39 +4,26 @@ import { getPosition } from '../common/helpers';
 export class Move extends Component {
 	constructor(props) {
 		super(props);
+		this.position = getPosition('move', this.props.move.direction);
 		this.geometry = `geometry_move_${this.props.move.direction}`;
 		this.material = `material_move_${this.props.move.direction}`;
-		this.state = {
-			position: getPosition(
-				'move',
-				this.props.move.direction,
-				this.props.move.showTime,
-				this.props.gameTime,
-			)
-		};
 	}
 	componentDidMount() {
-		// Another possibility to animate elements is to use
-		// native Three methods on this.refs.move here
+		this.props.sceneMoves.set(this.props.move.id,
+			Object.assign({}, this.props.move, {
+				ref: this.refs.move
+			})
+		);
 	}
-	componentWillReceiveProps(nextProps) {
-		if (this.props.gameTime !== nextProps.gameTime) {
-			this.setState({
-				position: getPosition(
-					'move',
-					this.props.move.direction,
-					this.props.move.showTime,
-					this.props.gameTime,
-				)
-			});
-		}
-	}
-	shouldComponentUpdate(nextProps) {
-		return this.props.gameTime !== nextProps.gameTime;
+	componentWillUnmount() {
+		this.props.sceneMoves.delete(this.props.move.id);
 	}
 	render() {
 		return (
-			<mesh position={this.state.position}>
+			<mesh
+				ref="move"
+				position={this.position}
+			>
 				<geometryResource resourceId={this.geometry} />
 				<materialResource resourceId={this.material} />
 			</mesh>

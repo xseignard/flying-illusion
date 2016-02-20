@@ -4,16 +4,25 @@ import React3 from 'react-three-renderer';
 import C from '../../constants';
 import * as gameActions from '../../actions/game';
 import { getVisibleMoves } from '../../selectors/moves';
+import { getTranslation } from './common/helpers';
 import Scene from './Scene';
 
 export class Webgl extends Component {
 	constructor(props) {
 		super(props);
 		this._onAnimate = this._onAnimate.bind(this);
-		this.state = { gameTime: 0 };
+		this.choregraphyTime = this.props.choregraphy.get('time');
+		this.sceneMoves = new Map();
 	}
 	_onAnimate() {
-		this.setState({ gameTime: Date.now() - this.props.choregraphy.get('time') });
+		this.gameTime = Date.now() - this.choregraphyTime;
+		this.sceneMoves.forEach((move) => {
+			move.ref.translateY(getTranslation(
+				move.ref.position.y,
+				move.showTime,
+				this.gameTime,
+			));
+		});
 	}
 	render() {
 		return (
@@ -27,9 +36,9 @@ export class Webgl extends Component {
 				antialias
 			>
 				<Scene
+					sceneMoves={this.sceneMoves}
 					game={this.props.game}
 					moves={this.props.moves}
-					gameTime={this.state.gameTime}
 				/>
 			</React3>
 		);

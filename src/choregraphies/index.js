@@ -12,7 +12,9 @@ const mapSubsToMoves = (subs) => {
 		const showTime = moment.duration(sub.startTime).asMilliseconds();
 		const time = moment.duration(sub.endTime).asMilliseconds();
 		const moves = directions.map((direction) => {
+			const id = `${time}_${direction}`;
 			return {
+				id,
 				direction,
 				showTime,
 				time,

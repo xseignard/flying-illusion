@@ -15,8 +15,8 @@ export default class Scene extends Component {
 		const playContent = !isGame(this.props.game) ? null : (
 			<group>
 				<Moves
+					sceneMoves={this.props.sceneMoves}
 					moves={this.props.moves}
-					gameTime={this.props.gameTime}
 				/>
 				<Targets />
 			</group>

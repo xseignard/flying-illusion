@@ -14,8 +14,8 @@ export default class Moves extends Component {
 				{this.props.moves.map((move) => {
 					return (
 						<Move
-							gameTime={this.props.gameTime}
-							key={move.time + move.direction}
+							key={move.id}
+							sceneMoves={this.props.sceneMoves}
 							move={move}
 						/>
 					);
