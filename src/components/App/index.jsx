@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { isGame } from '../../utils';
+import { listenToMovesWorker } from '../../actions/moves';
 import { listenToPads } from '../../actions/pads';
 import { loadRanks } from '../../actions/ranks';
 import { launchPlay } from '../../actions/game';
@@ -15,6 +16,7 @@ export class App extends Component {
 		super(props);
 	}
 	componentDidMount() {
+		this.props.listenToMovesWorker();
 		this.props.listenToPads();
 		this.props.loadRanks();
 		// FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
@@ -43,4 +45,7 @@ export class App extends Component {
 	}
 }
 
-export default connect(state => state, { listenToPads, loadRanks, launchPlay })(App);
+export default connect(
+	state => state,
+	{ listenToMovesWorker, listenToPads, loadRanks, launchPlay }
+)(App);

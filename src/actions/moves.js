@@ -1,4 +1,16 @@
 import C from '../constants';
+import MovesWorker from '../workers/moves.worker';
+
+const movesWorker = new MovesWorker();
+
+export const listenToMovesWorker = () => {
+	return (dispatch, getState) => {
+		const onWorkerMessage = (event) => {
+			requestAnimationFrame(dispatch.bind(null, JSON.parse(event.data.action)));
+		};
+		movesWorker.addEventListener('message', onWorkerMessage);
+	};
+};
 
 export const getMovesEndTime = (moves) => {
 	return moves.last().time + C.MOVES_END_DELAY;
@@ -6,41 +18,11 @@ export const getMovesEndTime = (moves) => {
 
 export const setMovesTimeouts = (forward = 0) => {
 	return (dispatch, getState) => {
-		const movesTimeouts = getState().dance.get('moves').map((move, index) => {
-			const timeoutShow = setTimeout(() => {
-				dispatch({
-					type: C.MOVE_SHOW,
-					index
-				});
-			}, move.showTime - forward);
-			const timeoutCommentable = setTimeout(() => {
-				dispatch({
-					type: C.MOVE_COMMENTABLE,
-					index
-				});
-			}, move.time - C.MOVE_TOLERANCE_OK - forward);
-			const timeoutHide = setTimeout(() => {
-				dispatch({
-					type: C.MOVE_HIDE,
-					index
-				});
-			}, move.time - forward);
-			const timeoutUncommentable = setTimeout(() => {
-				dispatch({
-					type: C.MOVE_UNCOMMENTABLE,
-					index
-				});
-			}, move.time + C.MOVE_TOLERANCE_OK - forward);
-			return {
-				timeoutShow,
-				timeoutCommentable,
-				timeoutHide,
-				timeoutUncommentable
-			};
-		});
-		dispatch({
-			type: C.MOVES_TIMEOUTS,
-			timeouts: movesTimeouts
+		const movesArray = getState().dance.get('moves').toArray();
+		movesWorker.postMessage({
+			function: 'setMovesTimeouts',
+			moves: movesArray,
+			forward
 		});
 	};
 };

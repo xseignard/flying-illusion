@@ -42,7 +42,7 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.worker\.js$/,
-				loader: 'worker!'
+				loader: 'worker?name=[name].[ext]'
 			},
 			{
 				test: /\.js|\.jsx$/,

@@ -42,7 +42,7 @@ const setUncommentable = (state, index) => {
 
 const setMovesTimeouts = (state, action) => {
 	return state.set('moves', state.get('moves').map((move, index) => {
-		return Object.assign({}, move, action.timeouts.get(index));
+		return Object.assign({}, move, action.timeouts[index]);
 	}));
 };
 
