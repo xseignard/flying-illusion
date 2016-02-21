@@ -23,13 +23,13 @@ export default class Resources extends Component {
 			<resources>
 				<texture
 					resourceId="texture_target_left_bottom"
-					url="img/target_left_bottom.png"
+					url="img/target_left_bottom_128.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
 				<texture
 					resourceId="texture_target_top_right"
-					url="img/target_left_bottom.png"
+					url="img/target_left_bottom_128.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
@@ -48,36 +48,36 @@ export default class Resources extends Component {
 				<planeGeometry
 					ref="geometry_target_left"
 					resourceId="geometry_target_left"
-					width={107}
-					height={106}
+					width={128}
+					height={128}
 				/>
 				<planeGeometry
 					ref="geometry_target_top"
 					resourceId="geometry_target_top"
-					width={107}
-					height={106}
+					width={128}
+					height={128}
 				/>
 				<planeGeometry
 					ref="geometry_target_bottom"
 					resourceId="geometry_target_bottom"
-					width={107}
-					height={106}
+					width={128}
+					height={128}
 				/>
 				<planeGeometry
 					ref="geometry_target_right"
 					resourceId="geometry_target_right"
-					width={107}
-					height={106}
+					width={128}
+					height={128}
 				/>
 				<texture
 					resourceId="texture_move_left_bottom"
-					url="img/move_left_bottom.png"
+					url="img/move_left_bottom_256.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
 				<texture
 					resourceId="texture_move_top_right"
-					url="img/move_top_right.png"
+					url="img/move_top_right_256.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
@@ -96,26 +96,26 @@ export default class Resources extends Component {
 				<planeGeometry
 					ref="geometry_move_left"
 					resourceId="geometry_move_left"
-					width={140}
-					height={140}
+					width={256}
+					height={256}
 				/>
 				<planeGeometry
 					ref="geometry_move_top"
 					resourceId="geometry_move_top"
-					width={140}
-					height={140}
+					width={256}
+					height={256}
 				/>
 				<planeGeometry
 					ref="geometry_move_bottom"
 					resourceId="geometry_move_bottom"
-					width={140}
-					height={140}
+					width={256}
+					height={256}
 				/>
 				<planeGeometry
 					ref="geometry_move_right"
 					resourceId="geometry_move_right"
-					width={140}
-					height={140}
+					width={256}
+					height={256}
 				/>
 			</resources>
 		);
