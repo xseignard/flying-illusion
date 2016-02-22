@@ -15,6 +15,9 @@ export class Move extends Component {
 			})
 		);
 	}
+	componentWillUpdate(nextProps) {
+		return false;
+	}
 	componentWillUnmount() {
 		this.props.sceneMoves.delete(this.props.move.id);
 	}
