@@ -2,41 +2,65 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { saveRank } from '../../../actions/ranks';
 import { getPerformance } from '../../../selectors/performance';
+import Letter from '../Letter';
 import css from './css';
 
 export class Saver extends Component {
 	constructor(props) {
 		super(props);
-		this.saveName = this.saveName.bind(this);
+		this.state = {
+			focusIndex: 0
+		};
+		this.letters = [];
+		this.onLetterSelection = this.onLetterSelection.bind(this);
 	}
-	shouldComponentUpdate(nextProps) {
-	}
-	saveName() {
-		if (this.refs.name.validity.valid) {
-			console.log('correct input');
+	onLetterSelection(index, letter) {
+		this.letters[index] = letter;
+		if (index === 2) {
 			this.props.saveRank({
-				name: this.refs.name.value,
+				name: this.letters.join(''),
 				performance: this.props.performance
+			});
+		}
+		else {
+			this.setState({
+				focusIndex: this.state.focusIndex + 1
 			});
 		}
 	}
 	render() {
 		return (
 			<div className={css.saver}>
-				score: {this.props.performance.score} <br />
-				ok: {this.props.performance.ok} <br />
-				good: {this.props.performance.good} <br />
-				excellent: {this.props.performance.excellent} <br /><br />
-				<input
-					autoFocus
-					ref="name"
-					required
-					type="text"
-					minLength="3"
-					maxLength="3"
-					pattern="[a-z]+"
+				<div>
+					score: {this.props.performance.score} <br />
+					ok: {this.props.performance.ok} <br />
+					good: {this.props.performance.good} <br />
+					excellent: {this.props.performance.excellent} <br /><br />
+				</div>
+				<Letter
+					index={0}
+					focus={this.state.focusIndex === 0}
+					letter="A"
+					height={100}
+					duration={200}
+					onSelection={this.onLetterSelection}
 				/>
-			<button onClick={this.saveName}>Start new game</button>
+				<Letter
+					index={1}
+					focus={this.state.focusIndex === 1}
+					letter="A"
+					height={100}
+					duration={200}
+					onSelection={this.onLetterSelection}
+				/>
+				<Letter
+					index={2}
+					focus={this.state.focusIndex === 2}
+					letter="A"
+					height={100}
+					duration={200}
+					onSelection={this.onLetterSelection}
+				/>
 			</div>
 		);
 	}

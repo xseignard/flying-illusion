@@ -1,0 +1,45 @@
+.letter {
+	display: inline-block;
+	position: relative;
+	width: 202px;
+	height: 202px;
+	border: 1px solid #AAA;
+	margin: 0 20px;
+}
+.letter.focus {
+	border-color: red;
+}
+.visibleLetters {
+	width: 200px;
+	height: 200px;
+	background: #222;
+	overflow: hidden;
+	font-size: 72px;
+}
+.allLetters > div {
+	height: 100px;
+	line-height: 120px;
+}
+.previousLetter,
+.nextLetter,
+.onSelection {
+	width: 30px;
+	height: 30px;
+	background: #777;
+	position: absolute;
+}
+.previousLetter {
+	left: 50%;
+	margin-left: -15px;
+	top: -15px;
+}
+.nextLetter {
+	left: 50%;
+	margin-left: -15px;
+	bottom: -15px;
+}
+.onSelection {
+	right: -15px;
+	top: 50%;
+	margin-top: -15px;
+}

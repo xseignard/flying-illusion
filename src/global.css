@@ -15,5 +15,5 @@ body {
 
 @font-face {
 	font-family: 'din-condensed';
-	src: url('../www/din-condensed.woff') format('woff');
+	src: url('../www/din-condensed.ttf') format('truetype');
 }
