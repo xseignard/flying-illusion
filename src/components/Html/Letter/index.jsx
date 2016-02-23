@@ -18,8 +18,9 @@ export class Letter extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { letter: this.props.letter };
-		this.allLettersStyle = { transform: getCurrentTransform(this.props.height) };
+		this.inlineStyle = { transform: getCurrentTransform(this.props.height) };
 		this.changeLetter = this.changeLetter.bind(this);
+		this.onPadDown = this.onPadDown.bind(this);
 	}
 	shouldComponentUpdate() {
 		return this.props.focus;
@@ -31,22 +32,22 @@ export class Letter extends Component {
 				this.props.pads.get(direction) === 'down' &&
 				this.props.pads.get(direction) !== prevProps.pads.get(direction)
 			) {
-				switch (direction) {
-					case 'top':
-						this.changeLetter(-1);
-						break;
-					case 'bottom':
-						this.changeLetter(1);
-						break;
-					case 'right':
-						setTimeout(() => {
-							this.props.onSelection(this.props.index, this.state.letter);
-						}, 0);
-						break;
-					default:
-				}
+				this.onPadDown(direction);
 			}
 		});
+	}
+	onPadDown(direction) {
+		if (direction === 'top') {
+			this.changeLetter(-1);
+		}
+		else if (direction === 'bottom') {
+			this.changeLetter(1);
+		}
+		else if (direction === 'right') {
+			setTimeout(() => {
+				this.props.onSelection(this.props.index, this.state.letter);
+			}, 0);
+		}
 	}
 	changeLetter(increment) {
 		this.animation = this.refs.letter.animate([
@@ -80,23 +81,14 @@ export class Letter extends Component {
 					<div
 						ref="letter"
 						className={css.allLetters}
-						style={this.allLettersStyle}
+						style={this.inlineStyle}
 					>
 						{lettersContent}
 					</div>
 				</div>
-				<div
-					className={css.previousLetter}
-					onClick={this.previousLetter}
-				></div>
-				<div
-					className={css.nextLetter}
-					onClick={this.nextLetter}
-				></div>
-				<div
-					className={css.onSelection}
-					onClick={this.onSelection}
-				></div>
+				<div className={css.previousLetter}></div>
+				<div className={css.nextLetter}></div>
+				<div className={css.onSelection}></div>
 			</div>
 		);
 	}
