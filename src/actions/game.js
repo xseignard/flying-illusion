@@ -1,5 +1,5 @@
 import C from '../constants';
-import { startTutoChoregraphy, startChoregraphy } from './choregraphy';
+import { startTutoChoregraphy, startChoregraphy, resetChoregraphy } from './choregraphy';
 import { getMovesEndTime, stopMoves } from './moves';
 import { setTutoStepsTimeouts, resetSteps } from './steps';
 
@@ -8,7 +8,9 @@ let launchTuto;
 let launchWait;
 let launchLoad;
 let launchPlay;
+let launchRecap;
 let launchRank;
+let launchEnd;
 let checkStatus;
 
 launchIntro = () => {
@@ -34,6 +36,7 @@ launchTuto = () => {
 		const tutoTimeout = setTimeout(() => {
 			dispatch(resetSteps());
 			dispatch(stopMoves());
+			dispatch(resetChoregraphy());
 			dispatch(launchWait());
 			dispatch(checkStatus());
 		}, tutoFinishTime);
@@ -80,9 +83,7 @@ launchPlay = () => {
 		dispatch(startChoregraphy());
 		const playEndTime = getMovesEndTime(getState().dance.get('moves'));
 		const playTimeout = setTimeout(() => {
-			dispatch({
-				type: C.GAME_SAVE
-			});
+			dispatch(launchRecap());
 		}, playEndTime);
 		dispatch({
 			type: C.GAME_PLAY,
@@ -92,10 +93,42 @@ launchPlay = () => {
 	};
 };
 
+launchRecap = () => {
+	return (dispatch, getState) => {
+		const recapTimeout = setTimeout(() => {
+			dispatch({
+				type: C.GAME_SAVE
+			});
+		}, C.GAME_RECAP_DURATION);
+		dispatch({
+			type: C.GAME_RECAP,
+			timeout: recapTimeout
+		});
+	};
+};
+
 launchRank = () => {
 	return (dispatch, getState) => {
+		const rankTimeout = setTimeout(() => {
+			dispatch(launchEnd());
+		}, C.GAME_RANK_DURATION);
 		dispatch({
-			type: C.GAME_RANK
+			type: C.GAME_RANK,
+			timeout: rankTimeout
+		});
+	};
+};
+
+launchEnd = () => {
+	return (dispatch, getState) => {
+		const endTimeout = setTimeout(() => {
+			dispatch({
+				type: C.GAME_IDLE
+			});
+		}, C.GAME_END_DURATION);
+		dispatch({
+			type: C.GAME_END,
+			timeout: endTimeout
 		});
 	};
 };
@@ -146,6 +179,8 @@ checkStatus = (direction) => {
 
 export {
 	launchPlay,
+	launchRank,
+	launchRecap,
 	launchRank,
 	checkStatus
 };

@@ -1,0 +1,5 @@
+export default {
+	SCORE: 'SCORE',
+	SCORES_LOADED: 'SCORES_LOADED',
+	SCORES_RESET: 'SCORES_RESET',
+};

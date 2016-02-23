@@ -11,11 +11,10 @@ export class Webgl extends Component {
 	constructor(props) {
 		super(props);
 		this._onAnimate = this._onAnimate.bind(this);
-		this.choregraphyTime = this.props.choregraphy.get('time');
 		this.sceneMoves = new Map();
 	}
 	_onAnimate() {
-		this.gameTime = Date.now() - this.choregraphyTime;
+		this.gameTime = Date.now() - this.props.choregraphy.get('time');
 		this.sceneMoves.forEach((move) => {
 			move.ref.translateY(getTranslation(
 				move.ref.position.y,

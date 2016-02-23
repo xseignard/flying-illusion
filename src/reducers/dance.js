@@ -103,6 +103,8 @@ export function dance(state = defaultState, action) {
 			return setUncommentable(state, action.index);
 		case C.MOVES_TIMEOUTS:
 			return setMovesTimeouts(state, action);
+		case C.CHOREGRAPHY_RESET:
+			return state.set('moves', List([]));
 		case C.STEP:
 			return handleStep(state, action);
 		case C.STEPS_RESET:

@@ -3,7 +3,7 @@ import { game } from './game';
 import { pads } from './pads';
 import { choregraphy } from './choregraphy';
 import { dance } from './dance';
-import { ranks } from './ranks';
+import { scores } from './scores';
 import { TEST } from '../actions';
 
 // reducer dedicated to lang selection
@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
 	pads,
 	choregraphy,
 	dance,
-	ranks,
+	scores,
 	test,
 });
 

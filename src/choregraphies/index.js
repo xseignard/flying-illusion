@@ -1,6 +1,6 @@
 import moment from 'moment';
 import C from '../constants';
-import { flattenArray } from '../utils';
+import U from '../utils';
 import inTraining from './In_Training.new.srt';
 import lastResistance from './Last_Resistance.new.srt';
 import theBattle from './The_Battle.new.srt';
@@ -22,7 +22,7 @@ const mapSubsToMoves = (subs) => {
 		});
 		return moves;
 	});
-	return flattenArray(nestedMoves);
+	return U.flattenArray(nestedMoves);
 };
 
 const getTutoMoves = (moves) => {

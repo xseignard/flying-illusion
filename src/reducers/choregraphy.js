@@ -10,6 +10,8 @@ export function choregraphy(state = defaultState, action) {
 	switch (action.type) {
 		case C.CHOREGRAPHY:
 			return state.set('name', action.name);
+		case C.CHOREGRAPHY_RESET:
+			return defaultState;
 		case C.GAME_TUTO:
 			return state.set('time', action.time);
 		case C.GAME_PLAY:

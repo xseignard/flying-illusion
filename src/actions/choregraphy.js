@@ -37,3 +37,11 @@ export const startChoregraphy = () => {
 		dispatch(setMovesTimeouts());
 	};
 };
+
+export const resetChoregraphy = () => {
+	return (dispatch, getState) => {
+		dispatch({
+			type: C.CHOREGRAPHY_RESET
+		});
+	};
+};

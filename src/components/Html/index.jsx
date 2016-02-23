@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { isGame } from '../../utils';
+import Isvg from 'react-inlinesvg';
+import U from '../../utils';
 import * as gameActions from '../../actions/game';
-import Header from './Header';
+import Headline from './Headline';
 import Performance from './Performance';
-import Saver from './Saver';
-import Ranks from './Ranks';
+import Final from './Final';
 import css from './css';
 
 export class Html extends Component {
@@ -13,24 +13,40 @@ export class Html extends Component {
 		super(props);
 	}
 	render() {
-		const performanceContent = !isGame(this.props.game) ? null : (
-			<Performance />
+		const idleContent = this.props.game.get('status') !== 'idle' ? null : (
+			<Headline
+				line1="Prenez vos marques sur le tapis"
+				line2="Pour entrer dans la danse"
+			/>
 		);
-		const saverContent = this.props.game.get('status') !== 'save' ? null : (
-			<Saver />
+		const waitContent = this.props.game.get('status') !== 'wait' ? null : (
+			<div>
+				<Headline
+					line1="Maintenez < et > avec vos pieds sur le tapis"
+					line2="pour commencer à jouer"
+				/>
+				<div className={css.waiting}>
+					<div className={css.waitingBar}></div>
+				</div>
+			</div>
 		);
-		const ranksContent = this.props.game.get('status') !== 'rank' ? null : (
-			<Ranks />
+		const loadContent = this.props.game.get('status') !== 'load' ? null : (
+			<div className={css.loading}>
+				<div className={css.loadingBar}></div>
+			</div>
 		);
+		const performanceContent = !U.showPerformance(this.props.game) ? null : <Performance />;
+		const finalContent = !U.showFinal(this.props.game) ? null : <Final />;
 		return (
 			<div className={css.html}>
-				<Header
-					game={this.props.game}
-					launchPlay={this.props.launchPlay}
-				/>
+				<div className={css.logo}>
+					<Isvg src="img/logo.svg" />
+				</div>
+				{idleContent}
+				{waitContent}
+				{loadContent}
 				{performanceContent}
-				{saverContent}
-				{ranksContent}
+				{finalContent}
 			</div>
 		);
 	}

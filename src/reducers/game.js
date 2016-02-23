@@ -30,6 +30,10 @@ export function game(state = defaultState, action) {
 			return state
 				.set('status', 'play')
 				.set('timeout', action.timeout);
+		case C.GAME_RECAP:
+			return state
+				.set('status', 'recap')
+				.set('timeout', action.timeout);
 		case C.GAME_SAVE:
 			return state
 				.set('status', 'save')

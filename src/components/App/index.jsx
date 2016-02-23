@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { isGame } from '../../utils';
+import U from '../../utils';
 import { listenToMovesWorker } from '../../actions/moves';
 import { listenToPads } from '../../actions/pads';
-import { loadRanks } from '../../actions/ranks';
-import { launchPlay } from '../../actions/game';
+import { loadScores } from '../../actions/scores';
+import * as gameActions from '../../actions/game';
 import Video from '../Video';
 import Audio from '../Audio';
 import Webgl from '../Webgl';
@@ -18,14 +18,20 @@ export class App extends Component {
 	componentDidMount() {
 		this.props.listenToMovesWorker();
 		this.props.listenToPads();
-		this.props.loadRanks();
+		this.props.loadScores();
 		// FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
-		if (this.props.game.get('status') === 'dev') {
+		if (this.props.game.get('status') === 'devplay') {
 			this.props.launchPlay();
+		}
+		else if (this.props.game.get('status') === 'devrecap') {
+			this.props.launchRecap();
+		}
+		else if (this.props.game.get('status') === 'devrank') {
+			this.props.launchRank();
 		}
 	}
 	render() {
-		const webGlContent = !isGame(this.props.game) ? null : (
+		const webGlContent = !U.showWebgl(this.props.game) ? null : (
 			<div className={css.webgl}>
 				<Webgl />
 			</div>
@@ -45,7 +51,9 @@ export class App extends Component {
 	}
 }
 
-export default connect(
-	state => state,
-	{ listenToMovesWorker, listenToPads, loadRanks, launchPlay }
-)(App);
+const mapDispatchToProps = 	Object.assign(
+	{ listenToMovesWorker, listenToPads, loadScores }
+	, gameActions
+);
+
+export default connect(state => state, mapDispatchToProps)(App);

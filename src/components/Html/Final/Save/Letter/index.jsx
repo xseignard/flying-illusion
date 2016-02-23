@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { alphabet, getItemByInfiniteIndex } from '../../../utils';
+import U from '../../../../../utils';
 import css from './css';
 
 const getCurrentTransform = (height) => {
@@ -19,37 +19,39 @@ export class Letter extends Component {
 		super(props);
 		this.state = { letter: this.props.letter };
 		this.inlineStyle = { transform: getCurrentTransform(this.props.height) };
-		this.changeLetter = this.changeLetter.bind(this);
 		this.onPadDown = this.onPadDown.bind(this);
+		this.changeLetter = this.changeLetter.bind(this);
 	}
 	shouldComponentUpdate() {
 		return this.props.focus;
 	}
 	componentDidUpdate(prevProps) {
-		['top', 'bottom', 'right'].forEach((direction) => {
+		this.props.controls.forEach((direction) => {
 			if (
 				this.props.focus &&
 				this.props.pads.get(direction) === 'down' &&
 				this.props.pads.get(direction) !== prevProps.pads.get(direction)
 			) {
-				this.onPadDown(direction);
+				setTimeout(() => {
+					this.onPadDown(direction);
+				}, 0);
 			}
 		});
 	}
 	onPadDown(direction) {
-		if (direction === 'top') {
-			this.changeLetter(-1);
-		}
-		else if (direction === 'bottom') {
-			this.changeLetter(1);
+		if (direction === 'left') {
+			this.props.onLeft(this.props.index);
 		}
 		else if (direction === 'right') {
-			setTimeout(() => {
-				this.props.onSelection(this.props.index, this.state.letter);
-			}, 0);
+			this.props.onRight(this.props.index);
+		}
+		else {
+			this.changeLetter(direction);
 		}
 	}
-	changeLetter(increment) {
+	changeLetter(direction) {
+		const increment = direction === 'top' ? -1 : 1;
+		this.refs[direction].classList.add(css.onPadDown);
 		this.animation = this.refs.letter.animate([
 			{ transform: getCurrentTransform(this.props.height) },
 			{ transform: getNextTransform(this.props.height, increment) }
@@ -57,9 +59,11 @@ export class Letter extends Component {
 			duration: this.props.duration,
 		});
 		this.animation.onfinish = () => {
-			const thisIndex = alphabet.indexOf(this.state.letter);
-			const letter = getItemByInfiniteIndex(alphabet, thisIndex + increment);
+			this.refs[direction].classList.remove(css.onPadDown);
+			const thisIndex = U.alphabet.indexOf(this.state.letter);
+			const letter = U.getItemByInfiniteIndex(U.alphabet, thisIndex + increment);
 			this.setState({ letter });
+			this.props.onLetter(this.props.index, this.state.letter);
 		};
 	}
 	render() {
@@ -68,11 +72,20 @@ export class Letter extends Component {
 			[css.focus]: this.props.focus
 		});
 		const lettersContent = [-2, -1, 0, 1, 2].map((index) => {
-			const thisIndex = alphabet.indexOf(this.state.letter) + index;
+			const thisIndex = U.alphabet.indexOf(this.state.letter) + index;
 			return (
 				<div key={index}>
-					{getItemByInfiniteIndex(alphabet, thisIndex)}
+					{U.getItemByInfiniteIndex(U.alphabet, thisIndex)}
 				</div>
+			);
+		});
+		const controlsContent = this.props.controls.map((direction) => {
+			return (
+				<div
+					key={direction}
+					ref={direction}
+					className={css[`control_${direction}`]}
+				></div>
 			);
 		});
 		return (
@@ -86,9 +99,7 @@ export class Letter extends Component {
 						{lettersContent}
 					</div>
 				</div>
-				<div className={css.previousLetter}></div>
-				<div className={css.nextLetter}></div>
-				<div className={css.onSelection}></div>
+				{controlsContent}
 			</div>
 		);
 	}

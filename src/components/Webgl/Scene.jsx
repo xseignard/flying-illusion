@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import THREE from 'three';
 import C from '../../constants';
-import { isGame } from '../../utils';
+import U from '../../utils';
 import Resources from './common/Resources';
 import Targets from './Targets';
 import Moves from './Moves';
@@ -12,13 +12,13 @@ export default class Scene extends Component {
 		this.cameraPosition = new THREE.Vector3(0, 0, 1);
 	}
 	render() {
-		const playContent = !isGame(this.props.game) ? null : (
+		const playContent = !U.showWebgl(this.props.game) ? null : (
 			<group>
+				<Targets />
 				<Moves
 					sceneMoves={this.props.sceneMoves}
 					moves={this.props.moves}
 				/>
-				<Targets />
 			</group>
 		);
 		return (

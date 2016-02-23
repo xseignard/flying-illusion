@@ -27,20 +27,12 @@ export const setMovesTimeouts = (forward = 0) => {
 	};
 };
 
-const movesTimeouts = [
-	'timeoutShow',
-	'timeoutCommentable',
-	'timeoutHide',
-	'timeoutUncommentable'
-];
-
 export const stopMoves = () => {
 	return (dispatch, getState) => {
-		const state = getState();
-		state.dance.get('moves').forEach((move) => {
-			movesTimeouts.forEach((timeout) => {
-				clearTimeout(move[timeout]);
-			});
+		const moves = getState().dance.get('moves').toArray();
+		movesWorker.postMessage({
+			function: 'stopMoves',
+			moves
 		});
 	};
 };

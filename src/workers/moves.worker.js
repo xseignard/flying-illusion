@@ -46,8 +46,26 @@ export const setMovesTimeouts = (moves, forward = 0) => {
 	});
 };
 
+const movesTimeouts = [
+	'timeoutShow',
+	'timeoutCommentable',
+	'timeoutHide',
+	'timeoutUncommentable'
+];
+
+export const stopMoves = (moves) => {
+	moves.forEach((move) => {
+		movesTimeouts.forEach((timeout) => {
+			clearTimeout(move[timeout]);
+		});
+	});
+};
+
 self.addEventListener('message', (event) => {
 	if (event.data.function === 'setMovesTimeouts') {
 		setMovesTimeouts(event.data.moves, event.data.forward);
+	}
+	else if (event.data.function === 'stopMoves') {
+		stopMoves(event.data.moves);
 	}
 });

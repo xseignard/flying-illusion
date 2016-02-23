@@ -1,0 +1,71 @@
+.letter {
+	display: inline-block;
+	position: relative;
+	width: 202px;
+	height: 202px;
+	border: 1px solid #444;
+	margin: 0 20px;
+}
+.letter.focus {
+	border-color: #1D82C4;
+}
+.visibleLetters {
+	width: 200px;
+	height: 200px;
+	background: #222;
+	overflow: hidden;
+	font-size: 72px;
+}
+.allLetters {
+	will-change: transform;
+}
+.allLetters > div {
+	height: 100px;
+	line-height: 120px;
+}
+.control_left,
+.control_top,
+.control_bottom,
+.control_right {
+	width: 30px;
+	height: 30px;
+	background: #777;
+	position: absolute;
+}
+.control_left,
+.control_right {
+	top: 50%;
+	margin-top: -15px;
+}
+.control_top,
+.control_bottom {
+	left: 50%;
+	margin-left: -15px;
+}
+.control_left {
+	left: -15px;
+}
+.control_top {
+	top: -15px;
+}
+.control_bottom {
+	bottom: -15px;
+}
+.control_right {
+	right: -15px;
+}
+
+.control_top.onPadDown,
+.control_bottom.onPadDown {
+	background: #1D82C4;
+	animation: onpaddown 200ms linear;
+}
+
+@keyframes onpaddown {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}

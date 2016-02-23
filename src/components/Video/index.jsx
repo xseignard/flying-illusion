@@ -12,6 +12,9 @@ export class Video extends Component {
 			'wait',
 			'load',
 			'play',
+			'recap',
+			'save',
+			'rank',
 			'end'
 		];
 		this.state = {

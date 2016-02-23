@@ -5,15 +5,17 @@ const getDefaultState = () => {
 	return List([]);
 };
 
-export function ranks(state = getDefaultState(), action) {
+export function scores(state = getDefaultState(), action) {
 	switch (action.type) {
-		case C.RANK:
+		case C.SCORE:
 			return state.push({
 				name: action.name,
 				score: action.score
 			});
-		case C.RANKS_LOADED:
-			return List(action.ranks);
+		case C.SCORES_LOADED:
+			return List(action.scores);
+		case C.SCORES_RESET:
+			return getDefaultState();
 		default:
 			return state;
 	}
