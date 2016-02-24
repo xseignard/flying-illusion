@@ -10,6 +10,7 @@ export class Video extends Component {
 			'idle',
 			'intro',
 			'wait',
+			'warning',
 			'load',
 			'play',
 			'recap',

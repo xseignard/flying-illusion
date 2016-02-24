@@ -22,6 +22,10 @@ export function game(state = defaultState, action) {
 			return state
 				.set('status', 'wait')
 				.set('timeout', action.timeout);
+		case C.GAME_WARNING:
+			return state
+				.set('status', 'warning')
+				.set('timeout', action.timeout);
 		case C.GAME_LOAD:
 			return state
 				.set('status', 'load')

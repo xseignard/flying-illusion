@@ -3,15 +3,26 @@ import { startTutoChoregraphy, startChoregraphy, resetChoregraphy } from './chor
 import { getMovesEndTime, stopMoves } from './moves';
 import { setTutoStepsTimeouts, resetSteps } from './steps';
 
+let launchIdle;
 let launchIntro;
 let launchTuto;
 let launchWait;
+let launchWarning;
 let launchLoad;
 let launchPlay;
 let launchRecap;
+let launchSave;
 let launchRank;
 let launchEnd;
 let checkStatus;
+
+launchIdle = () => {
+	return (dispatch, getState) => {
+		dispatch({
+			type: C.GAME_IDLE,
+		});
+	};
+};
 
 launchIntro = () => {
 	return (dispatch, getState) => {
@@ -64,9 +75,21 @@ launchWait = () => {
 	};
 };
 
-launchLoad = () => {
+launchWarning = () => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
+		const warningTimeout = setTimeout(() => {
+			dispatch(launchLoad());
+		}, C.GAME_WARNING_DURATION);
+		dispatch({
+			type: C.GAME_WARNING,
+			timeout: warningTimeout
+		});
+	};
+};
+
+launchLoad = () => {
+	return (dispatch, getState) => {
 		const loadTimeout = setTimeout(() => {
 			dispatch(launchPlay());
 		}, C.GAME_LOAD_DURATION);
@@ -103,6 +126,15 @@ launchRecap = () => {
 		dispatch({
 			type: C.GAME_RECAP,
 			timeout: recapTimeout
+		});
+	};
+};
+
+launchSave = () => {
+	return (dispatch, getState) => {
+		clearTimeout(getState().game.get('timeout'));
+		dispatch({
+			type: C.GAME_SAVE
 		});
 	};
 };
@@ -146,7 +178,7 @@ const isLeftOrRightUp = (pads) => {
 	});
 };
 
-const isTopOrBottom = /top|bottom/;
+const isLeftOrRight = /left|right/;
 
 checkStatus = (direction) => {
 	return (dispatch, getState) => {
@@ -159,20 +191,43 @@ checkStatus = (direction) => {
 		) {
 			dispatch(launchIntro());
 		}
-		else if (direction && direction.match(isTopOrBottom)) {
+		else if (
+			direction &&
+			!direction.match(isLeftOrRight)
+		) {
 			return;
 		}
-		else if (
+		if (
 			status === 'wait' &&
 			areLeftAndRightDown(pads)
 		) {
-			dispatch(launchLoad());
+			dispatch(launchWarning());
+			return;
 		}
-		else if (
-			status === 'load' &&
+		if (
+			(
+				status === 'warning' ||
+				status === 'load'
+			) &&
 			isLeftOrRightUp(pads)
 		) {
 			dispatch(launchWait());
+			return;
+		}
+		if (
+			direction !== 'right' ||
+			pads.get('right') !== 'down'
+		) {
+			return;
+		}
+		if (status === 'recap') {
+			dispatch(launchSave());
+		}
+		if (status === 'rank') {
+			dispatch(launchEnd());
+		}
+		if (status === 'end') {
+			dispatch(launchIdle());
 		}
 	};
 };
