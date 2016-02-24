@@ -1,4 +1,4 @@
-const showWebglRegexp = /tuto|wait|load|play/;
+const showWebglRegexp = /tuto|wait|warning|load|play/;
 export const showWebgl = (game) => {
 	return game.get('status').match(showWebglRegexp);
 };

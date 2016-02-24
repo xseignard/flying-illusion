@@ -11,9 +11,9 @@ export class Recap extends Component {
 		return (
 			<div className={css.recap}>
 				score: {this.props.performance.score} <br />
-				ok: {this.props.performance.ok} <br />
-				good: {this.props.performance.good} <br />
-				excellent: {this.props.performance.excellent} <br /><br />
+				ok: {this.props.performance.commentsCount.ok} <br />
+				good: {this.props.performance.commentsCount.good} <br />
+				excellent: {this.props.performance.commentsCount.excellent} <br /><br />
 			</div>
 		);
 	}

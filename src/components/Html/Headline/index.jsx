@@ -6,12 +6,10 @@ export default class Headline extends Component {
 		super(props);
 	}
 	componentDidMount() {
+		this.refs.headline.classList.remove(css.loaded);
 		setTimeout(() => {
-			this.refs.headline.classList.remove(css.loaded);
-			setTimeout(() => {
-				this.refs.headline.classList.add(css.loaded);
-			}, 100);
-		}, 0);
+			this.refs.headline.classList.add(css.loaded);
+		}, 100);
 	}
 	render() {
 		return (

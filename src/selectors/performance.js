@@ -1,7 +1,5 @@
 import { createSelector } from 'reselect';
 
-const directions = ['left', 'top', 'bottom', 'right'];
-
 const performanceTable = {
 	ok: {
 		score: 1,
@@ -37,24 +35,13 @@ const sortEventsChronologically = (events) => {
 	});
 };
 
-const splitEventsByDirection = (events) => {
-	const splitEvents = {};
-	directions.forEach(direction => {
-		splitEvents[direction] = [];
-	});
-	events.forEach(event => {
-		splitEvents[event.direction].push(event);
-	});
-	return splitEvents;
-};
-
-const getLastCommentsByDirection = (events) => {
-	const splitEvents = splitEventsByDirection(events);
+const getTargets = (directions) => {
 	const targets = {};
-	directions.forEach(direction => {
-		const directionEvents = splitEvents[direction];
-		const lastDirectionEvent = directionEvents[directionEvents.length - 1];
-		targets[direction] = lastDirectionEvent ? lastDirectionEvent.comment : '';
+	Object.keys(directions).forEach((direction) => {
+		targets[direction] = {
+			lastComment: directions[direction].lastComment,
+			commentNumber: directions[direction][direction.lastComment]
+		};
 	});
 	return targets;
 };
@@ -62,26 +49,28 @@ const getLastCommentsByDirection = (events) => {
 const getPerformances = (events) => {
 	let combo = 1;
 	let score = 0;
-	let ok = 0;
-	let good = 0;
-	let excellent = 0;
+	const directions = {
+		left: { ok: 0, good: 0, excellent: 0, lastComment: '' },
+		top: { ok: 0, good: 0, excellent: 0, lastComment: '' },
+		bottom: { ok: 0, good: 0, excellent: 0, lastComment: '' },
+		right: { ok: 0, good: 0, excellent: 0, lastComment: '' },
+	};
+	const commentsCount = { ok: 0, good: 0, excellent: 0 };
 	events.forEach((event, index) => {
 		const comboAddition = performanceTable[event.comment].comboAddition;
 		combo = comboAddition ? combo + comboAddition : 1;
 		score += performanceTable[event.comment].score * combo;
-		ok = event.comment === 'ok' ? ok + 1 : ok;
-		good = event.comment === 'good' ? good + 1 : good;
-		excellent = event.comment === 'excellent' ? excellent + 1 : excellent;
+		directions[event.direction][event.comment]++;
+		directions[event.direction].lastComment = event.comment;
+		commentsCount[event.comment]++;
 	});
-	const comment = events.size > 0 ? events.last().comment : '';
-	const targets = getLastCommentsByDirection(events);
+	const lastComment = events.size > 0 ? events.last().comment : '';
+	const targets = getTargets(directions);
 	return {
 		combo,
 		score,
-		ok,
-		good,
-		excellent,
-		comment,
+		commentsCount,
+		lastComment,
 		targets
 	};
 };

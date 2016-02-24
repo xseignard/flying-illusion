@@ -19,7 +19,7 @@ export class App extends Component {
 		this.props.listenToMovesWorker();
 		this.props.listenToPads();
 		this.props.loadScores();
-		// FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
+		// FIXME: FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
 		if (this.props.game.get('status') === 'devplay') {
 			this.props.launchPlay();
 		}

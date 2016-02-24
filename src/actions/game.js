@@ -18,6 +18,7 @@ let checkStatus;
 
 launchIdle = () => {
 	return (dispatch, getState) => {
+		clearTimeout(getState().game.get('timeout'));
 		dispatch({
 			type: C.GAME_IDLE,
 		});
@@ -119,9 +120,7 @@ launchPlay = () => {
 launchRecap = () => {
 	return (dispatch, getState) => {
 		const recapTimeout = setTimeout(() => {
-			dispatch({
-				type: C.GAME_SAVE
-			});
+			dispatch(launchSave());
 		}, C.GAME_RECAP_DURATION);
 		dispatch({
 			type: C.GAME_RECAP,
@@ -133,14 +132,19 @@ launchRecap = () => {
 launchSave = () => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
+		const saveTimeout = setTimeout(() => {
+			dispatch(launchIdle());
+		}, C.GAME_SAVE_DURATION);
 		dispatch({
-			type: C.GAME_SAVE
+			type: C.GAME_SAVE,
+			timeout: saveTimeout
 		});
 	};
 };
 
 launchRank = () => {
 	return (dispatch, getState) => {
+		clearTimeout(getState().game.get('timeout'));
 		const rankTimeout = setTimeout(() => {
 			dispatch(launchEnd());
 		}, C.GAME_RANK_DURATION);
@@ -153,10 +157,9 @@ launchRank = () => {
 
 launchEnd = () => {
 	return (dispatch, getState) => {
+		clearTimeout(getState().game.get('timeout'));
 		const endTimeout = setTimeout(() => {
-			dispatch({
-				type: C.GAME_IDLE
-			});
+			dispatch(launchIdle());
 		}, C.GAME_END_DURATION);
 		dispatch({
 			type: C.GAME_END,
@@ -223,6 +226,9 @@ checkStatus = (direction) => {
 		if (status === 'recap') {
 			dispatch(launchSave());
 		}
+		if (status === 'save') {
+			dispatch(launchSave());
+		}
 		if (status === 'rank') {
 			dispatch(launchEnd());
 		}
@@ -236,6 +242,5 @@ export {
 	launchPlay,
 	launchRank,
 	launchRecap,
-	launchRank,
 	checkStatus
 };
