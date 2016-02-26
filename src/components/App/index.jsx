@@ -58,7 +58,7 @@ export class App extends Component {
 	}
 }
 
-const mapDispatchToProps = 	Object.assign(
+const mapDispatchToProps = Object.assign(
 	{ listenToClicks, listenToMovesWorker, listenToPads, loadRecords }
 	, gameActions
 );
