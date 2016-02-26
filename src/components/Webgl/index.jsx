@@ -32,7 +32,6 @@ export class Webgl extends Component {
 				this.sceneTargets[direction].shouldAnimate = true;
 				this.sceneTargets[direction].tileIndex = 0;
 				this.sceneTargets[direction].material.opacity = 1;
-				console.log(currentSnapshot, nextSnapshot);
 			}
 		});
 	}
