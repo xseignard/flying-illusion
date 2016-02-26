@@ -9,7 +9,7 @@ export class Performance extends Component {
 		const np = nextProps.performance;
 		return (
 			tp.score !== np.score ||
-			tp.lastComment !== np.lastComment ||
+			tp.comments.last !== np.comments.last ||
 			tp.combo !== np.combo
 		);
 	}
@@ -20,7 +20,7 @@ export class Performance extends Component {
 					<div className={css.label}>score</div>
 					<div className={css.amount}>{this.props.performance.score}</div>
 				</div>
-				<h1>{this.props.performance.lastComment}</h1>
+				<h1>{this.props.performance.comments.last}</h1>
 				<div className={css.combo}>
 					<div className={css.label}>combo</div>
 					<div className={css.amount}>X{this.props.performance.combo}</div>

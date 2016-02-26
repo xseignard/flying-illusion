@@ -12,10 +12,9 @@ export class Metric extends Component {
 		return (
 			<div className={css.metric}>
 				<div>
-					<Text
-						className={css.label}
-						text={this.props.label}
-					/>
+					<Text className={css.label}>
+						{this.props.label}
+					</Text>
 				</div>
 				<div
 					ref="scale"

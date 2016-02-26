@@ -12,8 +12,6 @@ export default class Targets extends Component {
 		];
 	}
 	shouldComponentUpdate() {
-		// TODO: check if performance.target.lastComment
-		// and performance.target.commentCount changed
 		return false;
 	}
 	render() {

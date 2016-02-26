@@ -12,7 +12,8 @@ export function records(state = getDefaultState(), action) {
 				time: action.time,
 				name: action.name,
 				player: action.player,
-				performance: action.performance
+				score: action.score,
+				comments: action.comments
 			});
 		case C.RECORDS_LOADED:
 			return List(action.records);

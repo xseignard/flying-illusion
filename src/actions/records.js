@@ -8,7 +8,8 @@ export function saveRecord(data) {
 			time: data.time,
 			name: data.name,
 			player: data.player,
-			performance: data.performance
+			score: data.score,
+			comments: data.comments
 		});
 		const serializedRecords = JSON.stringify(getState().records.toArray());
 		localStorage.setItem('records', serializedRecords);

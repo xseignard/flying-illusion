@@ -26,10 +26,9 @@ export class Final extends Component {
 	render() {
 		const recapContent = this.props.game.get('status') !== 'recap' ? null : (
 			<div>
-				<Text
-					text="PARTIE FINIE"
-					className={css.h1}
-				/>
+				<Text className={css.h1}>
+					PARTIE FINIE
+				</Text>
 				<div className={css.score}>
 					{this.props.performance.score} POINTS
 				</div>
@@ -38,10 +37,9 @@ export class Final extends Component {
 		);
 		const saveContent = this.props.game.get('status') !== 'save' ? null : (
 			<div>
-				<Text
-					text="PARTIE FINIE"
-					className={css.h1}
-				/>
+				<Text className={css.h1}>
+					PARTIE FINIE
+				</Text>
 				<div className={css.score}>
 					{this.props.performance.score} POINTS
 				</div>
@@ -50,10 +48,9 @@ export class Final extends Component {
 		);
 		const ranksContent = this.props.game.get('status') !== 'rank' ? null : (
 			<div>
-				<Text
-					text="CLASSEMENT"
-					className={css.h1}
-				/>
+				<Text className={css.h1}>
+					CLASSEMENT
+				</Text>
 				<div className={css.score}>
 					{this.props.performance.score} POINTS
 				</div>

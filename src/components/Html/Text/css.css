@@ -1,7 +1,7 @@
 .shade {
 	position: relative;
 	display: inline-block;
-	letter-spacing: 0.07em;
+	letter-spacing: 0.05em;
 }
 .shade > div:first-child {
 	position: absolute;

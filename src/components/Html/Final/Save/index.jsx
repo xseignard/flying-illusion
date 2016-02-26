@@ -26,10 +26,11 @@ export class Save extends Component {
 		}
 		else {
 			this.props.saveRecord({
-				time: this.props.choregraphy.time,
-				name: this.props.choregraphy.name,
+				time: this.props.choregraphy.get('time'),
+				name: this.props.choregraphy.get('name'),
 				player: this.letters.join(''),
-				performance: this.props.performance
+				score: this.props.performance.score,
+				comments: this.props.performance.commentsCount
 			});
 		}
 	}

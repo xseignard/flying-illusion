@@ -17,7 +17,7 @@ const performanceTable = {
 		score: 0,
 		comboAddition: null
 	},
-	missed: {
+	miss: {
 		score: 0,
 		comboAddition: null
 	},
@@ -35,13 +35,13 @@ const sortEventsChronologically = (events) => {
 	});
 };
 
-const getTargets = (stats) => {
+const getTargets = (directionsComments) => {
 	const targets = {};
-	Object.keys(stats).forEach((direction) => {
-		const stat = stats[direction];
+	Object.keys(directionsComments).forEach((direction) => {
+		const stat = directionsComments[direction];
 		targets[direction] = {
-			lastComment: stat.lastComment,
-			commentCount: stat[stat.lastComment]
+			lastComment: stat.last,
+			commentCount: stat[stat.last]
 		};
 	});
 	return targets;
@@ -50,28 +50,36 @@ const getTargets = (stats) => {
 const getPerformances = (events) => {
 	let combo = 1;
 	let score = 0;
-	const stats = {
-		left: { ok: 0, good: 0, excellent: 0, lastComment: '' },
-		top: { ok: 0, good: 0, excellent: 0, lastComment: '' },
-		bottom: { ok: 0, good: 0, excellent: 0, lastComment: '' },
-		right: { ok: 0, good: 0, excellent: 0, lastComment: '' },
+	let progression = 0;
+	const comments = {
+		ok: 0,
+		good: 0,
+		excellent: 0,
+		fail: 0,
+		miss: 0,
+		last: events.size > 0 ? events.last().comment : ''
 	};
-	const commentsCount = { ok: 0, good: 0, excellent: 0 };
+	const directionsComments = {
+		left: { ok: 0, good: 0, excellent: 0, fail: 0, miss: 0, last: '' },
+		top: { ok: 0, good: 0, excellent: 0, fail: 0, miss: 0, last: '' },
+		bottom: { ok: 0, good: 0, excellent: 0, fail: 0, miss: 0, last: '' },
+		right: { ok: 0, good: 0, excellent: 0, fail: 0, miss: 0, last: '' },
+	};
 	events.forEach((event, index) => {
 		const comboAddition = performanceTable[event.comment].comboAddition;
 		combo = comboAddition ? combo + comboAddition : 1;
 		score += performanceTable[event.comment].score * combo;
-		stats[event.direction][event.comment]++;
-		stats[event.direction].lastComment = event.comment;
-		commentsCount[event.comment]++;
+		progression += performanceTable[event.comment].score;
+		comments[event.comment]++;
+		directionsComments[event.direction][event.comment]++;
+		directionsComments[event.direction].last = event.comment;
 	});
-	const lastComment = events.size > 0 ? events.last().comment : '';
-	const targets = getTargets(stats);
+	const targets = getTargets(directionsComments);
 	return {
 		combo,
 		score,
-		commentsCount,
-		lastComment,
+		progression,
+		comments,
 		targets
 	};
 };

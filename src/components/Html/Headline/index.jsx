@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import Text from '../Text';
 import css from './css';
 
@@ -13,19 +14,13 @@ export default class Headline extends Component {
 		}, 100);
 	}
 	render() {
+		const thisClass = classnames({
+			[css.h1]: true,
+			[css[this.props.lineNumber]]: true
+		});
 		return (
-			<div
-				ref="h1"
-				className={css.h1}
-			>
-				<Text
-					text={this.props.line1}
-					className={css.line1}
-				/>
-				<Text
-					text={this.props.line2}
-					className={css.line2}
-				/>
+			<div ref="h1" className={thisClass}>
+				<Text>{this.props.children}</Text>
 			</div>
 		);
 	}

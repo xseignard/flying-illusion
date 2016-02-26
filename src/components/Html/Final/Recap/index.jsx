@@ -17,7 +17,7 @@ export class Recap extends Component {
 				>
 					<Metric
 						label="EXCELLENT"
-						value={this.props.performance.commentsCount.excellent}
+						value={this.props.performance.comments.excellent}
 					/>
 				</div>
 				<div
@@ -25,7 +25,7 @@ export class Recap extends Component {
 				>
 					<Metric
 						label="BIEN"
-						value={this.props.performance.commentsCount.good}
+						value={this.props.performance.comments.good}
 					/>
 				</div>
 				<div
@@ -33,7 +33,7 @@ export class Recap extends Component {
 				>
 					<Metric
 						label="OK"
-						value={this.props.performance.commentsCount.ok}
+						value={this.props.performance.comments.ok}
 					/>
 				</div>
 				<div
@@ -41,13 +41,13 @@ export class Recap extends Component {
 				>
 					<Metric
 						label="COMBO"
-						value={this.props.performance.commentsCount.combo}
+						value={this.props.performance.comments.combo}
 					/>
 				</div>
 				<div className={css.hint}>
-					<Text text="APPUYEZ SUR"/>
-					<div className={css.arrow}></div>
-					<Text text="POUR ENREGISTRER VOTRE SCORE"/>
+					<Text>APPUYEZ SUR</Text>
+					<div className={css.arrow_right}></div>
+					<Text>POUR ENREGISTRER VOTRE SCORE</Text>
 				</div>
 			</div>
 		);

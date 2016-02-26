@@ -32,11 +32,6 @@
 	font-size: 48px;
 }
 
-.arrow {
-	display: inline-block;
-	height: 60px;
-	width: 60px;
-	margin: 0 13px -10px;
-	background-image: url('../../../../../www/img/arrow_right.png');
-	background-position: center center;
+.arrow_right {
+	composes: arrow_right from "../../common.css";
 }

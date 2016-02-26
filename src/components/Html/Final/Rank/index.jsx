@@ -11,7 +11,7 @@ export class Rank extends Component {
 		const recordsContent = this.props.records.map((record, index) => {
 			return (
 				<div key={index}>
-					{record.player} : {record.performance.score}
+					{record.player} : {record.score}
 				</div>
 			);
 		});

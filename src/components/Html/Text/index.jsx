@@ -10,8 +10,8 @@ export default class Text extends Component {
 		});
 		return (
 			<div className={thisClass}>
-				<div>{this.props.text}</div>
-				<div>{this.props.text}</div>
+				<div>{this.props.children}</div>
+				<div>{this.props.children}</div>
 			</div>
 		);
 	}

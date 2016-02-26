@@ -10,3 +10,17 @@ export const getVisibleMoves = createSelector(
 		});
 	}
 );
+
+export const getMaximumProgression = createSelector(
+	[getMoves],
+	(moves) => {
+		return moves.size * 4;
+	}
+);
+
+export const getMaximumComments = createSelector(
+	[getMoves],
+	(moves) => {
+		return moves.size;
+	}
+);

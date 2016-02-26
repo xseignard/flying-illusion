@@ -14,19 +14,28 @@ export class Html extends Component {
 	}
 	render() {
 		const idleContent = this.props.game.get('status') !== 'idle' ? null : (
-			<Headline
-				line1="Prenez vos marques sur le tapis"
-				line2="Pour entrer dans la danse"
-			/>
+			<div>
+				<Headline lineNumber="line1">
+					Prenez vos marques sur le tapis
+				</Headline>
+				<Headline lineNumber="line2">
+					Pour entrer dans la danse
+				</Headline>
+			</div>
 		);
 		const waitContent = this.props.game.get('status') !== 'wait' ? null : (
 			<div>
-				<Headline
-					line1="Maintenez < et > avec vos pieds sur le tapis"
-					line2="pour commencer à jouer"
-				/>
-				<div className={css.waiting}>
-					<div className={css.waitingBar}></div>
+				<div>
+					<Headline lineNumber="line1">
+						Maintenez
+						<div className={css.arrow_left}></div>
+						et
+						<div className={css.arrow_right}></div>
+						avec vos pieds
+					</Headline>
+					<Headline lineNumber="line2">
+						pour commencer à jouer
+					</Headline>
 				</div>
 			</div>
 		);

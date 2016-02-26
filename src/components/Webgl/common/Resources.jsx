@@ -22,28 +22,40 @@ export default class Resources extends Component {
 		return (
 			<resources>
 				<texture
-					resourceId="texture_target_left_bottom"
-					url="img/target_left_bottom_128.png"
+					resourceId="texture_target_left"
+					url="img/target_left.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
 				<texture
-					resourceId="texture_target_top_right"
-					url="img/target_left_bottom_128.png"
+					resourceId="texture_target_top"
+					url="img/target_top.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
-			<meshBasicMaterial alphaTest={0.5} resourceId="material_target_left">
-					<textureResource resourceId="texture_target_left_bottom" />
+				<texture
+					resourceId="texture_target_bottom"
+					url="img/target_bottom.png"
+					wrapS={THREE.RepeatWrapping}
+					wrapT={THREE.RepeatWrapping}
+				/>
+				<texture
+					resourceId="texture_target_right"
+					url="img/target_right.png"
+					wrapS={THREE.RepeatWrapping}
+					wrapT={THREE.RepeatWrapping}
+				/>
+				<meshBasicMaterial alphaTest={0.5} resourceId="material_target_left">
+					<textureResource resourceId="texture_target_left" />
 				</meshBasicMaterial>
 				<meshBasicMaterial alphaTest={0.5} resourceId="material_target_top">
-					<textureResource resourceId="texture_target_top_right" />
+					<textureResource resourceId="texture_target_top" />
 				</meshBasicMaterial>
 				<meshBasicMaterial alphaTest={0.5} resourceId="material_target_bottom">
-					<textureResource resourceId="texture_target_left_bottom" />
+					<textureResource resourceId="texture_target_bottom" />
 				</meshBasicMaterial>
 				<meshBasicMaterial alphaTest={0.5} resourceId="material_target_right">
-					<textureResource resourceId="texture_target_top_right" />
+					<textureResource resourceId="texture_target_right" />
 				</meshBasicMaterial>
 				<planeGeometry
 					ref="geometry_target_left"
@@ -70,52 +82,52 @@ export default class Resources extends Component {
 					height={128}
 				/>
 				<texture
-					resourceId="texture_move_left_bottom"
-					url="img/move_left_bottom_256.png"
+					resourceId="texture_move_left_right"
+					url="img/move_left_right.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
 				<texture
-					resourceId="texture_move_top_right"
-					url="img/move_top_right_256.png"
+					resourceId="texture_move_top_bottom"
+					url="img/move_top_bottom.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
 			<meshBasicMaterial alphaTest={0.5} resourceId="material_move_left">
-					<textureResource resourceId="texture_move_left_bottom" />
+					<textureResource resourceId="texture_move_left_right" />
 				</meshBasicMaterial>
 				<meshBasicMaterial alphaTest={0.5} resourceId="material_move_top">
-					<textureResource resourceId="texture_move_top_right" />
+					<textureResource resourceId="texture_move_top_bottom" />
 				</meshBasicMaterial>
 				<meshBasicMaterial alphaTest={0.5} resourceId="material_move_bottom">
-					<textureResource resourceId="texture_move_left_bottom" />
+					<textureResource resourceId="texture_move_top_bottom" />
 				</meshBasicMaterial>
 				<meshBasicMaterial alphaTest={0.5} resourceId="material_move_right">
-					<textureResource resourceId="texture_move_top_right" />
+					<textureResource resourceId="texture_move_left_right" />
 				</meshBasicMaterial>
 				<planeGeometry
 					ref="geometry_move_left"
 					resourceId="geometry_move_left"
-					width={256}
-					height={256}
+					width={128}
+					height={128}
 				/>
 				<planeGeometry
 					ref="geometry_move_top"
 					resourceId="geometry_move_top"
-					width={256}
-					height={256}
+					width={128}
+					height={128}
 				/>
 				<planeGeometry
 					ref="geometry_move_bottom"
 					resourceId="geometry_move_bottom"
-					width={256}
-					height={256}
+					width={128}
+					height={128}
 				/>
 				<planeGeometry
 					ref="geometry_move_right"
 					resourceId="geometry_move_right"
-					width={256}
-					height={256}
+					width={128}
+					height={128}
 				/>
 			</resources>
 		);
