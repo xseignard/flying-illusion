@@ -35,16 +35,16 @@ const sortEventsChronologically = (events) => {
 	});
 };
 
-const getTargets = (directionsComments) => {
-	const targets = {};
+const getSnapshots = (directionsComments) => {
+	const snapshots = {};
 	Object.keys(directionsComments).forEach((direction) => {
-		const stat = directionsComments[direction];
-		targets[direction] = {
-			lastComment: stat.last,
-			commentCount: stat[stat.last]
+		const comment = directionsComments[direction];
+		snapshots[direction] = {
+			lastComment: comment.last,
+			commentCount: comment[comment.last]
 		};
 	});
-	return targets;
+	return snapshots;
 };
 
 const getPerformances = (events) => {
@@ -74,13 +74,13 @@ const getPerformances = (events) => {
 		directionsComments[event.direction][event.comment]++;
 		directionsComments[event.direction].last = event.comment;
 	});
-	const targets = getTargets(directionsComments);
+	const snapshots = getSnapshots(directionsComments);
 	return {
 		combo,
 		score,
 		progression,
 		comments,
-		targets
+		snapshots
 	};
 };
 

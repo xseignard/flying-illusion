@@ -125,6 +125,11 @@ export default class Resources extends Component {
 					width={128}
 					height={128}
 				/>
+				<planeGeometry
+					resourceId="sprite_geometry"
+					width={256}
+					height={256}
+				/>
 			</resources>
 		);
 	}

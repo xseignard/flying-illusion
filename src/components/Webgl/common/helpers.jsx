@@ -32,3 +32,9 @@ export const getTranslation = (y, moveShowTime, gameTime) => {
 	return originalYPosition.move - y
 		+ (gameTime - moveShowTime) / C.MOVE_DURATION * DISTANCE_FROM_MOVE_TO_TARGET;
 };
+
+export const getSpriteOffset = (tileIndex, hTiles, vTiles) => {
+	const tileColumn = tileIndex % hTiles;
+	const tileRow = vTiles - 1 - Math.floor(tileIndex / hTiles);
+	return new THREE.Vector2(tileColumn / hTiles, tileRow / vTiles);
+};

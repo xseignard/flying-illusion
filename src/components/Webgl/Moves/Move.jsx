@@ -15,7 +15,7 @@ export class Move extends Component {
 			})
 		);
 	}
-	componentWillUpdate(nextProps) {
+	shouldComponentUpdate(nextProps) {
 		return false;
 	}
 	componentWillUnmount() {
