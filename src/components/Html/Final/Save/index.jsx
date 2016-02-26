@@ -30,7 +30,7 @@ export class Save extends Component {
 				name: this.props.choregraphy.get('name'),
 				player: this.letters.join(''),
 				score: this.props.performance.score,
-				comments: this.props.performance.commentsCount
+				comments: this.props.performance.comments
 			});
 		}
 	}
