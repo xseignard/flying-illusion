@@ -34,7 +34,7 @@ const setUncommentable = (state, index) => {
 	return state.set('moves', state.get('moves').update(index, move => {
 		return Object.assign({}, move, {
 			commentable: false,
-			comment: 'missed',
+			comment: 'miss',
 			commentTime: move.time + C.MOVE_TOLERANCE_OK
 		});
 	}));

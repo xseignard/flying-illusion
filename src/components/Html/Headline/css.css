@@ -1,27 +1,20 @@
-.headline {
-	padding: 20px;
+.h1 {
 	text-align: center;
-}
-
-.headline h1 {
 	font-size: 96px;
 	margin: 0;
 	line-height: 120px;
 	font-weight: normal;
 	text-transform: uppercase;
 	font-style: italic;
-	background: -webkit-linear-gradient(#ECF3ED, #404040);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
 }
-.headline h1:nth-child(1) {
+.h1.line1 {
 	transform: translateX(-200%);
 }
-.headline h1:nth-child(2) {
+.h1.line2 {
 	transform: translateX(200%);
 }
-.headline.loaded h1:first-child,
-.headline.loaded h1:last-child {
+.h1.line1.loaded,
+.h1.line2.loaded {
 	transform: translateX(0);
 	transition: transform 1000ms ease-out;
 }

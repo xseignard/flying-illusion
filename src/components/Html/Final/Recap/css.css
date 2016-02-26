@@ -1,5 +1,37 @@
 .recap {
-	padding: 20px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+.recap > div {
+	position: absolute;
+}
+
+.excellent {
+	top: 100px;
+	left: 900px;
+}
+.good {
+	top: 200px;
+	left: 900px;
+}
+.ok {
+	top: 100px;
+	left: 1300px;
+}
+.combo {
+	top: 200px;
+	left: 1300px;
+}
+.hint {
+	width: 100%;
+	top: 600px;
+	left: 0px;
 	text-align: center;
-	font-size: 24px;
+	font-size: 48px;
+}
+
+.arrow_right {
+	composes: arrow_right from "../../common.css";
 }

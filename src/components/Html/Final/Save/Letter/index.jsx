@@ -73,8 +73,9 @@ export class Letter extends Component {
 		});
 		const lettersContent = [-2, -1, 0, 1, 2].map((index) => {
 			const thisIndex = U.alphabet.indexOf(this.state.letter) + index;
+			const thisClass = index === 0 ? css.activeLetter : null;
 			return (
-				<div key={index}>
+				<div key={index} className={thisClass}>
 					{U.getItemByInfiniteIndex(U.alphabet, thisIndex)}
 				</div>
 			);

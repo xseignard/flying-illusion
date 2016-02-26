@@ -1,5 +1,29 @@
 .final {
-	padding: 20px;
-	text-align: center;
-	background: rgba(29, 130, 196, 0.4);
+	position: relative;
+	height: 360px;
+	border: 1px solid #666;
+	margin-top: -1px;
+	background: rgba(29, 130, 196, 0.3);
+}
+.final > * {
+	visibility: hidden;
+}
+.loaded > * {
+	visibility: visible;
+}
+.h1 {
+	position: absolute;
+	top: 120px;
+	left: 200px;
+	font-size: 96px;
+	font-style: italic;
+	margin: 0;
+}
+.score {
+	position: absolute;
+	top: 212px;
+	left: 220px;
+	font-size: 24px;
+	font-style: italic;
+	color: rgba(255,255,255,0.2)
 }

@@ -1,14 +1,9 @@
-.ranks {
-	padding: 20px;
-	text-align: center;
+.rank {
 	font-size: 24px;
 }
 
-.clearScores {
+.records {
 	position: absolute;
-	top: 60px;
-	left: 0;
-	padding: 10px 20px;
-	border-radius: 4px;
-	background: green;
+	top: 100px;
+	left: 800px;
 }

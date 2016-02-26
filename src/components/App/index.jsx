@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import U from '../../utils';
+import { listenToClicks } from '../../actions/admin';
 import { listenToMovesWorker } from '../../actions/moves';
 import { listenToPads } from '../../actions/pads';
-import { loadScores } from '../../actions/scores';
+import { loadRecords } from '../../actions/records';
 import * as gameActions from '../../actions/game';
+import Admin from '../Admin';
 import Video from '../Video';
 import Audio from '../Audio';
 import Webgl from '../Webgl';
@@ -16,9 +18,10 @@ export class App extends Component {
 		super(props);
 	}
 	componentDidMount() {
+		this.props.listenToClicks();
 		this.props.listenToMovesWorker();
 		this.props.listenToPads();
-		this.props.loadScores();
+		this.props.loadRecords();
 		// FIXME: FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
 		if (this.props.game.get('status') === 'devplay') {
 			this.props.launchPlay();
@@ -31,6 +34,9 @@ export class App extends Component {
 		}
 	}
 	render() {
+		const adminContent = !this.props.admin.get('visible') ? null : (
+			<Admin />
+		);
 		const webGlContent = !U.showWebgl(this.props.game) ? null : (
 			<div className={css.webgl}>
 				<Webgl />
@@ -46,13 +52,14 @@ export class App extends Component {
 				<div className={css.html}>
 					<Html />
 				</div>
+				{adminContent}
 			</div>
 		);
 	}
 }
 
 const mapDispatchToProps = Object.assign(
-	{ listenToMovesWorker, listenToPads, loadScores }
+	{ listenToClicks, listenToMovesWorker, listenToPads, loadRecords }
 	, gameActions
 );
 

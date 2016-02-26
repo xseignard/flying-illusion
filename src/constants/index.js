@@ -1,3 +1,4 @@
+import admin from './admin';
 import app from './app';
 import game from './game';
 import choregraphy from './choregraphy';
@@ -8,6 +9,7 @@ import scores from './scores';
 import tuto from './tuto';
 
 export default Object.assign({},
+	admin,
 	app,
 	game,
 	choregraphy,

@@ -1,5 +1,5 @@
 .html {
-	padding-top: 400px;
+	padding-top: 360px;
 }
 
 .logo {
@@ -8,16 +8,14 @@
 	margin: 0 auto;
 }
 
-.loading,
-.waiting {
+.loading {
 	position: relative;
 	max-width: 600px;
 	margin: 0 auto;
 	text-align: center;
 }
 
-.loading:after,
-.waiting:after {
+.loading:after {
 	content: '3';
 	position: absolute;
 	left: 0;
@@ -25,52 +23,7 @@
 	top: 0;
 	height: 100%;
 	font-size: 40px;
-}
-
-.waiting:after {
-	content: '10';
-	animation: countdown10s 10s linear;
-}
-
-.loading:after {
-	content: '3';
 	animation: countdown3s 3300ms linear;
-}
-
-@keyframes countdown10s {
-  0% {
-		content: '10';
-  }
-	10% {
-		content: '9';
-  }
-	20% {
-		content: '8';
-  }
-	30% {
-		content: '7';
-  }
-	40% {
-		content: '6';
-  }
-	50% {
-		content: '5';
-  }
-	60% {
-		content: '4';
-  }
-	70% {
-		content: '3';
-  }
-	80% {
-		content: '2';
-  }
-	90% {
-		content: '1';
-  }
-  100% {
-		content: '0';
-  }
 }
 
 @keyframes countdown3s {
@@ -115,4 +68,16 @@
   to {
 		width: 100%;
   }
+}
+
+
+.arrow_left {
+	composes: arrow_left from "./common.css";
+}
+.arrow_right {
+	composes: arrow_right from "./common.css";
+}
+.arrow_left,
+.arrow_right {
+	margin: 0 60px 7px;
 }

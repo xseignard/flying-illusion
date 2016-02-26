@@ -78,52 +78,52 @@ export default class Resources extends Component {
 					height={128}
 				/>
 				<texture
-					resourceId="texture_move_left_bottom"
-					url="img/move_left_bottom_256.png"
+					resourceId="texture_move_left_right"
+					url="img/move_left_right.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
 				<texture
-					resourceId="texture_move_top_right"
-					url="img/move_top_right_256.png"
+					resourceId="texture_move_top_bottom"
+					url="img/move_top_bottom.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
 				<meshBasicMaterial transparent resourceId="material_move_left">
-					<textureResource resourceId="texture_move_left_bottom" />
+					<textureResource resourceId="texture_move_left_right" />
 				</meshBasicMaterial>
 				<meshBasicMaterial transparent resourceId="material_move_top">
-					<textureResource resourceId="texture_move_top_right" />
+					<textureResource resourceId="texture_move_top_bottom" />
 				</meshBasicMaterial>
 				<meshBasicMaterial transparent resourceId="material_move_bottom">
-					<textureResource resourceId="texture_move_left_bottom" />
+					<textureResource resourceId="texture_move_top_bottom" />
 				</meshBasicMaterial>
 				<meshBasicMaterial transparent resourceId="material_move_right">
-					<textureResource resourceId="texture_move_top_right" />
+					<textureResource resourceId="texture_move_left_right" />
 				</meshBasicMaterial>
 				<planeGeometry
 					ref="geometry_move_left"
 					resourceId="geometry_move_left"
-					width={256}
-					height={256}
+					width={128}
+					height={128}
 				/>
 				<planeGeometry
 					ref="geometry_move_top"
 					resourceId="geometry_move_top"
-					width={256}
-					height={256}
+					width={128}
+					height={128}
 				/>
 				<planeGeometry
 					ref="geometry_move_bottom"
 					resourceId="geometry_move_bottom"
-					width={256}
-					height={256}
+					width={128}
+					height={128}
 				/>
 				<planeGeometry
 					ref="geometry_move_right"
 					resourceId="geometry_move_right"
-					width={256}
-					height={256}
+					width={128}
+					height={128}
 				/>
 			</resources>
 		);
