@@ -3,3 +3,4 @@ electron
 npm-debug.log
 tmp
 dist
+hardware/**/.pioenvs

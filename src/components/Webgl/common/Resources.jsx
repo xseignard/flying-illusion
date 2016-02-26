@@ -22,28 +22,40 @@ export default class Resources extends Component {
 		return (
 			<resources>
 				<texture
-					resourceId="texture_target_left_bottom"
-					url="img/target_left_bottom_128.png"
+					resourceId="texture_target_left"
+					url="img/target_left.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
 				<texture
-					resourceId="texture_target_top_right"
-					url="img/target_left_bottom_128.png"
+					resourceId="texture_target_top"
+					url="img/target_top.png"
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
-			<meshBasicMaterial alphaTest={0.5} resourceId="material_target_left">
-					<textureResource resourceId="texture_target_left_bottom" />
+				<texture
+					resourceId="texture_target_right"
+					url="img/target_right.png"
+					wrapS={THREE.RepeatWrapping}
+					wrapT={THREE.RepeatWrapping}
+				/>
+				<texture
+					resourceId="texture_target_bottom"
+					url="img/target_bottom.png"
+					wrapS={THREE.RepeatWrapping}
+					wrapT={THREE.RepeatWrapping}
+				/>
+				<meshBasicMaterial transparent resourceId="material_target_left">
+					<textureResource resourceId="texture_target_left" />
 				</meshBasicMaterial>
-				<meshBasicMaterial alphaTest={0.5} resourceId="material_target_top">
-					<textureResource resourceId="texture_target_top_right" />
+				<meshBasicMaterial transparent resourceId="material_target_top">
+					<textureResource resourceId="texture_target_top" />
 				</meshBasicMaterial>
-				<meshBasicMaterial alphaTest={0.5} resourceId="material_target_bottom">
-					<textureResource resourceId="texture_target_left_bottom" />
+				<meshBasicMaterial transparent resourceId="material_target_right">
+					<textureResource resourceId="texture_target_right" />
 				</meshBasicMaterial>
-				<meshBasicMaterial alphaTest={0.5} resourceId="material_target_right">
-					<textureResource resourceId="texture_target_top_right" />
+				<meshBasicMaterial transparent resourceId="material_target_bottom">
+					<textureResource resourceId="texture_target_bottom" />
 				</meshBasicMaterial>
 				<planeGeometry
 					ref="geometry_target_left"
@@ -58,14 +70,14 @@ export default class Resources extends Component {
 					height={128}
 				/>
 				<planeGeometry
-					ref="geometry_target_bottom"
-					resourceId="geometry_target_bottom"
+					ref="geometry_target_right"
+					resourceId="geometry_target_right"
 					width={128}
 					height={128}
 				/>
 				<planeGeometry
-					ref="geometry_target_right"
-					resourceId="geometry_target_right"
+					ref="geometry_target_bottom"
+					resourceId="geometry_target_bottom"
 					width={128}
 					height={128}
 				/>
@@ -81,16 +93,16 @@ export default class Resources extends Component {
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
-			<meshBasicMaterial alphaTest={0.5} resourceId="material_move_left">
+				<meshBasicMaterial transparent resourceId="material_move_left">
 					<textureResource resourceId="texture_move_left_bottom" />
 				</meshBasicMaterial>
-				<meshBasicMaterial alphaTest={0.5} resourceId="material_move_top">
+				<meshBasicMaterial transparent resourceId="material_move_top">
 					<textureResource resourceId="texture_move_top_right" />
 				</meshBasicMaterial>
-				<meshBasicMaterial alphaTest={0.5} resourceId="material_move_bottom">
+				<meshBasicMaterial transparent resourceId="material_move_bottom">
 					<textureResource resourceId="texture_move_left_bottom" />
 				</meshBasicMaterial>
-				<meshBasicMaterial alphaTest={0.5} resourceId="material_move_right">
+				<meshBasicMaterial transparent resourceId="material_move_right">
 					<textureResource resourceId="texture_move_top_right" />
 				</meshBasicMaterial>
 				<planeGeometry
