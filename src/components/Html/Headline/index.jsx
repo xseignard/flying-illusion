@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Text from '../Text';
 import css from './css';
 
 export default class Headline extends Component {
@@ -6,19 +7,25 @@ export default class Headline extends Component {
 		super(props);
 	}
 	componentDidMount() {
-		this.refs.headline.classList.remove(css.loaded);
+		this.refs.h1.classList.remove(css.loaded);
 		setTimeout(() => {
-			this.refs.headline.classList.add(css.loaded);
+			this.refs.h1.classList.add(css.loaded);
 		}, 100);
 	}
 	render() {
 		return (
 			<div
-				ref="headline"
-				className={css.headline}
+				ref="h1"
+				className={css.h1}
 			>
-				<h1>{this.props.line1}</h1>
-				<h1>{this.props.line2}</h1>
+				<Text
+					text={this.props.line1}
+					className={css.line1}
+				/>
+				<Text
+					text={this.props.line2}
+					className={css.line2}
+				/>
 			</div>
 		);
 	}

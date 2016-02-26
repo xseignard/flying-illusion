@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saveScore } from '../../../../actions/scores';
+import { saveRecord } from '../../../../actions/records';
 import { getPerformance } from '../../../../selectors/performance';
 import Letter from './Letter';
 import css from './css';
@@ -25,8 +25,10 @@ export class Save extends Component {
 			this.setState({ focusIndex: this.state.focusIndex + 1 });
 		}
 		else {
-			this.props.saveScore({
-				name: this.letters.join(''),
+			this.props.saveRecord({
+				time: this.props.choregraphy.time,
+				name: this.props.choregraphy.name,
+				player: this.letters.join(''),
 				performance: this.props.performance
 			});
 		}
@@ -44,7 +46,7 @@ export class Save extends Component {
 					index={index}
 					focus={this.state.focusIndex === index}
 					letter={letter}
-					height={100}
+					height={150}
 					duration={200}
 					controls={controls[index]}
 					onLetter={this.onLetter}
@@ -63,8 +65,9 @@ export class Save extends Component {
 
 function mapStateToProps(state) {
 	return {
+		choregraphy: state.choregraphy,
 		performance: getPerformance(state),
 	};
 }
 
-export default connect(mapStateToProps, { saveScore })(Save);
+export default connect(mapStateToProps, { saveRecord })(Save);

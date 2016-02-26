@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPerformance } from '../../../../selectors/performance';
+import { Metric } from './Metric';
+import Text from '../../Text';
 import css from './css';
 
 export class Recap extends Component {
@@ -10,10 +12,43 @@ export class Recap extends Component {
 	render() {
 		return (
 			<div className={css.recap}>
-				score: {this.props.performance.score} <br />
-				ok: {this.props.performance.commentsCount.ok} <br />
-				good: {this.props.performance.commentsCount.good} <br />
-				excellent: {this.props.performance.commentsCount.excellent} <br /><br />
+				<div
+					className={css.excellent}
+				>
+					<Metric
+						label="EXCELLENT"
+						value={this.props.performance.commentsCount.excellent}
+					/>
+				</div>
+				<div
+					className={css.good}
+				>
+					<Metric
+						label="BIEN"
+						value={this.props.performance.commentsCount.good}
+					/>
+				</div>
+				<div
+					className={css.ok}
+				>
+					<Metric
+						label="OK"
+						value={this.props.performance.commentsCount.ok}
+					/>
+				</div>
+				<div
+					className={css.combo}
+				>
+					<Metric
+						label="COMBO"
+						value={this.props.performance.commentsCount.combo}
+					/>
+				</div>
+				<div className={css.hint}>
+					<Text text="APPUYEZ SUR"/>
+					<div className={css.arrow}></div>
+					<Text text="POUR ENREGISTRER VOTRE SCORE"/>
+				</div>
 			</div>
 		);
 	}

@@ -14,11 +14,11 @@ const performanceTable = {
 		comboAddition: 4
 	},
 	fail: {
-		score: -1,
+		score: 0,
 		comboAddition: null
 	},
 	missed: {
-		score: -10,
+		score: 0,
 		comboAddition: null
 	},
 };
@@ -35,12 +35,13 @@ const sortEventsChronologically = (events) => {
 	});
 };
 
-const getTargets = (directions) => {
+const getTargets = (stats) => {
 	const targets = {};
-	Object.keys(directions).forEach((direction) => {
+	Object.keys(stats).forEach((direction) => {
+		const stat = stats[direction];
 		targets[direction] = {
-			lastComment: directions[direction].lastComment,
-			commentNumber: directions[direction][direction.lastComment]
+			lastComment: stat.lastComment,
+			commentCount: stat[stat.lastComment]
 		};
 	});
 	return targets;
@@ -49,7 +50,7 @@ const getTargets = (directions) => {
 const getPerformances = (events) => {
 	let combo = 1;
 	let score = 0;
-	const directions = {
+	const stats = {
 		left: { ok: 0, good: 0, excellent: 0, lastComment: '' },
 		top: { ok: 0, good: 0, excellent: 0, lastComment: '' },
 		bottom: { ok: 0, good: 0, excellent: 0, lastComment: '' },
@@ -60,12 +61,12 @@ const getPerformances = (events) => {
 		const comboAddition = performanceTable[event.comment].comboAddition;
 		combo = comboAddition ? combo + comboAddition : 1;
 		score += performanceTable[event.comment].score * combo;
-		directions[event.direction][event.comment]++;
-		directions[event.direction].lastComment = event.comment;
+		stats[event.direction][event.comment]++;
+		stats[event.direction].lastComment = event.comment;
 		commentsCount[event.comment]++;
 	});
 	const lastComment = events.size > 0 ? events.last().comment : '';
-	const targets = getTargets(directions);
+	const targets = getTargets(stats);
 	return {
 		combo,
 		score,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { clearScores } from '../../../../actions/scores';
+import { getSortedRecords } from '../../../../selectors/records';
 import css from './css';
 
 export class Rank extends Component {
@@ -8,23 +8,17 @@ export class Rank extends Component {
 		super(props);
 	}
 	render() {
-		const scoresContent = this.props.scores.map((score, index) => {
+		const recordsContent = this.props.records.map((record, index) => {
 			return (
 				<div key={index}>
-					{score.name} : {score.score}
+					{record.player} : {record.performance.score}
 				</div>
 			);
 		});
 		return (
-			<div>
-				<div
-					className={css.clearScores}
-					onClick={this.props.clearScores}
-				>
-					Clear scores
-				</div>
-				<div className={css.scores}>
-					{scoresContent}
+			<div className={css.rank}>
+				<div className={css.records}>
+					{recordsContent}
 				</div>
 			</div>
 		);
@@ -33,8 +27,8 @@ export class Rank extends Component {
 
 function mapStateToProps(state) {
 	return {
-		scores: state.scores,
+		records: getSortedRecords(state),
 	};
 }
 
-export default connect(mapStateToProps, { clearScores })(Rank);
+export default connect(mapStateToProps)(Rank);

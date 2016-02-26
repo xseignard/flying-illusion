@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
 import css from './css';
 
 export class Audio extends Component {
 	constructor(props) {
 		super(props);
-		this.toggleSound = this.toggleSound.bind(this);
 		this.getAudioSrc = this.getAudioSrc.bind(this);
-		this.state = { muted: true };
 	}
 	componentDidMount() {
 		this.refs.audio.addEventListener('play', () => {
 			const delay = Date.now() - this.props.choregraphy.get('time');
 			this.refs.audio.currentTime = delay / 1000;
-			this.refs.audio.muted = this.state.muted;
+			this.refs.audio.muted = this.props.admin.get('muted');
 		});
 	}
 	getAudioSrc() {
@@ -26,28 +23,17 @@ export class Audio extends Component {
 		}
 		return `choregraphies/${this.props.choregraphyName}.mp3`;
 	}
-	toggleSound() {
-		this.setState({ muted: !this.state.muted });
-	}
 	render() {
 		const audioSrc = this.getAudioSrc();
-		const soundClass = classnames({
-			[css.sound]: true,
-			[css.muted]: this.state.muted
-		});
-		const soundText = this.state.muted ? 'Sound off' : 'Sound on';
 		return (
-			<div>
+			<div className={css.audio}>
 				<audio
 					ref="audio"
 					src={audioSrc}
 					autoPlay
-					muted={this.state.muted}
+					muted={this.props.admin.get('muted')}
 				>
 				</audio>
-				<div className={soundClass} onClick={this.toggleSound}>
-					{soundText}
-				</div>
 			</div>
 		);
 	}
@@ -55,6 +41,7 @@ export class Audio extends Component {
 
 function mapStateToProps(state) {
 	return {
+		admin: state.admin,
 		game: state.game,
 		choregraphy: state.choregraphy,
 		choregraphyName: state.choregraphy.get('name')

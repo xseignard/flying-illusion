@@ -5,16 +5,18 @@ const getDefaultState = () => {
 	return List([]);
 };
 
-export function scores(state = getDefaultState(), action) {
+export function records(state = getDefaultState(), action) {
 	switch (action.type) {
-		case C.SCORE:
+		case C.RECORD:
 			return state.push({
+				time: action.time,
 				name: action.name,
-				score: action.score
+				player: action.player,
+				performance: action.performance
 			});
-		case C.SCORES_LOADED:
-			return List(action.scores);
-		case C.SCORES_RESET:
+		case C.RECORDS_LOADED:
+			return List(action.records);
+		case C.RECORDS_RESET:
 			return getDefaultState();
 		default:
 			return state;
