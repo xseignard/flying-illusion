@@ -14,7 +14,9 @@ export default class Scene extends Component {
 	render() {
 		const playContent = !U.showWebgl(this.props.game) ? null : (
 			<group>
-				<Targets />
+				<Targets
+					sceneTargets={this.props.sceneTargets}
+				/>
 				<Moves
 					sceneMoves={this.props.sceneMoves}
 					moves={this.props.moves}
