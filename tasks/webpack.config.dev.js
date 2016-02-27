@@ -5,10 +5,16 @@ module.exports = {
 	eslint: {
 		configFile: '.eslintrc'
 	},
-	entry: [
-		'webpack-hot-middleware/client',
-		path.join(__dirname, '..', 'src', 'main.jsx')
-	],
+	entry: {
+		master: [
+			'webpack-hot-middleware/client',
+			path.join(__dirname, '..', 'src', 'main-master.jsx')
+		],
+		slave: [
+			'webpack-hot-middleware/client',
+			path.join(__dirname, '..', 'src', 'main-slave.js')
+		]
+	},
 	output: {
 		path: path.join(__dirname, '..', 'www'),
 		filename: '[name].js'
@@ -35,10 +41,6 @@ module.exports = {
 			}
 		],
 		loaders: [
-			{
-				test: /\.worker\.js$/,
-				loader: 'worker?name=[name].[ext]'
-			},
 			{
 				test: /\.js|\.jsx$/,
 				loader: 'babel',

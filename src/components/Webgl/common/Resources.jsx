@@ -8,12 +8,8 @@ export default class Resources extends Component {
 	componentDidMount() {
 		this.refs.geometry_move_left.rotateZ(Math.PI / -2);
 		this.refs.geometry_move_top.rotateZ(Math.PI);
-		this.refs.geometry_move_bottom.rotateZ();
+		this.refs.geometry_move_bottom.rotateZ(0);
 		this.refs.geometry_move_right.rotateZ(Math.PI / 2);
-		// this.refs.geometry_target_left.rotateZ(Math.PI / 2);
-		// this.refs.geometry_target_top.rotateZ(0);
-		// this.refs.geometry_target_bottom.rotateZ(Math.PI);
-		// this.refs.geometry_target_right.rotateZ(Math.PI / -2);
 	}
 	shouldComponentUpdate() {
 		return false;

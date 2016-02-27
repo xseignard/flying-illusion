@@ -6,9 +6,14 @@ module.exports = {
 	eslint: {
 		configFile: '.eslintrc'
 	},
-	entry: [
-		path.join(__dirname, '..', 'src', 'main')
-	],
+	entry: {
+		master: [
+			path.join(__dirname, '..', 'src', 'main-master')
+		],
+		slave: [
+			path.join(__dirname, '..', 'src', 'main-slave')
+		]
+	},
 	output: {
 		path: path.join(__dirname, '..', 'www'),
 		filename: '[name].js',
@@ -40,10 +45,6 @@ module.exports = {
 			}
 		],
 		loaders: [
-			{
-				test: /\.worker\.js$/,
-				loader: 'worker?name=[name].[ext]'
-			},
 			{
 				test: /\.js|\.jsx$/,
 				loader: 'babel',

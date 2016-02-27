@@ -9,9 +9,12 @@ export default class Headline extends Component {
 	}
 	componentDidMount() {
 		this.refs.h1.classList.remove(css.loaded);
-		setTimeout(() => {
+		this.timeout = setTimeout(() => {
 			this.refs.h1.classList.add(css.loaded);
 		}, 100);
+	}
+	componentWillUnmount() {
+		clearTimeout(this.timeout);
 	}
 	render() {
 		const thisClass = classnames({
