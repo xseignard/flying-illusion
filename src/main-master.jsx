@@ -23,3 +23,4 @@ renderApp();
 
 dev.moduleHotAccept();
 dev.scaleBody();
+dev.installImmutablejsDevtools();
