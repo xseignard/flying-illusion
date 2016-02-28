@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPerformance } from '../../../selectors/performance';
+import { getSortedRecords } from '../../../selectors/records';
 import Text from '../Text';
 import Recap from './Recap';
 import Save from './Save';
@@ -46,15 +47,21 @@ export class Final extends Component {
 				<Save />
 			</div>
 		);
+		const index = this.props.records.findIndex(record => {
+			return record.time === this.props.recordId;
+		});
+		const rank = index + 1;
 		const ranksContent = this.props.game.get('status') !== 'rank' ? null : (
 			<div>
 				<Text className={css.h1}>
 					CLASSEMENT
 				</Text>
-				<div className={css.score}>
-					{this.props.performance.score} POINTS
+				<div className={css.rank}>
+					<span>{rank}</span>
+					<sup className={css.suffix}>{rank === 1 ? 'ER' : 'ÈME'}</sup>
+					<span> sur {this.props.records.size}</span>
 				</div>
-				<Rank />
+				<Rank rank={index} />
 			</div>
 		);
 		return (
@@ -74,6 +81,8 @@ function mapStateToProps(state) {
 	return {
 		game: state.game,
 		performance: getPerformance(state),
+		records: getSortedRecords(state),
+		recordId: state.choregraphy.get('time')
 	};
 }
 

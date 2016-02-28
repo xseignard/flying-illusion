@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPerformance } from '../../../../selectors/performance';
+import { getMaximumComments } from '../../../../selectors/moves';
 import { Metric } from './Metric';
 import Text from '../../Text';
 import css from './css';
@@ -18,6 +19,7 @@ export class Recap extends Component {
 					<Metric
 						label="EXCELLENT"
 						value={this.props.performance.comments.excellent}
+						maxValue={this.props.maxComments}
 					/>
 				</div>
 				<div
@@ -26,6 +28,7 @@ export class Recap extends Component {
 					<Metric
 						label="BIEN"
 						value={this.props.performance.comments.good}
+						maxValue={this.props.maxComments}
 					/>
 				</div>
 				<div
@@ -34,6 +37,7 @@ export class Recap extends Component {
 					<Metric
 						label="OK"
 						value={this.props.performance.comments.ok}
+						maxValue={this.props.maxComments}
 					/>
 				</div>
 				<div
@@ -42,6 +46,7 @@ export class Recap extends Component {
 					<Metric
 						label="COMBO"
 						value={this.props.performance.comments.combo}
+						maxValue={this.props.maxComments}
 					/>
 				</div>
 				<div className={css.hint}>
@@ -57,6 +62,7 @@ export class Recap extends Component {
 function mapStateToProps(state) {
 	return {
 		performance: getPerformance(state),
+		maxComments: getMaximumComments(state)
 	};
 }
 

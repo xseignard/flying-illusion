@@ -42,7 +42,7 @@ module.exports = {
 			},
 			{
 				test: /\.js|\.jsx$/,
-				loader: 'babel',
+				loader: 'imports?define=>false!babel',
 				exclude: /node_modules/
 			},
 			{
@@ -51,7 +51,13 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				loader: 'style-loader!css-loader?modules'
+				loader: 'style-loader!css-loader?modules&localIdentName=[local]--[hash:base64:5]',
+				exclude: /node_modules/
+			},
+			{
+				test: /\.css$/,
+				loader: 'style-loader!css-loader?modules&localIdentName=[local]',
+				include: /node_modules/
 			},
 			{
 				test: /\.png|\.jpg|\.svg$/,
