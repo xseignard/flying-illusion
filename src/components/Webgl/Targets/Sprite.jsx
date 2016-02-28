@@ -11,7 +11,6 @@ export class Sprite extends Component {
 		this.sprite = `img/target_sprites_${color}.png`;
 	}
 	componentDidMount() {
-		console.log(this.props);
 		this.props.sceneTargets[this.props.direction] = {
 			ref: this.refs.sprite_texture,
 			material: this.refs.material,

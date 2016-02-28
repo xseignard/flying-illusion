@@ -1,4 +1,7 @@
 {
-	"name": "flying-illusion",
-	"main": "app.electron.js"
+  "name": "flying-illusion",
+  "main": "app.electron.js",
+  "dependencies": {
+    "serialport": "^2.0.6"
+  }
 }

@@ -34,5 +34,11 @@ export function listenToPads() {
 		dev.listenToDirectionKeys((eventType, direction) => {
 			dispatch(onPadChange(eventType, direction));
 		});
+		// listen to messages coming from electron main process
+		if (window.electron) {
+			window.electron.ipcRenderer.on('pad', (event, data) => {
+				dispatch(onPadChange(data.eventType, data.direction));
+			});
+		}
 	};
 }
