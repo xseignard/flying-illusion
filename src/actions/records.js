@@ -1,6 +1,6 @@
 import C from '../constants';
 import { launchRank } from './game';
-
+import { resetChoregraphy } from './choregraphy';
 export function saveRecord(data) {
 	return (dispatch, getState) => {
 		dispatch({
@@ -13,6 +13,7 @@ export function saveRecord(data) {
 		});
 		const serializedRecords = JSON.stringify(getState().records.toArray());
 		localStorage.setItem('records', serializedRecords);
+		dispatch(resetChoregraphy());
 		dispatch(launchRank());
 	};
 }

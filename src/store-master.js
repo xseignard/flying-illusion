@@ -1,15 +1,12 @@
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import { sendToSlave } from './utils/utils-master';
+import { dispatchToSlave } from './utils/utils-master';
 import dev from './dev';
 
 export const configureStore = () => {
 	const slaveMiddleware = store => next => action => {
-		store.dispatch(sendToSlave({
-			function: 'dispatch',
-			action
-		}));
+		dispatchToSlave(action);
 		return next(action);
 	};
 	const middlewares = [thunk, slaveMiddleware];

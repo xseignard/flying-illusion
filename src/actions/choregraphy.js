@@ -1,5 +1,5 @@
 import C from '../constants';
-import { setMovesTimeouts } from './moves';
+import { sendToSlave } from '../utils/utils-master';
 import { getTutoChoregraphy, getRandomChoregraphy } from '../choregraphies';
 
 const setTutoChoregraphy = () => {
@@ -24,6 +24,19 @@ const setRandomChoregraphy = () => {
 	};
 };
 
+export const getChoregraphyEndTime = (moves) => {
+	return moves.last().time + C.MOVES_END_DELAY;
+};
+
+export const setMovesTimeouts = (forward = 0) => {
+	return (dispatch, getState) => {
+		sendToSlave({
+			function: 'setMovesTimeouts',
+			forward
+		});
+	};
+};
+
 export const startTutoChoregraphy = () => {
 	return (dispatch, getState) => {
 		dispatch(setTutoChoregraphy());
@@ -40,6 +53,7 @@ export const startChoregraphy = () => {
 
 export const resetChoregraphy = () => {
 	return (dispatch, getState) => {
+		sendToSlave({ function: 'stopMoves' });
 		dispatch({
 			type: C.CHOREGRAPHY_RESET
 		});

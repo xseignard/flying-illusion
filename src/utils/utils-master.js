@@ -3,14 +3,22 @@ const slave = new Worker('slave.js');
 export const listenToSlave = () => {
 	return (dispatch, getState) => {
 		const onSlaveMessage = (event) => {
-			requestAnimationFrame(dispatch.bind(null, JSON.parse(event.data).action));
+			const data = JSON.parse(event.data);
+			requestAnimationFrame(() => {
+				if (data.function === 'dispatch') {
+					dispatch(data.action);
+				}
+			});
 		};
 		slave.addEventListener('message', onSlaveMessage);
 	};
 };
 
 export const sendToSlave = (message) => {
-	return (dispatch, getState) => {
-		slave.postMessage(JSON.stringify(message));
-	};
+	slave.postMessage(JSON.stringify(message));
+};
+
+export const dispatchToSlave = (actionArg) => {
+	const message = { function: 'dispatch', action: actionArg };
+	sendToSlave(message);
 };
