@@ -1,7 +1,7 @@
 /* Runs in slave thread */
 
 import C from '../constants';
-import { dispatchToMaster } from '../utils/utils-slave';
+import { dispatchToMaster } from '../utils/slave';
 
 export const setMovesTimeouts = (forward = 0) => {
 	return (dispatch, getState) => {

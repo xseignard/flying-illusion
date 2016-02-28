@@ -9,11 +9,11 @@ module.exports = {
 	entry: {
 		master: [
 			'webpack-hot-middleware/client',
-			path.join(__dirname, '..', 'src', 'main-master.jsx')
+			path.join(__dirname, '..', 'src', 'master.jsx')
 		],
 		slave: [
 			'webpack-hot-middleware/client',
-			path.join(__dirname, '..', 'src', 'main-slave.js')
+			path.join(__dirname, '..', 'src', 'slave.js')
 		]
 	},
 	output: {

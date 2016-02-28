@@ -8,10 +8,10 @@ module.exports = {
 	},
 	entry: {
 		master: [
-			path.join(__dirname, '..', 'src', 'main-master')
+			path.join(__dirname, '..', 'src', 'master')
 		],
 		slave: [
-			path.join(__dirname, '..', 'src', 'main-slave')
+			path.join(__dirname, '..', 'src', 'slave')
 		]
 	},
 	output: {

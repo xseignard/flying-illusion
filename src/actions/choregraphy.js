@@ -1,5 +1,5 @@
 import C from '../constants';
-import { sendToSlave } from '../utils/utils-master';
+import { sendToSlave } from '../utils/master';
 import { getTutoChoregraphy, getRandomChoregraphy } from '../choregraphies';
 
 const setTutoChoregraphy = () => {
