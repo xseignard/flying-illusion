@@ -8,6 +8,7 @@ Visible [ici pour l'instant](http://xseignard.github.io/flying-illusion/)
 ```
 npm i
 ```
+In the chrome dev tools settings, go to the Console section and tick "Enable custom formatters".
 
 ### Development
 ```

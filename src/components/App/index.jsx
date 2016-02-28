@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import U from '../../utils';
 import { listenToClicks } from '../../actions/admin';
-import { listenToMovesWorker } from '../../actions/moves';
 import { listenToPads } from '../../actions/pads';
 import { loadRecords } from '../../actions/records';
 import * as gameActions from '../../actions/game';
@@ -19,7 +18,6 @@ export class App extends Component {
 	}
 	componentDidMount() {
 		this.props.listenToClicks();
-		this.props.listenToMovesWorker();
 		this.props.listenToPads();
 		this.props.loadRecords();
 		// FIXME: FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
@@ -59,7 +57,7 @@ export class App extends Component {
 }
 
 const mapDispatchToProps = Object.assign(
-	{ listenToClicks, listenToMovesWorker, listenToPads, loadRecords }
+	{ listenToClicks, listenToPads, loadRecords }
 	, gameActions
 );
 

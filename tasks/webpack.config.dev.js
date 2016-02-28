@@ -2,14 +2,20 @@ import path from 'path';
 import webpack from 'webpack';
 
 module.exports = {
-	devtool: 'cheap-module-eval-source-map',
+	devtool: 'cheap-source-map',
 	eslint: {
 		configFile: '.eslintrc'
 	},
-	entry: [
-		'webpack-hot-middleware/client',
-		path.join(__dirname, '..', 'src', 'main.jsx')
-	],
+	entry: {
+		master: [
+			'webpack-hot-middleware/client',
+			path.join(__dirname, '..', 'src', 'master.jsx')
+		],
+		slave: [
+			'webpack-hot-middleware/client',
+			path.join(__dirname, '..', 'src', 'slave.js')
+		]
+	},
 	output: {
 		path: path.join(__dirname, '..', 'www'),
 		filename: '[name].js'
@@ -36,10 +42,6 @@ module.exports = {
 			}
 		],
 		loaders: [
-			{
-				test: /\.worker\.js$/,
-				loader: 'worker?name=[name].[ext]'
-			},
 			{
 				test: /\.js|\.jsx$/,
 				loader: 'imports?define=>false!babel',

@@ -1,38 +1,64 @@
+/* Runs in slave thread */
+
 import C from '../constants';
-import MovesWorker from '../workers/moves.worker';
-
-const movesWorker = new MovesWorker();
-
-export const listenToMovesWorker = () => {
-	return (dispatch, getState) => {
-		const onWorkerMessage = (event) => {
-			requestAnimationFrame(dispatch.bind(null, JSON.parse(event.data.action)));
-		};
-		movesWorker.addEventListener('message', onWorkerMessage);
-	};
-};
-
-export const getMovesEndTime = (moves) => {
-	return moves.last().time + C.MOVES_END_DELAY;
-};
+import { dispatchToMaster } from '../utils/slave';
 
 export const setMovesTimeouts = (forward = 0) => {
 	return (dispatch, getState) => {
-		const movesArray = getState().dance.get('moves').toArray();
-		movesWorker.postMessage({
-			function: 'setMovesTimeouts',
-			moves: movesArray,
-			forward
+		const moves = getState().dance.get('moves').toArray();
+		const movesTimeouts = moves.map((move, index) => {
+			const timeoutShow = setTimeout(() => {
+				dispatchToMaster({
+					type: C.MOVE_SHOW,
+					index
+				});
+			}, move.showTime - forward);
+			const timeoutCommentable = setTimeout(() => {
+				dispatchToMaster({
+					type: C.MOVE_COMMENTABLE,
+					index
+				});
+			}, move.time - C.MOVE_TOLERANCE_OK - forward);
+			const timeoutHide = setTimeout(() => {
+				dispatchToMaster({
+					type: C.MOVE_HIDE,
+					index
+				});
+			}, move.time - forward);
+			const timeoutUncommentable = setTimeout(() => {
+				dispatchToMaster({
+					type: C.MOVE_UNCOMMENTABLE,
+					index
+				});
+			}, move.time + C.MOVE_TOLERANCE_OK - forward);
+			return {
+				timeoutShow,
+				timeoutCommentable,
+				timeoutHide,
+				timeoutUncommentable
+			};
+		});
+		dispatchToMaster({
+			type: C.MOVES_TIMEOUTS,
+			timeouts: movesTimeouts
 		});
 	};
 };
 
+const movesTimeouts = [
+	'timeoutShow',
+	'timeoutCommentable',
+	'timeoutHide',
+	'timeoutUncommentable'
+];
+
 export const stopMoves = () => {
 	return (dispatch, getState) => {
 		const moves = getState().dance.get('moves').toArray();
-		movesWorker.postMessage({
-			function: 'stopMoves',
-			moves
+		moves.forEach((move) => {
+			movesTimeouts.forEach((timeout) => {
+				clearTimeout(move[timeout]);
+			});
 		});
 	};
 };
