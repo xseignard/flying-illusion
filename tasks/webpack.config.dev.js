@@ -43,8 +43,13 @@ module.exports = {
 		],
 		loaders: [
 			{
+				test: /\.js$/,
+				loader: 'imports?define=>false',
+				include: /odometer\.js/
+			},
+			{
 				test: /\.js|\.jsx$/,
-				loader: 'imports?define=>false!babel',
+				loader: 'babel',
 				exclude: /node_modules/
 			},
 			{
