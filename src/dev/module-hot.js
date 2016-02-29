@@ -8,8 +8,8 @@ export const moduleHotAccept = (middlewares) => {
 export const replaceReducerOnHotReload = (store) => {
 	if (process.env.NODE_ENV === 'development') {
 		if (module.hot) {
-			module.hot.accept('../reducers', () => {
-				const nextRootReducer = require('../reducers/index');
+			module.hot.accept('../stores/reducers', () => {
+				const nextRootReducer = require('../stores/reducers/index');
 				store.replaceReducer(nextRootReducer);
 			});
 		}

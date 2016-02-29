@@ -1,5 +1,5 @@
 import C from '../constants';
-import { sendToSlave } from '../utils/master';
+import { sendToSlave } from '../master';
 import { getTutoChoregraphy, getRandomChoregraphy } from '../choregraphies';
 
 const setTutoChoregraphy = () => {
@@ -7,6 +7,7 @@ const setTutoChoregraphy = () => {
 		const tutoChoregraphy = getTutoChoregraphy();
 		dispatch({
 			type: C.CHOREGRAPHY,
+			time: Date.now() - C.TUTO_FORWARD_TIME,
 			name: tutoChoregraphy.name,
 			moves: tutoChoregraphy.moves
 		});
@@ -18,6 +19,7 @@ const setRandomChoregraphy = () => {
 		const randomChoregraphy = getRandomChoregraphy();
 		dispatch({
 			type: C.CHOREGRAPHY,
+			time: Date.now(),
 			name: randomChoregraphy.name,
 			moves: randomChoregraphy.moves
 		});

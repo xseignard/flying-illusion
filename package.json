@@ -65,7 +65,7 @@
     "react-redux": "^4.0.6",
     "react-three-renderer": "0.0.19-alpha",
     "redux": "^3.2.0",
-    "redux-logger": "^2.4.0",
+    "redux-logger": "^2.6.0",
     "redux-thunk": "^1.0.3",
     "reselect": "^2.0.3",
     "rimraf": "^2.5.1",

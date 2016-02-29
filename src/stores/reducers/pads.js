@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-import C from '../constants';
+import C from '../../constants';
 
 const defaultState = Map([
 	['left', null],

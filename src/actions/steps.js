@@ -1,13 +1,15 @@
 import C from '../constants';
+import { dispatchToSlave } from '../master';
 
 export function dispatchStep(direction) {
 	return (dispatch, getState) => {
 		const state = getState();
 		const time = Date.now() - state.choregraphy.get('time');
-		dispatch({
+		dispatchToSlave({
 			type: C.STEP,
 			direction,
-			time
+			time,
+			log: true
 		});
 	};
 }

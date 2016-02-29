@@ -3,9 +3,9 @@ export const showWebgl = (game) => {
 	return game.get('status').match(showWebglRegexp);
 };
 
-const showPerformanceRegexp = /tuto|play/;
-export const showPerformance = (game) => {
-	return game.get('status').match(showPerformanceRegexp);
+const isGameRegexp = /tuto|play/;
+export const isGame = (game) => {
+	return game.get('status').match(isGameRegexp);
 };
 
 const showFinalRegexp = /recap|save|rank/;

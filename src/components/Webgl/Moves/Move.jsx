@@ -9,17 +9,13 @@ export class Move extends Component {
 		this.material = `material_move_${this.props.move.direction}`;
 	}
 	componentDidMount() {
-		this.props.sceneMoves.set(this.props.move.id,
-			Object.assign({}, this.props.move, {
-				ref: this.refs.move
-			})
-		);
+		this.props.sceneMoves[this.props.move.id] = this.refs.move;
 	}
 	shouldComponentUpdate(nextProps) {
 		return false;
 	}
 	componentWillUnmount() {
-		this.props.sceneMoves.delete(this.props.move.id);
+		this.props.sceneMoves[this.props.key] = undefined;
 	}
 	render() {
 		return (

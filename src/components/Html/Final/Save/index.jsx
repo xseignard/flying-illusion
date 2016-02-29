@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { saveRecord } from '../../../../actions/records';
-import { getPerformance } from '../../../../selectors/performance';
 import Letter from './Letter';
 import css from './css';
 
@@ -67,7 +66,7 @@ export class Save extends Component {
 function mapStateToProps(state) {
 	return {
 		choregraphy: state.choregraphy,
-		performance: getPerformance(state),
+		performance: state.performance,
 	};
 }
 

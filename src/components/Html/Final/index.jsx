@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPerformance } from '../../../selectors/performance';
 import Text from '../Text';
 import Recap from './Recap';
 import Save from './Save';
@@ -73,7 +72,7 @@ export class Final extends Component {
 function mapStateToProps(state) {
 	return {
 		game: state.game,
-		performance: getPerformance(state),
+		performance: state.performance,
 	};
 }
 

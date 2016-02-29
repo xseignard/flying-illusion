@@ -44,7 +44,7 @@ export class Html extends Component {
 				<div className={css.loadingBar}></div>
 			</div>
 		);
-		const performanceContent = !U.showPerformance(this.props.game) ? null : <Performance />;
+		const performanceContent = !U.isGame(this.props.game) ? null : <Performance />;
 		const finalContent = !U.showFinal(this.props.game) ? null : <Final />;
 		return (
 			<div className={css.html}>

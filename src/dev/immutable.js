@@ -1,3 +1,5 @@
-import { install } from 'immutablejs-devtools';
-
-export const installImmutablejsDevtools = install;
+export const installImmutablejsDevtools = () => {
+	if (process.env.NODE_ENV === 'development') {
+		require('immutablejs-devtools').install();
+	}
+};

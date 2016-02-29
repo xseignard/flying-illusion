@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPerformance } from '../../../../selectors/performance';
 import { Metric } from './Metric';
 import Text from '../../Text';
 import css from './css';
@@ -56,7 +55,7 @@ export class Recap extends Component {
 
 function mapStateToProps(state) {
 	return {
-		performance: getPerformance(state),
+		performance: state.performance,
 	};
 }
 

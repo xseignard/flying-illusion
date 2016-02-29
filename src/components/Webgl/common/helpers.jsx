@@ -2,7 +2,7 @@ import C from '../../../constants';
 import THREE from 'three';
 
 const TARGET_DISTANCE_FROM_TOP = 100;
-const MOVE_DISTANCE_FROM_BOTTOM = 0;
+const MOVE_DISTANCE_FROM_BOTTOM = -64;
 const DISTANCE_FROM_MOVE_TO_TARGET = C.APP_HEIGHT
 	- TARGET_DISTANCE_FROM_TOP
 	- MOVE_DISTANCE_FROM_BOTTOM;
@@ -28,8 +28,8 @@ export const getPosition = (type, direction, moveShowTime, gameTime) => {
 	);
 };
 
-export const getTranslation = (y, moveShowTime, gameTime) => {
-	return originalYPosition.move - y
+export const getPositionY = (moveShowTime, gameTime) => {
+	return originalYPosition.move
 		+ (gameTime - moveShowTime) / C.MOVE_DURATION * DISTANCE_FROM_MOVE_TO_TARGET;
 };
 
