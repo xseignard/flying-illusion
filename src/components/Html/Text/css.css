@@ -13,14 +13,14 @@
 .shade > div:last-child {
 	display: inline-block;
 	-webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0, #FFFFFF),
-    color-stop(1, #a5a8b1)
-  );
-  background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #a5a8b1 100%);
-  background-image: linear-gradient(to bottom, #FFFFFF 0%, #a5a8b1 100%);
+	-webkit-text-fill-color: transparent;
+	background-image: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(0, #FFFFFF),
+		color-stop(1, #a5a8b1)
+	);
+	background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #a5a8b1 100%);
+	background-image: linear-gradient(to bottom, #FFFFFF 0%, #a5a8b1 100%);
 }

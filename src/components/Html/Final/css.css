@@ -19,11 +19,17 @@
 	font-style: italic;
 	margin: 0;
 }
-.score {
+.score, .rank {
 	position: absolute;
 	top: 212px;
 	left: 220px;
 	font-size: 24px;
 	font-style: italic;
-	color: rgba(255,255,255,0.2)
+	color: rgba(255,255,255,0.2);
+	letter-spacing: 0.05em;
+}
+
+.suffix {
+	font-size: 15px;
+	padding-left: 3px;
 }

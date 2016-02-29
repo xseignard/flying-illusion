@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Odometer from 'odometer';
+import 'odometer/themes/odometer-theme-minimal';
 import Text from '../../../Text';
 import css from './css';
 
@@ -7,8 +9,22 @@ export class Metric extends Component {
 		super(props);
 	}
 	componentDidMount() {
+		this.refs.bar.animate([
+			{ transform: 'scaleX(0)' },
+			{ transform: 'scaleX(1)' }
+		], {
+			duration: 2000,
+			easing: 'cubic-bezier(0,0,0.32,1)'
+		});
+		const odometer = new Odometer({
+			el: this.refs.valueHolder,
+			value: 0
+		});
+		odometer.update(this.props.value);
 	}
 	render() {
+		const width = this.props.value / this.props.maxValue * 100;
+		const inlineStyle = { width: `${width}%` };
 		return (
 			<div className={css.metric}>
 				<div>
@@ -17,11 +33,12 @@ export class Metric extends Component {
 					</Text>
 				</div>
 				<div
-					ref="scale"
 					className={css.scale}
-				></div>
-				<div className={css.value}>
-					{this.props.value}
+				>
+					<div ref="bar" className={css.bar} style={inlineStyle} />
+				</div>
+				<div ref="valueHolder" className={css.value}>
+					0
 				</div>
 			</div>
 		);

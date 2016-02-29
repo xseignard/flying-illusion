@@ -56,7 +56,19 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules')
+				loader: ExtractTextPlugin.extract(
+					'style-loader',
+					'css-loader?modules&localIdentName=[local]--[hash:base64:5]'
+				),
+				exclude: /node_modules/
+			},
+			{
+				test: /\.css$/,
+				loader: ExtractTextPlugin.extract(
+					'style-loader',
+					'css-loader?modules&localIdentName=[local]'
+				),
+				include: /node_modules/
 			},
 			{
 				test: /\.png|\.jpg|\.svg$/,

@@ -6,7 +6,7 @@ export const getSortedRecords = createSelector(
 	[getRecords],
 	(records) => {
 		return records.sort((record1, record2) => {
-			return record1.score < record2.score;
+			return record1.score < record2.score ? 1 : -1;
 		});
 	}
 );

@@ -8,7 +8,7 @@
 .value {
 	float: left;
 	padding-left: 15px;
-	line-height: 20px;
+	margin-top: -7px;
 }
 .scale {
 	float: left;
@@ -17,21 +17,11 @@
 	transform: skewX(-20deg);
 	background: rgba(255,255,255,0.2);
 }
-.scale:before {
+.bar {
 	content: '';
 	position: absolute;
 	left: 0;
-	width: 0%;
 	height: 100%;
 	background: white;
-	animation: loading 3s cubic-bezier(0,0,0.32,1);
-}
-
-@keyframes loading {
-  from {
-		width: 0%;
-  }
-  to {
-		width: 100%;
-  }
+	transform-origin: 0 0;
 }

@@ -164,6 +164,7 @@ launchEnd = () => {
 		clearTimeout(getState().game.get('timeout'));
 		const endTimeout = setTimeout(() => {
 			dispatch(launchIdle());
+			dispatch(resetChoregraphy());
 		}, C.GAME_END_DURATION);
 		dispatch({
 			type: C.GAME_END,
