@@ -47,21 +47,20 @@ export class Final extends Component {
 				<Save />
 			</div>
 		);
-		const index = this.props.records.findIndex(record => {
-			return record.time === this.props.recordId;
+		const recordIndex = this.props.records.findIndex(record => {
+			return record.time === this.props.choregraphyTime;
 		});
-		const rank = index + 1;
 		const ranksContent = this.props.game.get('status') !== 'rank' ? null : (
 			<div>
 				<Text className={css.h1}>
 					CLASSEMENT
 				</Text>
 				<div className={css.rank}>
-					<span>{rank}</span>
-					<sup className={css.suffix}>{rank === 1 ? 'ER' : 'ÈME'}</sup>
+					<span>{recordIndex + 1}</span>
+					<sup className={css.suffix}>{recordIndex === 0 ? 'ER' : 'ÈME'}</sup>
 					<span> sur {this.props.records.size}</span>
 				</div>
-				<Rank rank={index} />
+				<Rank rank={recordIndex} />
 			</div>
 		);
 		return (
@@ -82,7 +81,7 @@ function mapStateToProps(state) {
 		game: state.game,
 		performance: getPerformance(state),
 		records: getSortedRecords(state),
-		recordId: state.choregraphy.get('time')
+		choregraphyTime: state.choregraphy.get('time')
 	};
 }
 

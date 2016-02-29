@@ -12,4 +12,10 @@
 	left: 1200px;
 }
 
+.ranksScore {
+	color: red;
+}
 
+.podiumScore {
+	color: yellow;
+}
