@@ -40,7 +40,7 @@ export const initWorld = () => {
 		S.perf = getPerformance(state);
 		S.moves = state.dance.get('moves');
 		world.moves = {};
-		world.showTimes = {};
+		S.showTimes = {};
 		S.moves.forEach(move => {
 			world.moves[move.id] = {};
 			S.showTimes[move.id] = move.showTime;

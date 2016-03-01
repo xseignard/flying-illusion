@@ -9,13 +9,13 @@ export class Move extends Component {
 		this.material = `material_move_${this.props.move.direction}`;
 	}
 	componentDidMount() {
-		this.props.sceneMoves[this.props.move.id] = this.refs.move;
+		this.props.movesRefs[this.props.move.id] = { mesh: this.refs.move };
 	}
 	shouldComponentUpdate(nextProps) {
 		return false;
 	}
 	componentWillUnmount() {
-		this.props.sceneMoves[this.props.key] = undefined;
+		this.props.movesRefs[this.props.move.id] = undefined;
 	}
 	render() {
 		return (

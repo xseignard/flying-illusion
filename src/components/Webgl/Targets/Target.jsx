@@ -21,10 +21,7 @@ export class Target extends Component {
 				</mesh>
 				<Sprite
 					direction={this.props.target.direction}
-					ref="sprite"
-					hTiles={8}
-					vTiles={9}
-					sceneTargets={this.props.sceneTargets}
+					targetsRefs={this.props.targetsRefs}
 				/>
 			</group>
 		);

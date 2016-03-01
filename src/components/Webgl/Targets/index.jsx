@@ -22,7 +22,7 @@ export default class Targets extends Component {
 						<Target
 							key={index}
 							target={target}
-							sceneTargets={this.props.sceneTargets}
+							targetsRefs={this.props.targetsRefs}
 						/>
 					);
 				})}

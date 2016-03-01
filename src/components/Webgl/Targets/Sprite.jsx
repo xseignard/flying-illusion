@@ -6,19 +6,14 @@ export class Sprite extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.position = getPosition('target', this.props.direction);
-		this.repeat = new THREE.Vector2(1 / this.props.hTiles, 1 / this.props.vTiles);
+		this.repeat = new THREE.Vector2(1 / 8, 1 / 9);
 		const color = this.props.direction.match(/left|right/) ? 'blue' : 'red';
 		this.sprite = `img/target_sprites_${color}.png`;
 	}
 	componentDidMount() {
-		this.props.sceneTargets[this.props.direction] = {
-			ref: this.refs.sprite_texture,
+		this.props.targetsRefs[this.props.direction] = {
+			texture: this.refs.texture,
 			material: this.refs.material,
-			hTiles: this.props.hTiles,
-			vTiles: this.props.vTiles,
-			maxTiles: this.props.hTiles * this.props.vTiles,
-			tileIndex: 0,
-			shouldAnimate: false
 		};
 	}
 	shouldComponentUpdate(nextProps) {
@@ -29,7 +24,7 @@ export class Sprite extends Component {
 			<group>
 				<resources>
 					<texture
-						ref="sprite_texture"
+						ref="texture"
 						resourceId="sprite_texture"
 						url={this.sprite}
 						wrapS={THREE.RepeatWrapping}

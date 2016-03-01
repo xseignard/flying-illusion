@@ -15,10 +15,10 @@ export default class Scene extends Component {
 		const playContent = !U.showWebgl(this.props.game) ? null : (
 			<group>
 				<Targets
-					sceneTargets={this.props.sceneTargets}
+					targetsRefs={this.props.targetsRefs}
 				/>
 				<Moves
-					sceneMoves={this.props.sceneMoves}
+					movesRefs={this.props.movesRefs}
 					moves={this.props.moves}
 				/>
 			</group>

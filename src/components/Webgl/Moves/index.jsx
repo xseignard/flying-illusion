@@ -15,7 +15,7 @@ export default class Moves extends Component {
 					return (
 						<Move
 							key={move.id}
-							sceneMoves={this.props.sceneMoves}
+							movesRefs={this.props.movesRefs}
 							move={move}
 						/>
 					);

@@ -20,8 +20,8 @@ export class Webgl extends Component {
 				antialias
 			>
 				<Scene
-					sceneMoves={this.props.sceneMoves}
-					sceneTargets={this.props.sceneTargets}
+					movesRefs={this.props.movesRefs}
+					targetsRefs={this.props.targetsRefs}
 					game={this.props.game}
 					moves={this.props.moves}
 				/>

@@ -5,8 +5,7 @@ import { listenToClicks } from '../../actions/admin';
 import { listenToPads } from '../../actions/pads';
 import { loadRecords } from '../../actions/records';
 import * as gameActions from '../../actions/game';
-import { slaveRequestAnimationFrame } from '../../master';
-import { world } from '../../world/master';
+import { animate } from './animate';
 import Admin from '../Admin';
 import Video from '../Video';
 import Audio from '../Audio';
@@ -18,8 +17,8 @@ export class App extends Component {
 	constructor(props) {
 		super(props);
 		this.animate = this.animate.bind(this);
-		this.sceneMoves = {};
-		this.sceneTargets = {};
+		this.targetsRefs = {};
+		this.movesRefs = {};
 	}
 	componentDidMount() {
 		this.props.listenToClicks();
@@ -46,25 +45,10 @@ export class App extends Component {
 		}
 	}
 	animate() {
-		if (this.shouldAnimate) requestAnimationFrame(this.animate);
-		else return;
-		Object.keys(this.sceneTargets).forEach(direction => {
-			if (!world.targets[direction].shouldAnimate) {
-				this.sceneTargets[direction].material.opacity = 0;
-			}
-			else {
-				this.sceneTargets[direction].material.opacity = 1;
-				this.sceneTargets[direction].ref.offset = world.targets[direction].textureOffset;
-			}
-		});
-		Object.keys(world.moves).forEach(id => {
-			if (world.moves[id] && world.moves[id].visible && this.sceneMoves[id]) {
-				this.sceneMoves[id].translateY(
-					world.moves[id].positionY - this.sceneMoves[id].position.y
-				);
-			}
-		});
-		slaveRequestAnimationFrame();
+		if (this.shouldAnimate) {
+			requestAnimationFrame(this.animate);
+			animate(this.targetsRefs, this.movesRefs);
+		}
 	}
 	render() {
 		const adminContent = !this.props.admin.get('visible') ? null : (
@@ -73,8 +57,8 @@ export class App extends Component {
 		const webGlContent = !U.showWebgl(this.props.game) ? null : (
 			<div className={css.webgl}>
 				<Webgl
-					sceneMoves={this.sceneMoves}
-					sceneTargets={this.sceneTargets}
+					targetsRefs={this.targetsRefs}
+					movesRefs={this.movesRefs}
 				/>
 			</div>
 		);

@@ -13,6 +13,7 @@
 		"brace-style": [2, "stroustrup"],
 		"indent": [2, "tab", {"SwitchCase": 1}],
 		"no-unused-vars": [2, {"vars": "all", "args": "none"}],
+		"no-param-reassign": 0,
 		"no-alert": 0,
 		"comma-dangle": 0,
 		"react/prop-types": 0,
