@@ -71,10 +71,10 @@ export class Video extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		game: state.game
 	};
-}
+};
 
 export default connect(mapStateToProps)(Video);

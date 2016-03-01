@@ -63,11 +63,11 @@ export class Save extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		choregraphy: state.choregraphy,
 		performance: state.performance,
 	};
-}
+};
 
 export default connect(mapStateToProps, { saveRecord })(Save);

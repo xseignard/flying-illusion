@@ -39,13 +39,13 @@ export class Audio extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		admin: state.admin,
 		game: state.game,
 		choregraphy: state.choregraphy,
 		choregraphyName: state.choregraphy.get('name')
 	};
-}
+};
 
 export default connect(mapStateToProps)(Audio);

@@ -29,10 +29,10 @@ export class Performance extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		performance: state.performance,
 	};
-}
+};
 
 export default connect(mapStateToProps)(Performance);

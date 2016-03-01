@@ -24,11 +24,10 @@ export function resetSteps() {
 
 export function setTutoStepsTimeouts() {
 	return (dispatch, getState) => {
-		setTimeout(() => {
-			dispatch(dispatchStep(C.TUTO_STEP_ONE_DIRECTION));
-		}, C.TUTO_STEP_ONE_TIME - C.TUTO_FORWARD_TIME);
-		setTimeout(() => {
-			dispatch(dispatchStep(C.TUTO_STEP_TWO_DIRECTION));
-		}, C.TUTO_STEP_TWO_TIME - C.TUTO_FORWARD_TIME);
+		C.TUTO_STEPS.forEach((tutoStep) => {
+			setTimeout(() => {
+				dispatch(dispatchStep(tutoStep.direction));
+			}, tutoStep.time - C.TUTO_FORWARD_TIME);
+		});
 	};
 }

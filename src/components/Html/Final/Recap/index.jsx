@@ -58,11 +58,11 @@ export class Recap extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		performance: state.performance,
 		maxComments: getMaximumComments(state)
 	};
-}
+};
 
 export default connect(mapStateToProps)(Recap);

@@ -13,6 +13,13 @@ import Webgl from '../Webgl';
 import Html from '../Html';
 import css from './css';
 
+const devCheck = (status) => {
+	// FIXME: FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
+	if (status === 'devplay') this.props.launchPlay();
+	else if (status === 'devrecap') this.props.launchRecap();
+	else if (status === 'devrank') this.props.launchRank();
+};
+
 export class App extends Component {
 	constructor(props) {
 		super(props);
@@ -24,16 +31,7 @@ export class App extends Component {
 		this.props.listenToClicks();
 		this.props.listenToPads();
 		this.props.loadRecords();
-		// FIXME: FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
-		if (this.props.game.get('status') === 'devplay') {
-			this.props.launchPlay();
-		}
-		else if (this.props.game.get('status') === 'devrecap') {
-			this.props.launchRecap();
-		}
-		else if (this.props.game.get('status') === 'devrank') {
-			this.props.launchRank();
-		}
+		devCheck(this.props.game.get('status'));
 	}
 	componentDidUpdate(prevProps) {
 		if (this.props.game.get('status') !== prevProps.game.get('status')) {
@@ -66,8 +64,8 @@ export class App extends Component {
 			<div className={css.app}>
 				<div className={css.video}>
 					<Video />
-					<Audio />
 				</div>
+				<Audio />
 				{webGlContent}
 				<div className={css.html}>
 					<Html />
@@ -78,14 +76,12 @@ export class App extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		admin: state.admin,
 		game: state.game,
-		choregraphy: state.choregraphy,
-		moves: state.dance.get('moves'),
 	};
-}
+};
 
 const mapDispatchToProps = Object.assign(
 	{ listenToClicks, listenToPads, loadRecords }

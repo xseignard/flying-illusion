@@ -74,10 +74,10 @@ export class Rank extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		records: getSortedRecords(state)
 	};
-}
+};
 
 export default connect(mapStateToProps)(Rank);

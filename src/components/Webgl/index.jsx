@@ -30,11 +30,11 @@ export class Webgl extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		game: state.game,
 		moves: state.dance.get('moves'),
 	};
-}
+};
 
 export default connect(mapStateToProps, gameActions)(Webgl);

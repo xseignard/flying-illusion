@@ -61,10 +61,10 @@ export class Html extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		game: state.game,
 	};
-}
+};
 
 export default connect(mapStateToProps, gameActions)(Html);

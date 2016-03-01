@@ -49,11 +49,11 @@ export class Admin extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		admin: state.admin,
 		records: state.records,
 	};
-}
+};
 
 export default connect(mapStateToProps, { toggleMuted, clearRecords })(Admin);

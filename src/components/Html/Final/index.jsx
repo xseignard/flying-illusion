@@ -75,13 +75,13 @@ export class Final extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		game: state.game,
 		performance: state.performance,
 		records: getSortedRecords(state),
 		choregraphyTime: state.choregraphy.get('time')
 	};
-}
+};
 
 export default connect(mapStateToProps)(Final);

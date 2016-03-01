@@ -107,10 +107,10 @@ export class Letter extends Component {
 }
 
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		pads: state.pads,
 	};
-}
+};
 
 export default connect(mapStateToProps)(Letter);
