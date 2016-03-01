@@ -1,6 +1,9 @@
 import { is, fromJS } from 'immutable';
 import { store } from '../stores/slave';
-import { getPositionY, getSpriteOffset } from '../components/Webgl/common/helpers';
+import {
+	getPositionY,
+	getSpriteOffset
+} from '../components/Webgl/common/helpers';
 import { getPerformance } from '../selectors/performance';
 import C from '../constants';
 
@@ -13,15 +16,31 @@ const commentSuccess = /ok|good|excellent/;
 	S: mutable state to optimize performance
 */
 
-export const world = {
-	moves: {},
-	targets: {
-		left: {},
-		top: {},
-		bottom: {},
-		right: {},
-	}
+const getDefaultWorld = () => {
+	return {
+		moves: {},
+		targets: {
+			left: {
+				shouldAnimate: false,
+				textureOffset: getSpriteOffset(0, 8, 9)
+			},
+			top: {
+				shouldAnimate: false,
+				textureOffset: getSpriteOffset(0, 8, 9)
+			},
+			bottom: {
+				shouldAnimate: false,
+				textureOffset: getSpriteOffset(0, 8, 9)
+			},
+			right: {
+				shouldAnimate: false,
+				textureOffset: getSpriteOffset(0, 8, 9)
+			},
+		}
+	};
 };
+
+export let world = getDefaultWorld();
 
 export const S = {
 	choregraphyTime: null, // Integer
@@ -39,7 +58,8 @@ export const initWorld = () => {
 		const state = getState();
 		S.perf = getPerformance(state);
 		S.moves = state.dance.get('moves');
-		world.moves = {};
+		world = getDefaultWorld();
+		console.log(S.choregraphyTime);
 		S.showTimes = {};
 		S.moves.forEach(move => {
 			world.moves[move.id] = {};

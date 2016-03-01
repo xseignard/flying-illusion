@@ -14,9 +14,6 @@ export class Move extends Component {
 	shouldComponentUpdate(nextProps) {
 		return false;
 	}
-	componentWillUnmount() {
-		this.props.movesRefs[this.props.move.id] = undefined;
-	}
 	render() {
 		return (
 			<mesh

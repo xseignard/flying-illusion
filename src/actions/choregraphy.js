@@ -2,7 +2,7 @@ import C from '../constants';
 import { sendToSlave } from '../utils/master';
 import { getTutoChoregraphy, getRandomChoregraphy } from '../choregraphies';
 
-const setTutoChoregraphy = () => {
+export const setTutoChoregraphy = () => {
 	return (dispatch, getState) => {
 		const tutoChoregraphy = getTutoChoregraphy();
 		dispatch({
@@ -14,7 +14,7 @@ const setTutoChoregraphy = () => {
 	};
 };
 
-const setRandomChoregraphy = () => {
+export const setRandomChoregraphy = () => {
 	return (dispatch, getState) => {
 		const randomChoregraphy = getRandomChoregraphy();
 		dispatch({
@@ -36,20 +36,6 @@ export const setMovesTimeouts = (forward = 0) => {
 			function: 'setMovesTimeouts',
 			forward
 		});
-	};
-};
-
-export const startTutoChoregraphy = () => {
-	return (dispatch, getState) => {
-		dispatch(setTutoChoregraphy());
-		dispatch(setMovesTimeouts(C.TUTO_FORWARD_TIME));
-	};
-};
-
-export const startChoregraphy = () => {
-	return (dispatch, getState) => {
-		dispatch(setRandomChoregraphy());
-		dispatch(setMovesTimeouts());
 	};
 };
 

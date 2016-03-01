@@ -9,11 +9,11 @@ const predicate = (getState, action) => {
 };
 
 export const configureStore = (thread) => {
-	const slaveMiddleware = store => next => action => {
+	const masterMiddleware = store => next => action => {
 		if (!action.fromMaster && !action.hideFromMaster) dispatchToMaster(action);
 		return next(action);
 	};
-	const middlewares = [thunk, slaveMiddleware];
+	const middlewares = [thunk, masterMiddleware];
 	dev.addLoggerToMiddlewares(middlewares, predicate);
 	const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 	const store = createStoreWithMiddleware(rootReducer);

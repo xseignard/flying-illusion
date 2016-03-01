@@ -1,5 +1,6 @@
 import { slaveRequestAnimationFrame } from '../../utils/master';
 import { world } from '../../world/master';
+import { getSpriteOffset } from '../../components/Webgl/common/helpers';
 
 export const animate = (targetsRefs, movesRefs) => {
 	Object.keys(targetsRefs).forEach(direction => {
@@ -19,4 +20,14 @@ export const animate = (targetsRefs, movesRefs) => {
 		}
 	});
 	slaveRequestAnimationFrame();
+};
+
+export const reset = (targetsRefs, movesRefs) => {
+	Object.keys(targetsRefs).forEach(direction => {
+		targetsRefs[direction].material.opacity = 0;
+		targetsRefs[direction].texture.offset = getSpriteOffset(0, 8, 9);
+	});
+	Object.keys(world.moves).forEach(id => {
+		if (movesRefs[id]) movesRefs[id].mesh.position.y = -600;
+	});
 };

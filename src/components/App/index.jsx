@@ -5,7 +5,10 @@ import { listenToClicks } from '../../actions/admin';
 import { listenToPads } from '../../actions/pads';
 import { loadRecords } from '../../actions/records';
 import * as gameActions from '../../actions/game';
-import { animate } from './animate';
+import {
+	animate,
+	reset
+} from './animate';
 import Admin from '../Admin';
 import Video from '../Video';
 import Audio from '../Audio';
@@ -43,10 +46,9 @@ export class App extends Component {
 		}
 	}
 	animate() {
-		if (this.shouldAnimate) {
-			requestAnimationFrame(this.animate);
-			animate(this.targetsRefs, this.movesRefs);
-		}
+		animate(this.targetsRefs, this.movesRefs);
+		if (this.shouldAnimate) requestAnimationFrame(this.animate);
+		else reset(this.targetsRefs, this.movesRefs);
 	}
 	render() {
 		const adminContent = !this.props.admin.get('visible') ? null : (

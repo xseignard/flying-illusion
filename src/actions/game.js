@@ -1,8 +1,9 @@
 import C from '../constants';
 import {
-	startTutoChoregraphy,
 	getChoregraphyEndTime,
-	startChoregraphy,
+	setTutoChoregraphy,
+	setRandomChoregraphy,
+	setMovesTimeouts,
 	resetChoregraphy
 } from './choregraphy';
 import { setTutoStepsTimeouts, resetSteps } from './steps';
@@ -45,7 +46,8 @@ launchTuto = () => {
 	return (dispatch, getState) => {
 		dispatch(resetSteps());
 		dispatch({ type: C.PERFORMANCE_RESET });
-		dispatch(startTutoChoregraphy());
+		dispatch(setTutoChoregraphy());
+		dispatch(setMovesTimeouts());
 		dispatch(setTutoStepsTimeouts());
 		const tutoFinishTime = getChoregraphyEndTime(getState().dance.get('moves'))
 			- C.TUTO_FORWARD_TIME
@@ -108,7 +110,8 @@ launchLoad = () => {
 launchPlay = () => {
 	return (dispatch, getState) => {
 		dispatch(resetSteps());
-		dispatch(startChoregraphy());
+		dispatch(setRandomChoregraphy());
+		dispatch(setMovesTimeouts());
 		const playEndTime = getChoregraphyEndTime(getState().dance.get('moves'));
 		const playTimeout = setTimeout(() => {
 			dispatch(resetSteps());
