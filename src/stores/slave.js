@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import { dispatchToMaster } from '../slave';
+import { dispatchToMaster } from '../utils/slave';
 import dev from '../dev';
 
 const predicate = (getState, action) => {

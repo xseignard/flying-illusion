@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import { dispatchToSlave } from '../master';
+import { dispatchToSlave } from '../utils/master';
 import dev from '../dev';
 
 export const configureStore = () => {

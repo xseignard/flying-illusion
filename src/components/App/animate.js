@@ -1,4 +1,4 @@
-import { slaveRequestAnimationFrame } from '../../master';
+import { slaveRequestAnimationFrame } from '../../utils/master';
 import { world } from '../../world/master';
 
 export const animate = (targetsRefs, movesRefs) => {

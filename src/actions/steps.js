@@ -1,5 +1,5 @@
 import C from '../constants';
-import { dispatchToSlave } from '../master';
+import { dispatchToSlave } from '../utils/master';
 
 export function dispatchStep(direction) {
 	return (dispatch, getState) => {
