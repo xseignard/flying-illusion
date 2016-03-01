@@ -4,6 +4,8 @@ import C from '../constants';
 
 export const setMovesTimeouts = (forward = 0) => {
 	return (dispatch, getState) => {
+		const state = getState();
+		const timeDifference = Date.now() - state.choregraphy.get('time');
 		const moves = getState().dance.get('moves').toArray();
 		const movesTimeouts = moves.map((move, index) => {
 			const timeoutShow = setTimeout(() => {
@@ -13,7 +15,7 @@ export const setMovesTimeouts = (forward = 0) => {
 					hideFromMaster: true,
 					log: true
 				});
-			}, move.showTime - forward);
+			}, move.showTime - timeDifference);
 			const timeoutCommentable = setTimeout(() => {
 				dispatch({
 					type: C.MOVE_COMMENTABLE,
@@ -21,7 +23,7 @@ export const setMovesTimeouts = (forward = 0) => {
 					hideFromMaster: true,
 					log: true
 				});
-			}, move.time - C.MOVE_TOLERANCE_OK - forward);
+			}, move.time - C.MOVE_TOLERANCE_OK - timeDifference);
 			const timeoutUncommentable = setTimeout(() => {
 				dispatch({
 					type: C.MOVE_UNCOMMENTABLE,
@@ -29,7 +31,7 @@ export const setMovesTimeouts = (forward = 0) => {
 					hideFromMaster: true,
 					log: true
 				});
-			}, move.time + C.MOVE_TOLERANCE_OK - forward);
+			}, move.time + C.MOVE_TOLERANCE_OK - timeDifference);
 			const timeoutHide = setTimeout(() => {
 				dispatch({
 					type: C.MOVE_HIDE,
@@ -37,7 +39,7 @@ export const setMovesTimeouts = (forward = 0) => {
 					hideFromMaster: true,
 					log: true
 				});
-			}, move.time + 1000 - forward);
+			}, move.time + 1000 - timeDifference);
 			return {
 				timeoutShow,
 				timeoutCommentable,

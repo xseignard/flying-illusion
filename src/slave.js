@@ -1,11 +1,13 @@
 import C from './constants';
 import { store } from './stores/slave';
 import { setMovesTimeouts, stopMoves } from './actions/moves';
+import { setTutoStepsTimeouts } from './actions/tuto';
 import { sendToMaster } from './utils/slave';
 import {
 	S,
 	world,
 	initWorld,
+	resetWorld,
 	onSlaveRequestAnimationFrame,
 	listenToStore,
 	stopListenToStore,
@@ -19,12 +21,10 @@ const onDispatchFromMaster = (data) => {
 			action.type === C.GAME_RECAP
 		) {
 			stopListenToStore();
+			dispatch(resetWorld());
 		}
 		dispatch(action);
-		if (
-			action.type === C.GAME_TUTO ||
-			action.type === C.GAME_PLAY
-		) {
+		if (action.type === C.CHOREGRAPHY) {
 			S.choregraphyTime = getState().choregraphy.get('time');
 			dispatch(initWorld());
 			dispatch(listenToStore());
@@ -41,8 +41,9 @@ const onMasterMessage = (event) => {
 	else if (data.function === 'dispatch') {
 		store.dispatch(onDispatchFromMaster(data));
 	}
-	else if (data.function === 'setMovesTimeouts') {
-		store.dispatch(setMovesTimeouts(data.forward));
+	else if (data.function === 'setGameTimeouts') {
+		store.dispatch(setMovesTimeouts());
+		if (data.isTuto) store.dispatch(setTutoStepsTimeouts());
 	}
 	else if (data.function === 'stopMoves') {
 		store.dispatch(stopMoves());

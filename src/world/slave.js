@@ -59,12 +59,17 @@ export const initWorld = () => {
 		S.perf = getPerformance(state);
 		S.moves = state.dance.get('moves');
 		world = getDefaultWorld();
-		console.log(S.choregraphyTime);
 		S.showTimes = {};
 		S.moves.forEach(move => {
 			world.moves[move.id] = {};
 			S.showTimes[move.id] = move.showTime;
 		});
+	};
+};
+
+export const resetWorld = () => {
+	return (dispatch, getState) => {
+		world = getDefaultWorld();
 	};
 };
 

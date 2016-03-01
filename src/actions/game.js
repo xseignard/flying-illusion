@@ -3,10 +3,10 @@ import {
 	getChoregraphyEndTime,
 	setTutoChoregraphy,
 	setRandomChoregraphy,
-	setMovesTimeouts,
+	setGameTimeouts,
 	resetChoregraphy
 } from './choregraphy';
-import { setTutoStepsTimeouts, resetSteps } from './steps';
+import { resetSteps } from './steps';
 
 let launchIdle;
 let launchIntro;
@@ -47,8 +47,6 @@ launchTuto = () => {
 		dispatch(resetSteps());
 		dispatch({ type: C.PERFORMANCE_RESET });
 		dispatch(setTutoChoregraphy());
-		dispatch(setMovesTimeouts());
-		dispatch(setTutoStepsTimeouts());
 		const tutoFinishTime = getChoregraphyEndTime(getState().dance.get('moves'))
 			- C.TUTO_FORWARD_TIME
 			- C.MOVE_DURATION;
@@ -63,6 +61,7 @@ launchTuto = () => {
 			type: C.GAME_TUTO,
 			timeout: tutoTimeout
 		});
+		dispatch(setGameTimeouts(true));
 	};
 };
 
@@ -111,7 +110,6 @@ launchPlay = () => {
 	return (dispatch, getState) => {
 		dispatch(resetSteps());
 		dispatch(setRandomChoregraphy());
-		dispatch(setMovesTimeouts());
 		const playEndTime = getChoregraphyEndTime(getState().dance.get('moves'));
 		const playTimeout = setTimeout(() => {
 			dispatch(resetSteps());
@@ -121,6 +119,7 @@ launchPlay = () => {
 			type: C.GAME_PLAY,
 			timeout: playTimeout
 		});
+		dispatch(setGameTimeouts());
 	};
 };
 

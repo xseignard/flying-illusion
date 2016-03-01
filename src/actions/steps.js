@@ -21,13 +21,3 @@ export function resetSteps() {
 		});
 	};
 }
-
-export function setTutoStepsTimeouts() {
-	return (dispatch, getState) => {
-		C.TUTO_STEPS.forEach((tutoStep) => {
-			setTimeout(() => {
-				dispatch(dispatchStep(tutoStep.direction));
-			}, tutoStep.time - C.TUTO_FORWARD_TIME);
-		});
-	};
-}

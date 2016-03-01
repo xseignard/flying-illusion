@@ -1,6 +1,6 @@
 import { slaveRequestAnimationFrame } from '../../utils/master';
 import { world } from '../../world/master';
-import { getSpriteOffset } from '../../components/Webgl/common/helpers';
+import { getSpriteOffset } from '../Webgl/common/helpers';
 
 export const animate = (targetsRefs, movesRefs) => {
 	Object.keys(targetsRefs).forEach(direction => {

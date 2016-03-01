@@ -30,11 +30,11 @@ export const getChoregraphyEndTime = (moves) => {
 	return moves.last().time + C.MOVES_END_DELAY;
 };
 
-export const setMovesTimeouts = (forward = 0) => {
+export const setGameTimeouts = (isTuto) => {
 	return (dispatch, getState) => {
 		sendToSlave({
-			function: 'setMovesTimeouts',
-			forward
+			function: 'setGameTimeouts',
+			isTuto
 		});
 	};
 };
