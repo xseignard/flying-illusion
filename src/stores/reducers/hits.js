@@ -5,6 +5,7 @@ const defaultState = {
 	top: false,
 	bottom: false,
 	right: false,
+	showHits: false,
 };
 
 export function hits(state = defaultState, action) {

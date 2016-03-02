@@ -5,7 +5,7 @@ import U from '../../utils';
 import * as gameActions from '../../actions/game';
 import Headline from './Headline';
 import Performance from './Performance';
-import Pad from './Pad';
+import Hits from './Hits';
 import Final from './Final';
 import css from './css';
 
@@ -46,7 +46,7 @@ export class Html extends Component {
 			</div>
 		);
 		const performanceContent = !U.isGame(this.props.game) ? null : <Performance />;
-		const padContent = !U.isTuto(this.props.game) ? null : <Pad />;
+		const hitsContent = !U.isGame(this.props.game) ? null : <Hits />;
 		const finalContent = !U.showFinal(this.props.game) ? null : <Final />;
 		return (
 			<div className={css.html}>
@@ -57,7 +57,7 @@ export class Html extends Component {
 				{waitContent}
 				{loadContent}
 				{performanceContent}
-				{padContent}
+				{hitsContent}
 				{finalContent}
 			</div>
 		);
