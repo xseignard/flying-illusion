@@ -6,6 +6,7 @@ import * as gameActions from '../../actions/game';
 import Headline from './Headline';
 import Progression from './Progression';
 import Performance from './Performance';
+import Pad from './Pad';
 import Final from './Final';
 import css from './css';
 
@@ -51,6 +52,7 @@ export class Html extends Component {
 				<Performance />
 			</div>
 		);
+		const padContent = !U.isTuto(this.props.game) ? null : <Pad />;
 		const finalContent = !U.showFinal(this.props.game) ? null : <Final />;
 		return (
 			<div className={css.html}>
@@ -61,6 +63,7 @@ export class Html extends Component {
 				{waitContent}
 				{loadContent}
 				{gameContent}
+				{padContent}
 				{finalContent}
 			</div>
 		);

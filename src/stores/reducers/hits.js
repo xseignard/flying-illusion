@@ -1,16 +1,16 @@
 import C from '../../constants';
 
 const defaultState = {
-	combo: 1,
-	score: 0,
-	progression: 0,
-	comments: {}
+	left: false,
+	top: false,
+	bottom: false,
+	right: false,
 };
 
-export function performance(state = defaultState, action) {
+export function hits(state = defaultState, action) {
 	switch (action.type) {
 		case C.STATS:
-			return Object.assign({}, action.data.performance);
+			return Object.assign({}, action.data.hits);
 		case C.STATS_RESET:
 			return Object.assign({}, defaultState);
 		default:

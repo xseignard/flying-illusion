@@ -45,14 +45,14 @@ launchIntro = () => {
 launchTuto = () => {
 	return (dispatch, getState) => {
 		dispatch(resetSteps());
-		dispatch({ type: C.PERFORMANCE_RESET });
+		dispatch({ type: C.STATS_RESET });
 		dispatch(setTutoChoregraphy());
 		const tutoFinishTime = getChoregraphyEndTime(getState().dance.get('moves'))
 			- C.TUTO_FORWARD_TIME
 			- C.MOVE_DURATION;
 		const tutoTimeout = setTimeout(() => {
 			dispatch(resetSteps());
-			dispatch({ type: C.PERFORMANCE_RESET });
+			dispatch({ type: C.STATS_RESET });
 			dispatch(resetChoregraphy());
 			dispatch(launchWait());
 			dispatch(checkStatus());
