@@ -9,6 +9,7 @@ import {
 import { resetSteps } from './steps';
 
 let launchIdle;
+let launchZoom;
 let launchIntro;
 let launchTuto;
 let launchWait;
@@ -24,14 +25,32 @@ let checkStatus;
 launchIdle = () => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
+		const idleTimeout = setTimeout(() => {
+			dispatch(launchZoom());
+		}, C.GAME_IDLE_DURATION);
 		dispatch({
 			type: C.GAME_IDLE,
+			timeout: idleTimeout
+		});
+	};
+};
+
+launchZoom = () => {
+	return (dispatch, getState) => {
+		clearTimeout(getState().game.get('timeout'));
+		const zoomTimeout = setTimeout(() => {
+			dispatch(launchIdle());
+		}, C.GAME_ZOOM_DURATION);
+		dispatch({
+			type: C.GAME_ZOOM,
+			timeout: zoomTimeout
 		});
 	};
 };
 
 launchIntro = () => {
 	return (dispatch, getState) => {
+		clearTimeout(getState().game.get('timeout'));
 		const introTimeout = setTimeout(() => {
 			dispatch(launchTuto());
 		}, C.GAME_INTRO_DURATION);
@@ -44,6 +63,7 @@ launchIntro = () => {
 
 launchTuto = () => {
 	return (dispatch, getState) => {
+		clearTimeout(getState().game.get('timeout'));
 		dispatch(resetSteps());
 		dispatch({ type: C.STATS_RESET });
 		dispatch(setTutoChoregraphy());
@@ -67,8 +87,7 @@ launchTuto = () => {
 
 launchWait = () => {
 	return (dispatch, getState) => {
-		const state = getState();
-		clearTimeout(state.game.get('timeout'));
+		clearTimeout(getState().game.get('timeout'));
 		const waitTimeout = setTimeout(() => {
 			dispatch({
 				type: C.GAME_IDLE
@@ -96,6 +115,7 @@ launchWarning = () => {
 
 launchLoad = () => {
 	return (dispatch, getState) => {
+		clearTimeout(getState().game.get('timeout'));
 		const loadTimeout = setTimeout(() => {
 			dispatch(launchPlay());
 		}, C.GAME_LOAD_DURATION);
@@ -108,6 +128,7 @@ launchLoad = () => {
 
 launchPlay = () => {
 	return (dispatch, getState) => {
+		clearTimeout(getState().game.get('timeout'));
 		dispatch(resetSteps());
 		dispatch(setRandomChoregraphy());
 		const playEndTime = getChoregraphyEndTime(getState().dance.get('moves'));
@@ -125,6 +146,7 @@ launchPlay = () => {
 
 launchRecap = () => {
 	return (dispatch, getState) => {
+		clearTimeout(getState().game.get('timeout'));
 		const recapTimeout = setTimeout(() => {
 			dispatch(launchSave());
 		}, C.GAME_RECAP_DURATION);
@@ -196,7 +218,7 @@ checkStatus = (direction) => {
 		const status = state.game.get('status');
 		const pads = state.pads;
 		if (
-			status === 'idle' &&
+			status.match(/idle|zoom/) &&
 			pads.includes('down')
 		) {
 			dispatch(launchIntro());
@@ -246,6 +268,7 @@ checkStatus = (direction) => {
 };
 
 export {
+	launchIdle,
 	launchPlay,
 	launchRank,
 	launchRecap,

@@ -1,17 +1,19 @@
 .h1 {
 	text-align: center;
-	font-size: 96px;
+	font-size: 84px;
 	margin: 0;
-	line-height: 120px;
+	line-height: 108px;
 	font-weight: normal;
 	text-transform: uppercase;
 	font-style: italic;
 }
 .h1.line1 {
 	transform: translateX(-200%);
+	transition: transform 1000ms ease-out;
 }
 .h1.line2 {
 	transform: translateX(200%);
+	transition: transform 1000ms ease-out;
 }
 .h1.line1.loaded,
 .h1.line2.loaded {

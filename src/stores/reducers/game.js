@@ -9,7 +9,13 @@ const defaultState = Map([
 export function game(state = defaultState, action) {
 	switch (action.type) {
 		case C.GAME_IDLE:
-			return state.set('status', 'idle');
+			return state
+				.set('status', 'idle')
+				.set('timeout', action.timeout);
+		case C.GAME_ZOOM:
+			return state
+				.set('status', 'zoom')
+				.set('timeout', action.timeout);
 		case C.GAME_INTRO:
 			return state
 				.set('status', 'intro')

@@ -5,10 +5,18 @@
 }
 
 .logo {
-	display: none;
-	width: 300px;
-	margin: 0 auto;
+	position: absolute;
+	left: 50%;
+	top: 25px;
+	margin-left: -160px;
+	width: 320px;
+	opacity: 0.9;
 }
+
+.logo > img {
+	max-width: 100%;
+}
+
 
 .loading {
 	position: relative;

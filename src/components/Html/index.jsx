@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Isvg from 'react-inlinesvg';
 import U from '../../utils';
 import * as gameActions from '../../actions/game';
 import Headline from './Headline';
 import Progression from './Progression';
 import Performance from './Performance';
+import Lines from './Lines';
 import Hits from './Hits';
 import Final from './Final';
 import css from './css';
@@ -17,10 +17,23 @@ export class Html extends Component {
 	render() {
 		const idleContent = this.props.game.get('status') !== 'idle' ? null : (
 			<div className={css.idle}>
-				<Headline lineNumber="line1">
+				<div className={css.logo}>
+					<img src="img/logo.png" />
+				</div>
+				<Headline direction="in" lineNumber="line1">
 					Prenez vos marques sur le tapis
 				</Headline>
-				<Headline lineNumber="line2">
+				<Headline direction="in" lineNumber="line2">
+					Pour entrer dans la danse
+				</Headline>
+			</div>
+		);
+		const zoomContent = this.props.game.get('status') !== 'zoom' ? null : (
+			<div>
+				<Headline direction="out" lineNumber="line1">
+					Prenez vos marques sur le tapis
+				</Headline>
+				<Headline direction="out" lineNumber="line2">
 					Pour entrer dans la danse
 				</Headline>
 			</div>
@@ -45,6 +58,7 @@ export class Html extends Component {
 			<div>
 				<Progression />
 				<Performance />
+				<Lines />
 			</div>
 		);
 		const hitsContent = !U.isGame(this.props.game) ? null : <Hits />;
@@ -55,10 +69,8 @@ export class Html extends Component {
 		);
 		return (
 			<div className={css.html}>
-				<div className={css.logo}>
-					<Isvg src="img/logo.svg" />
-				</div>
 				{idleContent}
+				{zoomContent}
 				{waitContent}
 				{gameContent}
 				{hitsContent}

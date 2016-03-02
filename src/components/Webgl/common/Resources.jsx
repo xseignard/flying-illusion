@@ -77,6 +77,11 @@ export default class Resources extends Component {
 					width={128}
 					height={128}
 				/>
+				<planeGeometry
+					resourceId="sprite_geometry"
+					width={256}
+					height={256}
+				/>
 				<texture
 					resourceId="texture_move_left_right"
 					url="img/move_left_right.png"
@@ -124,11 +129,6 @@ export default class Resources extends Component {
 					resourceId="geometry_move_right"
 					width={128}
 					height={128}
-				/>
-				<planeGeometry
-					resourceId="sprite_geometry"
-					width={256}
-					height={256}
 				/>
 			</resources>
 		);

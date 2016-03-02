@@ -33,6 +33,7 @@ export class App extends Component {
 		this.props.listenToClicks();
 		this.props.listenToPads();
 		this.props.loadRecords();
+		this.props.launchIdle();
 		devCheck(this.props.game.get('status'), this.props);
 	}
 	componentDidUpdate(prevProps) {
@@ -57,22 +58,20 @@ export class App extends Component {
 		const adminContent = !this.props.admin.get('visible') ? null : (
 			<Admin />
 		);
-		const webGlContent = !U.showWebgl(this.props.game) ? null : (
-			<div className={css.webgl}>
-				<Webgl
-					threeRefs={this.threeRefs}
-					targetsRefs={this.targetsRefs}
-					movesRefs={this.movesRefs}
-				/>
-			</div>
-		);
+		const audioContent = U.isGame(this.props.game) ? null : <Audio />;
 		return (
 			<div className={css.app}>
 				<div className={css.video}>
 					<Video />
 				</div>
-				<Audio />
-				{webGlContent}
+				{audioContent}
+				<div className={css.webgl}>
+					<Webgl
+						threeRefs={this.threeRefs}
+						targetsRefs={this.targetsRefs}
+						movesRefs={this.movesRefs}
+					/>
+				</div>
 				<div className={css.html}>
 					<Html />
 				</div>

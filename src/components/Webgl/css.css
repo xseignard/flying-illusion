@@ -1,0 +1,14 @@
+.webgl {
+	opacity: 0;
+}
+
+.tuto,
+.play {
+	opacity: 1;
+}
+
+.load,
+.end {
+	opacity: 0.3;
+}
+

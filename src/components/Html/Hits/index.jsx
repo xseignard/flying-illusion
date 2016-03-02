@@ -23,7 +23,7 @@ export class Hits extends Component {
 			const leftOpacity = this.props.hits.left ? { opacity: 1 } : { opacity: 0 };
 			hitsContent = (
 				<div className={css.hits} >
-					<img src="img/pad.png" />
+					<img style={{ opacity: 0.2 }} src="img/pad.png" />
 					<img style={topOpacity} src="img/pad_top.png" />
 					<img style={rightOpacity} src="img/pad_right.png" />
 					<img style={bottomOpacity} src="img/pad_bottom.png" />

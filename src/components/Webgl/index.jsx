@@ -1,47 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import React3 from 'react-three-renderer';
+import classnames from 'classnames';
 import C from '../../constants';
 import * as gameActions from '../../actions/game';
 import Scene from './Scene';
+import css from './css';
 
 export class Webgl extends Component {
 	constructor(props) {
 		super(props);
 		this.onRendererUpdated = this.onRendererUpdated.bind(this);
 	}
-	componentDidMount() {
-		this.initialized = true;
-	}
 	onManualRenderTriggerCreated(trigger) {
 		trigger();
 	}
 	onRendererUpdated(renderer) {
 		this.props.threeRefs.renderer = renderer;
+		setTimeout(() => {
+			renderer.render(this.props.threeRefs.scene, this.props.threeRefs.camera);
+		}, 5000);
 	}
 	render() {
+		const thisClass = classnames({
+			[css.webgl]: true,
+			[css[this.props.game.get('status')]]: true
+		});
 		return (
-			<React3
-				ref="boom"
-				context="3d"
-				mainCamera="camera"
-				width={C.APP_WIDTH}
-				height={C.APP_HEIGHT}
-				alpha
-				clearAlpha={0}
-				antialias
-				onRendererUpdated={this.onRendererUpdated}
-				forceManualRender
-				onManualRenderTriggerCreated={this.onManualRenderTriggerCreated}
-			>
-				<Scene
-					threeRefs={this.props.threeRefs}
-					movesRefs={this.props.movesRefs}
-					targetsRefs={this.props.targetsRefs}
-					game={this.props.game}
-					moves={this.props.moves}
-				/>
-			</React3>
+			<div className={thisClass}>
+				<React3
+					context="3d"
+					mainCamera="camera"
+					width={C.APP_WIDTH}
+					height={C.APP_HEIGHT}
+					alpha
+					clearAlpha={0}
+					antialias
+					onRendererUpdated={this.onRendererUpdated}
+					forceManualRender
+					onManualRenderTriggerCreated={this.onManualRenderTriggerCreated}
+				>
+					<Scene
+						threeRefs={this.props.threeRefs}
+						movesRefs={this.props.movesRefs}
+						targetsRefs={this.props.targetsRefs}
+						game={this.props.game}
+						moves={this.props.moves}
+					/>
+				</React3>
+			</div>
 		);
 	}
 }

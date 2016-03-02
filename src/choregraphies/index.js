@@ -1,16 +1,16 @@
-import moment from 'moment';
 import C from '../constants';
 import U from '../utils';
-import inTraining from './In_Training.new.srt';
-import lastResistance from './Last_Resistance.new.srt';
-import theBattle from './The_Battle.new.srt';
-import theFlyingHeroes from './The_Flying_Heroes.new.srt';
+import inTraining from './In_Training.srt';
+import lastResistance from './Last_Resistance.srt';
+import theBattle from './The_Battle.srt';
+import theFlyingHeroes from './The_Flying_Heroes.srt';
 
 const mapSubsToMoves = (subs) => {
 	const nestedMoves = subs.map((sub) => {
 		const directions = sub.text.split('#');
-		const showTime = moment.duration(sub.startTime).asMilliseconds();
-		const time = moment.duration(sub.endTime).asMilliseconds();
+		const showTime = sub.startTime - C.MOVE_DURATION > 0 ?
+			sub.startTime - C.MOVE_DURATION : 0;
+		const time = sub.startTime;
 		const moves = directions.map((direction) => {
 			const id = `${time}_${direction}`;
 			return {
@@ -58,6 +58,8 @@ export const choregraphies = [
 ];
 
 export const getRandomChoregraphy = () => {
-	const randomIndex = Math.floor(Math.random() * choregraphies.length);
-	return choregraphies[randomIndex];
+	// FIXME
+	// const randomIndex = Math.floor(Math.random() * choregraphies.length);
+	// return choregraphies[randomIndex];
+	return choregraphies[1];
 };
