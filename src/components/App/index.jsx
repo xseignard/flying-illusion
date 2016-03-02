@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import U from '../../utils';
+import { slaveRequestAnimationFrame } from '../../utils/master';
 import { listenToClicks } from '../../actions/admin';
 import { listenToPads } from '../../actions/pads';
 import { loadRecords } from '../../actions/records';
@@ -27,6 +28,7 @@ export class App extends Component {
 	constructor(props) {
 		super(props);
 		this.animate = this.animate.bind(this);
+		this.threeRefs = {};
 		this.targetsRefs = {};
 		this.movesRefs = {};
 	}
@@ -49,6 +51,8 @@ export class App extends Component {
 		animate(this.targetsRefs, this.movesRefs);
 		if (this.shouldAnimate) requestAnimationFrame(this.animate);
 		else reset(this.targetsRefs, this.movesRefs);
+		this.threeRefs.renderer.render(this.threeRefs.scene, this.threeRefs.camera);
+		slaveRequestAnimationFrame();
 	}
 	render() {
 		const adminContent = !this.props.admin.get('visible') ? null : (
@@ -57,6 +61,7 @@ export class App extends Component {
 		const webGlContent = !U.showWebgl(this.props.game) ? null : (
 			<div className={css.webgl}>
 				<Webgl
+					threeRefs={this.threeRefs}
 					targetsRefs={this.targetsRefs}
 					movesRefs={this.movesRefs}
 				/>

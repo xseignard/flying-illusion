@@ -7,6 +7,7 @@ import {
 import { getPerformance } from '../selectors/performance';
 import { getHits } from '../selectors/hits';
 import C from '../constants';
+import { dispatchToMaster } from '../utils/slave';
 
 const hTiles = 8;
 const vTiles = 9;
@@ -160,7 +161,7 @@ const setHasTimeFalse = () => {
 const dispatchStats = () => {
 	return (dispatch, getState) => {
 		S.shouldDispatchStatsOnRAF = false;
-		dispatch({
+		dispatchToMaster({
 			type: C.STATS,
 			data: {
 				performance: S.perf,
