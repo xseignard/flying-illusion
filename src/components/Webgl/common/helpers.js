@@ -1,7 +1,7 @@
 import C from '../../../constants';
 import THREE from 'three';
 
-const TARGET_DISTANCE_FROM_TOP = 100;
+const TARGET_DISTANCE_FROM_TOP = 160;
 const MOVE_DISTANCE_FROM_BOTTOM = -64;
 const DISTANCE_FROM_MOVE_TO_TARGET = C.APP_HEIGHT
 	- TARGET_DISTANCE_FROM_TOP

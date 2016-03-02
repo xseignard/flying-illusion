@@ -8,7 +8,7 @@
 }
 .score,
 .combo {
-	padding: 10px 20px;
+	padding: 10px 30px 0;
 }
 .score {
 	text-align: left;
@@ -17,9 +17,33 @@
 	text-align: right;
 }
 .label {
-	font-size: 16px;
-	color: rgba(255,255,255,0.4);
+	height: 64px;
+	font-size: 36px;
+	letter-spacing: 3px;
+	color: rgba(255,255,255,0.5);
+}
+.combo .label {
+	position: relative;
+	text-align: left;
+	font-size: 48px;
+	letter-spacing: 5px;
+}
+.combo .label > div {
+	position: absolute;
+	z-index: 1000;
+	top: -5px;
+	right: 0;
+	transform: scale(1);
+	will-change: transform opacity;
+	opacity: 1;
+	transition: none;
+}
+.combo .label > div.lastCommentUpdate {
+	transform: scale(0.75);
+	opacity: 0;
+	transition: all 1000ms cubic-bezier(0,0,0.32,1);
 }
 .amount {
-	font-size: 72px;
+	font-size: 120px;
+	line-height: 120px;
 }

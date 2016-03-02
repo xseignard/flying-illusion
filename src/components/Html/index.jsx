@@ -4,6 +4,7 @@ import Isvg from 'react-inlinesvg';
 import U from '../../utils';
 import * as gameActions from '../../actions/game';
 import Headline from './Headline';
+import Progression from './Progression';
 import Performance from './Performance';
 import Hits from './Hits';
 import Final from './Final';
@@ -45,7 +46,12 @@ export class Html extends Component {
 				<div className={css.loadingBar}></div>
 			</div>
 		);
-		const performanceContent = !U.isGame(this.props.game) ? null : <Performance />;
+		const gameContent = !U.isGame(this.props.game) ? null : (
+			<div>
+				<Progression />
+				<Performance />
+			</div>
+		);
 		const hitsContent = !U.isGame(this.props.game) ? null : <Hits />;
 		const finalContent = !U.showFinal(this.props.game) ? null : <Final />;
 		return (
@@ -56,7 +62,7 @@ export class Html extends Component {
 				{idleContent}
 				{waitContent}
 				{loadContent}
-				{performanceContent}
+				{gameContent}
 				{hitsContent}
 				{finalContent}
 			</div>
