@@ -21,7 +21,7 @@ export class Performance extends Component {
 		return (
 			<div className={css.performance}>
 				<div className={css.score}>
-					<div className={css.label}>score</div>
+					<div className={css.label}>SCORE</div>
 					<div className={css.amount}>
 						<Text>{this.props.performance.score}</Text>
 					</div>

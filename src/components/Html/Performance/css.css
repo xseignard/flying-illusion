@@ -33,6 +33,7 @@
 	z-index: 1000;
 	top: -5px;
 	right: 0;
+	text-transform: uppercase;
 	transform: scale(1);
 	will-change: transform opacity;
 	opacity: 1;
