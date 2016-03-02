@@ -5,7 +5,7 @@ import choregraphy from './choregraphy';
 import moves from './moves';
 import steps from './steps';
 import pads from './pads';
-import performance from './performance';
+import stats from './stats';
 import scores from './scores';
 import tuto from './tuto';
 
@@ -17,7 +17,7 @@ export default Object.assign({},
 	moves,
 	steps,
 	pads,
-	performance,
+	stats,
 	scores,
 	tuto,
 );

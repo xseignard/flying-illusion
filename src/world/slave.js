@@ -5,6 +5,7 @@ import {
 	getSpriteOffset
 } from '../components/Webgl/common/helpers';
 import { getPerformance } from '../selectors/performance';
+import { getHits } from '../selectors/hits';
 import C from '../constants';
 
 const hTiles = 8;
@@ -45,10 +46,11 @@ export let world = getDefaultWorld();
 export const S = {
 	choregraphyTime: null, // Integer
 	perf: null, // object
+	hits: null, // object
 	moves: null, // immutable List
 	hasTimeBeforeRAF: false,
 	shouldCheckOnRAF: false,
-	shouldDispatchPerformanceOnRAF: false,
+	shouldDispatchStatsOnRAF: false,
 	targetsTileIndexes: { left: 0, top: 0, bottom: 0, right: 0 },
 	showTimes: {},
 };
@@ -98,11 +100,15 @@ const checkMove = (move, index) => {
 	}
 };
 
-const checkTargets = (perf) => {
+const checkTargets = (perf, hits) => {
 	if (!is(fromJS(perf), fromJS(S.perf))) {
-		S.shouldDispatchPerformanceOnRAF = true;
+		S.shouldDispatchStatsOnRAF = true;
 		Object.keys(perf.snapshots).forEach(checkTarget.bind(this, perf));
 		S.perf = perf;
+	}
+	if (!is(fromJS(hits), fromJS(S.hits))) {
+		S.shouldDispatchStatsOnRAF = true;
+		S.hits = hits;
 	}
 };
 
@@ -117,7 +123,7 @@ const checkWorld = () => {
 	return (dispatch, getState) => {
 		S.shouldCheckOnRAF = false;
 		const state = getState();
-		checkTargets(getPerformance(state));
+		checkTargets(getPerformance(state), getHits(state));
 		checkMoves(state.dance.get('moves'));
 	};
 };
@@ -151,12 +157,15 @@ const setHasTimeFalse = () => {
 	S.hasTimeBeforeRAF = false;
 };
 
-const dispatchPerformance = () => {
+const dispatchStats = () => {
 	return (dispatch, getState) => {
-		S.shouldDispatchPerformanceOnRAF = false;
+		S.shouldDispatchStatsOnRAF = false;
 		dispatch({
-			type: C.PERFORMANCE,
-			data: S.perf
+			type: C.STATS,
+			data: {
+				performance: S.perf,
+				hits: S.hits
+			}
 		});
 	};
 };
@@ -166,7 +175,7 @@ export const onSlaveRequestAnimationFrame = () => {
 		setTimeout(setHasTimeFalse, 5);
 		S.hasTimeBeforeRAF = true;
 		if (S.shouldCheckOnRAF) dispatch(checkWorld());
-		if (S.shouldDispatchPerformanceOnRAF) dispatch(dispatchPerformance());
+		if (S.shouldDispatchStatsOnRAF) dispatch(dispatchStats());
 		positionTargets();
 		positionMoves();
 	};

@@ -5,6 +5,7 @@ import { dance } from './dance';
 import { game } from './game';
 import { pads } from './pads';
 import { performance } from './performance';
+import { hits } from './hits';
 import { records } from './records';
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
 	choregraphy,
 	dance,
 	performance,
+	hits,
 	records,
 });
 
