@@ -11,6 +11,7 @@ export function setTutoStepsTimeouts() {
 					type: C.STEP,
 					direction: tutoStep.direction,
 					time: tutoStep.time,
+					hideFromMaster: true,
 					log: true
 				});
 			}, tutoStep.time - timeDifference);
