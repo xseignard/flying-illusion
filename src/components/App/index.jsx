@@ -69,12 +69,13 @@ export class App extends Component {
 				/>
 			</div>
 		);
+		const audioContent = U.isGame(this.props.game) ? null : <Audio />;
 		return (
 			<div className={css.app}>
 				<div className={css.video}>
 					<Video />
 				</div>
-				<Audio />
+				{audioContent}
 				{webGlContent}
 				<div className={css.html}>
 					<Html />

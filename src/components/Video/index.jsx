@@ -6,16 +6,15 @@ import css from './css';
 export class Video extends Component {
 	constructor(props) {
 		super(props);
-		this.gameStates = [
+		this.videoNames = [
 			'idle',
-			'intro',
+			'intro_tuto',
 			'wait',
 			'warning',
 			'load',
-			'play',
+			'Last_Resistance',
 			'recap',
-			'save',
-			'rank',
+			'save_rank',
 			'end'
 		];
 		this.state = {
@@ -30,15 +29,36 @@ export class Video extends Component {
 		}
 	}
 	componentWillReceiveProps(nextProps) {
-		const currentGame = this.props.game.get('status');
-		const nextGame = nextProps.game.get('status');
-		const currentVideo = currentGame === 'tuto' ? 'intro' : currentGame;
-		const nextVideo = nextGame === 'tuto' ? 'intro' : nextGame;
-		if (currentVideo === nextVideo) {
-			return false;
+		const status = this.props.game.get('status');
+		const nextStatus = nextProps.game.get('status');
+		// arriving to tuto or rank wont make the video change
+		if (nextStatus.match(/tuto|rank/)) return false;
+
+		let currentVideoEl = this.refs[status];
+		let nextVideoEl = this.refs[nextStatus];
+
+		if (nextStatus === 'intro') {
+			nextVideoEl = this.refs.intro_tuto;
 		}
-		const currentVideoEl = this.refs[currentVideo];
-		const nextVideoEl = this.refs[nextVideo];
+		else if (nextStatus === 'wait' && status.match(/warning|load/)) {
+			nextVideoEl = this.refs.wait;
+		}
+		else if (nextStatus === 'wait') {
+			currentVideoEl = this.refs.intro_tuto;
+		}
+		else if (nextStatus === 'play') {
+			nextVideoEl = this.refs[this.props.choregraphy.get('name')];
+		}
+		else if (nextStatus === 'recap') {
+			currentVideoEl = this.refs[this.props.choregraphy.get('name')];
+		}
+		else if (nextStatus === 'save') {
+			nextVideoEl = this.refs.save_rank;
+		}
+		else if (nextStatus === 'end') {
+			currentVideoEl = this.refs.save_rank;
+		}
+
 		if (nextVideoEl) {
 			nextVideoEl.play();
 			nextVideoEl.classList.add(css.above);
@@ -49,13 +69,12 @@ export class Video extends Component {
 		}
 	}
 	render() {
-		const videosContent = this.gameStates.map((state) => {
-			let videoSrc = `videos/${state}.mp4`;
-			if (state.match(/save|rank/)) videoSrc = 'videos/save_rank.mp4';
+		const videosContent = this.videoNames.map((name) => {
+			const videoSrc = `videos/${name}.mp4`;
 			return (
 				<video
-					ref={state}
-					key={state}
+					ref={name}
+					key={name}
 					src={videoSrc}
 					width={C.APP_WIDTH}
 					height={C.APP_HEIGHT}
@@ -75,6 +94,7 @@ export class Video extends Component {
 const mapStateToProps = (state) => {
 	return {
 		game: state.game,
+		choregraphy: state.choregraphy,
 	};
 };
 
