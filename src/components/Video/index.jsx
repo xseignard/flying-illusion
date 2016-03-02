@@ -37,7 +37,11 @@ export class Video extends Component {
 		let currentVideoEl = this.refs[status];
 		let nextVideoEl = this.refs[nextStatus];
 
-		if (nextStatus === 'intro') {
+		if (nextStatus === 'idle' && status === 'save') {
+			currentVideoEl = this.refs.save_rank;
+			nextVideoEl = this.refs.idle;
+		}
+		else if (nextStatus === 'intro') {
 			nextVideoEl = this.refs.intro_tuto;
 		}
 		else if (nextStatus === 'wait' && status.match(/warning|load/)) {
@@ -66,6 +70,7 @@ export class Video extends Component {
 		if (currentVideoEl) {
 			currentVideoEl.classList.remove(css.above);
 			currentVideoEl.pause();
+			currentVideoEl.currentTime = 0;
 		}
 	}
 	render() {
