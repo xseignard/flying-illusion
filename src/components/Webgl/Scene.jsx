@@ -11,6 +11,10 @@ export default class Scene extends Component {
 		super();
 		this.cameraPosition = new THREE.Vector3(0, 0, 1);
 	}
+	componentDidMount() {
+		this.props.threeRefs.scene = this.refs.scene;
+		this.props.threeRefs.camera = this.refs.camera;
+	}
 	render() {
 		const playContent = !U.showWebgl(this.props.game) ? null : (
 			<group>
@@ -24,8 +28,9 @@ export default class Scene extends Component {
 			</group>
 		);
 		return (
-			<scene>
+			<scene ref="scene">
 				<orthographicCamera
+					ref="camera"
 					name="camera"
 					near={0.1}
 					far={1000}
