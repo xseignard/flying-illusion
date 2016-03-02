@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Text from '../Text';
 import css from './css';
 
 export class Performance extends Component {
-	shouldComponentUpdate(nextProps) {
-		const tp = this.props.performance;
-		const np = nextProps.performance;
-		return (
-			tp.score !== np.score ||
-			tp.comments.last !== np.comments.last ||
-			tp.combo !== np.combo
-		);
+	constructor() {
+		super();
+		this.addLastCommentClass = this.addLastCommentClass.bind(this);
+	}
+	componentDidUpdate(prevProps) {
+		this.refs.lastComment.classList.remove(css.lastCommentUpdate);
+		requestAnimationFrame(this.addLastCommentClass);
+	}
+	addLastCommentClass() {
+		if (this.refs.lastComment) {
+			this.refs.lastComment.classList.add(css.lastCommentUpdate);
+		}
 	}
 	render() {
 		return (
 			<div className={css.performance}>
 				<div className={css.score}>
 					<div className={css.label}>score</div>
-					<div className={css.amount}>{this.props.performance.score}</div>
+					<div className={css.amount}>
+						<Text>{this.props.performance.score}</Text>
+					</div>
 				</div>
-				<h1>{this.props.performance.comments.last}</h1>
 				<div className={css.combo}>
-					<div className={css.label}>combo</div>
-					<div className={css.amount}>X{this.props.performance.combo}</div>
+					<div className={css.label}>
+						<div ref="lastComment">
+							{this.props.performance.comments.last}
+						</div>
+					</div>
+					<div className={css.amount}>
+						<Text>X{this.props.performance.combo}</Text>
+					</div>
 				</div>
 			</div>
 		);
