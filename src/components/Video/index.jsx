@@ -50,7 +50,8 @@ export class Video extends Component {
 	}
 	render() {
 		const videosContent = this.gameStates.map((state) => {
-			const videoSrc = `videos/${state}.mp4`;
+			let videoSrc = `videos/${state}.mp4`;
+			if (state.match(/save|rank/)) videoSrc = 'videos/save_rank.mp4';
 			return (
 				<video
 					ref={state}
@@ -73,7 +74,7 @@ export class Video extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		game: state.game
+		game: state.game,
 	};
 };
 

@@ -41,11 +41,6 @@ export class Html extends Component {
 				</div>
 			</div>
 		);
-		const loadContent = this.props.game.get('status') !== 'load' ? null : (
-			<div className={css.loading}>
-				<div className={css.loadingBar}></div>
-			</div>
-		);
 		const gameContent = !U.isGame(this.props.game) ? null : (
 			<div>
 				<Progression />
@@ -61,7 +56,6 @@ export class Html extends Component {
 				</div>
 				{idleContent}
 				{waitContent}
-				{loadContent}
 				{gameContent}
 				{hitsContent}
 				{finalContent}
