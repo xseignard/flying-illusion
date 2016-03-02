@@ -7,7 +7,7 @@ export class Video extends Component {
 	constructor(props) {
 		super(props);
 		this.videoNames = [
-			'idle',
+			'idle_zoom',
 			'intro_tuto',
 			'wait',
 			'warning',
@@ -32,16 +32,16 @@ export class Video extends Component {
 		const status = this.props.game.get('status');
 		const nextStatus = nextProps.game.get('status');
 		// arriving to tuto or rank wont make the video change
-		if (nextStatus.match(/tuto|rank/)) return false;
+		if (nextStatus.match(/zoom|tuto|rank/)) return false;
 
 		let currentVideoEl = this.refs[status];
 		let nextVideoEl = this.refs[nextStatus];
 
-		if (nextStatus === 'idle' && status === 'save') {
-			currentVideoEl = this.refs.save_rank;
-			nextVideoEl = this.refs.idle;
+		if (nextStatus === 'idle') {
+			nextVideoEl = this.refs.idle_zoom;
 		}
 		else if (nextStatus === 'intro') {
+			currentVideoEl = this.refs.idle_zoom;
 			nextVideoEl = this.refs.intro_tuto;
 		}
 		else if (nextStatus === 'wait' && status.match(/warning|load/)) {
@@ -60,6 +60,10 @@ export class Video extends Component {
 			nextVideoEl = this.refs.save_rank;
 		}
 		else if (nextStatus === 'end') {
+			currentVideoEl = this.refs.save_rank;
+		}
+
+		if (status === 'save') {
 			currentVideoEl = this.refs.save_rank;
 		}
 

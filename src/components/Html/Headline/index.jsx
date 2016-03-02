@@ -8,10 +8,17 @@ export default class Headline extends Component {
 		super(props);
 	}
 	componentDidMount() {
-		this.refs.h1.classList.remove(css.loaded);
+		const methods = this.props.direction === 'in' ? ['add', 'remove'] : ['remove', 'add'];
+		this.refs.h1.classList[methods[0]](css.loaded);
 		this.timeout = setTimeout(() => {
-			this.refs.h1.classList.add(css.loaded);
+			this.refs.h1.classList[methods[0]](css.loaded);
 		}, 100);
+	}
+	componentWillReceiveProps(nextProps) {
+		if (
+			nextProps.display && this.props.display) {
+			this.refs.h1.classList.remove(css.loaded);
+		}
 	}
 	componentWillUnmount() {
 		clearTimeout(this.timeout);

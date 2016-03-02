@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import THREE from 'three';
 import C from '../../constants';
-import U from '../../utils';
 import Resources from './common/Resources';
 import Targets from './Targets';
 import Moves from './Moves';
@@ -16,17 +15,6 @@ export default class Scene extends Component {
 		this.props.threeRefs.camera = this.refs.camera;
 	}
 	render() {
-		const playContent = !U.showWebgl(this.props.game) ? null : (
-			<group>
-				<Targets
-					targetsRefs={this.props.targetsRefs}
-				/>
-				<Moves
-					movesRefs={this.props.movesRefs}
-					moves={this.props.moves}
-				/>
-			</group>
-		);
 		return (
 			<scene ref="scene">
 				<orthographicCamera
@@ -41,7 +29,13 @@ export default class Scene extends Component {
 					position={this.cameraPosition}
 				/>
 				<Resources />
-				{playContent}
+				<Targets
+					targetsRefs={this.props.targetsRefs}
+				/>
+				<Moves
+					movesRefs={this.props.movesRefs}
+					moves={this.props.moves}
+				/>
 			</scene>
 		);
 	}

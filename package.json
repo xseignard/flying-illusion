@@ -16,8 +16,7 @@
     "deploy": "git subtree push --prefix www origin gh-pages",
     "test": "mocha 'src/**/__test__/*.test.js*' -R spec --compilers jsx:babel-core/register,css:./tasks/misc/null-compiler --recursive",
     "ci:checks": "npm run clean && npm run lint",
-    "ci": "npm run ci:checks && npm run build && npm run app:linux && npm run pack:linux",
-    "srt": "node tasks/misc/choregraphiesConverter"
+    "ci": "npm run ci:checks && npm run build && npm run app:linux && npm run pack:linux"
   },
   "repository": {
     "type": "git",
@@ -59,7 +58,6 @@
     "lodash": "^4.0.1",
     "mkdirp": "^0.5.1",
     "mocha": "^2.3.4",
-    "moment": "^2.11.1",
     "odometer": "^0.4.7",
     "raw-loader": "^0.5.1",
     "react": "^0.14.6",
