@@ -61,8 +61,22 @@ export class Rank extends Component {
 				</div>
 			);
 		});
+		const recordIndex = this.props.records.findIndex(record => {
+			return record.time === this.props.choregraphyTime;
+		});
 		return (
 			<div className={css.rank}>
+				<div className={css.info}>
+					<Text className={css.h1}>
+						CLASSEMENT
+					</Text>
+					<div className={css.score}>
+						<span>{recordIndex + 1}</span>
+						<sup className={css.suffix}>{recordIndex === 0 ? 'ER' : 'ÈME'}</sup>
+						<span> sur {this.props.records.size}</span>
+					</div>
+					<Rank rank={recordIndex} />
+				</div>
 				<div className={css.ranks}>
 					{rankContent}
 				</div>

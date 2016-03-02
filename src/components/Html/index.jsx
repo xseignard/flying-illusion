@@ -16,7 +16,7 @@ export class Html extends Component {
 	}
 	render() {
 		const idleContent = this.props.game.get('status') !== 'idle' ? null : (
-			<div>
+			<div className={css.idle}>
 				<Headline lineNumber="line1">
 					Prenez vos marques sur le tapis
 				</Headline>
@@ -26,7 +26,7 @@ export class Html extends Component {
 			</div>
 		);
 		const waitContent = this.props.game.get('status') !== 'wait' ? null : (
-			<div>
+			<div className={css.wait}>
 				<div>
 					<Headline lineNumber="line1">
 						Maintenez
@@ -48,7 +48,11 @@ export class Html extends Component {
 			</div>
 		);
 		const hitsContent = !U.isGame(this.props.game) ? null : <Hits />;
-		const finalContent = !U.showFinal(this.props.game) ? null : <Final />;
+		const finalContent = !U.showFinal(this.props.game) ? null : (
+			<div className={css.final}>
+				<Final />
+			</div>
+		);
 		return (
 			<div className={css.html}>
 				<div className={css.logo}>

@@ -6,10 +6,7 @@ import { listenToClicks } from '../../actions/admin';
 import { listenToPads } from '../../actions/pads';
 import { loadRecords } from '../../actions/records';
 import * as gameActions from '../../actions/game';
-import {
-	animate,
-	reset
-} from './animate';
+import { animate, reset } from './animate';
 import Admin from '../Admin';
 import Video from '../Video';
 import Audio from '../Audio';
@@ -17,11 +14,11 @@ import Webgl from '../Webgl';
 import Html from '../Html';
 import css from './css';
 
-const devCheck = (status) => {
+const devCheck = (status, props) => {
 	// FIXME: FOR DEV PURPOSES, GAME CAN BE STARTED IMMEDIATELY
-	if (status === 'devplay') this.props.launchPlay();
-	else if (status === 'devrecap') this.props.launchRecap();
-	else if (status === 'devrank') this.props.launchRank();
+	if (status === 'devplay') props.launchPlay();
+	else if (status === 'devrecap') props.launchRecap();
+	else if (status === 'devrank') props.launchRank();
 };
 
 export class App extends Component {
@@ -36,7 +33,7 @@ export class App extends Component {
 		this.props.listenToClicks();
 		this.props.listenToPads();
 		this.props.loadRecords();
-		devCheck(this.props.game.get('status'));
+		devCheck(this.props.game.get('status'), this.props);
 	}
 	componentDidUpdate(prevProps) {
 		if (this.props.game.get('status') !== prevProps.game.get('status')) {

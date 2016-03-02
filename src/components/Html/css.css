@@ -1,4 +1,6 @@
-.html {
+.idle,
+.wait,
+.final {
 	padding-top: 360px;
 }
 

@@ -20,7 +20,7 @@ const onDispatchFromMaster = (data) => {
 			action.type === C.GAME_WAIT ||
 			action.type === C.GAME_RECAP
 		) {
-			stopListenToStore();
+			if (stopListenToStore) stopListenToStore();
 			dispatch(resetWorld());
 		}
 		dispatch(action);

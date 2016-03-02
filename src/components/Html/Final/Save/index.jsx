@@ -57,6 +57,15 @@ export class Save extends Component {
 		});
 		return (
 			<div className={css.save}>
+				<div className={css.info}>
+					<Text className={css.h1}>
+						PARTIE FINIE
+					</Text>
+					<div className={css.score}>
+						{this.props.performance.score} POINTS
+					</div>
+					<Save />
+				</div>
 				{lettersContent}
 			</div>
 		);

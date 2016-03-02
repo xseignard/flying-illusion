@@ -1,16 +1,21 @@
-.final {
-	position: relative;
-	height: 360px;
+.final {}
+.background,
+.recap,
+.save,
+.rank {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 360px;
+	bottom: 360px;
+}
+.background {
 	border: 1px solid #666;
-	margin-top: -1px;
 	background: rgba(29, 130, 196, 0.3);
+	transform: scaleY(0);
+	will-change: transform;
 }
-.final > * {
-	visibility: hidden;
-}
-.loaded > * {
-	visibility: visible;
-}
+
 .h1 {
 	position: absolute;
 	top: 120px;
@@ -19,7 +24,7 @@
 	font-style: italic;
 	margin: 0;
 }
-.score, .rank {
+.score {
 	position: absolute;
 	top: 212px;
 	left: 220px;
@@ -32,4 +37,11 @@
 .suffix {
 	font-size: 15px;
 	padding-left: 3px;
+}
+.info {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 360px;
+	bottom: 360px;
 }

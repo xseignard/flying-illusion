@@ -12,6 +12,14 @@ export class Recap extends Component {
 	render() {
 		return (
 			<div className={css.recap}>
+				<div className={css.info}>
+					<Text className={css.h1}>
+						PARTIE FINIE
+					</Text>
+					<div className={css.score}>
+						{this.props.performance.score} POINTS
+					</div>
+				</div>
 				<div
 					className={css.excellent}
 				>
