@@ -80,7 +80,7 @@ export class Video extends Component {
 		this.videoNames.forEach((name) => {
 			this.refs[name].addEventListener('play', (e) => {
 				if (this.props.game.get('status') === 'play' && name === 'Last_Resistance') {
-					const delay = Date.now() - this.props.choregraphy.get('time');
+					const delay = Date.now() - this.props.choregraphy.get('time') + 300;
 					this.refs[name].currentTime = delay / 1000;
 				}
 			});
