@@ -103,7 +103,10 @@ const checkMove = (move, index) => {
 	if (move.commentable !== previousMove.commentable) {
 		world.moves[move.id].commentable = move.commentable;
 	}
-	if (move.comment !== previousMove.comment) {
+	if (
+		move.comment !== previousMove.comment &&
+		moves.match(commentSuccess)
+	) {
 		world.moves[move.id].shouldScale = true;
 		world.moves[move.id].scale = getMoveScale(0);
 	}
