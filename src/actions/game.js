@@ -9,6 +9,7 @@ import {
 import { sendToSlave } from '../utils/master';
 import { resetSteps } from './steps';
 
+let launchAssets;
 let launchIdle;
 let launchZoom;
 let launchIntro;
@@ -22,6 +23,19 @@ let launchSave;
 let launchRank;
 let launchEnd;
 let checkStatus;
+
+launchAssets = (devTime = 0) => {
+	return (dispatch, getState) => {
+		clearTimeout(getState().game.get('timeout'));
+		const assetsTimeout = setTimeout(() => {
+			dispatch(launchIdle());
+		}, C.GAME_ASSETS_DURATION + devTime);
+		dispatch({
+			type: C.GAME_ASSETS,
+			timeout: assetsTimeout
+		});
+	};
+};
 
 launchIdle = (devTime = 0) => {
 	return (dispatch, getState) => {
@@ -271,6 +285,7 @@ checkStatus = (direction) => {
 };
 
 export {
+	launchAssets,
 	launchIdle,
 	launchZoom,
 	launchIntro,

@@ -2,7 +2,8 @@ import { is, fromJS } from 'immutable';
 import { store } from '../stores/slave';
 import {
 	getPositionY,
-	getSpriteOffset
+	getSpriteOffset,
+	getMoveScale
 } from '../components/Webgl/common/helpers';
 import { getPerformance } from '../selectors/performance';
 import { getHits } from '../selectors/hits';
@@ -53,6 +54,7 @@ export const S = {
 	shouldCheckOnRAF: false,
 	shouldDispatchStatsOnRAF: false,
 	targetsTileIndexes: { left: 0, top: 0, bottom: 0, right: 0 },
+	movesScaleIndexes: {},
 	showTimes: {},
 };
 
@@ -63,9 +65,11 @@ export const initWorld = () => {
 		S.moves = state.dance.get('moves');
 		world = getDefaultWorld();
 		S.showTimes = {};
+		S.movesScaleIndexes = {};
 		S.moves.forEach(move => {
 			world.moves[move.id] = {};
 			S.showTimes[move.id] = move.showTime;
+			S.movesScaleIndexes[move.id] = 0;
 		});
 	};
 };
@@ -98,6 +102,13 @@ const checkMove = (move, index) => {
 	}
 	if (move.commentable !== previousMove.commentable) {
 		world.moves[move.id].commentable = move.commentable;
+	}
+	if (
+		move.comment !== previousMove.comment &&
+		move.match(commentSuccess)
+	) {
+		world.moves[move.id].shouldScale = true;
+		world.moves[move.id].scale = getMoveScale(0);
 	}
 };
 
@@ -133,9 +144,7 @@ export const positionTargets = () => {
 	Object.keys(world.targets).forEach(direction => {
 		if (world.targets[direction].shouldAnimate) {
 			S.targetsTileIndexes[direction]++;
-			if (
-				S.targetsTileIndexes[direction] >= hTiles * vTiles
-			) {
+			if (S.targetsTileIndexes[direction] >= hTiles * vTiles) {
 				world.targets[direction].shouldAnimate = false;
 				S.targetsTileIndexes[direction] = 0;
 			}
@@ -150,6 +159,13 @@ export const positionMoves = () => {
 		if (world.moves[id].visible) {
 			world.moves[id].positionY =
 				getPositionY(S.showTimes[id], Date.now() - S.choregraphyTime);
+		}
+		if (world.moves[id].shouldScale) {
+			S.movesScaleIndexes[id]++;
+			if (S.movesScaleIndexes[id] >= C.MOVE_HIT_FRAME_DURATION) {
+				world.moves[id].shouldScale = false;
+			}
+			world.moves[id].scale = getMoveScale(S.movesScaleIndexes[id]);
 		}
 	});
 };

@@ -33,8 +33,13 @@ export const getPositionY = (moveShowTime, gameTime) => {
 		+ (gameTime - moveShowTime) / C.MOVE_DURATION * DISTANCE_FROM_MOVE_TO_TARGET;
 };
 
+export const getMoveScale = (scaleIndex) => {
+	return 1 - scaleIndex / (C.MOVE_HIT_FRAME_DURATION * 2);
+};
+
 export const getSpriteOffset = (tileIndex, hTiles, vTiles) => {
-	const tileColumn = tileIndex % hTiles;
-	const tileRow = vTiles - 1 - Math.floor(tileIndex / hTiles);
-	return new THREE.Vector2(tileColumn / hTiles, tileRow / vTiles);
+	return {
+		x: tileIndex % hTiles / hTiles,
+		y: vTiles - 1 - Math.floor(tileIndex / hTiles) / vTiles
+	};
 };

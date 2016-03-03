@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Assets from './Assets';
 import Idle from './Idle';
 import Zoom from './Zoom';
 import TutoPlay from './TutoPlay';
@@ -12,6 +13,7 @@ import End from './End';
 import css from './css';
 
 const mapStatusToTag = {
+	assets: <Assets />,
 	idle: <Idle />,
 	zoom: <Zoom />,
 	intro: <noscript />,
