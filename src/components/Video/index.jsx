@@ -30,9 +30,9 @@ export class Video extends Component {
 	componentWillReceiveProps(nextProps) {
 		const status = this.props.game.get('status');
 		const nextStatus = nextProps.game.get('status');
-		// arriving to tuto or rank wont make the video change
+		// arriving to zoom, tuto or rank wont make the video change
 		if (
-			status === nextStatus ||
+			(status === nextStatus && status !== 'idle') ||
 			nextStatus.match(/zoom|tuto|rank/)
 		) return false;
 
@@ -101,8 +101,8 @@ export class Video extends Component {
 					width={C.APP_WIDTH}
 					height={C.APP_HEIGHT}
 					loop
-					muted
 					preload="auto"
+					muted
 				></video>
 			);
 		});

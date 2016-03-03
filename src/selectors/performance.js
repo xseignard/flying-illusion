@@ -49,6 +49,7 @@ const getSnapshots = (directionsComments) => {
 
 const getPerformances = (events) => {
 	let combo = 1;
+	let comboMax = 1;
 	let score = 0;
 	let progression = 0;
 	const comments = {
@@ -68,6 +69,7 @@ const getPerformances = (events) => {
 	events.forEach((event, index) => {
 		const comboAddition = performanceTable[event.comment].comboAddition;
 		combo = comboAddition ? combo + comboAddition : 1;
+		comboMax = Math.max(comboMax, combo);
 		score += performanceTable[event.comment].score * combo;
 		progression += performanceTable[event.comment].score;
 		comments[event.comment]++;
@@ -77,6 +79,7 @@ const getPerformances = (events) => {
 	const snapshots = getSnapshots(directionsComments);
 	return {
 		combo,
+		comboMax,
 		score,
 		progression,
 		comments,

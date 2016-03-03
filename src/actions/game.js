@@ -6,6 +6,7 @@ import {
 	setGameTimeouts,
 	resetChoregraphy
 } from './choregraphy';
+import { sendToSlave } from '../utils/master';
 import { resetSteps } from './steps';
 
 let launchIdle;
@@ -147,6 +148,7 @@ launchPlay = (devTime = 0) => {
 
 launchRecap = (devTime = 0) => {
 	return (dispatch, getState) => {
+		sendToSlave({ function: 'stopMoves' });
 		clearTimeout(getState().game.get('timeout'));
 		const recapTimeout = setTimeout(() => {
 			dispatch(launchSave());

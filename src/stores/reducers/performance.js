@@ -2,6 +2,7 @@ import C from '../../constants';
 
 const defaultState = {
 	combo: 1,
+	comboMax: 1,
 	score: 0,
 	progression: 0,
 	comments: {}
