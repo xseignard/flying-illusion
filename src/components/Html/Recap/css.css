@@ -29,6 +29,7 @@
 	bottom: 80px;
 	text-align: center;
 	font-size: 48px;
+	animation: pulse 2s infinite;
 }
 
 /*
@@ -56,4 +57,10 @@
 .metrics.loaded {
 	transform: translate3d(0, 0, 0);
 	opacity: 1;
+}
+
+@keyframes pulse {
+	0% { opacity: 1; }
+	50% { opacity: 0.5; }
+	100% { opacity: 1; }
 }
