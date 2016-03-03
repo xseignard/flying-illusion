@@ -48,13 +48,12 @@ export class App extends Component {
 	}
 	render() {
 		const adminContent = !this.props.admin.get('visible') ? null : <Admin />;
-		const audioContent = U.isGame(this.props.game) ? null : <Audio />;
 		return (
 			<div className={css.app}>
 				<div className={css.video}>
 					<Video />
+					<Audio />
 				</div>
-				{audioContent}
 				<div className={css.webgl}>
 					<Webgl
 						threeRefs={this.threeRefs}

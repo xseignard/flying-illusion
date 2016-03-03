@@ -6,6 +6,7 @@ import css from './css';
 export class Video extends Component {
 	constructor(props) {
 		super(props);
+		this.videoSynchronization = this.videoSynchronization.bind(this);
 		this.videoNames = [
 			'idle_zoom',
 			'intro_tuto',
@@ -17,9 +18,6 @@ export class Video extends Component {
 			'save_rank',
 			'end'
 		];
-		this.state = {
-			muted: true
-		};
 	}
 	componentDidMount() {
 		const video = this.refs[this.props.game.get('status')];
@@ -27,12 +25,16 @@ export class Video extends Component {
 			video.play();
 			video.classList.add(css.above);
 		}
+		this.videoSynchronization();
 	}
 	componentWillReceiveProps(nextProps) {
 		const status = this.props.game.get('status');
 		const nextStatus = nextProps.game.get('status');
 		// arriving to tuto or rank wont make the video change
-		if (nextStatus.match(/zoom|tuto|rank/)) return false;
+		if (
+			status === nextStatus ||
+			nextStatus.match(/zoom|tuto|rank/)
+		) return false;
 
 		let currentVideoEl = this.refs[status];
 		let nextVideoEl = this.refs[nextStatus];
@@ -77,6 +79,17 @@ export class Video extends Component {
 			currentVideoEl.currentTime = 0;
 		}
 	}
+	videoSynchronization() {
+		this.videoNames.forEach((name) => {
+			this.refs[name].addEventListener('play', (e) => {
+				if (this.props.game.get('status') === 'play' && name === 'Last_Resistance') {
+					// FIXME: Find better way to sync video
+					const delay = Date.now() - this.props.choregraphy.get('time') + 400;
+					this.refs[name].currentTime = delay / 1000;
+				}
+			});
+		});
+	}
 	render() {
 		const videosContent = this.videoNames.map((name) => {
 			const videoSrc = `videos/${name}.mp4`;
@@ -88,7 +101,7 @@ export class Video extends Component {
 					width={C.APP_WIDTH}
 					height={C.APP_HEIGHT}
 					loop
-					muted={this.props.admin.get('muted')}
+					muted
 					preload="auto"
 				></video>
 			);

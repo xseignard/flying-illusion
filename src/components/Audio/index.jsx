@@ -17,11 +17,11 @@ export class Audio extends Component {
 	getAudioSrc() {
 		if (
 			this.props.game.get('status') !== 'play' ||
-			!this.props.choregraphyName
+			!this.props.choregraphy.get('name')
 		) {
 			return null;
 		}
-		return `choregraphies/${this.props.choregraphyName}.mp3`;
+		return `choregraphies/${this.props.choregraphy.get('name')}.mp3`;
 	}
 	render() {
 		const audioSrc = this.getAudioSrc();
@@ -44,7 +44,6 @@ const mapStateToProps = (state) => {
 		admin: state.admin,
 		game: state.game,
 		choregraphy: state.choregraphy,
-		choregraphyName: state.choregraphy.get('name')
 	};
 };
 

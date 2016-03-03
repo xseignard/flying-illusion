@@ -3,8 +3,8 @@
 }
 video {
 	position: absolute;
-	display: none;
+	visibility: hidden;
 }
 video.above {
-	display: block;
+	visibility: visible;
 }
