@@ -5,7 +5,8 @@ import Lightning from '../common/Lightning';
 import { saveRecord } from '../../../actions/records';
 import Letter from './Letter';
 import Text from '../common/Text';
-import finalCss from '../common/final.css';
+import finalCss from '../common/final';
+import commonCss from '../common/css';
 import css from './css';
 
 export class Save extends Component {
@@ -70,6 +71,11 @@ export class Save extends Component {
 				</div>
 				<div className={css.letters}>
 					{lettersContent}
+				</div>
+				<div className={commonCss.hint}>
+					<Text>
+						INSCRIVEZ VOTRE PSEUDO EN FACE DE VOTRE SCORE
+					</Text>
 				</div>
 				<Lightning />
 			</div>

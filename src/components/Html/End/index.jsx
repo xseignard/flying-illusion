@@ -1,4 +1,6 @@
 import React from 'react';
+import Text from '../common/Text';
+import commonCss from '../common/css';
 import css from './css';
 
 export default () => {
@@ -30,6 +32,11 @@ export default () => {
 					<div>Kalli</div>
 					<div>Willy</div>
 				</div>
+			</div>
+			<div className={commonCss.hint}>
+				<Text>APPUYEZ SUR</Text>
+				<div className={commonCss.arrow_right}></div>
+				<Text>POUR TERMINER LE JEU</Text>
 			</div>
 		</div>
 	);

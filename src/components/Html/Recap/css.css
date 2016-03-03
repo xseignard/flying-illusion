@@ -22,15 +22,6 @@
 	top: 140px;
 	left: 400px;
 }
-.hint {
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 80px;
-	text-align: center;
-	font-size: 48px;
-	animation: pulse 2s infinite;
-}
 
 /*
 	ANIMATIONS
@@ -57,10 +48,4 @@
 .metrics.loaded {
 	transform: translate3d(0, 0, 0);
 	opacity: 1;
-}
-
-@keyframes pulse {
-	0% { opacity: 1; }
-	50% { opacity: 0.5; }
-	100% { opacity: 1; }
 }

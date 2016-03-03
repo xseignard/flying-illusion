@@ -69,7 +69,7 @@ export class Recap extends Component {
 						/>
 					</div>
 				</div>
-				<div className={css.hint}>
+				<div className={commonCss.hint}>
 					<Text>APPUYEZ SUR</Text>
 					<div className={commonCss.arrow_right}></div>
 					<Text>POUR ENREGISTRER VOTRE SCORE</Text>
