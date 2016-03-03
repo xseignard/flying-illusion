@@ -9,6 +9,7 @@ import Recap from './Recap';
 import Save from './Save';
 import Rank from './Rank';
 import End from './End';
+import Lightning from './common/Lightning';
 import css from './css';
 
 const mapStatusToTag = {
@@ -31,10 +32,13 @@ export class Html extends Component {
 		super(props);
 	}
 	render() {
-		const content = mapStatusToTag[this.props.game.get('status')];
+		const status = this.props.game.get('status');
+		const content = mapStatusToTag[status];
+		const lightning = !status.match(/play|recap|save|rank/) ? null : <Lightning />;
 		return (
 			<div className={css.html}>
 				{content}
+				{lightning}
 			</div>
 		);
 	}

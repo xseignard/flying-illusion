@@ -3,8 +3,6 @@ import css from './css';
 
 export default () => {
 	return (
-		<div className={css.end}>
-			end
-		</div>
+		<div className={css.lightning}></div>
 	);
 };
