@@ -30,3 +30,30 @@
 	text-align: center;
 	font-size: 48px;
 }
+
+/*
+	ANIMATIONS
+*/
+
+.h1 {
+	transform: translate3d(-100px, 0, 0);
+	opacity: 0;
+}
+.h1.loaded {
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
+}
+.score {
+	transform: translate3d(-50px, 0, 0);
+}
+.score.loaded {
+	transform: translate3d(0, 0, 0);
+}
+.metrics {
+	transform: translate3d(100px, 0, 0);
+	opacity: 0.3;
+}
+.metrics.loaded {
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
+}

@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { getMaximumProgression } from '../../../../selectors/moves';
 import css from './css';
 
-const getScale = (progression, max) => {
-	return `scaleX(${progression / max})`;
+const getTranslateX = (progression, max) => {
+	return `translateX(${-100 * (Math.min(1 - progression / max, 0.99))}%)`;
 };
 
 export class Performance extends Component {
@@ -17,9 +17,9 @@ export class Performance extends Component {
 		return this.props.progression !== nextProps.progression;
 	}
 	componentDidUpdate(prevProps) {
-		this.animation = this.refs.progressionContent.animate([
-			{ transform: getScale(prevProps.progression, this.props.max) },
-			{ transform: getScale(this.props.progression, this.props.max) }
+		this.animation = this.refs.progressionBar.animate([
+			{ transform: getTranslateX(prevProps.progression, this.props.max) },
+			{ transform: getTranslateX(this.props.progression, this.props.max) }
 		], {
 			duration: 200,
 			easing: 'cubic-bezier(0,0,0.32,1)'
@@ -27,19 +27,18 @@ export class Performance extends Component {
 	}
 	render() {
 		const progressionClass = classnames({
-			[css.progressionBar]: true,
+			[css.progression]: true,
 			[css.notNull]: this.props.progression > 0,
 		});
-		const inlineStyle = { transform: getScale(this.props.progression, this.props.max) };
+		const inlineStyle = { transform: getTranslateX(this.props.progression, this.props.max) };
 		return (
-			<div className={css.progression}>
-				<div className={progressionClass}>
-					<div
-						ref="progressionContent"
-						style={inlineStyle}
-						className={css.progressionContent}
-					></div>
-				</div>
+			<div className={progressionClass}>
+				<div className={css.line}></div>
+				<div
+					ref="progressionBar"
+					style={inlineStyle}
+					className={css.progressionBar}
+				></div>
 			</div>
 		);
 	}

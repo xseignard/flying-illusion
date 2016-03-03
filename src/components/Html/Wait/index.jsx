@@ -16,16 +16,16 @@ export default () => {
 	});
 	return (
 		<div className={css.wait}>
-			<Background />
+			<Background animated />
 			<div className={commonCss.headline}>
-				<Headline lineNumber="line1">
+				<Headline direction="in" lineNumber="line1">
 					Maintenez
 					<div className={leftArrowClass}></div>
 					et
 					<div className={rightArrowClass}></div>
 					avec vos pieds
 				</Headline>
-				<Headline lineNumber="line2">
+				<Headline direction="in" lineNumber="line2">
 					pour commencer à jouer
 				</Headline>
 			</div>
