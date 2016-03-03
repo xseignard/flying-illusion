@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Background from '../common/Background';
+import Lightning from '../common/Lightning';
 import { saveRecord } from '../../../actions/records';
 import Letter from './Letter';
 import Text from '../common/Text';
@@ -70,6 +71,7 @@ export class Save extends Component {
 				<div className={css.letters}>
 					{lettersContent}
 				</div>
+				<Lightning />
 			</div>
 		);
 	}

@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import Background from '../common/Background';
+import Lightning from '../common/Lightning';
 import { getMaximumComments } from '../../../selectors/moves';
 import { Metric } from './Metric';
 import Text from '../common/Text';
@@ -73,6 +74,7 @@ export class Recap extends Component {
 					<div className={commonCss.arrow_right}></div>
 					<Text>POUR ENREGISTRER VOTRE SCORE</Text>
 				</div>
+				<Lightning />
 			</div>
 		);
 	}

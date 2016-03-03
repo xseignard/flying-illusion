@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Text from '../common/Text';
 import Background from '../common/Background';
+import Lightning from '../common/Lightning';
 import { getSortedRecords } from '../../../selectors/records';
 import finalCss from '../common/final.css';
 import css from './css';
@@ -86,6 +87,7 @@ export class Rank extends Component {
 				<div className={css.podium}>
 					{podiumContent}
 				</div>
+				<Lightning />
 			</div>
 		);
 	}

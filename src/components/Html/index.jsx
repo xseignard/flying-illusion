@@ -9,7 +9,6 @@ import Recap from './Recap';
 import Save from './Save';
 import Rank from './Rank';
 import End from './End';
-import Lightning from './common/Lightning';
 import css from './css';
 
 const mapStatusToTag = {
@@ -20,7 +19,7 @@ const mapStatusToTag = {
 	wait: <Wait />,
 	warning: <Warning />,
 	load: <noscript />,
-	play: <TutoPlay />,
+	play: <TutoPlay play />,
 	recap: <Recap />,
 	save: <Save />,
 	rank: <Rank />,
@@ -37,7 +36,6 @@ export class Html extends Component {
 		return (
 			<div className={css.html}>
 				{content}
-				<Lightning active={status.match(/play|recap|save|rank/)} />
 			</div>
 		);
 	}
