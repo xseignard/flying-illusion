@@ -2,20 +2,69 @@
 	font-size: 24px;
 }
 
-.ranks, .podium {
+.suffix {
+	font-size: 0.5em;
+	padding-left: 0.5em;
+}
+
+.siblings,
+.podium {
 	position: absolute;
-	top: 500px;
-	left: 800px;
+	top: 410px;
+	left: 840px;
+	font-size: 44px;
+	line-height: 80px;
+	color: rgba(250,250,255,0.7);
+	vertical-align: bottom;
+}
+
+.siblings .suffix,
+.podium .suffix {
+	padding-left: 0em;
 }
 
 .podium {
-	left: 1200px;
+	left: 1400px;
+}
+.podium > :nth-child(1) {
+	color: rgba(250,250,255,0.9);
+}
+.podium > :nth-child(1) .player,
+.podium > :nth-child(1) .score {
+	font-size: 64px;
+}
+.podium > :nth-child(2) {
+	color: rgba(250,250,255,0.8);
+}
+.podium > :nth-child(2) .player,
+.podium > :nth-child(2) .score {
+	font-size: 56px;
 }
 
-.ranksScore {
-	color: red;
-}
-
+.siblingsScore,
 .podiumScore {
-	color: yellow;
+	color: rgba(255,255,255,1);
+}
+
+.siblingsScore .player,
+.siblingsScore .score,
+.podiumScore .player,
+.podiumScore .score {
+	font-size: 64px;
+}
+
+.position,
+.player,
+.score {
+	display: inline-block;
+}
+
+.position {
+	width: 90px;
+}
+.player {
+	width: 130px;
+}
+.score {
+	width: 250px;
 }

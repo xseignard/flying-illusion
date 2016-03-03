@@ -7,68 +7,102 @@ import { getSortedRecords } from '../../../selectors/records';
 import finalCss from '../common/final.css';
 import css from './css';
 
+const getPodium = (records) => {
+	const podiumRecords = records.filter((record, index) => {
+		return index < 3;
+	});
+	return podiumRecords.map((record, index) => {
+		const suffix = index === 0 ? 'ER' : 'ÈME';
+		return Object.assign({}, record, { suffix });
+	});
+};
+
+const getSiblings = (records, rank) => {
+	const siblingsRecords = records.filter((record, index) => {
+		// player is first ranked or last ranked
+		if (
+			rank === 0 ||
+			rank === records.size - 1
+		) {
+			return Math.abs(index - rank) <= 2;
+		}
+		// otherwise
+		return Math.abs(index - rank) <= 1;
+	});
+	return siblingsRecords.map((record, index) => {
+		// if the player made the best score, use ER instead of ÈME
+		const suffix = (
+			rank === index &&
+			rank === 0
+		) ? 'ER' : 'ÈME';
+		// apply correction to the index of map to get rank position
+		let correction = 0;
+		// best score needs a rank correction of 1
+		if (rank === 0) correction = 1;
+		// worst score needs a correction of -1
+		else if (rank === records.size - 1) correction = -1;
+
+		return Object.assign({}, record, { suffix, correction });
+	});
+};
+
 export class Rank extends Component {
 	constructor(props) {
 		super(props);
+		if (this.props.records) {
+			this.rank = this.props.records.findIndex(record => {
+				return record.time === this.props.choregraphy.get('time');
+			});
+		}
 	}
 	render() {
 		if (!this.props.records) return null;
-		const podiumList = this.props.records.filter((record, index) => {
-			return index < 3;
-		});
-		const podiumContent = podiumList.map((record, index) => {
-			const suffix = index === 0 ? 'ER' : 'ÈME';
+		const suffix = this.rank === 0 ? 'ER' : 'ÈME';
+		const podiumContent = getPodium(this.props.records).map((record, index) => {
 			// apply special class to the current score
-			const currentScoreClass = this.props.rank === index ? css.podiumScore : '';
+			const currentScoreClass = this.rank === index ? css.podiumScore : '';
 			return (
 				<div key={index} className={currentScoreClass}>
-					{index + 1}{suffix} {record.player} {record.score}
+					<Text>
+						<div className={css.position}>
+							{index + 1}
+							<sup className={css.suffix}>{record.suffix}</sup>
+						</div>
+						<div className={css.player}>
+							{record.player}
+						</div>
+						<div className={css.score}>
+							{record.score}
+						</div>
+					</Text>
 				</div>
 			);
 		});
-
-		const rankList = this.props.records.filter((record, index) => {
-			// player is first ranked or last ranked
-			if (
-				this.props.rank === 0 ||
-				this.props.rank === this.props.records.size - 1
-			) {
-				return Math.abs(index - this.props.rank) <= 2;
-			}
-			// otherwise
-			return Math.abs(index - this.props.rank) <= 1;
-		});
-		const rankContent = rankList.map((record, index) => {
-			// if the player made the best score, use ER instead of ÈME
-			const suffix = (
-				this.props.rank === index &&
-				this.props.rank === 0
-			) ? 'ER' : 'ÈME';
-			// apply correction to the index of map to get rank position
-			let correction = 0;
-			// best score needs a rank correction of 1
-			if (this.props.rank === 0) {
-				correction = 1;
-			}
-			// worst score needs a correction of -1
-			else if (this.props.rank === this.props.records.size - 1) {
-				correction = -1;
-			}
-			// apply special class to the current score
-			const currentScoreClass = (
-				(correction === 1 && index === 0) ||
-				(correction === 0 && index === 1) ||
-				(correction === -1 && index === 2)
-			) ? css.ranksScore : '';
-			return (
-				<div key={index} className={currentScoreClass}>
-					{this.props.rank + correction + index}{suffix} {record.player} {record.score}
-				</div>
-			);
-		});
-		const recordIndex = this.props.records.findIndex(record => {
-			return record.time === this.props.choregraphyTime;
-		});
+		const siblingsContent = getSiblings(this.props.records, this.rank)
+			.map((record, index) => {
+				// apply special class to the current score
+				const currentScoreClass = (
+					(record.correction === 1 && index === 0) ||
+					(record.correction === 0 && index === 1) ||
+					(record.correction === -1 && index === 2)
+				) ? css.siblingsScore : '';
+				return (
+					<div key={index} className={currentScoreClass}>
+						<Text>
+							<div className={css.position}>
+								{this.rank + record.correction + index}
+								<sup className={css.suffix}>{record.suffix}</sup>
+							</div>
+							<div className={css.player}>
+								{record.player}
+							</div>
+							<div className={css.score}>
+								{record.score}
+							</div>
+						</Text>
+					</div>
+				);
+			});
 		return (
 			<div className={css.rank}>
 				<Background />
@@ -76,13 +110,13 @@ export class Rank extends Component {
 					CLASSEMENT
 				</Text>
 				<div className={finalCss.score}>
-					<span>{recordIndex + 1}</span>
-					<sup className={css.suffix}>{recordIndex === 0 ? 'ER' : 'ÈME'}</sup>
+					<span>{this.rank + 1}</span>
+					<sup className={css.suffix}>{suffix}</sup>
 					<span> sur {this.props.records.size}</span>
 				</div>
-				<Rank rank={recordIndex} />
-				<div className={css.ranks}>
-					{rankContent}
+				<Rank rank={this.rank} />
+				<div className={css.siblings}>
+					{siblingsContent}
 				</div>
 				<div className={css.podium}>
 					{podiumContent}
@@ -95,7 +129,8 @@ export class Rank extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		records: getSortedRecords(state)
+		records: getSortedRecords(state),
+		choregraphy: state.choregraphy
 	};
 };
 
