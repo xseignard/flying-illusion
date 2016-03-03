@@ -1,0 +1,21 @@
+.rank {
+	font-size: 24px;
+}
+
+.ranks, .podium {
+	position: absolute;
+	top: 500px;
+	left: 800px;
+}
+
+.podium {
+	left: 1200px;
+}
+
+.ranksScore {
+	color: red;
+}
+
+.podiumScore {
+	color: yellow;
+}

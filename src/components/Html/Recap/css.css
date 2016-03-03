@@ -1,0 +1,32 @@
+.metrics {
+	position: absolute;
+	top: 450px;
+	left: 900px;
+}
+.metrics > div {
+	position: absolute;
+}
+.excellent {
+	top: 0;
+	left: 0;
+}
+.good {
+	top: 0;
+	left: 400px;
+}
+.ok {
+	top: 140px;
+	left: 0;
+}
+.combo {
+	top: 140px;
+	left: 400px;
+}
+.hint {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 80px;
+	text-align: center;
+	font-size: 48px;
+}

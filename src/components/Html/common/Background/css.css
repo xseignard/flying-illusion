@@ -1,0 +1,10 @@
+.background {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 360px;
+	bottom: 360px;
+	border: 1px solid #666;
+	background: rgba(29, 130, 196, 0.3);
+	will-change: transform;
+}

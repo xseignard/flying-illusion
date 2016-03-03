@@ -1,80 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import U from '../../utils';
-import * as gameActions from '../../actions/game';
-import Headline from './Headline';
-import Progression from './Progression';
-import Performance from './Performance';
-import Lines from './Lines';
-import Hits from './Hits';
-import Final from './Final';
+import Idle from './Idle';
+import Zoom from './Zoom';
+import TutoPlay from './TutoPlay';
+import Wait from './Wait';
+import Warning from './Warning';
+import Recap from './Recap';
+import Save from './Save';
+import Rank from './Rank';
+import End from './End';
 import css from './css';
+
+const mapStatusToTag = {
+	idle: <Idle />,
+	zoom: <Zoom />,
+	intro: <noscript />,
+	tuto: <TutoPlay />,
+	wait: <Wait />,
+	warning: <Warning />,
+	load: <noscript />,
+	play: <TutoPlay />,
+	recap: <Recap />,
+	save: <Save />,
+	rank: <Rank />,
+	end: <End />,
+};
 
 export class Html extends Component {
 	constructor(props) {
 		super(props);
 	}
 	render() {
-		const idleContent = this.props.game.get('status') !== 'idle' ? null : (
-			<div className={css.idle}>
-				<div className={css.logo}>
-					<img src="img/logo.png" />
-				</div>
-				<Headline direction="in" lineNumber="line1">
-					Prenez vos marques sur le tapis
-				</Headline>
-				<Headline direction="in" lineNumber="line2">
-					Pour entrer dans la danse
-				</Headline>
-			</div>
-		);
-		const zoomContent = this.props.game.get('status') !== 'zoom' ? null : (
-			<div>
-				<Headline direction="out" lineNumber="line1">
-					Prenez vos marques sur le tapis
-				</Headline>
-				<Headline direction="out" lineNumber="line2">
-					Pour entrer dans la danse
-				</Headline>
-			</div>
-		);
-		const waitContent = this.props.game.get('status') !== 'wait' ? null : (
-			<div className={css.wait}>
-				<div>
-					<Headline lineNumber="line1">
-						Maintenez
-						<div className={css.arrow_left}></div>
-						et
-						<div className={css.arrow_right}></div>
-						avec vos pieds
-					</Headline>
-					<Headline lineNumber="line2">
-						pour commencer à jouer
-					</Headline>
-				</div>
-			</div>
-		);
-		const gameContent = !U.isGame(this.props.game) ? null : (
-			<div>
-				<Progression />
-				<Performance />
-				<Lines />
-			</div>
-		);
-		const hitsContent = !U.isGame(this.props.game) ? null : <Hits />;
-		const finalContent = !U.showFinal(this.props.game) ? null : (
-			<div className={css.final}>
-				<Final />
-			</div>
-		);
+		const content = mapStatusToTag[this.props.game.get('status')];
 		return (
 			<div className={css.html}>
-				{idleContent}
-				{zoomContent}
-				{waitContent}
-				{gameContent}
-				{hitsContent}
-				{finalContent}
+				{content}
 			</div>
 		);
 	}
@@ -86,4 +46,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, gameActions)(Html);
+export default connect(mapStateToProps)(Html);

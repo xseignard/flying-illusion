@@ -1,0 +1,22 @@
+.left,
+.top,
+.bottom,
+.right {
+	position: absolute;
+	top: 212px;
+	bottom: 0;
+	width: 2px;
+	background-color: rgba(255,255,255,0.2);
+}
+.left {
+	left: 479px;
+}
+.top {
+	left: 799px;
+}
+.bottom {
+	left: 1119px;
+}
+.right {
+	left: 1439px;
+}

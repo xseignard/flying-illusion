@@ -1,0 +1,27 @@
+.h1 {
+	text-align: center;
+	font-size: 84px;
+	margin: 0;
+	line-height: 108px;
+	font-weight: normal;
+	text-transform: uppercase;
+	font-style: italic;
+}
+.h1.line1,
+.h1.line2 {
+	transition: transform 1000ms ease-out;
+}
+.h1.line1.in,
+.h1.line2.out.loaded {
+	transform: translateX(-200%);
+}
+.h1.line2.in,
+.h1.line1.out.loaded {
+	transform: translateX(200%);
+}
+.h1.line1.out,
+.h1.line2.out,
+.h1.line1.in.loaded,
+.h1.line2.in.loaded {
+	transform: translateX(0);
+}

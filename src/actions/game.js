@@ -22,12 +22,12 @@ let launchRank;
 let launchEnd;
 let checkStatus;
 
-launchIdle = () => {
+launchIdle = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		const idleTimeout = setTimeout(() => {
 			dispatch(launchZoom());
-		}, C.GAME_IDLE_DURATION);
+		}, C.GAME_IDLE_DURATION + devTime);
 		dispatch({
 			type: C.GAME_IDLE,
 			timeout: idleTimeout
@@ -35,12 +35,12 @@ launchIdle = () => {
 	};
 };
 
-launchZoom = () => {
+launchZoom = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		const zoomTimeout = setTimeout(() => {
 			dispatch(launchIdle());
-		}, C.GAME_ZOOM_DURATION);
+		}, C.GAME_ZOOM_DURATION + devTime);
 		dispatch({
 			type: C.GAME_ZOOM,
 			timeout: zoomTimeout
@@ -48,12 +48,12 @@ launchZoom = () => {
 	};
 };
 
-launchIntro = () => {
+launchIntro = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		const introTimeout = setTimeout(() => {
 			dispatch(launchTuto());
-		}, C.GAME_INTRO_DURATION);
+		}, C.GAME_INTRO_DURATION + devTime);
 		dispatch({
 			type: C.GAME_INTRO,
 			timeout: introTimeout
@@ -61,7 +61,7 @@ launchIntro = () => {
 	};
 };
 
-launchTuto = () => {
+launchTuto = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		dispatch(resetSteps());
@@ -76,7 +76,7 @@ launchTuto = () => {
 			dispatch(resetChoregraphy());
 			dispatch(launchWait());
 			dispatch(checkStatus());
-		}, tutoFinishTime);
+		}, tutoFinishTime + devTime);
 		dispatch({
 			type: C.GAME_TUTO,
 			timeout: tutoTimeout
@@ -85,14 +85,14 @@ launchTuto = () => {
 	};
 };
 
-launchWait = () => {
+launchWait = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		const waitTimeout = setTimeout(() => {
 			dispatch({
 				type: C.GAME_IDLE
 			});
-		}, C.GAME_WAIT_DURATION);
+		}, C.GAME_WAIT_DURATION + devTime);
 		dispatch({
 			type: C.GAME_WAIT,
 			timeout: waitTimeout
@@ -100,12 +100,12 @@ launchWait = () => {
 	};
 };
 
-launchWarning = () => {
+launchWarning = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		const warningTimeout = setTimeout(() => {
 			dispatch(launchLoad());
-		}, C.GAME_WARNING_DURATION);
+		}, C.GAME_WARNING_DURATION + devTime);
 		dispatch({
 			type: C.GAME_WARNING,
 			timeout: warningTimeout
@@ -113,12 +113,12 @@ launchWarning = () => {
 	};
 };
 
-launchLoad = () => {
+launchLoad = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		const loadTimeout = setTimeout(() => {
 			dispatch(launchPlay());
-		}, C.GAME_LOAD_DURATION);
+		}, C.GAME_LOAD_DURATION + devTime);
 		dispatch({
 			type: C.GAME_LOAD,
 			timeout: loadTimeout
@@ -126,7 +126,7 @@ launchLoad = () => {
 	};
 };
 
-launchPlay = () => {
+launchPlay = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		dispatch(resetSteps());
@@ -135,7 +135,7 @@ launchPlay = () => {
 		const playTimeout = setTimeout(() => {
 			dispatch(resetSteps());
 			dispatch(launchRecap());
-		}, playEndTime);
+		}, playEndTime + devTime);
 		dispatch({
 			type: C.GAME_PLAY,
 			timeout: playTimeout
@@ -144,12 +144,12 @@ launchPlay = () => {
 	};
 };
 
-launchRecap = () => {
+launchRecap = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		const recapTimeout = setTimeout(() => {
 			dispatch(launchSave());
-		}, C.GAME_RECAP_DURATION);
+		}, C.GAME_RECAP_DURATION + devTime);
 		dispatch({
 			type: C.GAME_RECAP,
 			timeout: recapTimeout
@@ -157,12 +157,12 @@ launchRecap = () => {
 	};
 };
 
-launchSave = () => {
+launchSave = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		const saveTimeout = setTimeout(() => {
 			dispatch(launchIdle());
-		}, C.GAME_SAVE_DURATION);
+		}, C.GAME_SAVE_DURATION + devTime);
 		dispatch({
 			type: C.GAME_SAVE,
 			timeout: saveTimeout
@@ -170,12 +170,12 @@ launchSave = () => {
 	};
 };
 
-launchRank = () => {
+launchRank = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		const rankTimeout = setTimeout(() => {
 			dispatch(launchEnd());
-		}, C.GAME_RANK_DURATION);
+		}, C.GAME_RANK_DURATION + devTime);
 		dispatch({
 			type: C.GAME_RANK,
 			timeout: rankTimeout
@@ -183,13 +183,13 @@ launchRank = () => {
 	};
 };
 
-launchEnd = () => {
+launchEnd = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		const endTimeout = setTimeout(() => {
 			dispatch(launchIdle());
 			dispatch(resetChoregraphy());
-		}, C.GAME_END_DURATION);
+		}, C.GAME_END_DURATION + devTime);
 		dispatch({
 			type: C.GAME_END,
 			timeout: endTimeout
@@ -269,8 +269,16 @@ checkStatus = (direction) => {
 
 export {
 	launchIdle,
+	launchZoom,
+	launchIntro,
+	launchTuto,
+	launchWait,
+	launchWarning,
+	launchLoad,
 	launchPlay,
-	launchRank,
 	launchRecap,
-	checkStatus
+	launchSave,
+	launchRank,
+	launchEnd,
+	checkStatus,
 };

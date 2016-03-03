@@ -51,7 +51,7 @@ export class Video extends Component {
 			currentVideoEl = this.refs.intro_tuto;
 		}
 		else if (nextStatus === 'play') {
-			nextVideoEl = this.refs[this.props.choregraphy.get('name')];
+			nextVideoEl = this.refs[nextProps.choregraphy.get('name')];
 		}
 		else if (nextStatus === 'recap') {
 			currentVideoEl = this.refs[this.props.choregraphy.get('name')];
@@ -88,6 +88,7 @@ export class Video extends Component {
 					width={C.APP_WIDTH}
 					height={C.APP_HEIGHT}
 					loop
+					muted={this.props.admin.get('muted')}
 					preload="auto"
 				></video>
 			);
@@ -102,6 +103,7 @@ export class Video extends Component {
 
 const mapStateToProps = (state) => {
 	return {
+		admin: state.admin,
 		game: state.game,
 		choregraphy: state.choregraphy,
 	};
