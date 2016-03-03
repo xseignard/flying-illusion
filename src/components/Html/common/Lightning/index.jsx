@@ -11,7 +11,8 @@ export default class Lightning extends Component {
 			{ opacity: 1 },
 			{ opacity: 0 }
 		], {
-			duration: 300
+			duration: 300,
+			easing: 'cubic-bezier(0,0,0.32,1)'
 		});
 	}
 	render() {
