@@ -18,6 +18,7 @@ const mapStateToActionCreator = {
 
 export const setDevGameState = (status) => {
 	if (mapStateToActionCreator[status]) {
-		store.dispatch(mapStateToActionCreator[status](500000));
+		const delay = status !== 'devplay' ? 500000 : -50000;
+		store.dispatch(mapStateToActionCreator[status](delay));
 	}
 };

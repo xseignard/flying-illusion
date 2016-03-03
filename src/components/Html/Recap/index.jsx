@@ -63,8 +63,8 @@ export class Recap extends Component {
 					</div>
 					<div className={css.combo}>
 						<Metric
-							label="COMBO"
-							value={this.props.performance.comments.combo}
+							label="COMBO MAX"
+							value={this.props.performance.comboMax}
 							maxValue={this.props.maxComments}
 						/>
 					</div>

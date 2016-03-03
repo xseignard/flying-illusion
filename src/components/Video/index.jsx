@@ -102,6 +102,7 @@ export class Video extends Component {
 					height={C.APP_HEIGHT}
 					loop
 					preload="auto"
+					muted
 				></video>
 			);
 		});
