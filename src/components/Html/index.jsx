@@ -34,11 +34,10 @@ export class Html extends Component {
 	render() {
 		const status = this.props.game.get('status');
 		const content = mapStatusToTag[status];
-		const lightning = !status.match(/play|recap|save|rank/) ? null : <Lightning />;
 		return (
 			<div className={css.html}>
 				{content}
-				{lightning}
+				<Lightning active={status.match(/play|recap|save|rank/)} />
 			</div>
 		);
 	}
