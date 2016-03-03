@@ -13,8 +13,28 @@
 .score {
 	text-align: left;
 }
+.score::after {
+	content: '';
+	background: url('../../../../../www/img/diamond_left.png') no-repeat;
+	opacity: 0.1;
+	top: -40px;
+	left: -40px;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+}
 .combo {
 	text-align: right;
+}
+.combo::after {
+	content: '';
+	background: url('../../../../../www/img/diamond_right.png') no-repeat;
+	opacity: 0.1;
+	top: -40px;
+	left: 1700px;
+	bottom: 0;
+	right: 0;
+	position: absolute;
 }
 .label {
 	height: 64px;
