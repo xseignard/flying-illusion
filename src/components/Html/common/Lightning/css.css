@@ -7,7 +7,7 @@
 	opacity: 0;
 	background: radial-gradient(
 		ellipse at center,
-		rgba(255,255,255,.5),
-		rgba(35,41,68,0.5)
+		rgba(255,255,255,.25),
+		rgba(255,255,255,0)
 	);
 }
