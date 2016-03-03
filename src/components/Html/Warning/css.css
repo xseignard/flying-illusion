@@ -1,2 +1,12 @@
 .warning {
+	position: absolute;
+	top: 120px;
+	left: 250px;
+	right: 250px;
+}
+.headline {
+	font-size: 84px;
+}
+.content {
+	font-size: 40px;
 }
