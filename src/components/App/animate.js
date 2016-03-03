@@ -13,9 +13,26 @@ export const animate = (targetsRefs, movesRefs) => {
 	});
 	Object.keys(world.moves).forEach(id => {
 		if (world.moves[id] && world.moves[id].visible && movesRefs[id]) {
+			// always translate the move
 			movesRefs[id].mesh.translateY(
 				world.moves[id].positionY - movesRefs[id].mesh.position.y
 			);
+			// if target is hit, change geometry, material and scale it
+			if (world.moves[id].shouldScale) {
+				movesRefs[id].mesh.material = movesRefs[id].hitMaterial;
+				movesRefs[id].mesh.geometry = movesRefs[id].hitGeometry;
+				movesRefs[id].mesh.scale.set(
+					world.moves[id].scale,
+					world.moves[id].scale,
+					1
+				);
+			}
+			// scale is false, return to original geometry and material
+			else if (typeof world.moves[id].shouldScale !== 'undefined') {
+				movesRefs[id].mesh.material = movesRefs[id].material;
+				movesRefs[id].mesh.geometry = movesRefs[id].geometry;
+				movesRefs[id].mesh.scale.set(1, 1, 1);
+			}
 		}
 	});
 };

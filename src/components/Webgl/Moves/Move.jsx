@@ -7,22 +7,55 @@ export class Move extends Component {
 		this.position = getPosition('move', this.props.move.direction);
 		this.geometry = `geometry_move_${this.props.move.direction}`;
 		this.material = `material_move_${this.props.move.direction}`;
+		this.textureId = this.props.move.direction.match(/top|bottom/) ?
+			'top_bottom' :
+			'left_right';
+		const rotations = {
+			left: Math.PI / -2,
+			top: Math.PI,
+			bottom: 0,
+			right: Math.PI / 2
+		};
+		this.rotation = rotations[this.props.move.direction];
 	}
 	componentDidMount() {
-		this.props.movesRefs[this.props.move.id] = { mesh: this.refs.move };
+		this.props.movesRefs[this.props.move.id] = {
+			mesh: this.refs.move,
+			material: this.refs.material,
+			geometry: this.refs.geometry,
+			hitMaterial: this.refs.hitMaterial,
+			hitGeometry: this.refs.hitGeometry
+		};
+		this.refs.geometry.rotateZ(this.rotation);
+		this.refs.hitGeometry.rotateZ(this.rotation);
 	}
 	shouldComponentUpdate(nextProps) {
 		return false;
 	}
 	render() {
 		return (
-			<mesh
-				ref="move"
-				position={this.position}
-			>
-				<geometryResource resourceId={this.geometry} />
-				<materialResource resourceId={this.material} />
-			</mesh>
+			<group>
+				<mesh
+					ref="move"
+					position={this.position}
+				>
+					<planeGeometry ref="geometry" width={128} height={128} />
+					<meshBasicMaterial ref="material" transparent>
+						<textureResource resourceId={`texture_move_${this.textureId}`} />
+					</meshBasicMaterial>
+				</mesh>
+				<resources>
+					<meshBasicMaterial ref="hitMaterial" resourceId="hitMaterial" transparent>
+						<textureResource resourceId={`texture_hit_${this.textureId}`} />
+					</meshBasicMaterial>
+					<planeGeometry
+						ref="hitGeometry"
+						resourceId="hitGeometry"
+						width={512}
+						height={512}
+					/>
+				</resources>
+			</group>
 		);
 	}
 }

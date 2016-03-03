@@ -5,12 +5,6 @@ export default class Resources extends Component {
 	constructor(props) {
 		super(props);
 	}
-	componentDidMount() {
-		this.refs.geometry_move_left.rotateZ(Math.PI / -2);
-		this.refs.geometry_move_top.rotateZ(Math.PI);
-		this.refs.geometry_move_bottom.rotateZ(0);
-		this.refs.geometry_move_right.rotateZ(Math.PI / 2);
-	}
 	shouldComponentUpdate() {
 		return false;
 	}
@@ -94,41 +88,17 @@ export default class Resources extends Component {
 					wrapS={THREE.RepeatWrapping}
 					wrapT={THREE.RepeatWrapping}
 				/>
-				<meshBasicMaterial transparent resourceId="material_move_left">
-					<textureResource resourceId="texture_move_left_right" />
-				</meshBasicMaterial>
-				<meshBasicMaterial transparent resourceId="material_move_top">
-					<textureResource resourceId="texture_move_top_bottom" />
-				</meshBasicMaterial>
-				<meshBasicMaterial transparent resourceId="material_move_bottom">
-					<textureResource resourceId="texture_move_top_bottom" />
-				</meshBasicMaterial>
-				<meshBasicMaterial transparent resourceId="material_move_right">
-					<textureResource resourceId="texture_move_left_right" />
-				</meshBasicMaterial>
-				<planeGeometry
-					ref="geometry_move_left"
-					resourceId="geometry_move_left"
-					width={128}
-					height={128}
+				<texture
+					resourceId="texture_hit_top_bottom"
+					url="img/hit_top_bottom.png"
+					wrapS={THREE.RepeatWrapping}
+					wrapT={THREE.RepeatWrapping}
 				/>
-				<planeGeometry
-					ref="geometry_move_top"
-					resourceId="geometry_move_top"
-					width={128}
-					height={128}
-				/>
-				<planeGeometry
-					ref="geometry_move_bottom"
-					resourceId="geometry_move_bottom"
-					width={128}
-					height={128}
-				/>
-				<planeGeometry
-					ref="geometry_move_right"
-					resourceId="geometry_move_right"
-					width={128}
-					height={128}
+				<texture
+					resourceId="texture_hit_left_right"
+					url="img/hit_left_right.png"
+					wrapS={THREE.RepeatWrapping}
+					wrapT={THREE.RepeatWrapping}
 				/>
 			</resources>
 		);

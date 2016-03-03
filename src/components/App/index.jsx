@@ -27,7 +27,7 @@ export class App extends Component {
 		this.props.listenToClicks();
 		this.props.listenToPads();
 		this.props.loadRecords();
-		this.props.launchIdle();
+		this.props.launchAssets();
 		setDevGameState(this.props.game.get('status'));
 	}
 	componentDidUpdate(prevProps) {

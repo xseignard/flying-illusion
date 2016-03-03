@@ -2,12 +2,16 @@ import { Map } from 'immutable';
 import C from '../../constants';
 
 const defaultState = Map([
-	['status', 'idle'],
+	['status', 'assets'],
 	['timeout', null],
 ]);
 
 export function game(state = defaultState, action) {
 	switch (action.type) {
+		case C.GAME_ASSETS:
+			return state
+				.set('status', 'assets')
+				.set('timeout', action.timeout);
 		case C.GAME_IDLE:
 			return state
 				.set('status', 'idle')
