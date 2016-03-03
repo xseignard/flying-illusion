@@ -6,6 +6,7 @@ import css from './css';
 export class Video extends Component {
 	constructor(props) {
 		super(props);
+		this.videoSynchronization = this.videoSynchronization.bind(this);
 		this.videoNames = [
 			'idle_zoom',
 			'intro_tuto',
@@ -17,9 +18,6 @@ export class Video extends Component {
 			'save_rank',
 			'end'
 		];
-		this.state = {
-			muted: true
-		};
 	}
 	componentDidMount() {
 		const video = this.refs[this.props.game.get('status')];
@@ -27,6 +25,7 @@ export class Video extends Component {
 			video.play();
 			video.classList.add(css.above);
 		}
+		this.videoSynchronization();
 	}
 	componentWillReceiveProps(nextProps) {
 		const status = this.props.game.get('status');
@@ -76,6 +75,16 @@ export class Video extends Component {
 			currentVideoEl.pause();
 			currentVideoEl.currentTime = 0;
 		}
+	}
+	videoSynchronization() {
+		this.videoNames.forEach((name) => {
+			this.refs[name].addEventListener('play', (e) => {
+				if (this.props.game.get('status') === 'play' && name === 'Last_Resistance') {
+					const delay = Date.now() - this.props.choregraphy.get('time');
+					this.refs[name].currentTime = delay / 1000;
+				}
+			});
+		});
 	}
 	render() {
 		const videosContent = this.videoNames.map((name) => {
