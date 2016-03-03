@@ -27,7 +27,7 @@ export const setRandomChoregraphy = () => {
 };
 
 export const getChoregraphyEndTime = (moves) => {
-	return moves.last().time + C.MOVES_END_DELAY;
+	return moves.last().time;
 };
 
 export const setGameTimeouts = (isTuto) => {

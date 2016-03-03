@@ -31,7 +31,10 @@ export class Video extends Component {
 		const status = this.props.game.get('status');
 		const nextStatus = nextProps.game.get('status');
 		// arriving to tuto or rank wont make the video change
-		if (nextStatus.match(/zoom|tuto|rank/)) return false;
+		if (
+			status === nextStatus ||
+			nextStatus.match(/zoom|tuto|rank/)
+		) return false;
 
 		let currentVideoEl = this.refs[status];
 		let nextVideoEl = this.refs[nextStatus];
@@ -80,7 +83,8 @@ export class Video extends Component {
 		this.videoNames.forEach((name) => {
 			this.refs[name].addEventListener('play', (e) => {
 				if (this.props.game.get('status') === 'play' && name === 'Last_Resistance') {
-					const delay = Date.now() - this.props.choregraphy.get('time') + 300;
+					// FIXME: Find better way to sync video
+					const delay = Date.now() - this.props.choregraphy.get('time') + 400;
 					this.refs[name].currentTime = delay / 1000;
 				}
 			});
@@ -97,7 +101,7 @@ export class Video extends Component {
 					width={C.APP_WIDTH}
 					height={C.APP_HEIGHT}
 					loop
-					muted={this.props.admin.get('muted')}
+					muted
 					preload="auto"
 				></video>
 			);
