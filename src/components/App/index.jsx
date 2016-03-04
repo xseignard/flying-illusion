@@ -40,7 +40,7 @@ export class App extends Component {
 		}
 	}
 	animate() {
-		animate(this.targetsRefs, this.movesRefs);
+		animate(this.threeRefs, this.targetsRefs, this.movesRefs);
 		if (this.shouldAnimate) requestAnimationFrame(this.animate);
 		else reset(this.targetsRefs, this.movesRefs);
 		this.threeRefs.renderer.render(this.threeRefs.scene, this.threeRefs.camera);

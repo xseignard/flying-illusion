@@ -1,7 +1,7 @@
 import { world } from '../../world/master';
 import { getSpriteOffset } from '../Webgl/common/helpers';
 
-export const animate = (targetsRefs, movesRefs) => {
+export const animate = (threeRefs, targetsRefs, movesRefs) => {
 	Object.keys(targetsRefs).forEach(direction => {
 		if (!world.targets[direction].shouldAnimate) {
 			targetsRefs[direction].material.opacity = 0;
@@ -19,8 +19,8 @@ export const animate = (targetsRefs, movesRefs) => {
 			);
 			// if target is hit, change geometry, material and scale it
 			if (world.moves[id].shouldScale) {
-				movesRefs[id].mesh.material = movesRefs[id].hitMaterial;
-				movesRefs[id].mesh.geometry = movesRefs[id].hitGeometry;
+				movesRefs[id].mesh.material = threeRefs.hitMovesMaterials[world.moves[id].direction];
+				movesRefs[id].mesh.geometry = threeRefs.hitMovesGeometries[world.moves[id].direction];
 				movesRefs[id].mesh.scale.set(
 					world.moves[id].scale,
 					world.moves[id].scale,

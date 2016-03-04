@@ -23,11 +23,8 @@ export class Move extends Component {
 			mesh: this.refs.move,
 			material: this.refs.material,
 			geometry: this.refs.geometry,
-			hitMaterial: this.refs.hitMaterial,
-			hitGeometry: this.refs.hitGeometry
 		};
 		this.refs.geometry.rotateZ(this.rotation);
-		this.refs.hitGeometry.rotateZ(this.rotation);
 	}
 	shouldComponentUpdate(nextProps) {
 		return false;
@@ -44,17 +41,6 @@ export class Move extends Component {
 						<textureResource resourceId={`texture_move_${this.textureId}`} />
 					</meshBasicMaterial>
 				</mesh>
-				<resources>
-					<meshBasicMaterial ref="hitMaterial" resourceId="hitMaterial" transparent>
-						<textureResource resourceId={`texture_hit_${this.textureId}`} />
-					</meshBasicMaterial>
-					<planeGeometry
-						ref="hitGeometry"
-						resourceId="hitGeometry"
-						width={512}
-						height={512}
-					/>
-				</resources>
 			</group>
 		);
 	}

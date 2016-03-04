@@ -28,7 +28,9 @@ export default class Scene extends Component {
 					bottom={C.APP_HEIGHT / -2}
 					position={this.cameraPosition}
 				/>
-				<Resources />
+				<Resources
+					threeRefs={this.props.threeRefs}
+				/>
 				<Targets
 					targetsRefs={this.props.targetsRefs}
 				/>

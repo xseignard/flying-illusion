@@ -67,7 +67,7 @@ export const initWorld = () => {
 		S.showTimes = {};
 		S.movesScaleIndexes = {};
 		S.moves.forEach(move => {
-			world.moves[move.id] = {};
+			world.moves[move.id] = { direction: move.direction };
 			S.showTimes[move.id] = move.showTime;
 			S.movesScaleIndexes[move.id] = 0;
 		});
@@ -105,7 +105,7 @@ const checkMove = (move, index) => {
 	}
 	if (
 		move.comment !== previousMove.comment &&
-		move.match(commentSuccess)
+		move.comment.match(commentSuccess)
 	) {
 		world.moves[move.id].shouldScale = true;
 		world.moves[move.id].scale = getMoveScale(0);
