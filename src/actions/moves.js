@@ -39,7 +39,7 @@ export const setMovesTimeouts = (forward = 0) => {
 					hideFromMaster: true,
 					log: true
 				});
-			}, move.time + 1000 - timeDifference);
+			}, move.time + 2000 - timeDifference);
 			return {
 				timeoutShow,
 				timeoutCommentable,

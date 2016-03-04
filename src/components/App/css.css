@@ -9,3 +9,9 @@
 	left: 0;
 	right: 0;
 }
+.webgl {
+	z-index: 0;
+}
+.html {
+	z-index: 10;
+}

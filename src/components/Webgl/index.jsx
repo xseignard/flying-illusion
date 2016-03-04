@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import C from '../../constants';
 import * as gameActions from '../../actions/game';
 import Scene from './Scene';
+import Lines from '../Html/common/Lines';
 import css from './css';
 
 export class Webgl extends Component {
@@ -28,26 +29,31 @@ export class Webgl extends Component {
 		});
 		return (
 			<div className={thisClass}>
-				<React3
-					context="3d"
-					mainCamera="camera"
-					width={C.APP_WIDTH}
-					height={C.APP_HEIGHT}
-					alpha
-					clearAlpha={0}
-					antialias
-					onRendererUpdated={this.onRendererUpdated}
-					forceManualRender
-					onManualRenderTriggerCreated={this.onManualRenderTriggerCreated}
-				>
-					<Scene
-						threeRefs={this.props.threeRefs}
-						movesRefs={this.props.movesRefs}
-						targetsRefs={this.props.targetsRefs}
-						game={this.props.game}
-						moves={this.props.moves}
-					/>
-				</React3>
+				<div className={css.lines}>
+					<Lines />
+				</div>
+				<div className={css.react3}>
+					<React3
+						context="3d"
+						mainCamera="camera"
+						width={C.APP_WIDTH}
+						height={C.APP_HEIGHT}
+						alpha
+						clearAlpha={0}
+						antialias
+						onRendererUpdated={this.onRendererUpdated}
+						forceManualRender
+						onManualRenderTriggerCreated={this.onManualRenderTriggerCreated}
+					>
+						<Scene
+							threeRefs={this.props.threeRefs}
+							movesRefs={this.props.movesRefs}
+							targetsRefs={this.props.targetsRefs}
+							game={this.props.game}
+							moves={this.props.moves}
+						/>
+					</React3>
+				</div>
 			</div>
 		);
 	}

@@ -3,7 +3,6 @@ import { findDOMNode } from 'react-dom';
 import Progression from '../common/Progression';
 import Hits from '../common/Hits';
 import Performance from '../common/Performance';
-import Lines from '../common/Lines';
 import Text from '../common/Text';
 import Background from '../common/Background';
 import {
@@ -42,7 +41,6 @@ export default class Rank extends Component {
 				<Hits />
 				<Progression />
 				<Performance />
-				<Lines />
 			</div>
 		);
 	}
