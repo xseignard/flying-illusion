@@ -3,6 +3,14 @@ import { connect } from 'react-redux';
 import Text from '../Text';
 import css from './css';
 
+const comments = {
+	ok: 'OK',
+	good: 'BIEN',
+	excellent: 'EXCELLENT',
+	fail: '',
+	miss: '',
+};
+
 export class Performance extends Component {
 	constructor() {
 		super();
@@ -29,7 +37,7 @@ export class Performance extends Component {
 				<div className={css.combo}>
 					<div className={css.label}>
 						<div ref="lastComment">
-							{this.props.performance.comments.last}
+							{comments[this.props.performance.comments.last]}
 						</div>
 					</div>
 					<div className={css.amount}>

@@ -1,20 +1,43 @@
-.tuto {}
-
-.ready {
+.tuto {
 	position: absolute;
-	top: 470px;
-	left: -950px;
-	font-size: 96px;
+	overflow: hidden;
+	top: 0;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+.ready,
+.rule,
+.rule2,
+.rule3 {
+	position: absolute;
+	text-align: center;
+	position: absolute;
+	left: 0px;
+	right: 0px;
 	font-style: italic;
-	margin: 0;
+}
+.ready {
+	top: 470px;
+	font-size: 96px;
+	transform: translateX(-1920px);
 }
 
-.rules {
-	position: absolute;
+.rule {
 	top: 570px;
-	left: 1920px;
 	font-size: 46px;
-	font-style: italic;
 	opacity: 0.6;
-	margin: 0;
+	transform: translateX(1920px);
+}
+.rule2 {
+	top: 450px;
+	font-size: 46px;
+	opacity: 0;
+	transform: translateY(50px);
+}
+.rule3 {
+	top: 550px;
+	font-size: 46px;
+	opacity: 0;
+	transform: translateY(50px);
 }

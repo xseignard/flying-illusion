@@ -16,7 +16,7 @@ export default () => {
 	});
 	return (
 		<div className={css.wait}>
-			<Background animated />
+			<Background />
 			<div className={commonCss.headline}>
 				<Headline direction="in" lineNumber="line1">
 					Maintenez
