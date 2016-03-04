@@ -162,7 +162,7 @@ export const positionMoves = () => {
 		}
 		if (world.moves[id].shouldScale) {
 			S.movesScaleIndexes[id]++;
-			if (S.movesScaleIndexes[id] >= C.MOVE_HIT_FRAME_DURATION) {
+			if (S.movesScaleIndexes[id] >= C.MOVE_HIT_FRAMES) {
 				world.moves[id].shouldScale = false;
 			}
 			world.moves[id].scale = getMoveScale(S.movesScaleIndexes[id]);
