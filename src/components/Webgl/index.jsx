@@ -20,7 +20,7 @@ export class Webgl extends Component {
 		this.props.threeRefs.renderer = renderer;
 		setTimeout(() => {
 			renderer.render(this.props.threeRefs.scene, this.props.threeRefs.camera);
-		}, 5000);
+		}, 10000);
 	}
 	render() {
 		const thisClass = classnames({
