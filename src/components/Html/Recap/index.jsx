@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import Background from '../common/Background';
 import Lightning from '../common/Lightning';
-import { getMaximumComments } from '../../../selectors/moves';
+import { getMaximumComments, getMaximumProgression } from '../../../selectors/moves';
 import { Metric } from './Metric';
 import Text from '../common/Text';
 import commonCss from '../common/css';
@@ -65,7 +65,7 @@ export class Recap extends Component {
 						<Metric
 							label="COMBO MAX"
 							value={this.props.performance.comboMax}
-							maxValue={this.props.maxComments}
+							maxValue={this.props.maxCombo}
 						/>
 					</div>
 				</div>
@@ -83,7 +83,8 @@ export class Recap extends Component {
 const mapStateToProps = (state) => {
 	return {
 		performance: state.performance,
-		maxComments: getMaximumComments(state)
+		maxComments: getMaximumComments(state),
+		maxCombo: getMaximumProgression(state)
 	};
 };
 
