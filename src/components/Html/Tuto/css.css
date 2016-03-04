@@ -1,3 +1,20 @@
-.tuto {
+.tuto {}
 
+.ready {
+	position: absolute;
+	top: 470px;
+	left: -950px;
+	font-size: 96px;
+	font-style: italic;
+	margin: 0;
+}
+
+.rules {
+	position: absolute;
+	top: 570px;
+	left: 1920px;
+	font-size: 46px;
+	font-style: italic;
+	opacity: 0.6;
+	margin: 0;
 }
