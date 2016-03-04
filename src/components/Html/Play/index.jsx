@@ -12,14 +12,13 @@ export default class Rank extends Component {
 		super(props);
 	}
 	render() {
-		const lightningContent = this.props.play ? <Lightning /> : null;
 		return (
-			<div className={css.tutoPlay}>
+			<div className={css.play}>
+				<Lightning />
 				<Hits />
 				<Progression />
 				<Performance />
 				<Lines />
-				{lightningContent}
 			</div>
 		);
 	}

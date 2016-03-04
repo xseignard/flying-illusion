@@ -102,7 +102,7 @@ export class Video extends Component {
 					height={C.APP_HEIGHT}
 					loop
 					preload="auto"
-					muted
+					muted={this.props.admin.get('muted') || name === 'Last_Resistance'}
 				></video>
 			);
 		});

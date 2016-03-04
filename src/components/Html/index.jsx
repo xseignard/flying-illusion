@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import Assets from './Assets';
 import Idle from './Idle';
 import Zoom from './Zoom';
-import TutoPlay from './TutoPlay';
+import Tuto from './Tuto';
 import Wait from './Wait';
 import Warning from './Warning';
+import Play from './Play';
 import Recap from './Recap';
 import Save from './Save';
 import Rank from './Rank';
@@ -17,11 +18,11 @@ const mapStatusToTag = {
 	idle: <Idle />,
 	zoom: <Zoom />,
 	intro: <noscript />,
-	tuto: <TutoPlay />,
+	tuto: <Tuto />,
 	wait: <Wait />,
 	warning: <Warning />,
 	load: <noscript />,
-	play: <TutoPlay play />,
+	play: <Play />,
 	recap: <Recap />,
 	save: <Save />,
 	rank: <Rank />,
@@ -33,8 +34,7 @@ export class Html extends Component {
 		super(props);
 	}
 	render() {
-		const status = this.props.game.get('status');
-		const content = mapStatusToTag[status];
+		const content = mapStatusToTag[this.props.game.get('status')];
 		return (
 			<div className={css.html}>
 				{content}
