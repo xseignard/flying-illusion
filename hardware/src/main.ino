@@ -4,5 +4,5 @@ void setup() {
 
 void loop() {
 	Serial.println("left");
-	delay(1000);
+	delay(10000);
 }
