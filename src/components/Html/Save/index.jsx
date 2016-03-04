@@ -4,6 +4,7 @@ import Background from '../common/Background';
 import Lightning from '../common/Lightning';
 import { saveRecord } from '../../../actions/records';
 import Letter from './Letter';
+import Shooter from './Shooter';
 import Text from '../common/Text';
 import finalCss from '../common/final';
 import commonCss from '../common/css';
@@ -71,6 +72,7 @@ export class Save extends Component {
 				</div>
 				<div className={css.letters}>
 					{lettersContent}
+					<Shooter controls={controls} focusIndex={this.state.focusIndex} />
 				</div>
 				<div className={commonCss.hint}>
 					<Text>

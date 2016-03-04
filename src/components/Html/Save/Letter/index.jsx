@@ -51,7 +51,6 @@ export class Letter extends Component {
 	}
 	changeLetter(direction) {
 		const increment = direction === 'top' ? -1 : 1;
-		this.refs[direction].classList.add(css.onPadDown);
 		this.animation = this.refs.letter.animate([
 			{ transform: getCurrentTransform(this.props.height) },
 			{ transform: getNextTransform(this.props.height, increment) }
@@ -59,7 +58,6 @@ export class Letter extends Component {
 			duration: this.props.duration,
 		});
 		this.animation.onfinish = () => {
-			this.refs[direction].classList.remove(css.onPadDown);
 			const thisIndex = U.alphabet.indexOf(this.state.letter);
 			const letter = U.getItemByInfiniteIndex(U.alphabet, thisIndex + increment);
 			this.setState({ letter });
@@ -80,15 +78,6 @@ export class Letter extends Component {
 				</div>
 			);
 		});
-		const controlsContent = this.props.controls.map((direction) => {
-			return (
-				<div
-					key={direction}
-					ref={direction}
-					className={css[`control_${direction}`]}
-				></div>
-			);
-		});
 		return (
 			<div className={letterClass}>
 				<div className={css.visibleLetters}>
@@ -100,7 +89,6 @@ export class Letter extends Component {
 						{lettersContent}
 					</div>
 				</div>
-				{controlsContent}
 			</div>
 		);
 	}
