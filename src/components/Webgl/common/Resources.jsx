@@ -104,31 +104,31 @@ export default class Resources extends Component {
 				<planeGeometry
 					ref="geometry_target_left"
 					resourceId="geometry_target_left"
-					width={128}
-					height={128}
+					width={256}
+					height={256}
 				/>
 				<planeGeometry
 					ref="geometry_target_top"
 					resourceId="geometry_target_top"
-					width={128}
-					height={128}
+					width={256}
+					height={256}
 				/>
 				<planeGeometry
 					ref="geometry_target_right"
 					resourceId="geometry_target_right"
-					width={128}
-					height={128}
+					width={256}
+					height={256}
 				/>
 				<planeGeometry
 					ref="geometry_target_bottom"
 					resourceId="geometry_target_bottom"
-					width={128}
-					height={128}
+					width={256}
+					height={256}
 				/>
 				<planeGeometry
 					resourceId="sprite_geometry"
-					width={256}
-					height={256}
+					width={512}
+					height={512}
 				/>
 				<texture
 					resourceId="texture_move_left_right"
