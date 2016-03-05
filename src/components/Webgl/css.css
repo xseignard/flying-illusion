@@ -32,10 +32,7 @@
 .play {
 	opacity: 1;
 	transition: opacity 1s linear;
-	transition-delay: 2s;
 }
-
-.wait,
 .recap {
 	opacity: 0;
 	transition: opacity 1s linear;
@@ -62,4 +59,7 @@
 	top: 0;
 	bottom: 0;
 	z-index: 1;
+}
+.game {
+	z-index: 2;
 }
