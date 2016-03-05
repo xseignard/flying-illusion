@@ -1,11 +1,44 @@
 .webgl {
-	position: relative;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
 	opacity: 0;
+	will-change: opacity;
+}
+.tuto {
+	animation: tuto 10s linear;
+	animation-fill-mode: forwards;
+}
+@keyframes tuto {
+	0% {
+		opacity: 0;
+	}
+	20% {
+		opacity: 0;
+	}
+	30% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 
-.tuto,
 .play {
 	opacity: 1;
+	transition: opacity 1s linear;
+	transition-delay: 2s;
+}
+
+.wait,
+.recap {
+	opacity: 0;
+	transition: opacity 1s linear;
 }
 
 .load,
@@ -13,15 +46,19 @@
 	opacity: 0.3;
 }
 
+.game,
 .lines {
 	position: absolute;
+	left: 0;
+	right: 0;
 	top: 0;
 	bottom: 0;
 	z-index: 0;
 }
-
 .react3 {
 	position: absolute;
+	left: 0;
+	right: 0;
 	top: 0;
 	bottom: 0;
 	z-index: 1;

@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import Progression from '../common/Progression';
-import Hits from '../common/Hits';
-import Performance from '../common/Performance';
 import Lightning from '../common/Lightning';
 import css from './css';
 
@@ -14,9 +11,6 @@ export default class Rank extends Component {
 		return (
 			<div className={css.play}>
 				<Lightning />
-				<Hits />
-				<Progression />
-				<Performance />
 			</div>
 		);
 	}

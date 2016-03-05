@@ -5,7 +5,7 @@ import Lightning from '../common/Lightning';
 import { saveRecord } from '../../../actions/records';
 import Letter from './Letter';
 import Shooter from './Shooter';
-import Text from '../common/Text';
+import Texte from '../common/Texte';
 import finalCss from '../common/final';
 import commonCss from '../common/css';
 import css from './css';
@@ -64,9 +64,9 @@ export class Save extends Component {
 		return (
 			<div className={css.save}>
 				<Background />
-				<Text className={finalCss.h1}>
+				<Texte className={finalCss.h1}>
 					PARTIE FINIE
-				</Text>
+				</Texte>
 				<div className={finalCss.score}>
 					{this.props.performance.score} POINTS
 				</div>
@@ -75,9 +75,9 @@ export class Save extends Component {
 					<Shooter controls={controls} focusIndex={this.state.focusIndex} />
 				</div>
 				<div className={commonCss.hint}>
-					<Text>
+					<Texte>
 						INSCRIVEZ VOTRE PSEUDO EN FACE DE VOTRE SCORE
-					</Text>
+					</Texte>
 				</div>
 				<Lightning />
 			</div>

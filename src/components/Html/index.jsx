@@ -10,6 +10,7 @@ import Play from './Play';
 import Recap from './Recap';
 import Save from './Save';
 import Rank from './Rank';
+import End from './End';
 import css from './css';
 
 const mapStatusToTag = {
@@ -25,7 +26,7 @@ const mapStatusToTag = {
 	recap: <Recap />,
 	save: <Save />,
 	rank: <Rank />,
-	end: <noscript />,
+	end: <End />,
 };
 
 export class Html extends Component {

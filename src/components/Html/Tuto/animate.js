@@ -3,7 +3,7 @@ export const animateReady = ready => {
 		{ transform: 'translateX(-1920px)' },
 		{ transform: 'translateX(1920px)' },
 	], {
-		delay: 1000,
+		delay: 0,
 		duration: 3000,
 		easing: 'cubic-bezier(0,.9,1,.1)'
 	});
@@ -14,7 +14,7 @@ export const animateRule = rule => {
 		{ transform: 'translateX(1920px)' },
 		{ transform: 'translateX(-1920px)' },
 	], {
-		delay: 1000,
+		delay: 0,
 		duration: 3000,
 		easing: 'cubic-bezier(0,.9,1,.1)'
 	});

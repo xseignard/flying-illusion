@@ -13,6 +13,10 @@
 	top: 0;
 	bottom: 0;
 }
+.closed .color,
+.closed .border {
+	transform: scaleY(0);
+}
 .color {
 	background: linear-gradient(to right, rgba(29, 130, 196, 0.05) 0%,
 	  rgba(29, 130, 196, 0.5) 35%, rgba(29, 130, 196, 0.5) 60%, rgba(29, 130, 196, 0.05) 100%);

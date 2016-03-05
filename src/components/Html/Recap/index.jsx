@@ -6,7 +6,7 @@ import Background from '../common/Background';
 import Lightning from '../common/Lightning';
 import { getMaximumComments, getMaximumProgression } from '../../../selectors/moves';
 import { Metric } from './Metric';
-import Text from '../common/Text';
+import Texte from '../common/Texte';
 import commonCss from '../common/css';
 import finalCss from '../common/final.css';
 import { animateH1, animateScore, animateMetrics } from './animate';
@@ -32,10 +32,10 @@ export class Recap extends Component {
 		});
 		return (
 			<div className={css.recap}>
-				<Background animated />
-				<Text ref="h1" className={h1Class}>
+				<Background animated="in" />
+				<Texte ref="h1" className={h1Class}>
 					PARTIE FINIE
-				</Text>
+				</Texte>
 				<div ref="score" className={scoreClass}>
 					{this.props.performance.score} POINTS
 				</div>
@@ -70,9 +70,9 @@ export class Recap extends Component {
 					</div>
 				</div>
 				<div className={commonCss.hint}>
-					<Text>APPUYEZ SUR</Text>
+					<Texte>APPUYEZ SUR</Texte>
 					<div className={commonCss.arrow_right}></div>
-					<Text>POUR ENREGISTRER VOTRE SCORE</Text>
+					<Texte>POUR ENREGISTRER VOTRE SCORE</Texte>
 				</div>
 				<Lightning />
 			</div>

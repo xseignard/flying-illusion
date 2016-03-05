@@ -18,14 +18,14 @@ export default () => {
 		<div className={css.wait}>
 			<Background />
 			<div className={commonCss.headline}>
-				<Headline direction="in" lineNumber="line1">
+				<Headline direction="in" delay="200" lineNumber="line1">
 					Maintenez
 					<div className={leftArrowClass}></div>
 					et
 					<div className={rightArrowClass}></div>
 					avec vos pieds
 				</Headline>
-				<Headline direction="in" lineNumber="line2">
+				<Headline direction="in" delay="200" lineNumber="line2">
 					pour commencer à jouer
 				</Headline>
 			</div>

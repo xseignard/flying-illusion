@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import Text from '../Text';
+import Texte from '../Texte';
 import css from './css';
 
 export default class Headline extends Component {
@@ -23,7 +23,7 @@ export default class Headline extends Component {
 		});
 		return (
 			<div ref="h1" className={thisClass}>
-				<Text>{this.props.children}</Text>
+				<Texte>{this.props.children}</Texte>
 			</div>
 		);
 	}

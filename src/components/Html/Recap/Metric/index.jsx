@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Odometer from 'odometer';
 import 'odometer/themes/odometer-theme-minimal';
-import Text from '../../common/Text';
+import Texte from '../../common/Texte';
 import css from './css';
 
 export class Metric extends Component {
@@ -28,9 +28,9 @@ export class Metric extends Component {
 		return (
 			<div className={css.metric}>
 				<div>
-					<Text className={css.label}>
+					<Texte className={css.label}>
 						{this.props.label}
-					</Text>
+					</Texte>
 				</div>
 				<div className={css.scale}>
 					<div ref="bar" className={css.bar} style={inlineStyle} />

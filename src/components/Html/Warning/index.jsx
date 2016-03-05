@@ -1,15 +1,15 @@
 import React from 'react';
-import Text from '../common/Text';
+import Texte from '../common/Texte';
 import css from './css';
 
 export default () => {
 	return (
 		<div className={css.warning}>
 			<div className={css.headline}>
-				<Text>AVERTISSEMENT</Text>
+				<Texte>AVERTISSEMENT</Texte>
 			</div>
 			<div className={css.content}>
-				<Text>
+				<Texte>
 					<br />Ce jeu est déconseillé aux femmes enceintes.<br /><br />
 					La participation d’un enfant mineur à ce jeu
 					doit se faire sous la surveillance d’un adulte.<br /><br />
@@ -23,7 +23,7 @@ export default () => {
 					Votre participation se fera sous votre seule responsabilité;
 					en aucun cas la responsabilité de Red Bull ne pourra être recherchée.
 					Votre participation au jeu emporte votre pleine acceptation des risques.
-				</Text>
+				</Texte>
 			</div>
 		</div>
 	);

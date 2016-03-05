@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import css from './css';
 
-export default class Text extends Component {
+export default class Texte extends Component {
 	render() {
 		const thisClass = classnames({
 			[css.shade]: true,

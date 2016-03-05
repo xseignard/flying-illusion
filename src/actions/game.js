@@ -79,17 +79,14 @@ launchIntro = (devTime = 0) => {
 launchTuto = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
-		dispatch(resetSteps());
 		dispatch({ type: C.STATS_RESET });
+		dispatch(resetSteps());
 		dispatch(setTutoChoregraphy());
 		const tutoFinishTime = getChoregraphyEndTime(getState().dance.get('moves'))
 			+ C.TUTO_END_DELAY
 			- C.TUTO_FORWARD_TIME
 			- C.MOVE_DURATION;
 		const tutoTimeout = setTimeout(() => {
-			dispatch(resetSteps());
-			dispatch({ type: C.STATS_RESET });
-			dispatch(resetChoregraphy());
 			dispatch(launchWait());
 			dispatch(checkStatus());
 		}, tutoFinishTime + devTime);
@@ -145,6 +142,7 @@ launchLoad = (devTime = 0) => {
 launchPlay = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
+		dispatch({ type: C.STATS_RESET });
 		dispatch(resetSteps());
 		dispatch(setRandomChoregraphy());
 		const playEndTime = getChoregraphyEndTime(getState().dance.get('moves')) + C.MOVES_END_DELAY;

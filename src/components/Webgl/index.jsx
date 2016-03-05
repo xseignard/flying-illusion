@@ -6,6 +6,7 @@ import C from '../../constants';
 import * as gameActions from '../../actions/game';
 import Scene from './Scene';
 import Lines from '../Html/common/Lines';
+import Game from '../Html/common/Game';
 import css from './css';
 
 export class Webgl extends Component {
@@ -53,6 +54,9 @@ export class Webgl extends Component {
 							moves={this.props.moves}
 						/>
 					</React3>
+				</div>
+				<div className={css.game}>
+					<Game />
 				</div>
 			</div>
 		);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Text from '../Text';
+import Texte from '../Texte';
 import css from './css';
 
 const comments = {
@@ -31,7 +31,7 @@ export class Performance extends Component {
 				<div className={css.score}>
 					<div className={css.label}>SCORE</div>
 					<div className={css.amount}>
-						<Text>{this.props.performance.score}</Text>
+						<Texte>{this.props.performance.score}</Texte>
 					</div>
 				</div>
 				<div className={css.combo}>
@@ -41,7 +41,7 @@ export class Performance extends Component {
 						</div>
 					</div>
 					<div className={css.amount}>
-						<Text>X{this.props.performance.combo}</Text>
+						<Texte>X{this.props.performance.combo}</Texte>
 					</div>
 				</div>
 			</div>

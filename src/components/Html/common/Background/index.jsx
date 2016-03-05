@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import css from './css';
+
+const colorScaleY = {
+	in: [0, 1],
+	out: [1, 0],
+};
+
+const borderScaleY = {
+	in: [0.5, 1],
+	out: [1, 0.5],
+};
 
 export default class Background extends Component {
 	constructor(props) {
@@ -7,25 +18,40 @@ export default class Background extends Component {
 	}
 	componentDidMount() {
 		if (this.props.animated) {
-			this.refs.color.animate([
-				{ transform: 'scaleY(0)' },
-				{ transform: 'scaleY(1)' }
+			const colorAnimation = this.refs.color.animate([
+				{ transform: `scaleY(${colorScaleY[this.props.animated][0]})` },
+				{ transform: `scaleY(${colorScaleY[this.props.animated][1]})` },
 			], {
-				duration: 600,
-				easing: 'cubic-bezier(0,0,0.32,1)'
+				delay: this.props.delay || 0,
+				duration: this.props.duration || 600,
+				easing: this.props.duration || 'cubic-bezier(0,0,0.32,1)'
 			});
 			this.refs.border.animate([
-				{ transform: 'scaleY(0.5)' },
-				{ transform: 'scaleY(1)' }
+				{ transform: `scaleY(${borderScaleY[this.props.animated][0]})` },
+				{ transform: `scaleY(${borderScaleY[this.props.animated][1]})` },
 			], {
-				duration: 600,
-				easing: 'cubic-bezier(0,0,0.32,1)'
+				delay: this.props.delay || 0,
+				duration: this.props.duration || 600,
+				easing: this.props.duration || 'cubic-bezier(0,0,0.32,1)'
 			});
+			colorAnimation.onfinish = () => {
+				if (!this.refs.background) return;
+				if (this.props.animated === 'in') {
+					this.refs.background.classList.remove(css.closed);
+				}
+				else if (this.props.animated === 'out') {
+					this.refs.background.classList.add(css.closed);
+				}
+			};
 		}
 	}
 	render() {
+		const thisClass = classnames({
+			[css.background]: true,
+			[css.closed]: this.props.animated === 'in'
+		});
 		return (
-			<div className={css.background}>
+			<div ref="background" className={thisClass}>
 				<div ref="color" className={css.color}></div>
 				<div ref="border" className={css.border}></div>
 			</div>

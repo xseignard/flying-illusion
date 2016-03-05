@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Progression from '../common/Progression';
-import Hits from '../common/Hits';
-import Performance from '../common/Performance';
-import Text from '../common/Text';
+import Texte from '../common/Texte';
 import Background from '../common/Background';
 import {
 	animateReady,
@@ -26,22 +23,19 @@ export default class Rank extends Component {
 	render() {
 		return (
 			<div className={css.tuto}>
-				<Background animated />
+				<Background animated="in"/>
 				<div ref="ready" className={css.ready}>
-					<Text>PRÊT À ENTRER EN SCÈNE ?</Text>
+					<Texte>PRÊT À ENTRER EN SCÈNE ?</Texte>
 				</div>
 				<div ref="rule" className={css.rule}>
-					<Text>RÈGLES DU JEU</Text>
+					<Texte>RÈGLES DU JEU</Texte>
 				</div>
 				<div ref="rule2" className={css.rule2}>
-					<Text>SUIVEZ LES INDICATIONS À L’ÉCRAN</Text>
+					<Texte>SUIVEZ LES INDICATIONS À L’ÉCRAN</Texte>
 				</div>
 				<div ref="rule3" className={css.rule3}>
-					<Text>ET REPRODUISEZ LES MOUVEMENTS SUR LE TAPIS</Text>
+					<Texte>ET REPRODUISEZ LES MOUVEMENTS SUR LE TAPIS</Texte>
 				</div>
-				<Hits />
-				<Progression />
-				<Performance />
 			</div>
 		);
 	}

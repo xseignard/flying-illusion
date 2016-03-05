@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Text from '../common/Text';
+import Texte from '../common/Texte';
 import Background from '../common/Background';
 import Lightning from '../common/Lightning';
 import { getSortedRecords } from '../../../selectors/records';
@@ -63,7 +63,7 @@ export class Rank extends Component {
 			const currentScoreClass = this.rank === index ? css.podiumScore : '';
 			return (
 				<div key={index} className={currentScoreClass}>
-					<Text>
+					<Texte>
 						<div className={css.position}>
 							{index + 1}
 							<sup className={css.suffix}>{record.suffix}</sup>
@@ -74,7 +74,7 @@ export class Rank extends Component {
 						<div className={css.score}>
 							{record.score}
 						</div>
-					</Text>
+					</Texte>
 				</div>
 			);
 		});
@@ -88,7 +88,7 @@ export class Rank extends Component {
 				) ? css.siblingsScore : '';
 				return (
 					<div key={index} className={currentScoreClass}>
-						<Text>
+						<Texte>
 							<div className={css.position}>
 								{this.rank + record.correction + index}
 								<sup className={css.suffix}>{record.suffix}</sup>
@@ -99,16 +99,16 @@ export class Rank extends Component {
 							<div className={css.score}>
 								{record.score}
 							</div>
-						</Text>
+						</Texte>
 					</div>
 				);
 			});
 		return (
 			<div className={css.rank}>
 				<Background />
-				<Text className={finalCss.h1}>
+				<Texte className={finalCss.h1}>
 					CLASSEMENT
-				</Text>
+				</Texte>
 				<div className={finalCss.score}>
 					<span>{this.rank + 1}</span>
 					<sup className={css.suffix}>{suffix}</sup>

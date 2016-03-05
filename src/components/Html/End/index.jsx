@@ -1,11 +1,13 @@
 import React from 'react';
-import Text from '../common/Text';
+import Texte from '../common/Texte';
+import Background from '../common/Background';
 import commonCss from '../common/css';
 import css from './css';
 
 export default () => {
 	return (
 		<div className={css.end}>
+			<Background animated="out" />
 			<div className={css.logo}>
 				<img src="img/logo.png" />
 			</div>
@@ -34,9 +36,9 @@ export default () => {
 				</div>
 			</div>
 			<div className={commonCss.hint}>
-				<Text>APPUYEZ SUR</Text>
+				<Texte>APPUYEZ SUR</Texte>
 				<div className={commonCss.arrow_right}></div>
-				<Text>POUR TERMINER LE JEU</Text>
+				<Texte>POUR TERMINER LE JEU</Texte>
 			</div>
 		</div>
 	);
