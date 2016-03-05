@@ -14,7 +14,7 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
 	let mainWindow = new BrowserWindow({ fullscreen: true });
-	mainWindow.loadURL('file://' + __dirname + '/index.electron.html');
+	mainWindow.loadURL(`file://${__dirname}/index.electron.html`);
 
 	if (process.platform === 'darwin') {
 		globalShortcut.register('Alt+Command+I', () => {
