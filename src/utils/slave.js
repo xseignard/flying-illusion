@@ -13,7 +13,7 @@ import {
 } from '../world/slave';
 
 export const universalSelf = typeof self !== 'undefined' ?
-	self : require('../electron/electron-self');
+	self : require('../electron/self-webpackNoParse');
 
 export const sendToMaster = (message) => {
 	universalSelf.postMessage(JSON.stringify(message));

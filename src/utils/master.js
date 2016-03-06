@@ -2,8 +2,19 @@ import { store } from '../stores/master';
 import { setMasterWorld } from '../world/master';
 import { onPadChange } from '../actions/pads';
 
+const electronSlave = {
+	postMessage: (message) => {
+		window.electron.ipcRenderer.send('message', message);
+	},
+	addEventListener: (message, onSlaveMessage) => {
+		window.electron.ipcRenderer.on('message', (event, data) => {
+			onSlaveMessage({ data });
+		});
+	}
+};
+
 export const universalSlave = typeof window.electron === 'undefined' ?
-	new Worker('slave.js') : require('../electron/electron-slave');
+	new Worker('slave.js') : electronSlave;
 
 export const sendToSlave = (message) => {
 	universalSlave.postMessage(JSON.stringify(message));

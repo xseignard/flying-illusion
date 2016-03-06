@@ -35,7 +35,7 @@ module.exports = {
 	],
 	module: {
 		noParse: [
-			/electron/
+			/webpackNoParse/
 		],
 		preLoaders: [
 			{
