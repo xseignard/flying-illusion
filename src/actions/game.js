@@ -6,7 +6,7 @@ import {
 	setGameTimeouts,
 	resetChoregraphy
 } from './choregraphy';
-import { sendToSlave } from '../utils/master';
+import { sendToSlave } from '../threads/master';
 import { resetSteps } from './steps';
 
 let launchAssets;
@@ -82,14 +82,11 @@ launchTuto = (devTime = 0) => {
 		dispatch({ type: C.STATS_RESET });
 		dispatch(resetSteps());
 		dispatch(setTutoChoregraphy());
-		const tutoFinishTime = getChoregraphyEndTime(getState().dance.get('moves'))
-			+ C.TUTO_END_DELAY
-			- C.TUTO_FORWARD_TIME
-			- C.MOVE_DURATION;
+		const tutoEndTime = dispatch(getChoregraphyEndTime(true));
 		const tutoTimeout = setTimeout(() => {
 			dispatch(launchWait());
 			dispatch(checkStatus());
-		}, tutoFinishTime + devTime);
+		}, tutoEndTime + devTime);
 		dispatch({
 			type: C.GAME_TUTO,
 			timeout: tutoTimeout
@@ -143,7 +140,7 @@ launchPlay = (devTime = 0) => {
 		dispatch({ type: C.STATS_RESET });
 		dispatch(resetSteps());
 		dispatch(setRandomChoregraphy());
-		const playEndTime = getChoregraphyEndTime(getState().dance.get('moves')) + C.MOVES_END_DELAY;
+		const playEndTime = dispatch(getChoregraphyEndTime());
 		const playTimeout = setTimeout(() => {
 			dispatch(resetSteps());
 			dispatch(launchRecap());

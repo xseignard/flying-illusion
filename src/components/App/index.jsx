@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import U from '../../utils';
 import { setDevGameState } from '../../dev/game-state';
-import { slaveRequestAnimationFrame } from '../../utils/master';
+import { slaveRequestAnimationFrame } from '../../threads/master';
 import { listenToClicks } from '../../actions/admin';
 import { loadRecords } from '../../actions/records';
 import * as gameActions from '../../actions/game';

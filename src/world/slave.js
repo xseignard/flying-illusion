@@ -8,7 +8,7 @@ import {
 import { getPerformance } from '../selectors/performance';
 import { getHits } from '../selectors/hits';
 import C from '../constants';
-import { dispatchToMaster } from '../utils/slave';
+import { dispatchToMaster } from '../threads/slave';
 
 const hTiles = 8;
 const vTiles = 9;
@@ -114,12 +114,24 @@ const checkMove = (move, index) => {
 
 const checkTargets = (perf, hits) => {
 	if (!is(fromJS(perf), fromJS(S.perf))) {
-		S.shouldDispatchStatsOnRAF = true;
 		Object.keys(perf.snapshots).forEach(checkTarget.bind(this, perf));
+		if (
+			S.perf.score !== perf.score ||
+			S.perf.combo !== perf.combo
+		) {
+			S.shouldDispatchStatsOnRAF = true;
+		}
 		S.perf = perf;
 	}
 	if (!is(fromJS(hits), fromJS(S.hits))) {
-		S.shouldDispatchStatsOnRAF = true;
+		if (
+			!hits ||
+			!S.hits ||
+			hits.showHits ||
+			S.hits.showHits && !hits.showHits
+		) {
+			S.shouldDispatchStatsOnRAF = true;
+		}
 		S.hits = hits;
 	}
 };

@@ -1,5 +1,5 @@
 import C from '../constants';
-import { sendToSlave } from '../utils/master';
+import { sendToSlave } from '../threads/master';
 import { getTutoChoregraphy, getRandomChoregraphy } from '../choregraphies';
 
 export const setTutoChoregraphy = () => {
@@ -26,8 +26,24 @@ export const setRandomChoregraphy = () => {
 	};
 };
 
-export const getChoregraphyEndTime = (moves) => {
-	return moves.last().time;
+const findChoregraphyByName = (name) => {
+	return C.CHOREGRAPHIES.find(choregraphy => {
+		return choregraphy.name === name;
+	});
+};
+
+export const getChoregraphyEndTime = (isTuto) => {
+	return (dispatch, getState) => {
+		const state = getState();
+		if (isTuto) {
+			const tutoChoregraphy = findChoregraphyByName(C.TUTO_CHOREGRAPHY_NAME);
+			return tutoChoregraphy.duration
+			+ C.TUTO_END_DELAY
+			- C.TUTO_FORWARD_TIME
+			- C.MOVE_DURATION;
+		}
+		return findChoregraphyByName(state.choregraphy.get('name')).duration;
+	};
 };
 
 export const setGameTimeouts = (isTuto) => {

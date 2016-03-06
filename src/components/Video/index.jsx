@@ -4,23 +4,23 @@ import U from '../../utils';
 import C from '../../constants';
 import css from './css';
 
-const universVideosNames = [
-	'Last_Resistance'
-];
+const universVideosNames = C.CHOREGRAPHIES.map(choregraphy => {
+	return choregraphy.name;
+});
 
 const stateVideos = {
-	assets: { name: 'idle_zoom', restart: true },
-	idle: { name: 'idle_zoom', restart: true },
+	assets: { name: 'idle_zoom', start: true },
+	idle: { name: 'idle_zoom', start: true },
 	zoom: { name: 'idle_zoom' },
-	intro: { name: 'intro_tuto', restart: true },
+	intro: { name: 'intro_tuto', start: true },
 	tuto: { name: 'intro_tuto' },
-	wait: { name: 'wait', restart: true },
+	wait: { name: 'wait', start: true },
 	warning: { name: 'wait' },
-	load: { name: 'load', restart: true },
-	recap: { name: 'recap', restart: true },
-	save: { name: 'save_rank', restart: true },
+	load: { name: 'load', start: true },
+	recap: { name: 'recap', start: true },
+	save: { name: 'save_rank', start: true },
 	rank: { name: 'save_rank' },
-	end: { name: 'end', restart: true },
+	end: { name: 'end', start: true },
 };
 
 const stateVideosNames = U.filterOutDuplicates(Object.keys(stateVideos).map(key => {
@@ -32,10 +32,8 @@ const allVideosNames = [].concat(stateVideosNames).concat(universVideosNames);
 const getVideo = (props) => {
 	const status = props.game.get('status');
 	return status !== 'play' ?
-		stateVideos[status] : { name: props.choregraphy.get('name'), restart: true };
+		stateVideos[status] : { name: props.choregraphy.get('name'), start: true };
 };
-
-console.log(allVideosNames);
 
 export class Video extends Component {
 	constructor(props) {
@@ -58,28 +56,28 @@ export class Video extends Component {
 
 		if (
 			currentStatus !== nextStatus &&
-			nextVideo.restart
+			nextVideo.start
 		) {
 			if (nextVideo) {
-				const nextVideoEl = this.refs[nextVideo.name];
-				if (nextVideoEl) {
-					nextVideoEl.currentTime = 0;
-					nextVideoEl.play();
-					nextVideoEl.classList.add(css.above);
+				const nextVideoRef = this.refs[nextVideo.name];
+				if (nextVideoRef) {
+					nextVideoRef.currentTime = 0;
+					nextVideoRef.play();
+					nextVideoRef.classList.add(css.above);
 				}
 			}
 
 			if (currentVideo) {
-				const currentVideoEl = this.refs[currentVideo.name];
+				const currentVideoRef = this.refs[currentVideo.name];
 				if (
-					currentVideoEl &&
+					currentVideoRef &&
 					currentVideo.name &&
 					nextVideo.name &&
 					currentVideo.name !== nextVideo.name
 				) {
-					currentVideoEl.classList.remove(css.above);
-					currentVideoEl.pause();
-					currentVideoEl.currentTime = 0;
+					currentVideoRef.classList.remove(css.above);
+					currentVideoRef.pause();
+					currentVideoRef.currentTime = 0;
 				}
 			}
 		}
@@ -108,7 +106,8 @@ export class Video extends Component {
 					height={C.APP_HEIGHT}
 					loop
 					preload="auto"
-					muted={this.props.admin.get('muted') || name === 'Last_Resistance'}
+					muted={this.props.admin.get('muted') ||
+						this.props.game.get('status') === 'play'}
 				></video>
 			);
 		});

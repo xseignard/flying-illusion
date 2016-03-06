@@ -1,4 +1,5 @@
 export default {
+	TUTO_CHOREGRAPHY_NAME: 'Last_Resistance',
 	TUTO_FORWARD_TIME: 10000,
 	TUTO_END_TIME: 20000,
 	TUTO_END_DELAY: 1000,
