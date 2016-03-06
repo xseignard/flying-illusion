@@ -102,9 +102,7 @@ launchWait = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
 		const waitTimeout = setTimeout(() => {
-			dispatch({
-				type: C.GAME_IDLE
-			});
+			dispatch(launchIdle());
 		}, C.GAME_WAIT_DURATION + devTime);
 		dispatch({
 			type: C.GAME_WAIT,

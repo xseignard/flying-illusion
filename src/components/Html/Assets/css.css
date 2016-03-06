@@ -1,4 +1,6 @@
-.assets {}
+.assets {
+	background: #1D2025;
+}
 .video {
 	visibility: visible;
 	position: absolute;

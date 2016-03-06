@@ -55,22 +55,32 @@ export class Video extends Component {
 		const nextStatus = nextProps.game.get('status');
 		const currentVideo = getVideo(this.props);
 		const nextVideo = getVideo(nextProps);
-		const currentVideoEl = this.refs[currentVideo.name];
-		const nextVideoEl = this.refs[nextVideo.name];
 
 		if (
 			currentStatus !== nextStatus &&
 			nextVideo.restart
 		) {
-			if (nextVideoEl) {
-				nextVideoEl.currentTime = 0;
-				nextVideoEl.play();
-				nextVideoEl.classList.add(css.above);
+			if (nextVideo) {
+				const nextVideoEl = this.refs[nextVideo.name];
+				if (nextVideoEl) {
+					nextVideoEl.currentTime = 0;
+					nextVideoEl.play();
+					nextVideoEl.classList.add(css.above);
+				}
 			}
-			if (currentVideoEl && nextVideoEl && currentVideo.name !== nextVideo.name) {
-				currentVideoEl.classList.remove(css.above);
-				currentVideoEl.pause();
-				currentVideoEl.currentTime = 0;
+
+			if (currentVideo) {
+				const currentVideoEl = this.refs[currentVideo.name];
+				if (
+					currentVideoEl &&
+					currentVideo.name &&
+					nextVideo.name &&
+					currentVideo.name !== nextVideo.name
+				) {
+					currentVideoEl.classList.remove(css.above);
+					currentVideoEl.pause();
+					currentVideoEl.currentTime = 0;
+				}
 			}
 		}
 	}

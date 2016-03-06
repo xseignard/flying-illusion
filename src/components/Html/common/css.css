@@ -4,8 +4,23 @@
 	top: 50px;
 	margin-left: -160px;
 	width: 320px;
-	opacity: 0.9;
+	animation: fading 700ms linear;
+	animation-fill-mode: forwards;
 }
+@keyframes fading {
+	0% { opacity: 0; }
+	100% { opacity: 0.9; }
+}
+
+.logo.out {
+	animation: fadeout 700ms linear;
+	animation-fill-mode: forwards;
+}
+@keyframes fadeout {
+	0% { opacity: 0.9; }
+	100% { opacity: 0; }
+}
+
 .logo > img {
 	max-width: 100%;
 }
