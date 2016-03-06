@@ -1,20 +1,20 @@
 'use strict';
 
-const initDevHelpers = (globalShortcut, mainWindow) => {
+const initDevHelpers = (globalShortcut, masterWindow) => {
 	if (process.platform === 'darwin') {
 		globalShortcut.register('Alt+Command+I', () => {
-			mainWindow.toggleDevTools();
+			masterWindow.toggleDevTools();
 		});
 		globalShortcut.register('Command+Shift+F', () => {
-			mainWindow.setFullScreen(!mainWindow.isFullScreen());
+			masterWindow.setFullScreen(!masterWindow.isFullScreen());
 		});
 	}
 	else {
 		globalShortcut.register('Alt+Ctrl+I', () => {
-			mainWindow.toggleDevTools();
+			masterWindow.toggleDevTools();
 		});
 		globalShortcut.register('F11', () => {
-			mainWindow.setFullScreen(!mainWindow.isFullScreen());
+			masterWindow.setFullScreen(!masterWindow.isFullScreen());
 		});
 	}
 };

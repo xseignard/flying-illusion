@@ -1,28 +1,28 @@
 'use strict';
-const E = require('electron');
+const electron = require('electron');
 const app = require('app');
 const BrowserWindow = require('browser-window');
-const D = require('./dev');
-const pads = require('./pads');
-
-require('crash-reporter').start();
+const dev = require('./dev');
+const pads = require('./pads/index');
 
 app.on('ready', () => {
-	let mainWindow = new BrowserWindow({ fullscreen: true });
-	mainWindow.loadURL(`file://${__dirname}/../index.electron.html`);
-
-	D.initDevHelpers(E.globalShortcut, mainWindow);
-
-	pads.listenToPads((padChange) => {
-		mainWindow.webContents.send('pad', padChange);
+	global.masterWindow = new BrowserWindow({
+		useContentSize: true,
+		width: 960,
+		height: 540
 	});
-	E.ipcMain.on('performance', (event, data) => {
-		pads.lightPads(data);
+	dev.initDevHelpers(electron.globalShortcut, global.masterWindow);
+	if (global.masterWindow.setAspectRatio) global.masterWindow.setAspectRatio(1920 / 1080);
+	global.masterWindow.loadURL(`file://${__dirname}/../index.electron.html`);
+
+	require('../slave');
+
+	pads.onPadChange((padChange) => {
+		global.masterWindow.webContents.send('message', padChange);
 	});
 
-	// closing strategy
-	mainWindow.on('closed', () => {
-		mainWindow = null;
+	global.masterWindow.on('closed', () => {
+		global.masterWindow = null;
 	});
 });
 

@@ -10,7 +10,8 @@
 		"electron": "rm -rf ./www/electron/* && cp -r ./src/electron ./www",
 		"build:electron": "npm run build && npm run electron",
 		"rebuild": "electron-rebuild $(electron -v) -p -f -m www -w serialport -e node_modules/electron-prebuilt",
-		"start": "electron www",
+		"start": "npm run electron && electron www",
+		"develectron": "rm -rf ./www/electron/* && cp -r ./src/electron ./www && npm run start",
 		"app:osx": "electron-packager www flying-illusion --platform=darwin --arch=x64 --out=electron/osx --version=0.36.5 --overwrite",
     "app:linux": "electron-packager www flying-illusion --platform=linux --arch=x64 --out=electron/linux --version=0.36.5 --overwrite",
     "pack:linux": "node tasks/buildPackage.es5.js"

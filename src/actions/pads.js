@@ -1,10 +1,8 @@
 import C from '../constants';
 import { checkStatus } from './game';
 import { dispatchStep } from './steps';
-import dev from '../dev';
-import { listenToHardwarePads } from '../utils/electron';
 
-const onPadChange = (eventType, direction) => {
+export const onPadChange = (eventType, direction) => {
 	return (dispatch, getState) => {
 		const state = getState();
 		const status = state.game.get('status');
@@ -29,14 +27,3 @@ const onPadChange = (eventType, direction) => {
 		}
 	};
 };
-export function listenToPads() {
-	return dispatch => {
-		// TO BE REPLACED WITH MESSAGES COMING FROM THE ACTUAL PADS
-		dev.listenToDirectionKeys((eventType, direction) => {
-			dispatch(onPadChange(eventType, direction));
-		});
-		listenToHardwarePads((eventType, direction) => {
-			dispatch(onPadChange(eventType, direction));
-		});
-	};
-}
