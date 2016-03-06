@@ -1,4 +1,4 @@
-import { world } from '../../world/master';
+import { world } from '../../threads/master/world';
 import { getSpriteOffset } from '../Webgl/common/helpers';
 
 export const animate = (threeRefs, targetsRefs, movesRefs) => {

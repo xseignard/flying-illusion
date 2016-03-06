@@ -1,14 +1,14 @@
 import { is, fromJS } from 'immutable';
-import { store } from '../stores/slave';
+import { store } from '../../stores/slave';
 import {
 	getPositionY,
 	getSpriteOffset,
 	getMoveScale
-} from '../components/Webgl/common/helpers';
-import { getPerformance } from '../selectors/performance';
-import { getHits } from '../selectors/hits';
-import C from '../constants';
-import { dispatchToMaster } from '../threads/slave';
+} from '../../components/Webgl/common/helpers';
+import { getPerformance } from '../../selectors/performance';
+import { getHits } from '../../selectors/hits';
+import C from '../../constants';
+import { dispatchToMaster } from '../../threads/slave';
 
 const hTiles = 8;
 const vTiles = 9;

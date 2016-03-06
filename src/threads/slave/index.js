@@ -1,7 +1,7 @@
-import C from '../constants';
-import { store } from '../stores/slave';
-import { setTutoStepsTimeouts } from '../actions/tuto';
-import { setMovesTimeouts, stopMoves } from '../actions/moves';
+import C from '../../constants';
+import { store } from '../../stores/slave';
+import { setTutoStepsTimeouts } from '../../actions/tuto';
+import { setMovesTimeouts, stopMoves } from '../../actions/moves';
 import {
 	S,
 	world,
@@ -10,10 +10,10 @@ import {
 	onSlaveRequestAnimationFrame,
 	listenToStore,
 	stopListenToStore,
-} from '../world/slave';
+} from './world';
 
 export const universalSelf = typeof self !== 'undefined' ?
-	self : require('../electron/self-webpackNoParse');
+	self : require('../../electron/self-webpackNoParse');
 
 export const sendToMaster = (message) => {
 	universalSelf.postMessage(JSON.stringify(message));

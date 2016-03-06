@@ -35,13 +35,7 @@ const findChoregraphyByName = (name) => {
 export const getChoregraphyEndTime = (isTuto) => {
 	return (dispatch, getState) => {
 		const state = getState();
-		if (isTuto) {
-			const tutoChoregraphy = findChoregraphyByName(C.TUTO_CHOREGRAPHY_NAME);
-			return tutoChoregraphy.duration
-			+ C.TUTO_END_DELAY
-			- C.TUTO_FORWARD_TIME
-			- C.MOVE_DURATION;
-		}
+		if (isTuto) return C.TUTO_END_TIME - C.TUTO_FORWARD_TIME;
 		return findChoregraphyByName(state.choregraphy.get('name')).duration;
 	};
 };

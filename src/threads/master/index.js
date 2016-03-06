@@ -1,6 +1,6 @@
-import { store } from '../stores/master';
-import { setMasterWorld } from '../world/master';
-import { onPadChange } from '../actions/pads';
+import { store } from '../../stores/master';
+import { setMasterWorld } from './world';
+import { onPadChange } from '../../actions/pads';
 
 const electronSlave = {
 	postMessage: (message) => {
