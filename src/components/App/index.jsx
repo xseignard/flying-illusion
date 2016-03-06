@@ -4,7 +4,6 @@ import U from '../../utils';
 import { setDevGameState } from '../../dev/game-state';
 import { slaveRequestAnimationFrame } from '../../utils/master';
 import { listenToClicks } from '../../actions/admin';
-import { listenToPads } from '../../actions/pads';
 import { loadRecords } from '../../actions/records';
 import * as gameActions from '../../actions/game';
 import { animate, reset } from './animate';
@@ -25,7 +24,6 @@ export class App extends Component {
 	}
 	componentDidMount() {
 		this.props.listenToClicks();
-		this.props.listenToPads();
 		this.props.loadRecords();
 		this.props.launchAssets();
 		setDevGameState(this.props.game.get('status'));
@@ -78,7 +76,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = Object.assign(
-	{ listenToClicks, listenToPads, loadRecords }
+	{ listenToClicks, loadRecords }
 	, gameActions
 );
 

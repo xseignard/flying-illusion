@@ -31,9 +31,12 @@ module.exports = {
 			'process.env': {
 				NODE_ENV: JSON.stringify('development')
 			}
-		})
+		}),
 	],
 	module: {
+		noParse: [
+			/webpackNoParse/
+		],
 		preLoaders: [
 			{
 				test: /\.js|\.jsx$/,

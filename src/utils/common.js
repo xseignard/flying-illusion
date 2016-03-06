@@ -4,6 +4,13 @@ export const flattenArray = (arr) => {
 	});
 };
 
+// http://stackoverflow.com/questions/9229645/remove-duplicates-from-javascript-array
+export const filterOutDuplicates = (arr) => {
+	return arr.filter((item, pos, self) => {
+		return self.indexOf(item) === pos;
+	});
+};
+
 export const sum = (array) => {
 	return array.reduce((first, second) => {
 		return first + second;

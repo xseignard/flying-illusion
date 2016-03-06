@@ -1,23 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import U from '../../utils';
 import C from '../../constants';
 import css from './css';
+
+const universVideosNames = [
+	'Last_Resistance'
+];
+
+const stateVideos = {
+	assets: { name: 'idle_zoom', restart: true },
+	idle: { name: 'idle_zoom', restart: true },
+	zoom: { name: 'idle_zoom' },
+	intro: { name: 'intro_tuto', restart: true },
+	tuto: { name: 'intro_tuto' },
+	wait: { name: 'wait', restart: true },
+	warning: { name: 'wait' },
+	load: { name: 'load', restart: true },
+	recap: { name: 'recap', restart: true },
+	save: { name: 'save_rank', restart: true },
+	rank: { name: 'save_rank' },
+	end: { name: 'end', restart: true },
+};
+
+const stateVideosNames = U.filterOutDuplicates(Object.keys(stateVideos).map(key => {
+	return stateVideos[key].name;
+}));
+
+const allVideosNames = [].concat(stateVideosNames).concat(universVideosNames);
+
+const getVideo = (props) => {
+	const status = props.game.get('status');
+	return status !== 'play' ?
+		stateVideos[status] : { name: props.choregraphy.get('name'), restart: true };
+};
+
+console.log(allVideosNames);
 
 export class Video extends Component {
 	constructor(props) {
 		super(props);
 		this.videoSynchronization = this.videoSynchronization.bind(this);
-		this.videoNames = [
-			'idle_zoom',
-			'intro_tuto',
-			'wait',
-			'warning',
-			'load',
-			'Last_Resistance',
-			'recap',
-			'save_rank',
-			'end'
-		];
 	}
 	componentDidMount() {
 		const video = this.refs[this.props.game.get('status')];
@@ -28,70 +51,53 @@ export class Video extends Component {
 		this.videoSynchronization();
 	}
 	componentWillReceiveProps(nextProps) {
-		const status = this.props.game.get('status');
+		const currentStatus = this.props.game.get('status');
 		const nextStatus = nextProps.game.get('status');
-		// arriving to zoom, tuto or rank wont make the video change
+		const currentVideo = getVideo(this.props);
+		const nextVideo = getVideo(nextProps);
+
 		if (
-			(status === nextStatus && status !== 'idle') ||
-			nextStatus.match(/zoom|tuto|rank/)
-		) return false;
+			currentStatus !== nextStatus &&
+			nextVideo.restart
+		) {
+			if (nextVideo) {
+				const nextVideoEl = this.refs[nextVideo.name];
+				if (nextVideoEl) {
+					nextVideoEl.currentTime = 0;
+					nextVideoEl.play();
+					nextVideoEl.classList.add(css.above);
+				}
+			}
 
-		let currentVideoEl = this.refs[status];
-		let nextVideoEl = this.refs[nextStatus];
-
-		if (nextStatus === 'idle') {
-			nextVideoEl = this.refs.idle_zoom;
-		}
-		else if (nextStatus === 'intro') {
-			currentVideoEl = this.refs.idle_zoom;
-			nextVideoEl = this.refs.intro_tuto;
-		}
-		else if (nextStatus === 'wait' && status.match(/warning|load/)) {
-			nextVideoEl = this.refs.wait;
-		}
-		else if (nextStatus === 'wait') {
-			currentVideoEl = this.refs.intro_tuto;
-		}
-		else if (nextStatus === 'play') {
-			nextVideoEl = this.refs[nextProps.choregraphy.get('name')];
-		}
-		else if (nextStatus === 'recap') {
-			currentVideoEl = this.refs[this.props.choregraphy.get('name')];
-		}
-		else if (nextStatus === 'save') {
-			nextVideoEl = this.refs.save_rank;
-		}
-		else if (nextStatus === 'end') {
-			currentVideoEl = this.refs.save_rank;
-		}
-
-		if (status === 'save') {
-			currentVideoEl = this.refs.save_rank;
-		}
-
-		if (nextVideoEl) {
-			nextVideoEl.play();
-			nextVideoEl.classList.add(css.above);
-		}
-		if (currentVideoEl) {
-			currentVideoEl.classList.remove(css.above);
-			currentVideoEl.pause();
-			currentVideoEl.currentTime = 0;
+			if (currentVideo) {
+				const currentVideoEl = this.refs[currentVideo.name];
+				if (
+					currentVideoEl &&
+					currentVideo.name &&
+					nextVideo.name &&
+					currentVideo.name !== nextVideo.name
+				) {
+					currentVideoEl.classList.remove(css.above);
+					currentVideoEl.pause();
+					currentVideoEl.currentTime = 0;
+				}
+			}
 		}
 	}
 	videoSynchronization() {
-		this.videoNames.forEach((name) => {
-			this.refs[name].addEventListener('play', (e) => {
-				if (this.props.game.get('status') === 'play' && name === 'Last_Resistance') {
+		universVideosNames.forEach((name) => {
+			const thisVideo = this.refs[name];
+			thisVideo.addEventListener('play', (e) => {
+				if (this.props.game.get('status') === 'play') {
 					// FIXME: Find better way to sync video
 					const delay = Date.now() - this.props.choregraphy.get('time') + 400;
-					this.refs[name].currentTime = delay / 1000;
+					thisVideo.currentTime = delay / 1000;
 				}
 			});
 		});
 	}
 	render() {
-		const videosContent = this.videoNames.map((name) => {
+		const videosContent = allVideosNames.map((name) => {
 			const videoSrc = `videos/${name}.mp4`;
 			return (
 				<video

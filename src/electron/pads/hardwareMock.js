@@ -5,9 +5,9 @@ class Pads extends EventEmitter {
 	constructor(port) {
 		super();
 		this.emit('ready');
-		setInterval(() => {
-			this.emit('pad_event', 'left');
-		}, 10000);
+		// setInterval(() => {
+		// 	this.emit('pad_event', 'left');
+		// }, 10000);
 	}
 	lights(data) {
 		console.log(

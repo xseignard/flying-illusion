@@ -1,11 +1,20 @@
 import React from 'react';
+import classnames from 'classnames';
 import Headline from '../common/Headline';
 import commonCss from '../common/css';
 import css from './css';
 
 export default () => {
+	const thisClass = classnames({
+		[commonCss.logo]: true,
+		[commonCss.out]: true
+	});
+	console.log(thisClass);
 	return (
 		<div className={css.zoom}>
+			<div className={thisClass}>
+				<img src="img/logo.png" />
+			</div>
 			<div className={commonCss.headline}>
 				<Headline direction="out" lineNumber="line1">
 					Prenez vos marques sur le tapis

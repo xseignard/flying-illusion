@@ -1,3 +1,6 @@
+import { store } from '../stores/master';
+import { onPadChange } from '../actions/pads';
+
 const mapKeyCodeToDirection = (keyCode) => {
 	let value;
 	switch (keyCode) {
@@ -59,3 +62,9 @@ export function listenToDirectionKeys(cb) {
 		body.addEventListener('keydown', onKeyDown);
 	}
 }
+
+export const initKeyboard = () => {
+	listenToDirectionKeys((eventType, direction) => {
+		store.dispatch(onPadChange(eventType, direction));
+	});
+};

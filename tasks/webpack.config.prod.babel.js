@@ -37,6 +37,9 @@ module.exports = {
 		extensions: ['', '.js', '.jsx', '.css', '.srt']
 	},
 	module: {
+		noParse: [
+			/webpackNoParse/
+		],
 		preLoaders: [
 			{
 				test: /\.js|\.jsx$/,

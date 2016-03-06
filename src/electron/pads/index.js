@@ -4,12 +4,10 @@ const Pads = process.platform === 'linux' ?
 
 const pads = new Pads('/dev/ttyACM0');
 
-const listenToPads = (cb) => {
-	pads.once('ready', () => {
-		console.log('ready');
-	});
+const onPadChange = (cb) => {
 	pads.on('pad_event', (direction) => {
 		cb({
+			function: 'onPadChange',
 			eventType: 'keydown',
 			direction: direction.trim()
 		});
@@ -22,6 +20,6 @@ const lightPads = (comment) => {
 };
 
 module.exports = {
-	listenToPads,
+	onPadChange,
 	lightPads
 };

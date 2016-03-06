@@ -1,5 +1,6 @@
 import admin from './admin';
 import app from './app';
+import assets from './assets';
 import game from './game';
 import choregraphy from './choregraphy';
 import moves from './moves';
@@ -12,6 +13,7 @@ import tuto from './tuto';
 export default Object.assign({},
 	admin,
 	app,
+	assets,
 	game,
 	choregraphy,
 	moves,
