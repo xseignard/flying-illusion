@@ -9,7 +9,6 @@ export default () => {
 		[commonCss.logo]: true,
 		[commonCss.out]: true
 	});
-	console.log(thisClass);
 	return (
 		<div className={css.zoom}>
 			<div className={thisClass}>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import U from '../../utils';
 import { setDevGameState } from '../../dev/game-state';
-import { slaveRequestAnimationFrame } from '../../utils/master';
+import { slaveRequestAnimationFrame } from '../../threads/master';
 import { listenToClicks } from '../../actions/admin';
 import { loadRecords } from '../../actions/records';
 import * as gameActions from '../../actions/game';
@@ -10,6 +10,7 @@ import { animate, reset } from './animate';
 import Admin from '../Admin';
 import Video from '../Video';
 import Audio from '../Audio';
+import Sound from '../Sound';
 import Webgl from '../Webgl';
 import Html from '../Html';
 import css from './css';
@@ -48,9 +49,10 @@ export class App extends Component {
 		const adminContent = !this.props.admin.get('visible') ? null : <Admin />;
 		return (
 			<div className={css.app}>
-				<div className={css.video}>
+				<div className={css.media}>
 					<Video />
 					<Audio />
+					<Sound />
 				</div>
 				<div className={css.webgl}>
 					<Webgl

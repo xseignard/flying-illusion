@@ -11,7 +11,7 @@ export default () => {
 					Chargement en cours...
 				</Headline>
 				<Headline direction="in" lineNumber="line2">
-					Veuillez patienter (20 secondes)
+					Veuillez patienter
 				</Headline>
 			</div>
 		</div>

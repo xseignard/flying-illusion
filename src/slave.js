@@ -1,3 +1,3 @@
-import { universalSelf, onMasterMessage } from './utils/slave';
+import { universalSelf, onMasterMessage } from './threads/slave';
 
 universalSelf.addEventListener('message', onMasterMessage);

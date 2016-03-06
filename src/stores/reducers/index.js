@@ -3,20 +3,22 @@ import { admin } from './admin';
 import { choregraphy } from './choregraphy';
 import { dance } from './dance';
 import { game } from './game';
+import { hits } from './hits';
 import { pads } from './pads';
 import { performance } from './performance';
-import { hits } from './hits';
 import { records } from './records';
+import { sound } from './sound';
 
 const rootReducer = combineReducers({
 	admin,
-	game,
-	pads,
 	choregraphy,
 	dance,
-	performance,
+	game,
 	hits,
+	pads,
+	performance,
 	records,
+	sound,
 });
 
 export default rootReducer;
