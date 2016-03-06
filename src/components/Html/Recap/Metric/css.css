@@ -23,5 +23,9 @@
 	left: 0;
 	height: 100%;
 	background: white;
+	transform: scaleX(0);
 	transform-origin: 0 0;
+}
+.bar.loaded {
+	transform: scaleX(1);
 }
