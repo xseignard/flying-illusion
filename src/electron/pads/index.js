@@ -5,13 +5,7 @@ const Pads = process.platform === 'linux' ?
 const pads = new Pads('/dev/ttyACM0');
 
 const onPadChange = (cb) => {
-	pads.on('pad_event', (direction) => {
-		cb({
-			function: 'onPadChange',
-			eventType: 'keydown',
-			direction: direction.trim()
-		});
-	});
+	pads.on('pad_event', cb);
 };
 
 const lightPads = (comment) => {
