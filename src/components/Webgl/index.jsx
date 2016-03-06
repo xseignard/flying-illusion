@@ -24,13 +24,22 @@ export class Webgl extends Component {
 		}, C.ASSETS_WEBGL_RENDER_TIME);
 	}
 	render() {
-		const thisClass = classnames({
+		const status = this.props.game.get('status');
+		const topClass = classnames({
 			[css.webgl]: true,
-			[css[this.props.game.get('status')]]: true
+			[css[status]]: true
+		});
+		const linesClass = classnames({
+			[css.lines]: true,
+			[css.hidden]: status.match(/load|end/)
+		});
+		const gameClass = classnames({
+			[css.game]: true,
+			[css.hidden]: status.match(/load|end/)
 		});
 		return (
-			<div className={thisClass}>
-				<div className={css.lines}>
+			<div className={topClass}>
+				<div className={linesClass}>
 					<Lines />
 				</div>
 				<div className={css.react3}>
@@ -55,7 +64,7 @@ export class Webgl extends Component {
 						/>
 					</React3>
 				</div>
-				<div className={css.game}>
+				<div className={gameClass}>
 					<Game />
 				</div>
 			</div>
