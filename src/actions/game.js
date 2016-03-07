@@ -246,10 +246,7 @@ checkStatus = (direction) => {
 			return;
 		}
 		if (
-			(
-				status === 'warning' ||
-				status === 'load'
-			) &&
+			status === 'warning' &&
 			isLeftOrRightUp(pads)
 		) {
 			dispatch(launchWait());
