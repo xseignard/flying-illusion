@@ -40,6 +40,10 @@ const onDispatchFromMaster = (data) => {
 			dispatch(initWorld());
 			dispatch(listenToStore());
 		}
+		if (universalSelf.sendToHardware) {
+			// TODO: maybe handle more status to send to hardware
+			if (action.type === C.GAME_IDLE) universalSelf.sendToHardware({ function: 'glow' });
+		}
 	};
 };
 

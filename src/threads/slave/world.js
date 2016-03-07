@@ -10,6 +10,9 @@ import { getHits } from '../../selectors/hits';
 import C from '../../constants';
 import { dispatchToMaster } from '../../threads/slave';
 
+const sendToHardware = typeof self !== 'undefined' ?
+	null : require('../../electron/self-webpackNoParse').sendToHardware;
+
 const hTiles = 8;
 const vTiles = 9;
 const commentSuccess = /ok|good|excellent/;
@@ -112,7 +115,7 @@ const checkMove = (move, index) => {
 	}
 };
 
-const checkTargets = (perf, hits) => {
+const checkTargets = (perf, hits, shouldNotifyHardware) => {
 	if (!is(fromJS(perf), fromJS(S.perf))) {
 		Object.keys(perf.snapshots).forEach(checkTarget.bind(this, perf));
 		if (
@@ -120,6 +123,12 @@ const checkTargets = (perf, hits) => {
 			S.perf.combo !== perf.combo
 		) {
 			S.shouldDispatchStatsOnRAF = true;
+		}
+		if (shouldNotifyHardware) {
+			sendToHardware({
+				function: 'feedback',
+				snapshots: perf.snapshots
+			});
 		}
 		S.perf = perf;
 	}
@@ -147,7 +156,8 @@ const checkWorld = () => {
 	return (dispatch, getState) => {
 		S.shouldCheckOnRAF = false;
 		const state = getState();
-		checkTargets(getPerformance(state), getHits(state));
+		const performance = getPerformance(state);
+		checkTargets(performance, getHits(state), typeof self === 'undefined');
 		checkMoves(state.dance.get('moves'));
 	};
 };

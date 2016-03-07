@@ -22,9 +22,22 @@ class Pads extends EventEmitter {
 		});
 	}
 	lights(data) {
-		this.sp.write(JSON.stringify(data), (err, results) => {
-			if (err) console.log(err);
-		});
+		const keys = Object.keys(data);
+		// FIXME: dirty hack in order not to handle messages that should'nt be
+		// e.g. messages with more than 2 directions
+		if (keys.length <= 2) {
+			let message = '';
+			keys.forEach((direction) => {
+				message += data[direction] ? `${direction};red#` : `${direction};regular#`;
+			});
+			console.log(message);
+			// this.sp.write(JSON.stringify(data), (err, results) => {
+			// 	if (err) console.log(err);
+			// });
+		}
+	}
+	glow() {
+		console.log('glow');
 	}
 }
 

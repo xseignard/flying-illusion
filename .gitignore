@@ -4,3 +4,4 @@ tmp
 /hardware/**/.pioenvs
 /electron
 www/electron
+.imdone
