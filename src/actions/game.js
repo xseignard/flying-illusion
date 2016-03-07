@@ -142,7 +142,6 @@ launchPlay = (devTime = 0) => {
 		dispatch(setRandomChoregraphy());
 		const playEndTime = dispatch(getChoregraphyEndTime());
 		const playTimeout = setTimeout(() => {
-			dispatch(resetSteps());
 			dispatch(launchRecap());
 		}, playEndTime + devTime);
 		dispatch({

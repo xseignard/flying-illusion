@@ -7,15 +7,27 @@ import css from './css';
 export class Metric extends Component {
 	constructor(props) {
 		super(props);
+		this.animateOdometer = this.animateOdometer.bind(this);
 	}
 	componentDidMount() {
-		this.refs.bar.animate([
+		const animation = this.refs.bar.animate([
 			{ transform: 'scaleX(0)' },
 			{ transform: 'scaleX(1)' }
 		], {
-			duration: 2000,
+			delay: 1400,
+			duration: 1000,
 			easing: 'cubic-bezier(0,0,0.32,1)'
 		});
+		animation.onfinish = () => {
+			if (!this.refs.bar) return;
+			this.refs.bar.classList.add(css.loaded);
+		};
+		this.timeout = setTimeout(this.animateOdometer, 1400);
+	}
+	componentWillUnmount() {
+		clearTimeout(this.timeout);
+	}
+	animateOdometer() {
 		const odometer = new Odometer({
 			el: this.refs.valueHolder,
 			value: 0
@@ -35,9 +47,7 @@ export class Metric extends Component {
 				<div className={css.scale}>
 					<div ref="bar" className={css.bar} style={inlineStyle} />
 				</div>
-				<div ref="valueHolder" className={css.value}>
-					0
-				</div>
+				<div ref="valueHolder" className={css.value}></div>
 			</div>
 		);
 	}
