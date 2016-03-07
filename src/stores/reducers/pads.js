@@ -2,10 +2,10 @@ import { Map } from 'immutable';
 import C from '../../constants';
 
 const defaultState = Map([
-	['left', null],
-	['top', null],
-	['right', null],
-	['bottom', null]
+	['left', 'up'],
+	['top', 'up'],
+	['right', 'up'],
+	['bottom', 'up']
 ]);
 
 export function pads(state = defaultState, action) {

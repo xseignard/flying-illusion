@@ -23,6 +23,8 @@
 	left: 0;
 	height: 100%;
 	background: white;
+}
+.bar.animated {
 	transform: scaleX(0);
 	transform-origin: 0 0;
 }

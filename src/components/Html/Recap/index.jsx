@@ -5,12 +5,13 @@ import { connect } from 'react-redux';
 import Background from '../common/Background';
 import Lightning from '../common/Lightning';
 import { getMaximumComments, getMaximumProgression } from '../../../selectors/moves';
-import { Metric } from './Metric';
+import { Metric } from '../common/Metric';
 import Texte from '../common/Texte';
 import commonCss from '../common/css';
 import finalCss from '../common/final.css';
-import { animateH1, animateScore, animateMetrics } from './animate';
+import metricsCss from '../common/metrics.css';
 import css from './css';
+import { animateH1, animateScore, animateMetrics } from './animate';
 
 export class Recap extends Component {
 	constructor(props) {
@@ -30,6 +31,10 @@ export class Recap extends Component {
 			[finalCss.score]: true,
 			[css.score]: true
 		});
+		const metricsClass = classnames({
+			[metricsCss.metrics]: true,
+			[metricsCss.fading]: true,
+		});
 		return (
 			<div className={css.recap}>
 				<Background animated="in" />
@@ -39,30 +44,34 @@ export class Recap extends Component {
 				<div ref="score" className={scoreClass}>
 					{this.props.performance.score} POINTS
 				</div>
-				<div ref="metrics" className={css.metrics}>
+				<div ref="metrics" className={metricsClass}>
 					<div className={css.excellent}>
 						<Metric
+							animated
 							label="EXCELLENT"
 							value={this.props.performance.comments.excellent}
 							maxValue={this.props.maxComments}
 						/>
 					</div>
-					<div className={css.good}>
+					<div className={metricsCss.good}>
 						<Metric
+							animated
 							label="BIEN"
 							value={this.props.performance.comments.good}
 							maxValue={this.props.maxComments}
 						/>
 					</div>
-					<div className={css.ok}>
+					<div className={metricsCss.ok}>
 						<Metric
+							animated
 							label="OK"
 							value={this.props.performance.comments.ok}
 							maxValue={this.props.maxComments}
 						/>
 					</div>
-					<div className={css.combo}>
+					<div className={metricsCss.combo}>
 						<Metric
+							animated
 							label="COMBO MAX"
 							value={this.props.performance.comboMax}
 							maxValue={this.props.maxCombo}

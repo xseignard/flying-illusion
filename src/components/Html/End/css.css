@@ -1,10 +1,33 @@
 .end {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: center;
-	justify-content: space-around;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	font-size: 48px;
+	overflow: hidden;
+	animation: filmend 10s linear;
+	animation-fill-mode: forwards;
+}
+.flyingHeroes,
+.darkIllusions {
+	position: absolute;
+	top: 400px;
+	width: 50%;
+	text-align: center;
+}
+.flyingHeroes {
+	left: 0;
+}
+.darkIllusions {
+	right: 0;
 }
 
-.logo {
-	flex: 1 100%;
+@keyframes filmend {
+	0% {
+		transform: translate3d(0,0,0);
+	}
+	100% {
+		transform: translate3d(0,-100%,0);
+	}
 }

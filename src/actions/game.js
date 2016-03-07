@@ -267,9 +267,6 @@ checkStatus = (direction) => {
 		if (status === 'save') {
 			dispatch(launchSave());
 		}
-		if (status === 'rank') {
-			dispatch(launchEnd());
-		}
 		if (status === 'end') {
 			dispatch(launchIdle());
 		}

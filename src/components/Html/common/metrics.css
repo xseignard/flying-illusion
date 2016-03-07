@@ -1,0 +1,53 @@
+.metrics {
+	position: absolute;
+	top: 450px;
+	left: 900px;
+}
+.metrics > div {
+	position: absolute;
+}
+.excellent {
+	top: 0;
+	left: 0;
+}
+.good {
+	top: 0;
+	left: 400px;
+}
+.ok {
+	top: 140px;
+	left: 0;
+}
+.combo {
+	top: 140px;
+	left: 400px;
+}
+
+/*
+	Animation is handled with Element.animate for the fading
+	and with css animations for the fadeout because there is
+	a delay for the fading animation but not for the fadeout.
+*/
+.metrics.fading {
+	opacity: 0;
+	transform: translate3d(100px, 0, 0);
+}
+.metrics.fading.loaded {
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
+}
+.metrics.fadeout {
+	will-change: transform;
+	animation: fadeout 400ms linear;
+	animation-fill-mode: forwards;
+}
+@keyframes fadeout {
+	0% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+	100% {
+		opacity: 0;
+		transform: translate3d(100px, 0, 0);
+	}
+}

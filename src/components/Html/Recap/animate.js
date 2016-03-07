@@ -1,3 +1,4 @@
+import metricsCss from '../common/metrics.css';
 import css from './css';
 
 export const animateH1 = (h1) => {
@@ -5,12 +6,12 @@ export const animateH1 = (h1) => {
 		{	transform: 'translate3d(-100px, 0, 0)' },
 		{ transform: 'translate3d(0, 0, 0)' },
 	], {
-		delay: 400,
+		delay: 600,
 		duration: 1000,
 		easing: 'ease-out'
 	});
 	h1.animate([{	opacity: 0.3 }, { opacity: 1 }], {
-		delay: 400,
+		delay: 600,
 		duration: 1000,
 		easing: 'ease-out'
 	});
@@ -25,12 +26,12 @@ export const animateScore = (score) => {
 		{	transform: 'translate3d(-50px, 0, 0)' },
 		{ transform: 'translate3d(0, 0, 0)' },
 	], {
-		delay: 400,
+		delay: 600,
 		duration: 1000,
 		easing: 'ease-out'
 	});
 	score.animate([{	opacity: 0.3 }, { opacity: 1 }], {
-		delay: 400,
+		delay: 600,
 		duration: 1000,
 		easing: 'ease-out'
 	});
@@ -45,17 +46,17 @@ export const animateMetrics = (metrics) => {
 		{	transform: 'translate3d(100px, 0, 0)' },
 		{ transform: 'translate3d(0, 0, 0)' },
 	], {
-		delay: 800,
+		delay: 1000,
 		duration: 1000,
 		easing: 'ease-out'
 	});
 	metrics.animate([{	opacity: 0.3 }, { opacity: 1 }], {
-		delay: 800,
+		delay: 1000,
 		duration: 1000,
 		easing: 'ease-out'
 	});
 	animation.onfinish = () => {
 		if (!metrics) return;
-		metrics.classList.add(css.loaded);
+		metrics.classList.add(metricsCss.loaded);
 	};
 };
