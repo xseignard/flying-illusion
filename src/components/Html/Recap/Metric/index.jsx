@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Odometer from 'odometer';
 import 'odometer/themes/odometer-theme-minimal';
+import classnames from 'classnames';
 import Texte from '../../common/Texte';
 import css from './css';
 
@@ -32,9 +33,13 @@ export class Metric extends Component {
 			el: this.refs.valueHolder,
 			value: 0
 		});
-		odometer.update(this.props.value);
+		odometer.update(100);
 	}
 	render() {
+		const valueClass = classnames({
+			[css.value]: true,
+			[css.prefix]: this.props.prefix
+		});
 		const width = this.props.value / this.props.maxValue * 100;
 		const inlineStyle = { width: `${width}%` };
 		return (
@@ -47,7 +52,7 @@ export class Metric extends Component {
 				<div className={css.scale}>
 					<div ref="bar" className={css.bar} style={inlineStyle} />
 				</div>
-				<div ref="valueHolder" className={css.value}></div>
+				<div ref="valueHolder" className={valueClass}></div>
 			</div>
 		);
 	}

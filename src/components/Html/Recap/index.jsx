@@ -66,6 +66,7 @@ export class Recap extends Component {
 							label="COMBO MAX"
 							value={this.props.performance.comboMax}
 							maxValue={this.props.maxCombo}
+							prefix
 						/>
 					</div>
 				</div>

@@ -10,6 +10,11 @@
 	padding-left: 15px;
 	margin-top: -7px;
 }
+.value.prefix > div::before {
+	content: 'x';
+	margin-right: 5px;
+	vertical-align: middle;
+}
 .scale {
 	float: left;
 	width: 300px;
