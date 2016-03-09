@@ -3,7 +3,7 @@ import C from '../../constants';
 
 const defaultState = Map([
 	['visible', false],
-	['muted', true],
+	['muted', false],
 ]);
 
 export function admin(state = defaultState, action) {

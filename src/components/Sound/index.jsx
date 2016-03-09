@@ -1,34 +1,59 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import css from './css';
+import { Howl } from 'howler';
 
 export class Sound extends Component {
 	constructor(props) {
 		super(props);
-		this.getSoundSrc = this.getSoundSrc.bind(this);
+		this.sounds = new Howl({
+			urls: ['sounds/sounds.ogg'],
+			sprite: {
+				enter: [0, 2000],
+				fail: [3000, 700],
+				pad: [5000, 300]
+			}
+		});
+		this.oneIsDown = this.oneIsDown.bind(this);
 	}
-	getSoundSrc() {
+	componentWillReceiveProps(nextProps) {
+		if (
+			this.props.status !== nextProps.status &&
+			nextProps.status === 'intro'
+		) {
+			this.sounds.play('enter');
+		}
+		else if (
+			this.props.status === 'play' &&
+			nextProps.status === 'play' &&
+			nextProps.fail > this.props.fail
+		) {
+			this.sounds.play('fail');
+		}
+		else if (
+			this.props.status.match(/recap|save|rank|end/) &&
+			nextProps.status !== 'idle' &&
+			this.props.pads !== nextProps.pads &&
+			this.oneIsDown(nextProps.pads)
+		) {
+			this.sounds.play('pad');
+		}
+	}
+	oneIsDown(pads) {
+		return ['left', 'top', 'bottom', 'right'].some((dir) => {
+			return pads.get(dir) === 'down';
+		});
 	}
 	render() {
-		const soundSrc = this.getSoundSrc();
-		return (
-			<div className={css.sound}>
-				<audio
-					ref="sound"
-					src={soundSrc}
-					autoPlay
-					muted={this.props.admin.get('muted')}
-				>
-				</audio>
-			</div>
-		);
+		return <noscript />;
 	}
 }
 
 const mapStateToProps = (state) => {
 	return {
-		admin: state.admin,
-		sound: state.sound,
+		status: state.game.get('status'),
+		pads: state.pads,
+		fail: state.dance.get('fail'),
+		admin: state.admin
 	};
 };
 

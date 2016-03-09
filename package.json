@@ -12,8 +12,9 @@
     "rebuild": "electron-rebuild $(electron -v) -p -f -m www -w serialport -e node_modules/electron-prebuilt",
     "start": "npm run electron && electron www",
     "develectron": "rm -rf ./www/electron/* && cp -r ./src/electron ./www && npm run start",
-    "app:osx": "electron-packager www flying-illusion --platform=darwin --arch=x64 --out=electron/osx --version=0.36.5 --overwrite",
-    "app:linux": "electron-packager www flying-illusion --platform=linux --arch=x64 --out=electron/linux --version=0.36.5 --overwrite",
+    "app:osx": "electron-packager www flying-illusion --platform=darwin --arch=x64 --out=electron/osx --version=0.36.10 --overwrite",
+    "app:linux": "electron-packager www flying-illusion --platform=linux --arch=x64 --out=electron/linux --version=0.36.10 --overwrite",
+    "app:windows": "electron-packager www flying-illusion --platform=win32 --arch=ia32 --out=electron/win --version=0.36.10 --overwrite",
     "pack:linux": "node tasks/buildPackage.es5.js"
   },
   "repository": {
@@ -49,6 +50,7 @@
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
+    "howler": "^1.1.29",
     "immutable": "^3.7.6",
     "immutablejs-devtools": "^0.2.0",
     "imports-loader": "^0.6.5",

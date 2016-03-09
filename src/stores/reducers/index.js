@@ -7,7 +7,6 @@ import { hits } from './hits';
 import { pads } from './pads';
 import { performance } from './performance';
 import { records } from './records';
-import { sound } from './sound';
 
 const rootReducer = combineReducers({
 	admin,
@@ -18,7 +17,6 @@ const rootReducer = combineReducers({
 	pads,
 	performance,
 	records,
-	sound,
 });
 
 export default rootReducer;

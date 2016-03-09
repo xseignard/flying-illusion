@@ -3,7 +3,8 @@ import C from '../../constants';
 
 const defaultState = Map([
 	['moves', List([])],
-	['steps', List([])]
+	['steps', List([])],
+	['fail', 0],
 ]);
 
 const initMoves = (state, action) => {
@@ -105,6 +106,8 @@ export function dance(state = defaultState, action) {
 			return setMovesTimeouts(state, action);
 		case C.CHOREGRAPHY_RESET:
 			return state.set('moves', List([]));
+		case C.MOVE_FAIL:
+			return state.set('fail', action.count);
 		case C.STEP:
 			return handleStep(state, action);
 		case C.STEPS_RESET:

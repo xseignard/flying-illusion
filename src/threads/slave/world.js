@@ -209,12 +209,22 @@ const dispatchStats = () => {
 	};
 };
 
+const dispatchFails = () => {
+	return (dispatch, getState) => {
+		dispatchToMaster({
+			type: C.MOVE_FAIL,
+			count: S.perf.comments.fail
+		});
+	};
+};
+
 export const onSlaveRequestAnimationFrame = () => {
 	return (dispatch, getState) => {
 		setTimeout(setHasTimeFalse, 5);
 		S.hasTimeBeforeRAF = true;
 		if (S.shouldCheckOnRAF) dispatch(checkWorld());
 		if (S.shouldDispatchStatsOnRAF) dispatch(dispatchStats());
+		if (S.perf.comments && S.perf.comments.last === 'fail') dispatch(dispatchFails());
 		positionTargets();
 		positionMoves();
 	};
