@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import Odometer from 'odometer';
 import 'odometer/themes/odometer-theme-minimal';
-import classnames from 'classnames';
 import Texte from '../../common/Texte';
 import css from './css';
 
@@ -36,7 +35,7 @@ export class Metric extends Component {
 			el: this.refs.valueHolder,
 			value: 0
 		});
-		odometer.update(100);
+		odometer.update(this.props.value);
 	}
 	render() {
 		const valueClass = classnames({

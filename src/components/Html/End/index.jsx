@@ -32,8 +32,6 @@ export default () => {
 						<div>Rubberlegz</div>
 						<div>Lil Ceng</div>
 						<div>Minzy</div>
-						<div>Kalli</div>
-						<div>Willy</div>
 					</div>
 				</Texte>
 			</div>
