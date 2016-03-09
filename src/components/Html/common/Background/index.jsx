@@ -15,35 +15,40 @@ const borderScaleY = {
 export default class Background extends Component {
 	constructor(props) {
 		super(props);
+		this.animate = this.animate.bind(this);
 	}
 	componentDidMount() {
-		if (this.props.animated) {
-			const colorAnimation = this.refs.color.animate([
-				{ transform: `scaleY(${colorScaleY[this.props.animated][0]})` },
-				{ transform: `scaleY(${colorScaleY[this.props.animated][1]})` },
-			], {
-				delay: this.props.delay || 0,
-				duration: this.props.duration || 600,
-				easing: this.props.duration || 'cubic-bezier(0,0,0.32,1)'
-			});
-			this.refs.border.animate([
-				{ transform: `scaleY(${borderScaleY[this.props.animated][0]})` },
-				{ transform: `scaleY(${borderScaleY[this.props.animated][1]})` },
-			], {
-				delay: this.props.delay || 0,
-				duration: this.props.duration || 600,
-				easing: this.props.duration || 'cubic-bezier(0,0,0.32,1)'
-			});
-			colorAnimation.onfinish = () => {
-				if (!this.refs.background) return;
-				if (this.props.animated === 'in') {
-					this.refs.background.classList.remove(css.closed);
-				}
-				else if (this.props.animated === 'out') {
-					this.refs.background.classList.add(css.closed);
-				}
-			};
-		}
+		if (this.props.animated) this.animate();
+	}
+	componentWillReceiveProps() {
+		if (this.props.animated) this.animate();
+	}
+	animate() {
+		const colorAnimation = this.refs.color.animate([
+			{ transform: `scaleY(${colorScaleY[this.props.animated][0]})` },
+			{ transform: `scaleY(${colorScaleY[this.props.animated][1]})` },
+		], {
+			delay: this.props.delay || 0,
+			duration: this.props.duration || 600,
+			easing: this.props.duration || 'cubic-bezier(0,0,0.32,1)'
+		});
+		this.refs.border.animate([
+			{ transform: `scaleY(${borderScaleY[this.props.animated][0]})` },
+			{ transform: `scaleY(${borderScaleY[this.props.animated][1]})` },
+		], {
+			delay: this.props.delay || 0,
+			duration: this.props.duration || 600,
+			easing: this.props.duration || 'cubic-bezier(0,0,0.32,1)'
+		});
+		colorAnimation.onfinish = () => {
+			if (!this.refs.background) return;
+			if (this.props.animated === 'in') {
+				this.refs.background.classList.remove(css.closed);
+			}
+			else if (this.props.animated === 'out') {
+				this.refs.background.classList.add(css.closed);
+			}
+		};
 	}
 	render() {
 		const thisClass = classnames({

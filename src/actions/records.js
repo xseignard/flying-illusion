@@ -1,5 +1,4 @@
 import C from '../constants';
-import { launchRank } from './game';
 
 export function saveRecord(data) {
 	return (dispatch, getState) => {
@@ -13,7 +12,6 @@ export function saveRecord(data) {
 		});
 		const serializedRecords = JSON.stringify(getState().records.toArray());
 		localStorage.setItem('records', serializedRecords);
-		dispatch(launchRank());
 	};
 }
 

@@ -9,9 +9,6 @@
 	border-radius: 4px;
 	color: white;
 }
-.letter.focus {
-	border-color: #1D82C4;
-}
 .visibleLetters {
 	position: relative;
 	width: 200px;
@@ -46,7 +43,22 @@
 	line-height: 170px;
 	visibility: hidden;
 }
-.allLetters > div.activeLetter,
-.focus .allLetters > div {
+.allLetters > div.activeLetter {
 	visibility: visible;
+}
+.focus .allLetters > div:not(.activeLetter) {
+	visibility: visible;
+	animation: delayed 300ms linear;
+	animation-fill-mode: forwards;
+}
+@keyframes delayed {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }

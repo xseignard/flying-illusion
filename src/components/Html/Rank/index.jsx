@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { launchEnd } from '../../../actions/game';
 import Texte from '../common/Texte';
 import Background from '../common/Background';
 import Lightning from '../common/Lightning';
@@ -54,6 +55,23 @@ export class Rank extends Component {
 				return record.time === this.props.choregraphy.get('time');
 			});
 		}
+		this.state = {
+			backgroundAnimated: false,
+			backgroundDelay: 0
+		};
+	}
+	componentWillReceiveProps(nextProps) {
+		if (
+			this.props.pads.get('right') === 'up' &&
+			nextProps.pads.get('right') === 'down'
+		) {
+			this.refs.rank.classList.add(css.disappear);
+			this.setState({
+				backgroundDelay: 200,
+				backgroundAnimated: 'out'
+			});
+			setTimeout(this.props.launchEnd, 800);
+		}
 	}
 	render() {
 		if (!this.props.records) return null;
@@ -104,22 +122,28 @@ export class Rank extends Component {
 				);
 			});
 		return (
-			<div className={css.rank}>
-				<Background />
-				<Texte className={finalCss.h1}>
-					CLASSEMENT
-				</Texte>
-				<div className={finalCss.score}>
-					<span>{this.rank + 1}</span>
-					<sup className={css.suffix}>{suffix}</sup>
-					<span> sur {this.props.records.size}</span>
-				</div>
-				<Rank rank={this.rank} />
-				<div className={css.siblings}>
-					{siblingsContent}
-				</div>
-				<div className={css.podium}>
-					{podiumContent}
+			<div ref="rank" className={css.rank}>
+				<Background
+					animated={this.state.backgroundAnimated}
+					delay={this.state.backgroundDelay}
+				/>
+				<div className={css.rankContent}>
+					<Texte className={finalCss.h1}>
+						CLASSEMENT
+					</Texte>
+					<div className={finalCss.score}>
+						<span>{this.rank + 1}</span>
+						<sup className={css.suffix}>{suffix}</sup>
+						<span> sur {this.props.records.size}</span>
+					</div>
+					<div className={css.lists}>
+						<div className={css.siblings}>
+							{siblingsContent}
+						</div>
+						<div className={css.podium}>
+							{podiumContent}
+						</div>
+					</div>
 				</div>
 				<Lightning />
 			</div>
@@ -129,9 +153,10 @@ export class Rank extends Component {
 
 const mapStateToProps = (state) => {
 	return {
+		pads: state.pads,
 		records: getSortedRecords(state),
 		choregraphy: state.choregraphy
 	};
 };
 
-export default connect(mapStateToProps)(Rank);
+export default connect(mapStateToProps, { launchEnd })(Rank);

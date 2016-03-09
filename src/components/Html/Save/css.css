@@ -4,4 +4,35 @@
 	position: absolute;
 	top: 400px;
 	left: 840px;
+	will-change: transform;
+	animation: fading 800ms linear;
+	animation-fill-mode: forwards;
+}
+@keyframes fading {
+	0% {
+		opacity: 0;
+		transform: translate3d(100px, 0, 0);
+	}
+	50% {
+		opacity: 0;
+		transform: translate3d(100px, 0, 0);
+	}
+	100% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+.letters.fadeout {
+	animation: fadeout 300ms linear;
+	animation-fill-mode: forwards;
+}
+@keyframes fadeout {
+	0% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+	100% {
+		opacity: 0;
+		transform: translate3d(100px, 0, 0);
+	}
 }

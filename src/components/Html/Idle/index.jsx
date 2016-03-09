@@ -6,9 +6,6 @@ import css from './css';
 export default () => {
 	return (
 		<div className={css.idle}>
-			<div className={commonCss.logo}>
-				<img src="img/logo.png" />
-			</div>
 			<div className={commonCss.headline}>
 				<Headline
 					direction="in"
