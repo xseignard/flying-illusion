@@ -12,15 +12,28 @@
 .flyingHeroes,
 .darkIllusions {
 	position: absolute;
-	top: 400px;
-	width: 50%;
+	width: 60%;
 	text-align: center;
 }
 .flyingHeroes {
 	left: 0;
+	top: 400px;
 }
 .darkIllusions {
 	right: 0;
+	top: 475px;
+}
+.crew, .dancers {
+	text-transform: uppercase;
+}
+.crew {
+	font-size: 1em;
+	font-style: italic;
+	margin: 10px 0;
+}
+.dancers {
+	font-size: 1.5em;
+	margin: -10px 0;
 }
 
 @keyframes filmend {
@@ -28,6 +41,6 @@
 		transform: translate3d(0,0,0);
 	}
 	100% {
-		transform: translate3d(0,-100%,0);
+		transform: translate3d(0,-120%,0);
 	}
 }

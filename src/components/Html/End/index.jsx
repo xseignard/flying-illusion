@@ -12,27 +12,23 @@ export default () => {
 			<div className={css.flyingHeroes}>
 				<Texte>
 					<h1 className={css.crew}>Flying Heroes</h1>
-					<div className={css.dancers}>
-						<div>Benny</div>
-						<div>Lil Amok</div>
-						<div>Robozee</div>
-						<div>Demon</div>
-						<div>Ukay</div>
-						<div>Kalli</div>
-						<div>Willy</div>
-					</div>
+					<h1 className={css.dancers}>Benny</h1>
+					<h1 className={css.dancers}>Lil Amok</h1>
+					<h1 className={css.dancers}>Robozee</h1>
+					<h1 className={css.dancers}>Demon</h1>
+					<h1 className={css.dancers}>Ukay</h1>
+					<h1 className={css.dancers}>Kalli</h1>
+					<h1 className={css.dancers}>Willy</h1>
 				</Texte>
 			</div>
 			<div className={css.darkIllusions}>
 				<Texte>
 					<h1 className={css.crew}>Dark Illusions</h1>
-					<div className={css.dancers}>
-						<div>Lil Rock</div>
-						<div>Junior</div>
-						<div>Rubberlegz</div>
-						<div>Lil Ceng</div>
-						<div>Minzy</div>
-					</div>
+					<h1 className={css.dancers}>Lil Rock</h1>
+					<h1 className={css.dancers}>Junior</h1>
+					<h1 className={css.dancers}>Rubberlegz</h1>
+					<h1 className={css.dancers}>Lil Ceng</h1>
+					<h1 className={css.dancers}>Minzy</h1>
 				</Texte>
 			</div>
 		</div>
