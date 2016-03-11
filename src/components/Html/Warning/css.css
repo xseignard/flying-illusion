@@ -1,12 +1,15 @@
 .warning {
 	position: absolute;
-	top: 120px;
-	left: 250px;
-	right: 250px;
+	top: 72%;
+	left: 50px;
+	right: 50px;
+	text-align: center;
 }
 .headline {
-	font-size: 84px;
+	font-size: 48px;
+	font-style: italic;
 }
 .content {
-	font-size: 40px;
+	font-size: 22px;
+	opacity: 0.5;
 }
