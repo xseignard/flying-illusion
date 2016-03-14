@@ -20,7 +20,7 @@ const stateVideos = {
 	recap: { name: 'recap', start: true },
 	save: { name: 'save_rank', start: true },
 	rank: { name: 'save_rank' },
-	end: { name: 'save_rank', start: true },
+	end: { name: 'end', start: true },
 };
 
 const stateVideosNames = U.filterOutDuplicates(Object.keys(stateVideos).map(key => {
