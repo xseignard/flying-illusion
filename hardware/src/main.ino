@@ -1,23 +1,40 @@
 #include "Pad.h"
+#include <FastLED.h>
+#define NUM_LEDS 15
+#define DATA_PIN 6
 
-Pad left(A1, 0, "left");
-Pad top(4, 0, "top");
-Pad bottom(A3, 0, "bottom");
-Pad right(2, 0, "right");
 
-const int PAD_COUNT = 4;
-Pad pads[PAD_COUNT] = { left, top, bottom, right };
+bool glow = true;
+bool prevGlow = false;
+
+Pad left(A0, "left");
+Pad top(A0, "top");
 
 void setup() {
 	Serial.begin(9600);
 }
 
 void loop() {
-	for(int i=0; i < PAD_COUNT; i++){
-		String current = pads[i].read();
-		if (current.length() > 0) {
-			Serial.println(current);
-		}
-		delay(1);
+	EVERY_N_MILLISECONDS(10000) {
+		glow = !glow;
 	}
+	if (glow) {
+		EVERY_N_MILLISECONDS(30) {
+			if (!prevGlow) {
+				left.ledBlue();
+				top.ledBlue();
+			}
+			left.glow();
+			top.glow();
+		}
+	}
+	else {
+		left.ledOn();
+		top.ledOff();
+	}
+	left.update();
+	top.update();
+	FastLED.show();
+	prevGlow = glow;
+	delay(10);
 }
