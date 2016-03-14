@@ -31,6 +31,11 @@ export default () => {
 					<h1 className={css.dancers}>Minzy</h1>
 				</Texte>
 			</div>
+			<div className={css.followUpContent}>
+				<Texte>
+					<h1 className={css.followUp}>Continuez l'aventure sur http://flyingillusion.redbull.com/</h1>
+				</Texte>
+			</div>
 		</div>
 	);
 };

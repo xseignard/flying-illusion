@@ -1,7 +1,7 @@
 .end {
 	position: absolute;
 	top: 0;
-	bottom: 0;
+	bottom: -80px;
 	left: 0;
 	right: 0;
 	font-size: 48px;
@@ -10,10 +10,15 @@
 	animation-fill-mode: forwards;
 }
 .flyingHeroes,
-.darkIllusions {
+.darkIllusions,
+.followUpContent {
 	position: absolute;
 	width: 60%;
 	text-align: center;
+}
+.followUpContent {
+	width: 100%;
+	top: 1080px;
 }
 .flyingHeroes {
 	left: 0;
@@ -23,10 +28,10 @@
 	right: 0;
 	top: 475px;
 }
-.crew, .dancers {
+.crew, .dancers, .followUp {
 	text-transform: uppercase;
 }
-.crew {
+.crew, .followUp {
 	font-size: 1em;
 	font-style: italic;
 	margin: 10px 0;
@@ -41,6 +46,6 @@
 		transform: translate3d(0,0,0);
 	}
 	100% {
-		transform: translate3d(0,-120%,0);
+		transform: translate3d(0,-150%,0);
 	}
 }
