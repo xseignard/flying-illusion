@@ -23,7 +23,9 @@ export default class Rank extends Component {
 	render() {
 		return (
 			<div className={css.tuto}>
-				<Background animated="in"/>
+				<div style={{ opacity: 0.3 }}>
+					<Background animated="in"/>
+				</div>
 				<div ref="ready" className={css.ready}>
 					<Texte>PRÊT À ENTRER EN SCÈNE ?</Texte>
 				</div>

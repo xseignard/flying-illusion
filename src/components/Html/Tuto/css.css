@@ -15,8 +15,12 @@
 	position: absolute;
 	left: 0px;
 	right: 0px;
+}
+
+.ready, .rule {
 	font-style: italic;
 }
+
 .ready {
 	top: 470px;
 	font-size: 96px;
@@ -36,7 +40,7 @@
 	transform: translateY(50px);
 }
 .rule3 {
-	top: 550px;
+	top: 520px;
 	font-size: 46px;
 	opacity: 0;
 	transform: translateY(50px);

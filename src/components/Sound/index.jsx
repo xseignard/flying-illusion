@@ -2,15 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Howl } from 'howler';
 
+/*
+Quant tu synch avec < et >
+- Quand le jeu s’arrete et l’ecran fin de partie s’arrete
+- Quand on fait apparaitre le leaderboard apres avoir rentré le nom
+*/
+
 export class Sound extends Component {
 	constructor(props) {
 		super(props);
 		this.sounds = new Howl({
-			urls: ['sounds/sounds.ogg'],
+			urls: ['sounds/sounds.mp3'],
 			sprite: {
-				enter: [0, 2000],
-				fail: [3000, 700],
-				pad: [5000, 300]
+				enter: [1343, 2657],
+				fail: [0, 343],
+				pad: [8708, 678],
+				transition: [4976, 2800]
 			}
 		});
 		this.oneIsDown = this.oneIsDown.bind(this);
@@ -21,6 +28,12 @@ export class Sound extends Component {
 			nextProps.status === 'intro'
 		) {
 			this.sounds.play('enter');
+		}
+		else if (
+			this.props.status !== nextProps.status &&
+			nextProps.status.match(/warning|recap|end/)
+		) {
+			this.sounds.play('transition');
 		}
 		else if (
 			this.props.status === 'play' &&
