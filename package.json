@@ -1,6 +1,6 @@
 {
   "name": "flying-illusion",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Dance game for the Flying Illusion show",
   "scripts": {
     "dev": "node tasks/server-dev.es5.js",
@@ -16,8 +16,7 @@
     "app:linux": "electron-packager www flying-illusion --platform=linux --arch=x64 --out=electron/linux --version=0.36.10 --overwrite",
     "app:windows": "electron-packager www flying-illusion --platform=win32 --arch=ia32 --out=electron/win --version=0.36.10 --overwrite",
     "pack:linux": "node tasks/buildPackage.es5.js",
-	"pack:osx": "electron-builder electron/osx/flying-illusion-darwin-x64/flying-illusion.app --platform=osx --out=electron/osx --config=resources/config.json"
-
+    "pack:osx": "electron-builder electron/osx/flying-illusion-darwin-x64/flying-illusion.app --platform=osx --out=electron/osx --config=resources/config.json"
   },
   "repository": {
     "type": "git",
