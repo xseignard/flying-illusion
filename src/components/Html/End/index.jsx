@@ -2,12 +2,13 @@ import React from 'react';
 import Texte from '../common/Texte';
 import commonCss from '../common/css';
 import css from './css';
+import logo from '../../../../www/img/logo.resized.png';
 
 export default () => {
 	return (
 		<div className={css.end}>
 			<div className={commonCss.logo}>
-				<img src="img/logo.png" />
+				<img src={logo} />
 			</div>
 			<div className={css.flyingHeroes}>
 				<Texte>

@@ -80,7 +80,7 @@ module.exports = {
 			},
 			{
 				test: /\.png|\.jpg|\.svg$/,
-				loader: 'file-loader?name=img/[name].[ext]'
+				loader: 'url-loader?limit=25000'
 			},
 			{
 				test: /\.srt$/,

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import css from './css';
+import pad from '../../../../../www/img/pad.png';
+import padTop from '../../../../../www/img/pad_top.png';
+import padRight from '../../../../../www/img/pad_right.png';
+import padBottom from '../../../../../www/img/pad_bottom.png';
+import padLeft from '../../../../../www/img/pad_left.png';
 
 export class Hits extends Component {
 	shouldComponentUpdate(nextProps) {
@@ -23,11 +28,11 @@ export class Hits extends Component {
 			const leftOpacity = this.props.hits.left ? { opacity: 1 } : { opacity: 0 };
 			hitsContent = (
 				<div className={css.hits} >
-					<img style={{ opacity: 0.2 }} src="img/pad.png" />
-					<img style={topOpacity} src="img/pad_top.png" />
-					<img style={rightOpacity} src="img/pad_right.png" />
-					<img style={bottomOpacity} src="img/pad_bottom.png" />
-					<img style={leftOpacity} src="img/pad_left.png" />
+					<img style={{ opacity: 0.2 }} src={pad} />
+					<img style={topOpacity} src={padTop} />
+					<img style={rightOpacity} src={padRight} />
+					<img style={bottomOpacity} src={padBottom} />
+					<img style={leftOpacity} src={padLeft} />
 				</div>
 			);
 		}
