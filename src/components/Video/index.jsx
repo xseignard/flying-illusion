@@ -46,7 +46,7 @@ export class Video extends Component {
 			video.play();
 			video.classList.add(css.above);
 		}
-		this.videoSynchronization();
+		// this.videoSynchronization();
 	}
 	componentWillReceiveProps(nextProps) {
 		const currentStatus = this.props.game.get('status');
@@ -106,8 +106,7 @@ export class Video extends Component {
 					height={C.APP_HEIGHT}
 					loop
 					preload="auto"
-					muted={this.props.admin.get('muted') ||
-						this.props.game.get('status') === 'play'}
+					muted={this.props.admin.get('muted')}
 				></video>
 			);
 		});

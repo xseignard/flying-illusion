@@ -1,49 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import css from './css';
+import { Howl } from 'howler';
 
 export class Audio extends Component {
 	constructor(props) {
 		super(props);
-		this.getAudioSrc = this.getAudioSrc.bind(this);
-	}
-	componentDidMount() {
-		this.refs.audio.addEventListener('play', () => {
-			const delay = Date.now() - this.props.choregraphy.get('time');
-			this.refs.audio.currentTime = delay / 1000;
-			this.refs.audio.muted = this.props.admin.get('muted');
+		this.audio = new Howl({
+			urls: ['choregraphies/The_Flying_Heroes.mp3']
 		});
 	}
-	getAudioSrc() {
-		if (
-			this.props.game.get('status') !== 'play' ||
-			!this.props.choregraphy.get('name')
-		) {
-			return null;
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.game.get('status').match(/idle|play/)) {
+			this.audio.fade(1, 0, 1000, () => {
+				this.audio.stop();
+			});
 		}
-		return `choregraphies/${this.props.choregraphy.get('name')}.mp3`;
+		else if (nextProps.game.get('status').match(/tuto|recap/)) {
+			this.audio.volume(1);
+			this.audio.play();
+		}
 	}
+	// shouldComponentUpdate(nextProps) {
+	// 	return nextProps.game.get('status').match(/idle|tuto|play|recap/);
+	// }
 	render() {
-		const audioSrc = this.getAudioSrc();
-		return (
-			<div className={css.audio}>
-				<audio
-					ref="audio"
-					src={audioSrc}
-					autoPlay
-					muted={this.props.admin.get('muted')}
-				>
-				</audio>
-			</div>
-		);
+		return <noscript />;
 	}
 }
 
 const mapStateToProps = (state) => {
 	return {
 		admin: state.admin,
-		game: state.game,
-		choregraphy: state.choregraphy,
+		game: state.game
 	};
 };
 

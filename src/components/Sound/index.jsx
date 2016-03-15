@@ -31,7 +31,7 @@ export class Sound extends Component {
 		}
 		else if (
 			this.props.status !== nextProps.status &&
-			nextProps.status.match(/warning|recap|end/)
+			nextProps.status.match(/warning|load|recap|end/)
 		) {
 			this.sounds.play('transition');
 		}

@@ -58,8 +58,6 @@ export const choregraphies = [
 ];
 
 export const getRandomChoregraphy = () => {
-	// FIXME
-	// const randomIndex = Math.floor(Math.random() * choregraphies.length);
-	// return choregraphies[randomIndex];
-	return choregraphies[1];
+	const randomIndex = Math.floor(Math.random() * choregraphies.length);
+	return choregraphies[randomIndex];
 };
