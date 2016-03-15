@@ -105,7 +105,7 @@ export class Video extends Component {
 					width={C.APP_WIDTH}
 					height={C.APP_HEIGHT}
 					loop
-					preload="auto"
+					preload="metadata"
 					muted={this.props.admin.get('muted')}
 				></video>
 			);
