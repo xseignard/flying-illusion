@@ -4,6 +4,8 @@ import U from '../../utils';
 import C from '../../constants';
 import css from './css';
 
+const MAGIC_NUMBER = 0;
+
 const universVideosNames = C.CHOREGRAPHIES.map(choregraphy => {
 	return choregraphy.name;
 });
@@ -46,7 +48,7 @@ export class Video extends Component {
 			video.play();
 			video.classList.add(css.above);
 		}
-		// this.videoSynchronization();
+		this.videoSynchronization();
 	}
 	componentWillReceiveProps(nextProps) {
 		const currentStatus = this.props.game.get('status');
@@ -88,7 +90,7 @@ export class Video extends Component {
 			thisVideo.addEventListener('play', (e) => {
 				if (this.props.game.get('status') === 'play') {
 					// FIXME: Find better way to sync video
-					const delay = Date.now() - this.props.choregraphy.get('time') + 400;
+					const delay = Date.now() - this.props.choregraphy.get('time') + MAGIC_NUMBER;
 					thisVideo.currentTime = delay / 1000;
 				}
 			});
