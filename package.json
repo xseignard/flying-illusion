@@ -1,6 +1,6 @@
 {
   "name": "flying-illusion",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Dance game for the Flying Illusion show",
   "scripts": {
     "dev": "node tasks/server-dev.es5.js",
