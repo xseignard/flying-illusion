@@ -2,7 +2,7 @@ import { Map } from 'immutable';
 import C from '../../constants';
 
 const defaultState = Map([
-	['status', 'devplay'],
+	['status', 'assets'],
 	['timeout', null],
 ]);
 
