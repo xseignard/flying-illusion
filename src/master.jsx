@@ -10,6 +10,12 @@ import './global';
 
 universalSlave.addEventListener('message', onSlaveMessage);
 
+if (typeof window.electron !== 'undefined') {
+	window.electron.ipcRenderer.on('message', (event, data) => {
+		onSlaveMessage({ data });
+	});
+}
+
 initKeyboard();
 
 const rootElement = document.querySelector('.root');

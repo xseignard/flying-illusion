@@ -14,18 +14,22 @@ class Pad {
 		bool _previous;
 		bool _toViolet;
 		int _currentColor[3];
+		bool _flash;
 
 	public:
 		Pad(int sensorPin, String direction);
-		String read();
+		int read();
 		void ledViolet();
 		void ledBlue();
 		void ledOff();
 		void ledOn();
 		void ledError();
+		void lightFromIndex(String index);
+		void flash(String colorIndex);
 		void glow();
 		void update();
 		CRGB* getLeds();
+		String getDirection();
 };
 
 #endif

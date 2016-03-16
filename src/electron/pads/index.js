@@ -31,6 +31,18 @@ const lightPads = (message) => {
 	else if (message.function === 'glow') {
 		pads.glow();
 	}
+	else if (message.function === 'off') {
+		pads.off();
+	}
+	else if (message.function === 'leftRight') {
+		pads.leftRight();
+	}
+	else if (message.function === 'left') {
+		pads.left();
+	}
+	else if (message.function === 'all') {
+		pads.all();
+	}
 	// TODO: maybe other functions to handle
 };
 

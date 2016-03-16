@@ -12,11 +12,26 @@ import {
 	stopListenToStore,
 } from './world';
 
-export const universalSelf = typeof self !== 'undefined' ?
+// ipc/webworker switch : pass it to false to switch to electron IPC
+export const universalSelf = C.WEBWORKER ?
 	self : require('../../electron/self-webpackNoParse');
+// end of ipc/webworker switch
 
 export const sendToMaster = (message) => {
 	universalSelf.postMessage(JSON.stringify(message));
+};
+
+export const sendToHardware = (message) => {
+	// send message to master with some appropriate flag that
+	// will tell the master to send the message to hardware
+	if (C.WEBWORKER) {
+		const newMessage = Object.assign({}, message, { toHardware: true });
+		sendToMaster(newMessage);
+	}
+	// otherwise use IPC
+	else {
+		universalSelf.sendToHardware(message);
+	}
 };
 
 export const dispatchToMaster = (action) => {
@@ -40,10 +55,15 @@ const onDispatchFromMaster = (data) => {
 			dispatch(initWorld());
 			dispatch(listenToStore());
 		}
-		if (universalSelf.sendToHardware) {
-			// TODO: maybe handle more status to send to hardware
-			if (action.type === C.GAME_IDLE) universalSelf.sendToHardware({ function: 'glow' });
-		}
+		// TODO: maybe handle more status to send to hardware
+		if (action.type === C.GAME_IDLE) sendToHardware({ function: 'glow' });
+		else if (action.type === C.GAME_INTRO) sendToHardware({ function: 'off' });
+		else if (action.type === C.GAME_WAIT) sendToHardware({ function: 'leftRight' });
+		else if (action.type === C.GAME_LOAD) sendToHardware({ function: 'off' });
+		else if (action.type === C.GAME_RECAP) sendToHardware({ function: 'left' });
+		else if (action.type === C.GAME_SAVE) sendToHardware({ function: 'all' });
+		else if (action.type === C.GAME_RANK) sendToHardware({ function: 'off' });
+		else if (action.type === C.GAME_END) sendToHardware({ function: 'off' });
 	};
 };
 

@@ -1,3 +1,4 @@
+import C from '../../constants';
 import { store } from '../../stores/master';
 import { setMasterWorld } from './world';
 import { onPadChange } from '../../actions/pads';
@@ -13,7 +14,7 @@ const electronSlave = {
 	}
 };
 
-export const universalSlave = typeof window.electron === 'undefined' ?
+export const universalSlave = C.WEBWORKER ?
 	new Worker('slave.js') : electronSlave;
 
 export const sendToSlave = (message) => {
@@ -41,5 +42,8 @@ export const onSlaveMessage = (event) => {
 	else if (data.function === 'dispatch') {
 		const action = Object.assign({}, data.action, { fromSlave: true });
 		store.dispatch(action);
+	}
+	if (data.toHardware && window.electron) {
+		electronSlave.postMessage(data);
 	}
 };

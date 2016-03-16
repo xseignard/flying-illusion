@@ -8,9 +8,12 @@ import {
 import { getPerformance } from '../../selectors/performance';
 import { getHits } from '../../selectors/hits';
 import C from '../../constants';
-import { dispatchToMaster } from '../../threads/slave';
+import {
+	dispatchToMaster,
+	sendToHardware
+} from '../../threads/slave';
 
-const sendToHardware = typeof self !== 'undefined' ?
+const toHardware = C.WEBWORKER ?
 	null : require('../../electron/self-webpackNoParse').sendToHardware;
 
 const hTiles = 8;
@@ -125,10 +128,18 @@ const checkTargets = (perf, hits, shouldNotifyHardware) => {
 			S.shouldDispatchStatsOnRAF = true;
 		}
 		if (shouldNotifyHardware) {
-			sendToHardware({
-				function: 'feedback',
-				snapshots: perf.snapshots
-			});
+			if (toHardware) {
+				toHardware({
+					function: 'feedback',
+					snapshots: perf.snapshots
+				});
+			}
+			else {
+				sendToHardware({
+					function: 'feedback',
+					snapshots: perf.snapshots
+				});
+			}
 		}
 		S.perf = perf;
 	}
@@ -157,7 +168,8 @@ const checkWorld = () => {
 		S.shouldCheckOnRAF = false;
 		const state = getState();
 		const performance = getPerformance(state);
-		checkTargets(performance, getHits(state), typeof self === 'undefined');
+		// TODO pass to false if web and not electron
+		checkTargets(performance, getHits(state), true);
 		checkMoves(state.dance.get('moves'));
 	};
 };

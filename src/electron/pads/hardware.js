@@ -27,17 +27,48 @@ class Pads extends EventEmitter {
 		// e.g. messages with more than 2 directions
 		if (keys.length <= 2) {
 			let message = '';
-			keys.forEach((direction) => {
-				message += data[direction] ? `${direction};red#` : `${direction};regular#`;
+			['left', 'top', 'bottom', 'right'].forEach((direction) => {
+				if (typeof data[direction] !== 'undefined') {
+					message += data[direction] ? '2' : '1';
+				}
+				else message += '0';
+				if (direction === 'right') message += '#';
 			});
 			console.log(message);
-			// this.sp.write(JSON.stringify(data), (err, results) => {
-			// 	if (err) console.log(err);
-			// });
+			this.sp.write(message, (err, results) => {
+				if (err) console.log(err);
+			});
 		}
+	}
+	off() {
+		console.log('off');
+		this.sp.write('0#', (err, results) => {
+			if (err) console.log(err);
+		});
 	}
 	glow() {
 		console.log('glow');
+		this.sp.write('1#', (err, results) => {
+			if (err) console.log(err);
+		});
+	}
+	leftRight() {
+		console.log('leftRight');
+		this.sp.write('2#', (err, results) => {
+			if (err) console.log(err);
+		});
+	}
+	left() {
+		console.log('left');
+		this.sp.write('3#', (err, results) => {
+			if (err) console.log(err);
+		});
+	}
+	all() {
+		console.log('all');
+		this.sp.write('4#', (err, results) => {
+			if (err) console.log(err);
+		});
 	}
 }
 

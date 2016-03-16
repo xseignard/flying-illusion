@@ -5,20 +5,23 @@ const int violet[3] = {91, 3, 159};
 const int red[3] = {216, 8, 40};
 
 Pad::Pad(int sensorPin, String direction) :
-	_sensorPin(sensorPin), _direction(direction), _previous(false), _toViolet(true), _currentColor{2, 72, 209} {
+	_sensorPin(sensorPin), _direction(direction), _previous(false), _toViolet(true), _currentColor{2, 72, 209}, _flash(false) {
+
 	_leds = new CRGB[NUM_LEDS];
+
 	if (_direction == "left") FastLED.addLeds<NEOPIXEL, 6>(_leds, NUM_LEDS);
 	else if (_direction == "top") FastLED.addLeds<NEOPIXEL, 2>(_leds, NUM_LEDS);
 	else if (_direction == "bottom") FastLED.addLeds<NEOPIXEL, 6>(_leds, NUM_LEDS);
 	else if (_direction == "right") FastLED.addLeds<NEOPIXEL, 2>(_leds, NUM_LEDS);
+
 	pinMode(_sensorPin, INPUT);
 }
 
-String Pad::read() {
-	String state = "";
+int Pad::read() {
+	int state = 0;
 	int current = analogRead(_sensorPin);
-	if (current > 10 && _previous == false) state = _direction + ";keyup";
-	else if (current <= 10 && _previous == true) state = _direction + ";keydown";
+	if (current > 10 && _previous == false) state = 1;
+	else if (current <= 10 && _previous == true) state = 2;
 	_previous = current > 10;
 	return state;
 }
@@ -54,6 +57,12 @@ void Pad::ledError() {
 	_currentColor[0] = red[0];
 	_currentColor[1] = red[1];
 	_currentColor[2] = red[2];
+}
+
+void Pad::lightFromIndex(String index) {
+	if (index == "0") ledOff();
+	else if (index == "1") ledOn();
+	else if (index == "2") ledError();
 }
 
 void Pad::glow() {
@@ -93,4 +102,8 @@ void Pad::update() {
 
 CRGB* Pad::getLeds() {
 	return _leds;
+}
+
+String Pad::getDirection() {
+	return _direction;
 }
