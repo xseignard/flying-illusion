@@ -36,7 +36,6 @@ const getTutoMoves = (moves) => {
 
 export const getTutoChoregraphy = () => {
 	const moves = getTutoMoves(mapSubsToMoves(theFlyingHeroes));
-	console.log(moves);
 	return {
 		name: 'The_Flying_Heroes',
 		moves
