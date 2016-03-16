@@ -109,11 +109,9 @@ const checkMove = (move, index) => {
 	if (move.commentable !== previousMove.commentable) {
 		world.moves[move.id].commentable = move.commentable;
 	}
-	if (
-		move.comment !== previousMove.comment &&
-		move.comment.match(commentSuccess)
-	) {
-		world.moves[move.id].shouldScale = true;
+	if (move.comment !== previousMove.comment) {
+		if (move.comment.match(commentSuccess)) world.moves[move.id].shouldScale = true;
+		else world.moves[move.id].shouldFade = true;
 		world.moves[move.id].scale = getMoveScale(0);
 	}
 };
@@ -194,10 +192,11 @@ export const positionMoves = () => {
 			world.moves[id].positionY =
 				getPositionY(S.showTimes[id], Date.now() - S.choregraphyTime);
 		}
-		if (world.moves[id].shouldScale) {
+		if (world.moves[id].shouldScale || world.moves[id].shouldFade) {
 			S.movesScaleIndexes[id]++;
 			if (S.movesScaleIndexes[id] >= C.MOVE_HIT_FRAMES) {
-				world.moves[id].shouldScale = false;
+				if (world.moves[id].shouldScale) world.moves[id].shouldScale = false;
+				else world.moves[id].shouldFade = false;
 			}
 			world.moves[id].scale = getMoveScale(S.movesScaleIndexes[id]);
 		}

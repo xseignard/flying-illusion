@@ -8,7 +8,7 @@
 	will-change: opacity;
 }
 .tuto {
-	animation: tuto 10s linear;
+	animation: tuto 12s linear;
 	animation-fill-mode: forwards;
 }
 @keyframes tuto {
@@ -38,8 +38,7 @@
 	transition: opacity 1s linear;
 }
 
-.load,
-.end {
+.load {
 	opacity: 0.3;
 }
 

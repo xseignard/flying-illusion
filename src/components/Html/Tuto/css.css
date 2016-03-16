@@ -34,14 +34,14 @@
 	transform: translateX(1920px);
 }
 .rule2 {
-	top: 450px;
-	font-size: 46px;
+	top: 420px;
+	font-size: 96px;
 	opacity: 0;
 	transform: translateY(50px);
 }
 .rule3 {
-	top: 520px;
-	font-size: 46px;
+	top: 550px;
+	font-size: 96px;
 	opacity: 0;
 	transform: translateY(50px);
 }

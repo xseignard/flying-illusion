@@ -21,6 +21,7 @@ export class Sound extends Component {
 			}
 		});
 		this.oneIsDown = this.oneIsDown.bind(this);
+		this.canPlayFail = true;
 	}
 	componentWillReceiveProps(nextProps) {
 		if (
@@ -38,9 +39,14 @@ export class Sound extends Component {
 		else if (
 			this.props.status === 'play' &&
 			nextProps.status === 'play' &&
-			nextProps.fail > this.props.fail
+			nextProps.fail > this.props.fail &&
+			this.canPlayFail
 		) {
+			this.canPlayFail = false;
 			this.sounds.play('fail');
+			setTimeout(() => {
+				this.canPlayFail = true;
+			}, 2000);
 		}
 		else if (
 			this.props.status.match(/recap|save|rank|end/) &&

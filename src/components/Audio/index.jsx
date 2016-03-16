@@ -10,19 +10,20 @@ export class Audio extends Component {
 		});
 	}
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.game.get('status').match(/idle|play/)) {
-			this.audio.fade(1, 0, 1000, () => {
+		if (nextProps.game.get('status').match(/idle|load/)) {
+			this.audio.fade(0.4, 0, 1000, () => {
 				this.audio.stop();
 			});
+			setTimeout(() => {
+				this.audio.volume(0);
+			}, 1200);
 		}
 		else if (nextProps.game.get('status').match(/tuto|recap/)) {
-			this.audio.volume(1);
+			this.audio.volume(0.4);
 			this.audio.play();
 		}
 	}
-	// shouldComponentUpdate(nextProps) {
-	// 	return nextProps.game.get('status').match(/idle|tuto|play|recap/);
-	// }
+
 	render() {
 		return <noscript />;
 	}

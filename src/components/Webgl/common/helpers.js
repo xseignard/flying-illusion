@@ -34,7 +34,7 @@ export const getPositionY = (moveShowTime, gameTime) => {
 };
 
 export const getMoveScale = (scaleIndex) => {
-	return 0.75 - scaleIndex / (C.MOVE_HIT_FRAMES * 2);
+	return Math.max(0.75 - scaleIndex / C.MOVE_HIT_FRAMES, 0);
 };
 
 export const getSpriteOffset = (tileIndex, hTiles, vTiles) => {

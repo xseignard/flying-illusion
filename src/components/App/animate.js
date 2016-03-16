@@ -26,12 +26,11 @@ export const animate = (threeRefs, targetsRefs, movesRefs) => {
 					world.moves[id].scale,
 					1
 				);
+				movesRefs[id].mesh.material.opacity = world.moves[id].scale;
 			}
-			// scale is false, return to original geometry and material
-			else if (typeof world.moves[id].shouldScale !== 'undefined') {
-				movesRefs[id].mesh.material = movesRefs[id].material;
-				movesRefs[id].mesh.geometry = movesRefs[id].geometry;
-				movesRefs[id].mesh.scale.set(1, 1, 1);
+			// move is fail and/or missed
+			else if (world.moves[id].shouldFade) {
+				movesRefs[id].mesh.material.opacity = world.moves[id].scale;
 			}
 		}
 	});

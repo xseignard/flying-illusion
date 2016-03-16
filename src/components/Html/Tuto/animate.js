@@ -26,8 +26,8 @@ export const animateRule2 = rule => {
 		{ transform: 'translateY(50px)' },
 		{ transform: 'translateY(0)' },
 	], {
-		delay: 4000,
-		duration: 6000,
+		delay: 3500,
+		duration: 7000,
 		easing: 'linear'
 	});
 	rule.animate([
@@ -37,8 +37,8 @@ export const animateRule2 = rule => {
 		{ opacity: 1 },
 		{ opacity: 0.4 },
 	], {
-		delay: 4000,
-		duration: 6000,
+		delay: 3500,
+		duration: 7000,
 		easing: 'linear'
 	});
 };
@@ -48,8 +48,8 @@ export const animateRule3 = rule => {
 		{ transform: 'translateY(50px)' },
 		{ transform: 'translateY(0)' },
 	], {
-		delay: 4000,
-		duration: 6000,
+		delay: 3500,
+		duration: 7000,
 		easing: 'linear'
 	});
 	rule.animate([
@@ -59,8 +59,8 @@ export const animateRule3 = rule => {
 		{ opacity: 1 },
 		{ opacity: 0.4 },
 	], {
-		delay: 4000,
-		duration: 6000,
+		delay: 3500,
+		duration: 7000,
 		easing: 'linear'
 	});
 };

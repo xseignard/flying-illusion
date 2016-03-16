@@ -1,7 +1,7 @@
 .end {
 	position: absolute;
 	top: 0;
-	bottom: -80px;
+	bottom: 0;
 	left: 0;
 	right: 0;
 	font-size: 48px;
@@ -18,15 +18,15 @@
 }
 .followUpContent {
 	width: 100%;
-	top: 1080px;
+	top: 1000px;
 }
 .flyingHeroes {
 	left: 0;
-	top: 400px;
+	top: 350px;
 }
 .darkIllusions {
 	right: 0;
-	top: 475px;
+	top: 425px;
 }
 .crew, .dancers, .followUp {
 	text-transform: uppercase;
@@ -43,9 +43,9 @@
 
 @keyframes filmend {
 	0% {
-		transform: translate3d(0,0,0);
+		transform: translate3d(0,100%,0);
 	}
 	100% {
-		transform: translate3d(0,-150%,0);
+		transform: translate3d(0,0,0);
 	}
 }
