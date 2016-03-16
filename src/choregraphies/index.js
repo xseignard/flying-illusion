@@ -27,14 +27,19 @@ const mapSubsToMoves = (subs) => {
 
 const getTutoMoves = (moves) => {
 	return moves.filter((move) => {
-		return move.time < C.TUTO_END_TIME + C.MOVE_DURATION;
+		return (
+			C.TUTO_START_TIME < move.time &&
+			move.time < C.TUTO_END_TIME + C.MOVE_DURATION
+		);
 	});
 };
 
 export const getTutoChoregraphy = () => {
+	const moves = getTutoMoves(mapSubsToMoves(theFlyingHeroes));
+	console.log(moves);
 	return {
 		name: 'The_Flying_Heroes',
-		moves: getTutoMoves(mapSubsToMoves(theFlyingHeroes))
+		moves
 	};
 };
 
