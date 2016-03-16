@@ -12,13 +12,9 @@
 .rule3 {
 	position: absolute;
 	text-align: center;
-	position: absolute;
+	font-style: italic;
 	left: 0px;
 	right: 0px;
-}
-
-.ready, .rule {
-	font-style: italic;
 }
 
 .ready {
@@ -35,13 +31,13 @@
 }
 .rule2 {
 	top: 420px;
-	font-size: 96px;
+	font-size: 84px;
 	opacity: 0;
 	transform: translateY(50px);
 }
 .rule3 {
 	top: 550px;
-	font-size: 96px;
+	font-size: 84px;
 	opacity: 0;
 	transform: translateY(50px);
 }
