@@ -66,6 +66,7 @@ launchZoom = (devTime = 0) => {
 launchIntro = (devTime = 0) => {
 	return (dispatch, getState) => {
 		clearTimeout(getState().game.get('timeout'));
+		dispatch(resetChoregraphy());
 		const introTimeout = setTimeout(() => {
 			dispatch(launchTuto());
 		}, C.GAME_INTRO_DURATION + devTime);

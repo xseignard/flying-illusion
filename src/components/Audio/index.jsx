@@ -14,8 +14,10 @@ export class Audio extends Component {
 			this.audio.fade(0.4, 0, 1000, () => {
 				this.audio.stop();
 			});
+			// FIXME: shouldn't be necessary
 			setTimeout(() => {
-				this.audio.volume(0);
+				this.audio.stop();
+				// this.audio.volume(0.0);
 			}, 1200);
 		}
 		else if (nextProps.game.get('status').match(/tuto|recap/)) {
