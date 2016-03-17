@@ -3,8 +3,8 @@
 #define NUM_LEDS 15
 #define DATA_PIN 6
 
-Pad left(A0, "left");
-Pad top(A1, "top");
+Pad left("left");
+Pad top("top");
 
 // incoming message
 String fromApp;

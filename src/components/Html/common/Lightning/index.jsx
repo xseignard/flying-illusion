@@ -8,10 +8,12 @@ export default class Lightning extends Component {
 	componentDidMount() {
 		this.refs.lightning.animate([
 			{ opacity: 0 },
+			{ opacity: 0.7 },
+			{ opacity: 1 },
 			{ opacity: 1 },
 			{ opacity: 0 }
 		], {
-			duration: 300,
+			duration: 2000,
 			easing: 'cubic-bezier(0,0,0.32,1)'
 		});
 	}

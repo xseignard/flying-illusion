@@ -4,17 +4,31 @@ const int blue[3] = {2, 72, 209};
 const int violet[3] = {91, 3, 159};
 const int red[3] = {216, 8, 40};
 
-Pad::Pad(int sensorPin, String direction) :
-	_sensorPin(sensorPin), _direction(direction), _previous(false), _toViolet(true), _currentColor{2, 72, 209}, _flash(false) {
+Pad::Pad(String direction) :
+	_direction(direction), _previous(false), _toViolet(true), _currentColor{2, 72, 209}, _flash(false) {
 
 	_leds = new CRGB[NUM_LEDS];
 
-	if (_direction == "left") FastLED.addLeds<NEOPIXEL, 6>(_leds, NUM_LEDS);
-	else if (_direction == "top") FastLED.addLeds<NEOPIXEL, 2>(_leds, NUM_LEDS);
-	else if (_direction == "bottom") FastLED.addLeds<NEOPIXEL, 6>(_leds, NUM_LEDS);
-	else if (_direction == "right") FastLED.addLeds<NEOPIXEL, 2>(_leds, NUM_LEDS);
-
-	pinMode(_sensorPin, INPUT);
+	if (_direction == "left") {
+		FastLED.addLeds<NEOPIXEL, 5>(_leds, NUM_LEDS);
+		pinMode(A2, INPUT);
+		_sensorPin = A2;
+	}
+	else if (_direction == "top") {
+		FastLED.addLeds<NEOPIXEL, 4>(_leds, NUM_LEDS);
+		pinMode(A3, INPUT);
+		_sensorPin = A3;
+	}
+	else if (_direction == "bottom") {
+		FastLED.addLeds<NEOPIXEL, 3>(_leds, NUM_LEDS);
+		pinMode(A4, INPUT);
+		_sensorPin = A4;
+	}
+	else if (_direction == "right") {
+		FastLED.addLeds<NEOPIXEL, 2>(_leds, NUM_LEDS);
+		pinMode(A5, INPUT);
+		_sensorPin = A5;
+	}
 }
 
 int Pad::read() {

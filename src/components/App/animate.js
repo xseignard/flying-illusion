@@ -34,7 +34,7 @@ export const animate = (threeRefs, targetsRefs, movesRefs) => {
 			}
 			// no hit, no fail/miss, geometry, material are the regular ones
 			else if (
-				typeof world.moves[id].shouldScale === 'undefined' ||
+				typeof world.moves[id].shouldScale === 'undefined' &&
 				typeof world.moves[id].shouldFade === 'undefined'
 			) {
 				movesRefs[id].mesh.material = movesRefs[id].material;

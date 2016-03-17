@@ -17,7 +17,7 @@ class Pad {
 		bool _flash;
 
 	public:
-		Pad(int sensorPin, String direction);
+		Pad(String direction);
 		int read();
 		void ledViolet();
 		void ledBlue();

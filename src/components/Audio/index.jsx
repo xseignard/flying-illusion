@@ -6,7 +6,7 @@ export class Audio extends Component {
 	constructor(props) {
 		super(props);
 		this.audio = new Howl({
-			urls: ['choregraphies/The_Flying_Heroes.mp3']
+			urls: ['choregraphies/The_Flying_Heroes_tuto.mp3']
 		});
 	}
 	componentWillReceiveProps(nextProps) {
