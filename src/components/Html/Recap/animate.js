@@ -10,7 +10,7 @@ export const animateH1 = (h1) => {
 		duration: 1000,
 		easing: 'ease-out'
 	});
-	h1.animate([{	opacity: 0.3 }, { opacity: 1 }], {
+	h1.animate([{ opacity: 0.3 }, { opacity: 1 }], {
 		delay: 600,
 		duration: 1000,
 		easing: 'ease-out'

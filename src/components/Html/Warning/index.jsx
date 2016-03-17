@@ -1,6 +1,7 @@
 import React from 'react';
 import Headline from '../common/Headline';
 import Texte from '../common/Texte';
+import Circle from '../common/Circle';
 import css from './css';
 import commonCss from '../common/css';
 
@@ -8,6 +9,7 @@ export default () => {
 	return (
 		<div>
 			<div className={commonCss.headline}>
+				<Circle />
 				<Headline
 					direction="in"
 					lineNumber="line1"

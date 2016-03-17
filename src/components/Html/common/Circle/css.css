@@ -1,5 +1,21 @@
-.circle {
+.circle > svg {
 	position: absolute;
-	left: 0;
-	top: 0;
+	left: 50%;
+	top: 382px;
+	width: 314px;
+	margin-left: -157px;
+	opacity: 0;
+	transition: opacity 2s;
+}
+
+.loaded > svg {
+	opacity: 0.4;
+}
+
+svg > :global(#back) {
+	opacity: 0.2;
+}
+
+svg > :global(#front) {
+	transform-origin: center;
 }

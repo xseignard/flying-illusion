@@ -79,8 +79,12 @@ module.exports = {
 				include: /node_modules/
 			},
 			{
-				test: /\.png|\.jpg|\.svg$/,
+				test: /\.png|\.jpg$/,
 				loader: 'url-loader?limit=25000'
+			},
+			{
+				test: /\.svg$/,
+				loader: 'raw-loader'
 			},
 			{
 				test: /\.srt$/,
