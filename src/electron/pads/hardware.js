@@ -58,8 +58,8 @@ class Pads extends EventEmitter {
 			if (err) console.log(err);
 		});
 	}
-	left() {
-		console.log('left');
+	right() {
+		console.log('right');
 		this.sp.write('3#', (err, results) => {
 			if (err) console.log(err);
 		});

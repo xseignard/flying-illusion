@@ -19,12 +19,12 @@ Pad::Pad(String direction) :
 		pinMode(A3, INPUT);
 		_sensorPin = A3;
 	}
-	else if (_direction == "bottom") {
+	else if (_direction == "right") {
 		FastLED.addLeds<NEOPIXEL, 3>(_leds, NUM_LEDS);
 		pinMode(A4, INPUT);
 		_sensorPin = A4;
 	}
-	else if (_direction == "right") {
+	else if (_direction == "bottom") {
 		FastLED.addLeds<NEOPIXEL, 2>(_leds, NUM_LEDS);
 		pinMode(A5, INPUT);
 		_sensorPin = A5;

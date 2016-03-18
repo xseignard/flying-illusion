@@ -5,6 +5,8 @@
 
 Pad left("left");
 Pad top("top");
+Pad bottom("bottom");
+Pad right("right");
 
 // incoming message
 String fromApp;
@@ -60,7 +62,7 @@ void handleMessage() {
 	}
 	// left
 	else if (fromApp == "3") {
-		state = "left";
+		state = "right";
 	}
 	// all
 	else if (fromApp == "4") {
@@ -80,44 +82,44 @@ void handleState() {
 				shouldResetGlow = false;
 				left.ledBlue();
 				top.ledBlue();
-				// right.ledBlue();
-				// bottom.ledBlue();
+				right.ledBlue();
+				bottom.ledBlue();
 			}
 			left.glow();
 			top.glow();
-			// bottom.glow();
-			// right.glow();
+			bottom.glow();
+			right.glow();
 		}
 	}
 	else if (state == "off" && prevState != state) {
 		left.ledOff();
 		top.ledOff();
-		// bottom.ledOff();
-		// right.ledOff();
+		bottom.ledOff();
+		right.ledOff();
 	}
 	else if (state == "leftRight" && prevState != state) {
 		left.ledOn();
 		top.ledOff();
-		// bottom.ledOff();
-		// right.ledOn();
+		bottom.ledOff();
+		right.ledOn();
 	}
-	else if (state == "left" && prevState != state) {
-		left.ledOn();
-		// top.ledOff();
-		// bottom.ledOff();
-		// right.ledOff();
+	else if (state == "right" && prevState != state) {
+		left.ledOff();
+		top.ledOff();
+		bottom.ledOff();
+		right.ledOn();
 	}
 	else if (state == "all" && prevState != state) {
 		left.ledOn();
 		top.ledOn();
-		// bottom.ledOn();
-		// right.ledOn();
+		bottom.ledOn();
+		right.ledOn();
 	}
 	else if (state == "play"){
 		left.lightFromIndex(currentSteps.substring(0,1));
 		top.lightFromIndex(currentSteps.substring(1,2));
-		// bottom.lightFromIndex(currentSteps.substring(2,3));
-		// right.lightFromIndex(currentSteps.substring(3,4));
+		bottom.lightFromIndex(currentSteps.substring(2,3));
+		right.lightFromIndex(currentSteps.substring(3,4));
 	}
 }
 
@@ -143,14 +145,14 @@ void handlePad(Pad &pad) {
 void handlePads() {
 	handlePad(left);
 	handlePad(top);
-	// handlePad(bottom);
-	// handlePad(right);
+	handlePad(bottom);
+	handlePad(right);
 }
 
 void update() {
 	left.update();
 	top.update();
-	// bottom.update();
-	// right.update();
+	bottom.update();
+	right.update();
 	FastLED.show();
 }

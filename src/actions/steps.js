@@ -4,7 +4,7 @@ import { dispatchToSlave } from '../threads/master';
 export function dispatchStep(direction) {
 	return (dispatch, getState) => {
 		const state = getState();
-		const time = Date.now() - state.choregraphy.get('time');
+		const time = Date.now() - state.choregraphy.get('time') - C.PAD_DELAY;
 		dispatchToSlave({
 			type: C.STEP,
 			direction,

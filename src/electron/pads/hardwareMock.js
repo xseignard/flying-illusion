@@ -39,8 +39,8 @@ class Pads extends EventEmitter {
 	leftRight() {
 		console.log('leftRight');
 	}
-	left() {
-		console.log('left');
+	right() {
+		console.log('right');
 	}
 	all() {
 		console.log('all');
