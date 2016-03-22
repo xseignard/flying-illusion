@@ -114,6 +114,7 @@ launchWarning = (devTime = 0) => {
 		clearTimeout(getState().game.get('timeout'));
 		const warningTimeout = setTimeout(() => {
 			dispatch(launchLoad());
+			dispatch(resetChoregraphy());
 		}, C.GAME_WARNING_DURATION + devTime);
 		dispatch({
 			type: C.GAME_WARNING,

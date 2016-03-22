@@ -9,8 +9,8 @@ const ipcMain = electron.ipcMain;
 app.on('ready', () => {
 	global.masterWindow = new BrowserWindow({
 		useContentSize: true,
-		width: 960,
-		height: 540
+		fullscreen: true,
+		frame: false
 	});
 	dev.initDevHelpers(electron.globalShortcut, global.masterWindow);
 	if (global.masterWindow.setAspectRatio) global.masterWindow.setAspectRatio(1920 / 1080);

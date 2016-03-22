@@ -1,7 +1,6 @@
 #include "Pad.h"
 #include <FastLED.h>
 #define NUM_LEDS 15
-#define DATA_PIN 6
 
 Pad left("left");
 Pad top("top");
