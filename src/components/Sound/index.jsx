@@ -21,7 +21,6 @@ export class Sound extends Component {
 			}
 		});
 		this.oneIsDown = this.oneIsDown.bind(this);
-		this.canPlayFail = true;
 	}
 	componentWillReceiveProps(nextProps) {
 		if (
@@ -39,8 +38,7 @@ export class Sound extends Component {
 		else if (
 			this.props.status === 'play' &&
 			nextProps.status === 'play' &&
-			nextProps.success > this.props.success &&
-			this.canPlayFail
+			nextProps.success > this.props.success
 		) {
 			this.sounds.play('success');
 		}

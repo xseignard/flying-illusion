@@ -149,7 +149,7 @@ export class Rank extends Component {
 				<div className={commonCss.hint}>
 					<Texte>APPUYEZ SUR</Texte>
 					<div className={commonCss.arrow_right}></div>
-					<Texte>POUR ENREGISTRER VOTRE SCORE</Texte>
+					<Texte>POUR TERMINER LE JEU</Texte>
 				</div>
 				<Lightning />
 			</div>
