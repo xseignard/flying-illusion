@@ -34,7 +34,7 @@ export default () => {
 			</div>
 			<div className={css.followUpContent}>
 				<Texte>
-					<h1 className={css.followUp}>Continuez l'aventure sur http://flyingillusion.redbull.com/</h1>
+					<h1 className={css.followUp}>Continuez l'aventure sur www.redbullflyingillusion.fr</h1>
 				</Texte>
 			</div>
 		</div>

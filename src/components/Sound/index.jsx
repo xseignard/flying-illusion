@@ -14,10 +14,10 @@ export class Sound extends Component {
 		this.sounds = new Howl({
 			urls: ['sounds/sounds.mp3'],
 			sprite: {
-				enter: [1343, 2657],
+				enter: [2281, 2657],
 				success: [0, 1199],
-				pad: [8708, 678],
-				transition: [4976, 2800]
+				pad: [9509, 678],
+				transition: [5797, 2800]
 			}
 		});
 		this.oneIsDown = this.oneIsDown.bind(this);

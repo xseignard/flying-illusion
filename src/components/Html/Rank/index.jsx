@@ -6,6 +6,7 @@ import Background from '../common/Background';
 import Lightning from '../common/Lightning';
 import { getSortedRecords } from '../../../selectors/records';
 import finalCss from '../common/final.css';
+import commonCss from '../common/css';
 import css from './css';
 
 const getPodium = (records) => {
@@ -144,6 +145,11 @@ export class Rank extends Component {
 							{podiumContent}
 						</div>
 					</div>
+				</div>
+				<div className={commonCss.hint}>
+					<Texte>APPUYEZ SUR</Texte>
+					<div className={commonCss.arrow_right}></div>
+					<Texte>POUR ENREGISTRER VOTRE SCORE</Texte>
 				</div>
 				<Lightning />
 			</div>
