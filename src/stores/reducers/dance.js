@@ -106,8 +106,8 @@ export function dance(state = defaultState, action) {
 			return setMovesTimeouts(state, action);
 		case C.CHOREGRAPHY_RESET:
 			return state.set('moves', List([]));
-		case C.MOVE_FAIL:
-			return state.set('fail', action.count);
+		case C.MOVE_SUCCES:
+			return state.set('success', action.count);
 		case C.STEP:
 			return handleStep(state, action);
 		case C.STEPS_RESET:

@@ -220,11 +220,11 @@ const dispatchStats = () => {
 	};
 };
 
-const dispatchFails = () => {
+const dispatchSucces = () => {
 	return (dispatch, getState) => {
 		dispatchToMaster({
-			type: C.MOVE_FAIL,
-			count: S.perf.comments.fail
+			type: C.MOVE_SUCCES,
+			count: S.perf.comments.ok + S.perf.comments.good + S.perf.comments.excellent
 		});
 	};
 };
@@ -235,7 +235,9 @@ export const onSlaveRequestAnimationFrame = () => {
 		S.hasTimeBeforeRAF = true;
 		if (S.shouldCheckOnRAF) dispatch(checkWorld());
 		if (S.shouldDispatchStatsOnRAF) dispatch(dispatchStats());
-		if (S.perf.comments && S.perf.comments.last === 'fail') dispatch(dispatchFails());
+		if (S.perf.comments && S.perf.comments.last.match(/ok|good|excellent/)) {
+			dispatch(dispatchSucces());
+		}
 		positionTargets();
 		positionMoves();
 	};

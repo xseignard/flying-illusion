@@ -25,8 +25,6 @@ const stateVideos = {
 	end: { name: 'end', start: true },
 };
 
-const ext = 'webm';
-
 const stateVideosNames = U.filterOutDuplicates(Object.keys(stateVideos).map(key => {
 	return stateVideos[key].name;
 }));
@@ -100,7 +98,7 @@ export class Video extends Component {
 	}
 	render() {
 		const videosContent = allVideosNames.map((name) => {
-			const videoSrc = `videos/${ext}/${name}.${ext}`;
+			const videoSrc = `videos/${name}.webm`;
 			const preload = universVideosNames.indexOf(name) > -1 ? 'auto' : 'metadata';
 			return (
 				<video

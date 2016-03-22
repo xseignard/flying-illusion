@@ -19,10 +19,10 @@
 		opacity: 0;
 	}
 	30% {
-		opacity: 1;
+		opacity: 0.2;
 	}
 	90% {
-		opacity: 1;
+		opacity: 0.2;
 	}
 	100% {
 		opacity: 0;

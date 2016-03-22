@@ -21,8 +21,7 @@ const lightPads = (message) => {
 		const lightsData = {};
 		['left', 'top', 'bottom', 'right'].forEach((direction) => {
 			if (snapshots[direction].commentCount !== previousSnapshots[direction].commentCount) {
-				if (snapshots[direction].lastComment === 'fail') lightsData[direction] = true;
-				else lightsData[direction] = false;
+				if (snapshots[direction].lastComment !== 'fail') lightsData[direction] = false;
 			}
 		});
 		previousSnapshots = snapshots;

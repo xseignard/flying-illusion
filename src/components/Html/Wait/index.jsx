@@ -26,7 +26,7 @@ export default () => {
 					avec vos pieds
 				</Headline>
 				<Headline direction="in" delay="200" lineNumber="line2">
-					pour commencer à jouer
+					pendant 5 secondes
 				</Headline>
 			</div>
 		</div>

@@ -15,7 +15,7 @@ export class Sound extends Component {
 			urls: ['sounds/sounds.mp3'],
 			sprite: {
 				enter: [1343, 2657],
-				fail: [0, 343],
+				success: [0, 1199],
 				pad: [8708, 678],
 				transition: [4976, 2800]
 			}
@@ -39,14 +39,10 @@ export class Sound extends Component {
 		else if (
 			this.props.status === 'play' &&
 			nextProps.status === 'play' &&
-			nextProps.fail > this.props.fail &&
+			nextProps.success > this.props.success &&
 			this.canPlayFail
 		) {
-			this.canPlayFail = false;
-			this.sounds.play('fail');
-			setTimeout(() => {
-				this.canPlayFail = true;
-			}, 2000);
+			this.sounds.play('success');
 		}
 		else if (
 			this.props.status.match(/recap|save|rank|end/) &&
@@ -71,7 +67,7 @@ const mapStateToProps = (state) => {
 	return {
 		status: state.game.get('status'),
 		pads: state.pads,
-		fail: state.dance.get('fail'),
+		success: state.dance.get('success'),
 		admin: state.admin
 	};
 };
