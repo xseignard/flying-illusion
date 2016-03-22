@@ -31,6 +31,19 @@ Linux
 npm run app:linux
 ```
 
+### Installer build
+
+Installer `fpm`
+```
+sudo apt-get install ruby ruby-dev gcc make
+sudo gem install fpm --no-ri --no-rdoc
+```
+
+Puis
+```
+npm run app:linux && npm run pack:linux
+```
+
 ### Gihtub pages deployment
 ```
 npm run deploy

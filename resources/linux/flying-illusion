@@ -1,0 +1,30 @@
+#!/bin/bash
+# /etc/init.d/flying-illusion
+
+### BEGIN INIT INFO
+# Provides:          flying-illusion
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts flying illusion app
+# Description:       This service is used to start flying illusion app
+### END INIT INFO
+
+
+case "$1" in
+	start)
+		echo "Starting flying-illusion"
+		/opt/flying-illusion/flying-illusion
+		;;
+	stop)
+		echo "Stopping flying-illusion"
+		killall flying-illusion
+		;;
+	*)
+		echo "Usage: /etc/init.d/flying-illusion start|stop"
+		exit 1
+		;;
+esac
+
+exit 0

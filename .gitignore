@@ -5,3 +5,4 @@ tmp
 /electron
 www/electron
 .imdone
+/dist

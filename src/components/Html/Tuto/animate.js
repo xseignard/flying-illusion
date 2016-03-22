@@ -4,7 +4,7 @@ export const animateReady = ready => {
 		{ transform: 'translateX(1920px)' },
 	], {
 		delay: 0,
-		duration: 3000,
+		duration: 4000,
 		easing: 'cubic-bezier(0,.9,1,.1)'
 	});
 };
@@ -15,7 +15,7 @@ export const animateRule = rule => {
 		{ transform: 'translateX(-1920px)' },
 	], {
 		delay: 0,
-		duration: 3000,
+		duration: 4000,
 		easing: 'cubic-bezier(0,.9,1,.1)'
 	});
 };
@@ -26,8 +26,8 @@ export const animateRule2 = rule => {
 		{ transform: 'translateY(50px)' },
 		{ transform: 'translateY(0)' },
 	], {
-		delay: 3500,
-		duration: 7000,
+		delay: 4500,
+		duration: 8000,
 		easing: 'linear'
 	});
 	rule.animate([
@@ -37,8 +37,8 @@ export const animateRule2 = rule => {
 		{ opacity: 1 },
 		{ opacity: 0.4 },
 	], {
-		delay: 3500,
-		duration: 7000,
+		delay: 4500,
+		duration: 8000,
 		easing: 'linear'
 	});
 };
@@ -48,8 +48,8 @@ export const animateRule3 = rule => {
 		{ transform: 'translateY(50px)' },
 		{ transform: 'translateY(0)' },
 	], {
-		delay: 3500,
-		duration: 7000,
+		delay: 4500,
+		duration: 8000,
 		easing: 'linear'
 	});
 	rule.animate([
@@ -59,8 +59,8 @@ export const animateRule3 = rule => {
 		{ opacity: 1 },
 		{ opacity: 0.4 },
 	], {
-		delay: 3500,
-		duration: 7000,
+		delay: 4500,
+		duration: 8000,
 		easing: 'linear'
 	});
 };

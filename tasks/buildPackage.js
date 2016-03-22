@@ -81,7 +81,7 @@ const buildPackage = (buildArch, buildTarget) => {
 		packageName = `${path.join(distdDir, manifest.name)}-${process.env.TRAVIS_TAG}.${target}`;
 	}
 	else {
-		packageName = `${path.join(distdDir, manifest.name)}-DEBUG.${target}`;
+		packageName = `${path.join(distdDir, manifest.name)}-${manifest.version}.${target}`;
 	}
 
 	const args = [
