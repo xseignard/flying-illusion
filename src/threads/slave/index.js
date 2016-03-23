@@ -62,8 +62,8 @@ const onDispatchFromMaster = (data) => {
 		else if (action.type === C.GAME_LOAD) sendToHardware({ function: 'off' });
 		else if (action.type === C.GAME_RECAP) sendToHardware({ function: 'right' });
 		else if (action.type === C.GAME_SAVE) sendToHardware({ function: 'all' });
-		else if (action.type === C.GAME_RANK) sendToHardware({ function: 'off' });
-		else if (action.type === C.GAME_END) sendToHardware({ function: 'off' });
+		else if (action.type === C.GAME_RANK) sendToHardware({ function: 'right' });
+		else if (action.type === C.GAME_END) sendToHardware({ function: 'right' });
 	};
 };
 
