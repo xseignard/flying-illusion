@@ -12,7 +12,7 @@ app.on('ready', () => {
 		fullscreen: true,
 		frame: false
 	});
-	dev.initDevHelpers(electron.globalShortcut, global.masterWindow);
+	dev.initDevHelpers(electron.globalShortcut, global.masterWindow, app);
 	if (global.masterWindow.setAspectRatio) global.masterWindow.setAspectRatio(1920 / 1080);
 	global.masterWindow.loadURL(`file://${__dirname}/../index.electron.html`);
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const initDevHelpers = (globalShortcut, masterWindow) => {
+const initDevHelpers = (globalShortcut, masterWindow, app) => {
 	if (process.platform === 'darwin') {
 		globalShortcut.register('Alt+Command+I', () => {
 			masterWindow.toggleDevTools();
@@ -15,6 +15,9 @@ const initDevHelpers = (globalShortcut, masterWindow) => {
 		});
 		globalShortcut.register('F11', () => {
 			masterWindow.setFullScreen(!masterWindow.isFullScreen());
+		});
+		globalShortcut.register('q', () => {
+			app.quit();
 		});
 	}
 };
