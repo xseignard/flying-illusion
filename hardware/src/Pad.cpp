@@ -34,9 +34,9 @@ Pad::Pad(String direction) :
 int Pad::read() {
 	int state = 0;
 	int current = analogRead(_sensorPin);
-	if (current > 100 && _previous == false) state = 1;
-	else if (current <= 100 && _previous == true) state = 2;
-	_previous = current > 100;
+	if (current > 300 && _previous == false) state = 1;
+	else if (current <= 300 && _previous == true) state = 2;
+	_previous = current > 300;
 	return state;
 }
 

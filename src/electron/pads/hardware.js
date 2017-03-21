@@ -14,11 +14,13 @@ class Pads extends EventEmitter {
 		});
 		this.sp.on('data', (data) => {
 			const parsedData = data.split(';');
-			this.emit('pad_event', {
-				function: 'onPadChange',
-				eventType: parsedData[1].trim(),
-				direction: parsedData[0].trim()
-			});
+			if (parsedData.length === 2) {
+				this.emit('pad_event', {
+					function: 'onPadChange',
+					eventType: parsedData[1].trim(),
+					direction: parsedData[0].trim()
+				});
+			}
 		});
 	}
 	lights(data) {

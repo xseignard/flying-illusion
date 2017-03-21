@@ -1,8 +1,17 @@
 'use strict';
 const Pads = process.platform === 'linux' ?
 	require('./hardware') : require('./hardwareMock');
+const fs = require('fs');
 
-const pads = new Pads('/dev/ttyACM0');
+let port = '/dev/ttyACM0';
+
+try {
+	fs.statSync(port).isFile();
+}
+catch (err) {
+	port = '/dev/ttyUSB0';
+}
+const pads = new Pads(port);
 
 const onPadChange = (cb) => {
 	pads.on('pad_event', cb);
